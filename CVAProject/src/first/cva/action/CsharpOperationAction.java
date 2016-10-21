@@ -18,7 +18,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 	Map<String, Object> session;
 
 	public String index() throws Exception {
-//gfgfgfh
+		
 		return SUCCESS;
 	}
 
