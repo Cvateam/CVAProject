@@ -1,0 +1,1 @@
+proxygen.exe ..\..\ClassLibrary1.dll -wd ..\..\
