@@ -36,7 +36,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 	}
 
 	public String splitLetter() throws Exception {
-
+//		response.replace(oldChar, newChar);
 		return SUCCESS;
 	}
 
