@@ -90,7 +90,7 @@
 			<section class="featured-content">
 				<ul class="featured-list">
 					<li class="featured-list__item">
-						<a href="#" class="featured-list__link">
+						<a href="converter" class="featured-list__link">
 							<img class="featured-list__img" src="img/icons/converter.png" alt="Seaweed 1">
 							<h3 class="featured-list__title">Converter</h3>
 						</a>

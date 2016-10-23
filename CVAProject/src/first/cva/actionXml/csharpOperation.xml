@@ -6,6 +6,8 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<package name="default" namespace="/" extends="struts-default, json-default">
-	
+		<action name="converter" class="first.cva.action.CsharpOperationAction" method="index">
+			<result>/cvaConverter.jsp</result>
+		</action>
 	</package>
 </struts>

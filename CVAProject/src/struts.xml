@@ -10,7 +10,11 @@
 		<action name="index">
 			<result>/index.jsp</result>
 		</action>
+		<!--  -->
+		<action name="converter" class="first.cva.action.CsharpOperationAction" method="index">
+			<result>/cvaConverter.jsp</result>
+		</action>
 	</package>
 	
-	<include file="/first/cva/actionXml/csharpOperation.xml"></include>
+	<!-- <include file="first/cva/actionXml/csharpOperation.xml"></include> -->
 </struts>
