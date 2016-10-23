@@ -1163,6 +1163,11 @@ transform
 
 </head>
 <body class="home not-responsive">
+<script type="text/javascript">
+$(document).ready(function() {
+	
+})
+</script>
 	<div id="_container_java">
 		<!-- more option, stdin에 관련된 js -->
 		<script src="script/custom-index.js"></script>
