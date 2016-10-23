@@ -10,9 +10,15 @@
 		<action name="index">
 			<result>/index.jsp</result>
 		</action>
-		<!--  -->
+		
+		<!-- 들어갈때 -->
 		<action name="converter" class="first.cva.action.CsharpOperationAction" method="index">
 			<result>/cvaConverter.jsp</result>
+		</action>
+		
+		<!-- 씨샾 -->
+		<action name="compile2" class="first.cva.action.CsharpOperationAction" method="compile2">
+			<result type="json"></result>
 		</action>
 	</package>
 	

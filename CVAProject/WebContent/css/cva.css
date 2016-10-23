@@ -191,7 +191,7 @@ a:hover {
 	height: 60px;
 }
 
-#note1 {
+#output1 {
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 	border-color: #ccc;
@@ -206,7 +206,7 @@ a:hover {
 	height: 90px;
 }
 
-#note2 {
+#output2 {
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 	border-color: #ccc;
@@ -221,11 +221,11 @@ a:hover {
 	height: 90px;
 }
 
-#note1.mobile-size {
+#output1.mobile-size {
 	height: 70px;
 }
 
-#note2.mobile-size {
+#output2.mobile-size {
 	height: 70px;
 }
 

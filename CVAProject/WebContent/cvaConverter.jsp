@@ -21,6 +21,7 @@
 a [class^="icon-"], a [class*=" icon-"] {
 	display: inline;
 }
+
 </style>
 <style id="ace_editor">
 .ace_editor {
@@ -1126,6 +1127,7 @@ transform
 <link href="css/cva.css" rel="stylesheet">
 <link rel="shortcut icon" href="favicon.ico">
 
+
 <script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="script/jquery-migrate-1.0.0.js"></script>
 <!-- 필요없는건가? -->
@@ -1160,6 +1162,8 @@ transform
 <!-- JAVA, CSHARP ACE -->
 <script src="http://ideone.com/gfx2/libs/ace-2013-08/mode-csharp.js"></script>
 <script src="http://ideone.com/gfx2/libs/ace-2013-08/mode-java.js"></script>
+
+<script type="text/javascript" src="script/cva.js"></script>
 
 </head>
 <body class="home not-responsive">
@@ -1386,14 +1390,14 @@ class Test
 							<div class="ex-more-options-box" style="padding-top: 4px">
 								<!-- note -->
 								<div style="margin-bottom: 5px">
-									<i class="icon-pencil"></i> enter your note
-									<div class="pull-right option-clear">
+									<i class="icon-pencil"></i> Output
+									<!-- <div class="pull-right option-clear">
 										<a href="#" class="rel-tooltip" title="Clear the note"
 											onclick="$('#note1').val(''); return false;">clear</a>
-									</div>
+									</div> -->
 									<div class="clearfix"></div>
 								</div>
-								<textarea name="note" id="note1" rows="2" cols="80"></textarea>
+								<textarea name="output" id="output1" rows="2" cols="80" readonly="readonly"></textarea>
 							</div>
 						</div>
 					</div>
@@ -1628,14 +1632,17 @@ namespace CVa
 							<div class="ex-more-options-box" style="padding-top: 4px">
 								<!-- note -->
 								<div style="margin-bottom: 5px">
-									<i class="icon-pencil"></i> enter your note
-									<div class="pull-right option-clear">
+									<i class="icon-pencil"></i> Output
+									<!-- <div class="pull-right option-clear">
 										<a href="#" class="rel-tooltip" title="Clear the note"
 											onclick="$('#note2').val(''); return false;">clear</a>
-									</div>
+									</div> -->
 									<div class="clearfix"></div>
 								</div>
-								<textarea name="note" id="note2" rows="2" cols="80"></textarea>
+								<div id=output2>
+									
+								</div>
+								<!-- <textarea name="output2" id="output2" rows="2" cols="80" readonly="readonly"></textarea> -->
 							</div>
 						</div>
 					</div>

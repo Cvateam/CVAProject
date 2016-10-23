@@ -19,8 +19,8 @@ function csharpFocusEditor(){
 $(document).ready(function() {
 	$("div#_container_java #ex-input1").toggle(0);
 	$("div#_container_csharp #ex-input2").toggle(0);
-	$("div#_container_java #ex-more-options1").toggle(0);
-	$("div#_container_csharp #ex-more-options2").toggle(0);
+	/*$("div#_container_java #ex-more-options1").toggle(0);
+	$("div#_container_csharp #ex-more-options2").toggle(0);*/
 	
 	$("div#_container_java #button-input1").click(function(){
 		var $input_panel = $("div#_container_java #ex-input1");

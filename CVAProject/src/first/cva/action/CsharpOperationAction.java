@@ -9,51 +9,41 @@ import com.opensymphony.xwork2.ActionSupport;
 import first.cva.thread.Client;
 
 @SuppressWarnings("serial")
-public class CsharpOperationAction extends ActionSupport implements SessionAware{
-	
-	private String response;
-	private String response1;
+public class CsharpOperationAction extends ActionSupport implements SessionAware {
+
+	private String file2;
+	private String output2;
 	private String result;
 	private Client client;
 	Map<String, Object> session;
 
 	public String index() throws Exception {
-		
+
 		return SUCCESS;
 	}
 
-	public String test() throws Exception {
+	public String compile2() throws Exception {
+		// 클라이언트를 만들고
 		client = new Client();
-		session.put("client", client);
+		// 시작하고
 		client.startClient();
-		client = (Client) session.get("client");
-		client.send(response + "\n");
+		// 코드를 보내고
+		client.send(file2 + "\n");
 		// send가 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
-		Thread.sleep(3000);
+		Thread.sleep(5000);
+		// 데이터 가져오고
 		result = client.data;
+		// 데이터를 멈춘다.
+
+		// 임시
+		output2 = result;
 		client.stopClient();
 		return SUCCESS;
 	}
 
 	public String splitLetter() throws Exception {
-//		response.replace(oldChar, newChar);
+
 		return SUCCESS;
-	}
-
-	public String getResponse() {
-		return response;
-	}
-
-	public void setResponse(String response) {
-		this.response = response;
-	}
-
-	public String getResult() {
-		return result;
-	}
-
-	public void setResult(String result) {
-		this.result = result;
 	}
 
 	@Override
@@ -62,11 +52,20 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 
 	}
 
-	public String getResponse1() {
-		return response1;
+	public String getFile2() {
+		return file2;
 	}
 
-	public void setResponse1(String response1) {
-		this.response1 = response1;
+	public void setFile2(String file2) {
+		this.file2 = file2;
 	}
+
+	public String getOutput2() {
+		return output2;
+	}
+
+	public void setOutput2(String output2) {
+		this.output2 = output2;
+	}
+
 }
