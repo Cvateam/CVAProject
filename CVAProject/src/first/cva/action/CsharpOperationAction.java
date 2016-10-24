@@ -23,18 +23,15 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 	}
 
 	public String compile2() throws Exception {
-		// 클라이언트를 만들고
 		client = new Client();
-		// 시작하고
 		client.startClient();
-		// 코드를 보내고
+		// 접속 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
+		Thread.sleep(1000);
 		client.send(file2 + "\n");
+		System.out.println(file2);
 		// send가 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
-		Thread.sleep(5000);
-		// 데이터 가져오고
+		Thread.sleep(2000);
 		result = client.data;
-		// 데이터를 멈춘다.
-
 		// 임시
 		output2 = result;
 		client.stopClient();

@@ -191,7 +191,7 @@ $(document).ready(function(){
 	javaLoadEditor();
 	csharpLoadEditor();
 	
-	/*$("div#_container_java #syntax1").bind('click', function(){
+	$("div#_container_java #syntax1").bind('click', function(){
 		if( !$("div#_container_java #syntax1").attr('checked') ){
 			cookie_helper_set('run_syntax', '0');
 			javaUnloadEditor();
@@ -231,6 +231,6 @@ $(document).ready(function(){
 		if(site == 'index') {
 			$("div#_container_csharp #file2").focus();
 		}
-	}*/
+	}
 	
 });

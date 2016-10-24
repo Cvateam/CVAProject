@@ -1167,11 +1167,6 @@ transform
 
 </head>
 <body class="home not-responsive">
-<script type="text/javascript">
-$(document).ready(function() {
-	
-})
-</script>
 	<div id="_container_java">
 		<!-- more option, stdin에 관련된 js -->
 		<script src="script/custom-index.js"></script>
@@ -1376,12 +1371,12 @@ class Test
 							<div class="ex-more-options-box"
 								style="padding-bottom: 0px; padding-top: 6px">
 								<!-- syntax -->
-								<!-- <div class="syntax-box">
+								<div class="syntax-box">
 									<input type="hidden" name="syntax" value="0"> <label
 										for="syntax" class="checkbox"><input type="checkbox"
 										name="syntax" id="syntax1" value="1" checked="checked">
 										<span>syntax highlight</span></label>
-								</div> -->
+								</div>
 							</div>
 						</div>
 					</div>
@@ -1618,12 +1613,12 @@ namespace CVa
 							<div class="ex-more-options-box"
 								style="padding-bottom: 0px; padding-top: 6px">
 								<!-- syntax -->
-								<!-- <div class="syntax-box">
+								<div class="syntax-box">
 									<input type="hidden" name="syntax" value="0"> <label
 										for="syntax" class="checkbox"><input type="checkbox"
 										name="syntax" id="syntax2" value="1" checked="checked">
 										<span>syntax highlight</span></label>
-								</div> -->
+								</div>
 							</div>
 						</div>
 					</div>

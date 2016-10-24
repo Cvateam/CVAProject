@@ -120,7 +120,6 @@ public class Server extends Application {
 							byte[] byteArr = new byte[10000];
 							InputStream inputStream = socket.getInputStream();
 							int readByteCount = inputStream.read(byteArr);
-							
 							if (readByteCount == -1) {
 								throw new IOException();
 							}
@@ -148,7 +147,7 @@ public class Server extends Application {
 								// 이 클라이언트에게 보내야함.
 								Client.this.send(result.substring(4) + "\n");
 							} else {
-								String result1 = result.substring(175);
+								String result1 = result.substring(143);
 								int ii = result1.indexOf("C:");
 								result1 = result1.substring(0, ii);
 								result1 = result1.trim();
