@@ -49,6 +49,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 
 	public String getFile2() {
 		return file2;
+		//commit test
 	}
 
 	public void setFile2(String file2) {
