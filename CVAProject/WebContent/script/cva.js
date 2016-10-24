@@ -43,15 +43,16 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
+//				refresh해야함....찾자.
 				javaUnloadEditor();
-				/*$('#file1').html(response.translateOutput2);;
-				$('#input1').html(response.input2);*/
+				$('div#file_parent1 #file1').html(translateOutput2);
 				javaLoadEditor();
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
 			}
 		});
+		
 	})
 	
 });//ready

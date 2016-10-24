@@ -44,12 +44,26 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 	public String translate2() throws Exception {
 		KeywordDAO dao = new KeywordDAO();
 		List<KeywordVO> list = dao.searchKeyword();
+		//바꾼다 맨위 import <-> using
+		String javaForm = "import java.util.*;\nimport java.lang.*;\nimport java.io.*;";
+		String csharpForm = "using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n";
+		file2 = file2.replace(csharpForm, javaForm);
+		
+		//namespace를 찾아 없앤다.
+		int namespacePosition1 = file2.indexOf("namespace");
+		int namespacePosition2 = file2.indexOf("{");
+		String cut = file2.substring(namespacePosition1, namespacePosition2 + 1);
+		file2 = file2.replace(cut, "");
+		int fin = file2.lastIndexOf("}");
+		file2 = file2.substring(0, fin);
+		//앞뒤 빈칸자른다
+		file2 = file2.trim();
 		for (int ii = 0; ii < list.size(); ii++) {
 			if (file2.indexOf(list.get(ii).getCsharpKeyword()) != -1) {
 				file2 = file2.replace(list.get(ii).getCsharpKeyword(), list.get(ii).getJavaKeyword());
 			}
 		}
-
+		translateOutput2 = file2;
 		return SUCCESS;
 	}
 

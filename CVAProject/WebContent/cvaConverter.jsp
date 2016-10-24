@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,6 @@
 a [class^="icon-"], a [class*=" icon-"] {
 	display: inline;
 }
-
 </style>
 <style id="ace_editor">
 .ace_editor {
@@ -1169,13 +1168,11 @@ transform
 </head>
 <body class="home not-responsive">
 	<header class="codrops-header">
-		<h1 class="codrops-header__title">    A class 7 group</h1>
-			<nav class="codrops-demos">
-				<a  href="#">Home</a>
-				<a href="customer/loginForm.action">Login</a>
-				<a href="customer/loginForm.action">Logout</a>
-				<a href="#">Menu</a>
-			</nav>
+		<h1 class="codrops-header__title">A class 7 group</h1>
+		<nav class="codrops-demos">
+			<a href="#">Home</a> <a href="customer/loginForm.action">Login</a> <a
+				href="customer/loginForm.action">Logout</a> <a href="#">Menu</a>
+		</nav>
 	</header>
 	<div id="_container_java">
 		<!-- more option, stdin에 관련된 js -->
@@ -1183,13 +1180,13 @@ transform
 		<input type="hidden" id="site1" value="index">
 		<div class="span8 code-panel">
 			<!-- editor + ad -->
-			<div class = "codeTextarea javacodeText" >
+			<div class="codeTextarea javacodeText">
 				<h2>JAVA</h2>
 				<div id="file_div1" class=" ace_editor ace-tm"
 					style="height: 320px; display: block;">
 					<textarea class="ace_text-input" wrap="off" autocapitalize="off"
 						spellcheck="false"
-						style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"  ></textarea>
+						style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"></textarea>
 					<div class="ace_gutter">
 						<div class="ace_layer ace_gutter-layer ace_folding-enabled"
 							style="margin-top: 0px; height: 348.8px; width: 47px;">
@@ -1277,7 +1274,8 @@ transform
 									<span class="ace_comment">/*&nbsp;Name&nbsp;of&nbsp;the&nbsp;class&nbsp;has&nbsp;to&nbsp;be&nbsp;"Main"&nbsp;only&nbsp;if&nbsp;the&nbsp;class&nbsp;is&nbsp;public.&nbsp;*/</span>
 								</div>
 								<div class="ace_line" style="height: 14.40000057220459px">
-									<span class="ace_keyword">class</span>&nbsp;<span
+									<span class="ace_keyword">class</span>&nbsp; <span
+										class="ace_keyword">class</span>&nbsp;<span
 										class="ace_identifier">Test</span>
 								</div>
 								<div class="ace_line" style="height: 14.40000057220459px">{</div>
@@ -1318,16 +1316,16 @@ transform
 					</div>
 				</div>
 				<div id="file_parent1" style="padding: 10px; display: none;">
-					<textarea name="file" id="file1" tabindex="1">
+					<textarea name="file" id="file1" tabindex="1" >
 /* package whatever; // don't place package name! */
 import java.util.*;
 import java.lang.*;
 import java.io.*;
 
 /* Name of the class has to be &quot;Main&quot; only if the class is public. */
-class Test
+public class Test
 {
-	public static void main (String[] args) throws Exception
+	public static void main (String[] args)
 	{
 		// your code goes here
 	}
@@ -1342,9 +1340,9 @@ import java.lang.*;
 import java.io.*;
 
 /* Name of the class has to be &quot;Main&quot; only if the class is public. */
-class Test
+public class Test
 {
-	public static void main (String[] args) throws Exception
+	public static void main (String[] args)
 	{
 		// your code goes here
 	}
@@ -1403,9 +1401,7 @@ class Test
 									</div> -->
 									<div class="clearfix"></div>
 								</div>
-								<div id = "output1">
-								
-								</div>
+								<div id="output1"></div>
 							</div>
 						</div>
 					</div>
@@ -1456,12 +1452,12 @@ class Test
 		</div>
 	</div>
 
-	<div id="_container_csharp" >
+	<div id="_container_csharp">
 		<!-- <script src="script/custom-index.js"></script> -->
 		<input type="hidden" id="site2" value="index">
 		<div class="span8 code-panel">
 			<!-- editor + ad -->
-			<div class = "codeTextarea">
+			<div class="codeTextarea">
 				<h2>CSharp</h2>
 				<div id="file_div2" class=" ace_editor ace-tm"
 					style="height: 320px; display: block;">
@@ -1570,6 +1566,11 @@ class Test
 				</div>
 				<div id="file_parent2" style="padding: 10px; display: none;">
 					<textarea name="file" id="file2" tabindex="1">using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace CVa
 {
 	public class Test
@@ -1584,6 +1585,11 @@ namespace CVa
 			</div>
 			<input type="hidden" id="file_template2"
 				value="using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace CVa
 {
 	public class Test
@@ -1648,9 +1654,7 @@ namespace CVa
 									</div> -->
 									<div class="clearfix"></div>
 								</div>
-								<div id=output2>
-									
-								</div>
+								<div id=output2></div>
 								<!-- <textarea name="output2" id="output2" rows="2" cols="80" readonly="readonly"></textarea> -->
 							</div>
 						</div>
