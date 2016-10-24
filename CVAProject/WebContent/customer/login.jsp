@@ -8,8 +8,9 @@
     <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/loginstyle.css">
-	<script type="text/javascript" src="../script/jquery-3.1.0.min.js"></script>
-	<script>
+     <link rel="stylesheet" href="../css/main.css">
+	<script type="text/javascript" src="../script/cva.js"></script>
+<!-- 	<script>
 		$(function(){
 			$("#previousBtn").on('click' , function(){
 				location.href = "../index";
@@ -17,9 +18,15 @@
 			
 		});
 	
-	</script>
+	</script> -->
   </head>
-  <body>
+  <body  style="background-image: url(../img/main_img123.png);">
+  			<div class="codrops-header">
+				<nav class="codrops-demos">
+					<a href="joinForm">회원가입</a>
+					<a href="searchCustomerForm.action">ID/PASSWORD찾기</a>
+				</nav>
+			</div><!-- /codrops-header -->
     <div class="login">
   <header class="header">
     <span class="text">LOGIN</span>

@@ -22,5 +22,13 @@ $(document).ready(function() {
 				alert(resp + " " + code);
 			}
 		});
+	}); // cSharp 범욱아 이거 뭔지 표시좀
+	
+	$("#previousBtn").on('click' , function(){
+		location.href = "../index.action";
 	});
-});
+	// 로그인화면 메인돌아가기
+
+	
+	
+});//ready
