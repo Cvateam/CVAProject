@@ -109,6 +109,54 @@ body {
   border-top: 0.5rem solid transparent;
   border-bottom: 0.5rem solid transparent;
 }
+/* Codrops header */
+
+.codrops-header {
+	padding: 0.185em 0.5em;
+	width: calc(100% - 4em);
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+a {
+	outline: none;
+	color: #fff;
+	text-decoration: none;
+	-webkit-transition: color 0.2s;
+	transition: color 0.2s;
+}
+
+a:hover,
+a:focus {
+	color: #84ff84;
+	outline: none;
+}
+/* Top Navigation Style */
+
+.codrops-demos {
+	margin: 0 0 0 auto;
+}
+
+.codrops-demos a {
+	font-weight: 700;
+	font-size: 0.8em;
+	line-height: 1;
+	display: inline-block;
+	margin: 2em 2em 0 0;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
 
 @-webkit-keyframes loading {
   50% {
