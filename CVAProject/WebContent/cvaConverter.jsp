@@ -1392,7 +1392,9 @@ class Test
 									</div> -->
 									<div class="clearfix"></div>
 								</div>
-								<textarea name="output" id="output1" rows="2" cols="80" readonly="readonly"></textarea>
+								<div id = "output1">
+								
+								</div>
 							</div>
 						</div>
 					</div>

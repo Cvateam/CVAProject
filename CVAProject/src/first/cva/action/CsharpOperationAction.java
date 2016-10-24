@@ -13,7 +13,6 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 
 	private String file2;
 	private String output2;
-	private String result;
 	private Client client;
 	Map<String, Object> session;
 
@@ -28,18 +27,15 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		// 접속 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
 		Thread.sleep(1000);
 		client.send(file2 + "\n");
-		System.out.println(file2);
 		// send가 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
 		Thread.sleep(2000);
-		result = client.data;
-		// 임시
-		output2 = result;
+		output2 = client.data;
 		client.stopClient();
 		return SUCCESS;
 	}
 
 	public String splitLetter() throws Exception {
-
+		
 		return SUCCESS;
 	}
 
