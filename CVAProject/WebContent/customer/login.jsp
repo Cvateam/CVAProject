@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/loginstyle.css">
      <link rel="stylesheet" href="../css/main.css">
-	<script type="text/javascript" src="../script/cva.js"></script>
-<!-- 	<script>
+	<script type="text/javascript" src="../script/jquery-3.1.0.min.js"></script>
+		<script>
 		$(function(){
 			$("#previousBtn").on('click' , function(){
 				location.href = "../index";
@@ -18,7 +18,7 @@
 			
 		});
 	
-	</script> -->
+	</script>
   </head>
   <body  style="background-image: url(../img/main_img123.png);">
   			<div class="codrops-header">

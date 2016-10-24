@@ -245,7 +245,7 @@ a:focus {
 .arrowbtn{
   margin:1%;
   border:none;
-  padding:.5em;
+  padding: 0.7em;
   width:5em;
   background:hsla(0,0%,0%,1);
   color:hsla(255,255%,255%,1);

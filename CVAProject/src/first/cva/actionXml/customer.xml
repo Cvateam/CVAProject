@@ -55,14 +55,14 @@
 		<!-- 개인정보 수정 폼으로 -->
 		<action name="updateForm" method="updateCustomerForm"
 			class = "first.cva.action.CustomerAction">
-			<interceptor-ref name="loginInterceptorStack" />
+	<!-- 		<interceptor-ref name="loginInterceptorStack" /> -->
 			<result>/customer/updateCustomer.jsp</result>
 		</action>
 
 		<!-- 개인정보 수정 처리 -->
 		<action name="updateCustomer" method="updateCustomer"
 			class = "first.cva.action.CustomerAction">
-			<interceptor-ref name="loginInterceptorStack" />
+	<!-- 		<interceptor-ref name="loginInterceptorStack" /> -->
 			<result type="redirect">/index.action</result>
 		</action>
 

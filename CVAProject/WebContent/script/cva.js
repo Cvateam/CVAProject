@@ -54,12 +54,4 @@ $(document).ready(function() {
 		});
 	})
 	
-	
-	$("#previousBtn").on('click' , function(){
-		location.href = "../index.action";
-	});
-	// 로그인화면 메인돌아가기
-
-	
-	
 });//ready

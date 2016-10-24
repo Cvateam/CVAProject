@@ -44,6 +44,6 @@
 		
 	</package>
 	
-	<!-- <include file="first/cva/actionXml/customer.xml"/> -->
+	<include file="first/cva/actionXml/customer.xml"/>
 	<!-- <include file="first/cva/actionXml/csharpOperation.xml"></include> -->
 </struts>
