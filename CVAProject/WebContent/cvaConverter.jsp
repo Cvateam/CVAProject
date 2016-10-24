@@ -1124,6 +1124,7 @@ transform
 <link href="//stx1.ideone.com/gfx2/css/ideone-myrecent.css?8"
 	rel="stylesheet"> -->
 <!-- <link href="css/custom-view.css" rel="stylesheet"> -->
+<link href="css/main.css" rel="stylesheet">
 <link href="css/cva.css" rel="stylesheet">
 <link rel="shortcut icon" href="favicon.ico">
 
@@ -1167,18 +1168,28 @@ transform
 
 </head>
 <body class="home not-responsive">
+	<header class="codrops-header">
+		<h1 class="codrops-header__title">    A class 7 group</h1>
+			<nav class="codrops-demos">
+				<a  href="#">Home</a>
+				<a href="customer/loginForm.action">Login</a>
+				<a href="customer/loginForm.action">Logout</a>
+				<a href="#">Menu</a>
+			</nav>
+	</header>
 	<div id="_container_java">
 		<!-- more option, stdin에 관련된 js -->
 		<script src="script/custom-index.js"></script>
 		<input type="hidden" id="site1" value="index">
 		<div class="span8 code-panel">
 			<!-- editor + ad -->
-			<div style="border-bottom: 1px solid #ececec;">
+			<div class = "codeTextarea javacodeText" >
+				<h2>JAVA</h2>
 				<div id="file_div1" class=" ace_editor ace-tm"
 					style="height: 320px; display: block;">
 					<textarea class="ace_text-input" wrap="off" autocapitalize="off"
 						spellcheck="false"
-						style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"></textarea>
+						style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"  ></textarea>
 					<div class="ace_gutter">
 						<div class="ace_layer ace_gutter-layer ace_folding-enabled"
 							style="margin-top: 0px; height: 348.8px; width: 47px;">
@@ -1445,12 +1456,13 @@ class Test
 		</div>
 	</div>
 
-	<div id="_container_csharp">
+	<div id="_container_csharp" >
 		<!-- <script src="script/custom-index.js"></script> -->
 		<input type="hidden" id="site2" value="index">
 		<div class="span8 code-panel">
 			<!-- editor + ad -->
-			<div style="border-bottom: 1px solid #ececec;">
+			<div class = "codeTextarea">
+				<h2>CSharp</h2>
 				<div id="file_div2" class=" ace_editor ace-tm"
 					style="height: 320px; display: block;">
 					<textarea class="ace_text-input" wrap="off" autocapitalize="off"

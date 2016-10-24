@@ -16,7 +16,8 @@ body.not-responsive {
 
 body {
 	/*padding-top: 40px;*/
-	background-image: url(../img/main_img123opacity.png);
+	background-image: url(../img/main_img123opacity.PNG);
+	background-size: cover;
 }
 
 /* dla stopki bedacej na dole.*/
@@ -46,7 +47,10 @@ pre, textarea {
 a:hover {
 	text-decoration: none;
 }
-
+div.codeTextarea{
+	 border-bottom: 5px solid ;
+	 margin-top: 3em;
+}
 #lang {
 	height: 30px;
 }
