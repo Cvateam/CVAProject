@@ -12,6 +12,7 @@ import first.cva.thread.Client;
 public class CsharpOperationAction extends ActionSupport implements SessionAware {
 
 	private String file2;
+	private String originalFile2;
 	private String output2;
 	private Client client;
 	Map<String, Object> session;
@@ -26,6 +27,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		client.startClient();
 		// 접속 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
 		Thread.sleep(1000);
+		originalFile2 = file2;
 		client.send(file2 + "\n");
 		// send가 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
 		Thread.sleep(2000);
