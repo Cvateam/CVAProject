@@ -1,14 +1,15 @@
 create table keyword(
-num number primary key,
-csharpkeyword varchar2(100),
-javakeyword varchar2(100)
+	num number primary key,
+	csharpkeyword varchar2(100),
+	javakeyword varchar2(100)
 )
 
 create sequence keyword_seq;
 
 select * from keyword;
+select csharpkeyword, javakeyword from keyword;
 
-insert into keyword values(keyword_seq.nextval,'abstract','abstract')
+insert into keyword values(keyword_seq.nextval,'abstract','abstract');
 insert into keyword values(keyword_seq.nextval,'bool','boolean');
 insert into keyword values(keyword_seq.nextval,'case','case');
 insert into keyword values(keyword_seq.nextval,'break','break');
@@ -47,39 +48,10 @@ insert into keyword values(keyword_seq.nextval,'TRUE','TRUE');
 insert into keyword values(keyword_seq.nextval,'class','class');
 insert into keyword values(keyword_seq.nextval,'base','super');
 insert into keyword values(keyword_seq.nextval,'virtual','extends');
-
-insert into keyword values(keyword_seq.nextval,'explicit',);
-insert into keyword values(keyword_seq.nextval,,'assert');
-insert into keyword values(keyword_seq.nextval,,'package');
-insert into keyword values(keyword_seq.nextval,,'strictfp');
-insert into keyword values(keyword_seq.nextval,,'synchronized');
-insert into keyword values(keyword_seq.nextval,,'throws');
-insert into keyword values(keyword_seq.nextval,,'transient');
-insert into keyword values(keyword_seq.nextval,'as',);
-insert into keyword values(keyword_seq.nextval,'checked',);
-insert into keyword values(keyword_seq.nextval,'decimal',);
-insert into keyword values(keyword_seq.nextval,'delegate',);
-insert into keyword values(keyword_seq.nextval,'event',);
-insert into keyword values(keyword_seq.nextval,'extern',);
-insert into keyword values(keyword_seq.nextval,'fixed',);
-insert into keyword values(keyword_seq.nextval,'foreach',);
-insert into keyword values(keyword_seq.nextval,'impliciit',);
-insert into keyword values(keyword_seq.nextval,'in',);
-insert into keyword values(keyword_seq.nextval,'internal',);
-insert into keyword values(keyword_seq.nextval,'is',);
-insert into keyword values(keyword_seq.nextval,'lock',);
-insert into keyword values(keyword_seq.nextval,'objector',);
-insert into keyword values(keyword_seq.nextval,'operator',);
-insert into keyword values(keyword_seq.nextval,'out',);
-insert into keyword values(keyword_seq.nextval,'override',);
-insert into keyword values(keyword_seq.nextval,'params',);
-insert into keyword values(keyword_seq.nextval,'readonly',);
-insert into keyword values(keyword_seq.nextval,'ref',);
-insert into keyword values(keyword_seq.nextval,'sbyte',);
-insert into keyword values(keyword_seq.nextval,'sealed',);
-insert into keyword values(keyword_seq.nextval,'stackalloc',);
 insert into keyword values(keyword_seq.nextval,'string','String');
-insert into keyword values(keyword_seq.nextval,'String','String');
-insert into keyword values(keyword_seq.nextval,'struct',);
+insert into keyword values(keyword_seq.nextval,'Main','main');
+insert into keyword values(keyword_seq.nextval,'using','import');
+insert into keyword values(keyword_seq.nextval,'namespace', ' ');
 
+drop sequence keyword_seq;
 drop table keyword;

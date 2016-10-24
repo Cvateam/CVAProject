@@ -4,7 +4,9 @@
 
 	<!-- DB접속정보 값을 가지고 있는 파일 -->
 	<properties resource="db.properties" />
-	
+	<typeAliases>
+		<typeAlias type="first.cva.vo.KeywordVO" alias="KeywordVO"/>
+	</typeAliases>
 	<!-- DB접속 정보 셋팅 -->
 	<environments default="development">
 		<environment id="development">
