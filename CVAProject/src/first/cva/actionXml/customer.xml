@@ -5,7 +5,13 @@
 <!-- 다른 패키지들이 함께 사용할 설정정보들을 넣어둔다. -->
 <struts>
 	<constant name="struts.devMode" value="true" />
-	<package name="default" namespace="/" extends="struts-default, json-default">
-		
+	<package name="customer" namespace="/customer" extends="default" >
+		<!--customer 부분 (로그인 , 회원가입 , 로그아웃 ID , Password 찾기)-->
+		<action name = "loginForm">
+			<result>login.jsp</result>
+		</action>
+		<action name = "login" class = "first.cva.action.CustomerAction" method = "login">
+			<result type = "redirect">index</result> 
+		</action>
 	</package>
 </struts>

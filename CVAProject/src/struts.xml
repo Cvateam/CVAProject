@@ -6,10 +6,14 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<package name="default" namespace="/" extends="struts-default, json-default">
-		<default-action-ref name="index"></default-action-ref>
+		<!-- <default-action-ref name="index"></default-action-ref>  -->
 		<action name="index">
 			<result>/index.jsp</result>
 		</action>
+
+
+
+
 		
 		<!-- 들어갈때 -->
 		<action name="converter" class="first.cva.action.CsharpOperationAction" method="index">
@@ -20,7 +24,9 @@
 		<action name="compile2" class="first.cva.action.CsharpOperationAction" method="compile2">
 			<result type="json"></result>
 		</action>
+		
 	</package>
 	
+	<include file="first/cva/actionXml/customer.xml"/>
 	<!-- <include file="first/cva/actionXml/csharpOperation.xml"></include> -->
 </struts>

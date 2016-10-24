@@ -139,7 +139,7 @@
 				<h1 class="codrops-header__title">    A class 7 group</h1>
 				<nav class="codrops-demos">
 					<a class="current-demo" href="#">Home</a>
-					<a href="loginForm.action">Login</a>
+					<a href="customer/loginForm.action">Login</a>
 					<a href="#">Menu</a>
 				</nav>
 			</header><!-- /codrops-header -->
