@@ -44,7 +44,12 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 	public String translate2() throws Exception {
 		KeywordDAO dao = new KeywordDAO();
 		List<KeywordVO> list = dao.searchKeyword();
-		System.out.println(list);
+		for (int ii = 0; ii < list.size(); ii++) {
+			if (file2.indexOf(list.get(ii).getCsharpKeyword()) != -1) {
+				file2 = file2.replace(list.get(ii).getCsharpKeyword(), list.get(ii).getJavaKeyword());
+			}
+		}
+
 		return SUCCESS;
 	}
 
