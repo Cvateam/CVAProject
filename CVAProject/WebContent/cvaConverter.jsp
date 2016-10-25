@@ -28,7 +28,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 	overflow: hidden;
 	font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas',
 		'source-code-pro', monospace;
-	font-size: 12px;
+	font-size: 17px;
 	line-height: normal;
 	color: black;
 }

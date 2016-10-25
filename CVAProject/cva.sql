@@ -52,6 +52,7 @@ insert into keyword values(keyword_seq.nextval,'string','String');
 insert into keyword values(keyword_seq.nextval,'Main','main');
 insert into keyword values(keyword_seq.nextval,'using','import');
 insert into keyword values(keyword_seq.nextval,'namespace', ' ');
+insert into keyword values(keyword_seq.nextval,'Console.WriteLine','System.out.println');
 
 drop sequence keyword_seq;
 drop table keyword;

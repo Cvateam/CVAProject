@@ -20,7 +20,7 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
-				$('#output2').html('<h5>' + response.CompileOutput2 + '</h5>');
+				$('#output2').html('<h5>' + response.compileOutput2 + '</h5>');
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
@@ -44,15 +44,15 @@ $(document).ready(function() {
 			dataType : 'json',
 			success : function(response) {
 //				refresh해야함....찾자.
+				alert(response.translateOutput2);
 				javaUnloadEditor();
-				$('div#file_parent1 #file1').html(translateOutput2);
+				$('#file1').val(response.translateOutput2);
 				javaLoadEditor();
+				alert(response.translateOutput2);
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
 			}
 		});
-		
 	})
-	
 });//ready
