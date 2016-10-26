@@ -73,112 +73,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		// Console.WriteLine 변환.
 		consoleWriteLineToSysout();
 		// 겟셋
-		String mid = "";
-		String ddin = "";
-		String a2 = "";
-		String a3 = "";
-		String a4 = "";
-		int result = 0;
-
-		/*
-		 * String c_code =
-		 * "using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Text;\nusing System.Threading.Tasks;\n"
-		 * +
-		 * "namespace ConsoleApplication1\n{\n\tpublic class Program\n\t{\n\t\tprivate string name = \"durina\";\n\t\tprivate int age = 25;\n\t\t"
-		 * +
-		 * "\n\t\tpublic string Name\n\t\t{\n\t\t\tget;\n\t\t\tset;\n\t\t}\n\n\t\tpublic int Age\n\t\t{\n\t\t\tget;\n\t\t\tset;\n\t\t"
-		 * +
-		 * "}\n\t\t\n\t\tpublic static void Main(string[] args)\n\t\t{\n\t\t\tProgram a = new Program();\n\t\t}\n}\n}"
-		 * ;
-		 */
-
-		// 원래의 코드를 보존한다.
-		// 줄을 기준으로 나눠서 전체의 코드를 정리한다.
-		String[] mainArray = file2.split("\n");
-		// 타입과 변수명을 받기 위해서
-		String[] trimArray = new String[mainArray.length];
-
-		// trim으로 잘라서 저장한다.
-		for (int i = 0; i < mainArray.length; i++) {
-			trimArray[i] = mainArray[i].trim();
-		}
-
-		String[] midArray = file2.split("private ");
-		int index = midArray.length;
-		System.out.println(index);
-
-		for (int i = 1; i < index; i++) {
-			String a1 = midArray[i];
-			// a1:string name = "durina";
-			System.out.println("a1:" + a1);
-			String[] keyArray = a1.split(" ");
-			a2 = keyArray[0];
-			a3 = keyArray[1];
-			System.out.println("a2:" + a2);
-			System.out.println("a3:" + a3);
-			String b2 = a2.valueOf(a2.charAt(0)).toUpperCase();
-			for (int j = 1; j < a2.length(); j++) {
-				b2 += a2.charAt(j);
-			}
-			String b1 = a3.valueOf(a3.charAt(0)).toUpperCase();
-			for (int j = 1; j < a3.length(); j++) {
-				b1 += a3.charAt(j);
-			}
-			System.out.println("a2:" + a2);
-			System.out.println("b1:" + b1);
-			String[] checkArray = file2.split("public ");
-			for (int j = 1; j < checkArray.length; j++) {
-				System.out.println("확인해라");
-				System.out.println(j);
-				System.out.println(checkArray[2]);
-				System.out.println("안녕");
-				System.out.println(a2 + " " + b1);
-				if (checkArray[j].indexOf(a2 + " " + b1) != -1) {
-					a4 = checkArray[j];
-					// System.out.println(j);
-					System.out.println("나와라" + a4);
-					if (a4.indexOf("get") != -1) {
-						result += 10;
-					}
-					if (a4.indexOf("set") != -1) {
-						result += 1;
-					}
-					String mid_mid1 = "\t\tpublic " + a2 + " get" + b1 + "(){\n\t\t\treturn " + a3
-							+ ";\n\t\t}\n\t\tpublic void set" + b1 + "(" + a2 + " " + a3 + "){\n\t\t\tthis." + a3 + "="
-							+ a3 + ";\n\t\t}\n";
-					System.out.println("mid_mid:" + mid_mid1);
-					String mid_mid2 = "public " + a2 + " get" + b1 + "(){\n\treturn " + a3 + ";\n}\n";
-					String mid_mid3 = "public void set" + b1 + "(" + a2 + " " + a3 + "){\n\tthis." + a3 + "=" + a3
-							+ ";\n}";
-					System.out.println(file2);
-					// result = 11;
-					switch (result) {
-
-					case 11:// 둘다있다
-						file2 = file2.replace("public " + a4, mid_mid1);
-						a4 = "";
-						result = 0;
-						break;
-					case 10:// get
-						file2 = file2.replace("public " + a4, mid_mid2);
-						a4 = "";
-						result = 0;
-						break;
-					case 1:// set
-						file2 = file2.replace("public " + a4, mid_mid3);
-						a4 = "";
-						result = 0;
-						break;
-
-					default:
-						break;
-					}
-
-				}
-			}
-		}
-		System.out.println("==================");
-		System.out.println(file2);
+		changeGetSet();
 
 		/*
 		 * // get set 변환. String so = "private"; int index = 0; String a1 = "";
@@ -405,4 +300,104 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		}
 	}
 
+	public void changeGetSet() {
+		String a2 = "";
+		String a3 = "";
+		String a4 = "";
+		int result = 0;
+
+		/*
+		 * String c_code =
+		 * "using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Text;\nusing System.Threading.Tasks;\n"
+		 * +
+		 * "namespace ConsoleApplication1\n{\n\tpublic class Program\n\t{\n\t\tprivate string name = \"durina\";\n\t\tprivate int age = 25;\n\t\t"
+		 * +
+		 * "\n\t\tpublic string Name\n\t\t{\n\t\t\tget;\n\t\t\tset;\n\t\t}\n\n\t\tpublic int Age\n\t\t{\n\t\t\tget;\n\t\t\tset;\n\t\t"
+		 * +
+		 * "}\n\t\t\n\t\tpublic static void Main(string[] args)\n\t\t{\n\t\t\tProgram a = new Program();\n\t\t}\n}\n}"
+		 * ;
+		 */
+		/*
+		 * String c_code =
+		 * "using System;using System.Collections.Generic;using System.IO;using System.Text;using System.Threading.Tasks;"
+		 * +
+		 * "namespace CVa{public class Test{public static void Main(string[] args){}}public class Test1{private string a;private string b;"
+		 * +
+		 * "public Test1(){a = \"durina\";b = \"kkj\";}public string A{get;set;}public string B{get;set;}}}"
+		 * ;
+		 */
+
+		// 줄을 기준으로 나눠서 전체의 코드를 정리한다.
+		String[] mainArray = file2.split("\n");
+		// 타입과 변수명을 받기 위해서
+		String[] trimArray = new String[mainArray.length];
+
+		// trim으로 잘라서 저장한다.
+		for (int i = 0; i < mainArray.length; i++) {
+			trimArray[i] = mainArray[i].trim();
+		}
+
+		String[] midArray = file2.split("private ");
+		int index = midArray.length;
+
+		for (int i = 1; i < index; i++) {
+			String a1 = midArray[i];
+			// a1:string name = "durina";
+			String[] keyArray = a1.split(" ");
+			a2 = keyArray[0];
+			a3 = keyArray[1];
+			String[] keyArray1 = a3.split(";");
+			a3 = keyArray1[0];
+			String b2 = a2.valueOf(a2.charAt(0)).toUpperCase();
+			for (int j = 1; j < a2.length(); j++) {
+				b2 += a2.charAt(j);
+			}
+			String b1 = a3.valueOf(a3.charAt(0)).toUpperCase();
+			for (int j = 1; j < a3.length(); j++) {
+				b1 += a3.charAt(j);
+			}
+			String[] checkArray = file2.split("public ");
+			for (int j = 1; j < checkArray.length; j++) {
+				if (checkArray[j].indexOf(a2 + " " + b1) != -1) {
+					a4 = checkArray[j];
+					// System.out.println(j);
+					if (a4.indexOf("get") != -1) {
+						result += 10;
+					}
+					if (a4.indexOf("set") != -1) {
+						result += 1;
+					}
+					String mid_mid1 = "\t\tpublic " + a2 + " get" + b1 + "(){\n\t\t\treturn " + a3
+							+ ";\n\t\t}\n\t\tpublic void set" + b1 + "(" + a2 + " " + a3 + "){\n\t\t\tthis." + a3 + "="
+							+ a3 + ";\n\t\t}\n";
+					String mid_mid2 = "public " + a2 + " get" + b1 + "(){\n\treturn " + a3 + ";\n}\n";
+					String mid_mid3 = "public void set" + b1 + "(" + a2 + " " + a3 + "){\n\tthis." + a3 + "=" + a3
+							+ ";\n}";
+					// result = 11;
+					switch (result) {
+
+					case 11:// 둘다있다
+						file2 = file2.replace("public " + a4, mid_mid1);
+						a4 = "";
+						result = 0;
+						break;
+					case 10:// get
+						file2 = file2.replace("public " + a4, mid_mid2);
+						a4 = "";
+						result = 0;
+						break;
+					case 1:// set
+						file2 = file2.replace("public " + a4, mid_mid3);
+						a4 = "";
+						result = 0;
+						break;
+
+					default:
+						break;
+					}
+
+				}
+			}
+		}
+	}
 }
