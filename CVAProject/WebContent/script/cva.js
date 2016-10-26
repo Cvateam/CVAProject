@@ -20,7 +20,7 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
-				$('#output2').html('<h5>' + response.compileOutput2 + '</h5>');
+				$('#output2').html('<h3 class=output>' + response.compileOutput2 + '</h3>');
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
@@ -78,22 +78,5 @@ $(document).ready(function() {
 			}
 		});
 	});
-/*	$("#java_compile").on("click" , function(){
-			var javaSourceCode = $("textarea#file1").val();
-			var javaCompileCode = $('#javaCompileCode');
-			$.ajax({
-				url : 'javacompile'
-				,type : 'POST'
-				,dataType : 'json'
-				,data : {"javaCode" : javaSourceCode }
-				,success : function(resp){
-							javaCompileCode.val(resp.javaCompileCode);												
-						}
-				,error : function(){
-					alert("error");
-					}
-			});
-		});*/
-	
-	
+
 });//ready

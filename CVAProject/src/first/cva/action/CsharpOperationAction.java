@@ -34,9 +34,19 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		// 접속 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
 		Thread.sleep(1000);
 		originalFile2 = file2;
+
+		if (file2.indexOf("Console.ReadLine();") != -1) {
+			file2 = file2.replace("Console.ReadLine();", "\"" + input2 + "\""
+					+ ";\nBinaryWriter binWriter = new BinaryWriter(new MemoryStream());\nbinWriter.Write(" + "\""
+					+ input2 + "\"" + ");\n"
+					+ "BinaryReader binReader = new BinaryReader(binWriter.BaseStream);\nbinReader.BaseStream.Position = 0;\n");
+
+		}
+		System.out.println(file2);
+
 		client.send(file2 + "\n");
 		// send가 끝나면. 이것이 실행될수있게 코드를 바꿔보려고 한다. 지금은 좀 야매.
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		compileOutput2 = client.data;
 		client.stopClient();
 
@@ -62,6 +72,8 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		file2 = file2.trim();
 		// Console.WriteLine 변환.
 		consoleWriteLineToSysout();
+		// 겟셋
+		changeGetSet();
 
 		/*
 		 * // get set 변환. String so = "private"; int index = 0; String a1 = "";
@@ -94,6 +106,99 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 				file2 = file2.replace(list.get(ii).getCsharpKeyword(), list.get(ii).getJavaKeyword());
 			}
 		}
+
+		// 클래스 안에다 쳐넣기.
+		makeInnerClass();
+
+		translateOutput2 = file2;
+		return SUCCESS;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+
+	}
+
+	public String getFile2() {
+		return file2;
+	}
+
+	public void setFile2(String file2) {
+		this.file2 = file2;
+	}
+
+	public String getCompileOutput2() {
+		return compileOutput2;
+	}
+
+	public void setCompileOutput2(String CompileOutput2) {
+		this.compileOutput2 = CompileOutput2;
+	}
+
+	public String getInput2() {
+		return input2;
+	}
+
+	public void setInput2(String input2) {
+		this.input2 = input2;
+	}
+
+	public String getTranslateOutput2() {
+		return translateOutput2;
+	}
+
+	public void setTranslateOutput2(String translateOutput2) {
+		this.translateOutput2 = translateOutput2;
+	}
+
+	public void consoleWriteLineToSysout() {
+		String a1 = "";
+		String a2 = "";
+		String a3 = "";
+		String a = ".*{0}.*";
+		String so = "Console.WriteLine";
+		/*
+		 * String c_code =
+		 * "using System; namespace test{ class MainApp{ static void Main(String[] args){"
+		 * +
+		 * "int x =1; int y =2; Console.WriteLine(\"x:{0}\",x)}Console.WriteLine(\"y:{0}\",y)}"
+		 * + "Console.WriteLine(\"x+y:{0}\",x+y)}}";
+		 */
+		// 1)주어진 String에 maches를 이용하여 원하는 "Console"을 찾는다.
+		if (file2.indexOf(so) != -1) {
+			// 2)있는게 확인되면 "Console"을 기준으로 자른다.
+			String[] array = file2.split("Console.WriteLine");
+			int index = array.length;
+			// 3)잘라진 array의 length를 기준으로 length-1 일하기
+			// 1부터 시작하는 이유는 0으로 하면 그전에 쓸데없는 값들이 들어가서 인덱스 오류남
+			for (int i = 1; i < index; i++) {
+				if (array[i].indexOf("\"") != -1) {
+					// "" 안에 들어간 문자열을 저장한다 : a1
+					String[] array4 = array[i].split("\"");
+					a1 = array4[1];
+					// ""안의 글자 중 앞에 쓰인 글자만을 자른다.
+					if (a1.matches(a) == true) {
+						// {0} 앞까지 자른다.
+						String[] array2 = a1.split("\\{");
+						a2 = array2[0];
+						// 보통의 표기 : 앞을 자른다.
+						String[] array3 = a2.split(":");
+						a3 = array3[0];
+						a3 = a3.trim();
+						// a1을 a2로 치환한다.
+						file2 = file2.replace(a1, a2);
+						// 순수하게 잘라진 변수명을 이용하여 넣어준다.
+						String b = "," + a3;
+						String f = "+" + a3;
+						file2 = file2.replace(b, f);
+					}
+				}
+			}
+		}
+	}
+
+	public void makeInnerClass() {
 
 		// 수술들어갑니다.
 		String[] surgery = file2.split("\n");
@@ -193,90 +298,106 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 			}
 
 		}
-
-		translateOutput2 = file2;
-		return SUCCESS;
 	}
 
-	@Override
-	public void setSession(Map<String, Object> session) {
-		this.session = session;
-
-	}
-
-	public String getFile2() {
-		return file2;
-	}
-
-	public void setFile2(String file2) {
-		this.file2 = file2;
-	}
-
-	public String getCompileOutput2() {
-		return compileOutput2;
-	}
-
-	public void setCompileOutput2(String CompileOutput2) {
-		this.compileOutput2 = CompileOutput2;
-	}
-
-	public String getInput2() {
-		return input2;
-	}
-
-	public void setInput2(String input2) {
-		this.input2 = input2;
-	}
-
-	public String getTranslateOutput2() {
-		return translateOutput2;
-	}
-
-	public void setTranslateOutput2(String translateOutput2) {
-		this.translateOutput2 = translateOutput2;
-	}
-
-	public void consoleWriteLineToSysout() {
-		String a1 = "";
+	public void changeGetSet() {
 		String a2 = "";
 		String a3 = "";
-		String a = ".*{0}.*";
-		String so = "Console.WriteLine";
+		String a4 = "";
+		int result = 0;
+
 		/*
 		 * String c_code =
-		 * "using System; namespace test{ class MainApp{ static void Main(String[] args){"
+		 * "using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Text;\nusing System.Threading.Tasks;\n"
 		 * +
-		 * "int x =1; int y =2; Console.WriteLine(\"x:{0}\",x)}Console.WriteLine(\"y:{0}\",y)}"
-		 * + "Console.WriteLine(\"x+y:{0}\",x+y)}}";
+		 * "namespace ConsoleApplication1\n{\n\tpublic class Program\n\t{\n\t\tprivate string name = \"durina\";\n\t\tprivate int age = 25;\n\t\t"
+		 * +
+		 * "\n\t\tpublic string Name\n\t\t{\n\t\t\tget;\n\t\t\tset;\n\t\t}\n\n\t\tpublic int Age\n\t\t{\n\t\t\tget;\n\t\t\tset;\n\t\t"
+		 * +
+		 * "}\n\t\t\n\t\tpublic static void Main(string[] args)\n\t\t{\n\t\t\tProgram a = new Program();\n\t\t}\n}\n}"
+		 * ;
 		 */
-		// 1)주어진 String에 maches를 이용하여 원하는 "Console"을 찾는다.
-		if (file2.indexOf(so) != -1) {
-			// 2)있는게 확인되면 "Console"을 기준으로 자른다.
-			String[] array = file2.split("Console.WriteLine");
-			int index = array.length;
-			// 3)잘라진 array의 length를 기준으로 length-1 일하기
-			// 1부터 시작하는 이유는 0으로 하면 그전에 쓸데없는 값들이 들어가서 인덱스 오류남
-			for (int i = 1; i < index; i++) {
-				// "" 안에 들어간 문자열을 저장한다 : a1
-				String[] array4 = array[i].split("\"");
-				a1 = array4[1];
-				// ""안의 글자 중 앞에 쓰인 글자만을 자른다.
-				if (a1.matches(a) == true) {
-					// {0} 앞까지 자른다.
-					String[] array2 = a1.split("\\{");
-					a2 = array2[0];
-					// 보통의 표기 : 앞을 자른다.
-					String[] array3 = a2.split(":");
-					a3 = array3[0];
-					// a1을 a2로 치환한다.
-					file2 = file2.replace(a1, a2);
-					// 순수하게 잘라진 변수명을 이용하여 넣어준다.
-					String b = "," + a3;
-					String f = "+" + a3;
-					file2 = file2.replace(b, f);
+		/*
+		 * String c_code =
+		 * "using System;using System.Collections.Generic;using System.IO;using System.Text;using System.Threading.Tasks;"
+		 * +
+		 * "namespace CVa{public class Test{public static void Main(string[] args){}}public class Test1{private string a;private string b;"
+		 * +
+		 * "public Test1(){a = \"durina\";b = \"kkj\";}public string A{get;set;}public string B{get;set;}}}"
+		 * ;
+		 */
+
+		// 줄을 기준으로 나눠서 전체의 코드를 정리한다.
+		String[] mainArray = file2.split("\n");
+		// 타입과 변수명을 받기 위해서
+		String[] trimArray = new String[mainArray.length];
+
+		// trim으로 잘라서 저장한다.
+		for (int i = 0; i < mainArray.length; i++) {
+			trimArray[i] = mainArray[i].trim();
+		}
+
+		String[] midArray = file2.split("private ");
+		int index = midArray.length;
+
+		for (int i = 1; i < index; i++) {
+			String a1 = midArray[i];
+			// a1:string name = "durina";
+			String[] keyArray = a1.split(" ");
+			a2 = keyArray[0];
+			a3 = keyArray[1];
+			String[] keyArray1 = a3.split(";");
+			a3 = keyArray1[0];
+			String b2 = a2.valueOf(a2.charAt(0)).toUpperCase();
+			for (int j = 1; j < a2.length(); j++) {
+				b2 += a2.charAt(j);
+			}
+			String b1 = a3.valueOf(a3.charAt(0)).toUpperCase();
+			for (int j = 1; j < a3.length(); j++) {
+				b1 += a3.charAt(j);
+			}
+			String[] checkArray = file2.split("public ");
+			for (int j = 1; j < checkArray.length; j++) {
+				if (checkArray[j].indexOf(a2 + " " + b1) != -1) {
+					a4 = checkArray[j];
+					// System.out.println(j);
+					if (a4.indexOf("get") != -1) {
+						result += 10;
+					}
+					if (a4.indexOf("set") != -1) {
+						result += 1;
+					}
+					String mid_mid1 = "\t\tpublic " + a2 + " get" + b1 + "(){\n\t\t\treturn " + a3
+							+ ";\n\t\t}\n\t\tpublic void set" + b1 + "(" + a2 + " " + a3 + "){\n\t\t\tthis." + a3 + "="
+							+ a3 + ";\n\t\t}\n";
+					String mid_mid2 = "public " + a2 + " get" + b1 + "(){\n\treturn " + a3 + ";\n}\n";
+					String mid_mid3 = "public void set" + b1 + "(" + a2 + " " + a3 + "){\n\tthis." + a3 + "=" + a3
+							+ ";\n}";
+					// result = 11;
+					switch (result) {
+
+					case 11:// 둘다있다
+						file2 = file2.replace("public " + a4, mid_mid1);
+						a4 = "";
+						result = 0;
+						break;
+					case 10:// get
+						file2 = file2.replace("public " + a4, mid_mid2);
+						a4 = "";
+						result = 0;
+						break;
+					case 1:// set
+						file2 = file2.replace("public " + a4, mid_mid3);
+						a4 = "";
+						result = 0;
+						break;
+
+					default:
+						break;
+					}
+
 				}
 			}
 		}
 	}
-
 }

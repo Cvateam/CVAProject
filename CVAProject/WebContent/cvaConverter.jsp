@@ -1316,7 +1316,7 @@ transform
 					</div>
 				</div>
 				<div id="file_parent1" style="padding: 10px; display: none;">
-					<textarea name="file" id="file1" tabindex="1" >
+					<textarea name="file" id="file1" tabindex="1">
 /* package whatever; // don't place package name! */
 import java.util.*;
 import java.lang.*;
@@ -1353,7 +1353,7 @@ public class Test
 				<div class="span8">
 					<div class="ex-more-options-box"
 						style="padding: 10px; padding-top: 6px; color: #666">
-						<div style="margin-bottom: 5px">
+						<div class="stdin" style="margin-bottom: 5px">
 							<i class="icon-inbox"></i> enter input (stdin)
 							<div class="pull-right option-clear">
 								<a href="#" class="rel-tooltip" title="Clear the input"
@@ -1575,7 +1575,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CVa
+namespace Test
 {
 	public class Test
 	{
@@ -1610,7 +1610,7 @@ namespace CVa
 				<div class="span8">
 					<div class="ex-more-options-box"
 						style="padding: 10px; padding-top: 6px; color: #666">
-						<div style="margin-bottom: 5px">
+						<div class="stdin" style="margin-bottom: 5px">
 							<i class="icon-inbox"></i> enter input (stdin)
 							<div class="pull-right option-clear">
 								<a href="#" class="rel-tooltip" title="Clear the input"
@@ -1689,7 +1689,6 @@ namespace CVa
 						<!-- more options -->
 						<a href="#" id="button-more-options2" class=""><span
 							class="more-options-less">&nbsp;options</span> </a>
-
 						<!-- submit -->
 						<div class="pull-right">
 							<input type="hidden" name="run" value="1">
