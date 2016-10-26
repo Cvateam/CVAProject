@@ -54,5 +54,46 @@ $(document).ready(function() {
 				alert(resp + " " + code);
 			}
 		});
-	})
+	});
+	
+	//////////////// java compile connect  //////////////////////////
+	
+	$('#Submit1').on('click', function() {
+		javaUnloadEditor();
+		var item = {
+			"javaCode"  :  $('#file1').val()
+			,"javaCompileCode"  : $('#input1').val()
+		};                   
+		javaLoadEditor();
+		$.ajax({
+			type : 'get',
+			url : 'compile1',
+			data : item,
+			dataType : 'json',
+			success : function(response) {
+				$('#output1').html('<h5>' + response.javaCompileCode + '</h5>');
+			},
+			error : function(resp, code) {
+				alert(resp + " " + code);
+			}
+		});
+	});
+/*	$("#java_compile").on("click" , function(){
+			var javaSourceCode = $("textarea#file1").val();
+			var javaCompileCode = $('#javaCompileCode');
+			$.ajax({
+				url : 'javacompile'
+				,type : 'POST'
+				,dataType : 'json'
+				,data : {"javaCode" : javaSourceCode }
+				,success : function(resp){
+							javaCompileCode.val(resp.javaCompileCode);												
+						}
+				,error : function(){
+					alert("error");
+					}
+			});
+		});*/
+	
+	
 });//ready
