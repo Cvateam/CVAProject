@@ -1,5 +1,6 @@
 package first.cva.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -61,61 +62,32 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		file2 = file2.trim();
 		// Console.WriteLine 변환.
 		consoleWriteLineToSysout();
-		
-		// get set 변환.
-		String so = "private";
-		int index = 0;
-		String a1 = "";
-		String a2 = "";
-		String a3 = "";
-		String a4 = "";
-		/*c_code = "using System; namespace ConsoleApplocation1{private String name =\"durina\";public String Name"
-				+ "{get;set;}private int age = \"25\";public int Age{get;set;}}";*/
-		// 1) private이 있는지 확인하기
-		if (file2.indexOf(so) != -1) {
-			String[] array = file2.split("private");
-			index = array.length;
-			System.out.println(index);
-	        System.out.println(file2);
 
-			// 3) 잘라진 만큼 돌리고
-			for (int i = 1; i < index; i++) {
-				a1 = array[i];
-				System.out.println(a1);
-				String[] array2 = a1.split(" ");
-				// 타입명저장
-				a2 = array2[1];
-				// 변수명 저장
-				
-				a3 = array2[2];
-				System.out.println(a1);
-				// public 잘라주기
-				String[] array3 = a1.split("public ");
-				a4 = array3[1];
-				// 변수의 첫글자를 대문자로 바꿔 저장한다.
-				String b1 = a3.valueOf(a3.charAt(0)).toUpperCase();
-				for (int j = 1; j < a3.length(); j++) {
-					b1 += a3.charAt(j);
-				}
-				// get을 찾기위한
-				String so1 = b1 + "{get;";
-				// 치환해야할 부분을 찾기위해
-				// 4) get이 있으면
-				if (file2.indexOf("get") != -1) {
-					// 5) get 부분 치환
-					file2 = file2.replace(so1, "get" + b1 + "{return " + a3 + ";}");
-				}
-				String so2 = "}\npublic void " + "set" + b1 + "{this." + a3 + " = " + a3 + ";";
-				// 6) set이 있으면
-				if (file2.indexOf("set") != -1) {
-					// 8) set 부분 치환
-					file2 = file2.replace("}set;", so2);
-					System.out.println(file2);
-				}
-			}
-		}
-		
-		
+		/*
+		 * // get set 변환. String so = "private"; int index = 0; String a1 = "";
+		 * String a2 = ""; String a3 = ""; String a4 = ""; /*c_code =
+		 * "using System; namespace ConsoleApplocation1{private String name =\"durina\";public String Name"
+		 * + "{get;set;}private int age = \"25\";public int Age{get;set;}}"; //
+		 * 1) private이 있는지 확인하기 if (file2.indexOf(so) != -1) { String[] array =
+		 * file2.split("private"); index = array.length;
+		 * System.out.println(index); System.out.println(file2);
+		 * 
+		 * // 3) 잘라진 만큼 돌리고 for (int i = 1; i < index; i++) { a1 = array[i];
+		 * System.out.println(a1); String[] array2 = a1.split(" "); // 타입명저장 a2
+		 * = array2[1]; // 변수명 저장
+		 * 
+		 * a3 = array2[2]; System.out.println(a1); // public 잘라주기 String[]
+		 * array3 = a1.split("public "); a4 = array3[1]; // 변수의 첫글자를 대문자로 바꿔
+		 * 저장한다. String b1 = a3.valueOf(a3.charAt(0)).toUpperCase(); for (int j
+		 * = 1; j < a3.length(); j++) { b1 += a3.charAt(j); } // get을 찾기위한
+		 * String so1 = b1 + "{get;"; // 치환해야할 부분을 찾기위해 // 4) get이 있으면 if
+		 * (file2.indexOf("get") != -1) { // 5) get 부분 치환 file2 =
+		 * file2.replace(so1, "get" + b1 + "{return " + a3 + ";}"); } String so2
+		 * = "}\npublic void " + "set" + b1 + "{this." + a3 + " = " + a3 + ";";
+		 * // 6) set이 있으면 if (file2.indexOf("set") != -1) { // 8) set 부분 치환
+		 * file2 = file2.replace("}set;", so2); System.out.println(file2); } } }
+		 */
+
 		// 키워드
 		for (int ii = 0; ii < list.size(); ii++) {
 			if (file2.indexOf(list.get(ii).getCsharpKeyword()) != -1) {
@@ -123,8 +95,106 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 			}
 		}
 
+		// 수술들어갑니다.
+		String[] surgery = file2.split("\n");
+		ArrayList<String> c_code = new ArrayList<>();
+		for (int ii = 0; ii < surgery.length; ii++) {
+			c_code.add(surgery[ii]);
+		}
+		// 메인을 찾는다.
+		int mainWhere = 0;
+		// 메인 바로 다음 클래스는 어디인가?
+		int nextClass = 0;
+		// 메인 전 클래스는 어디인가?
+		int beforeClass = 0;
+		// 전체코드 출력
+		/*
+		 * for (int ii = 0; ii < surgery.length; ii++) {
+		 * System.out.println(surgery[ii]); }
+		 */
+		ArrayList<Integer> classWhere = new ArrayList<Integer>();
+		for (int ii = 0; ii < surgery.length; ii++) {
+			if (surgery[ii].indexOf("class") != -1) {
+				// 클래스의 위치를 찾는다.
+				classWhere.add(ii);
+			} else if (surgery[ii].indexOf("main") != -1) {
+				mainWhere = ii;
+			}
+		}
+
+		if (classWhere.size() >= 2) {
+			classWhere.add(1000);
+			for (int ii = 0; ii < surgery.length; ii++) {
+				if (classWhere.indexOf(ii) != -1) {
+					/*
+					 * System.out.println(surgery[classWhere.get(0)]);
+					 * System.out.println("----위");
+					 * System.out.println(surgery[classWhere.get(classWhere.
+					 * indexOf(ii))]); System.out.println("----아래");
+					 * System.out.println(surgery[classWhere.get(1)]);
+					 * System.out.println("첫번째 : " +
+					 * classWhere.get(classWhere.indexOf(ii)));
+					 * System.out.println("메   인 : " + mainWhere + " " +
+					 * surgery[mainWhere]); System.out.println("두번째 : " +
+					 * classWhere.get(classWhere.indexOf(ii)+1));
+					 */
+
+					if (classWhere.get(classWhere.indexOf(ii)) < mainWhere
+							&& classWhere.get(classWhere.indexOf(ii) + 1) > mainWhere) {
+						if (classWhere.get(classWhere.indexOf(ii) + 1) == 1000) {
+							beforeClass = classWhere.get(classWhere.indexOf(ii) - 1);
+							nextClass = classWhere.get(classWhere.indexOf(ii));
+							/*
+							 * System.out.println(beforeClass);
+							 * System.out.println(surgery[beforeClass]);
+							 */
+						} else {
+							nextClass = classWhere.get(classWhere.indexOf(ii) + 1);
+						}
+						break;
+					}
+				}
+			}
+			if (beforeClass == 0) {
+				for (int ii = nextClass; ii > 0; ii--) {
+					if (surgery[ii].indexOf("}") != -1) {
+						// System.out.println(surgery[ii]);
+						String temp = surgery[ii];
+						/*
+						 * System.out.println("길이" + surgery.length);
+						 * System.out.println(ii + "번째 : " + surgery[ii+1]);
+						 * System.out.println(ii+1 + "번째 : " + surgery[ii+2]);
+						 */
+						for (int jj = ii; jj < surgery.length - 1; jj++) {
+							surgery[jj] = "\t" + surgery[jj + 1];
+							// System.out.println(surgery[jj]);
+						}
+						surgery[surgery.length - 1] = temp;
+						// System.out.println(surgery[surgery.length-1]);
+						break;
+					}
+				}
+			} else {
+				int jj = beforeClass;
+				while (true) {
+					c_code.add(mainWhere, "\t" + c_code.get(beforeClass));
+					c_code.remove(c_code.get(beforeClass));
+					jj++;
+					if (jj == nextClass) {
+						break;
+					}
+				}
+				surgery = c_code.toArray(new String[surgery.length]);
+			}
+
+			file2 = "";
+			for (int ii = 0; ii < surgery.length; ii++) {
+				file2 += surgery[ii] + "\n";
+			}
+
+		}
+
 		translateOutput2 = file2;
-		System.out.println(translateOutput2);
 		return SUCCESS;
 	}
 

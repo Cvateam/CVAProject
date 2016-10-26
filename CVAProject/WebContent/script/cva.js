@@ -43,12 +43,12 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
-//				refresh해야함....찾자.
-				alert(response.translateOutput2);
+				// 언로드 시킨다.
 				javaUnloadEditor();
+				//값을 java꺼에 붙인다.
 				$('#file1').val(response.translateOutput2);
+				$('#input1').val(response.input2);
 				javaLoadEditor();
-				alert(response.translateOutput2);
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
