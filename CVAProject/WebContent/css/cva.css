@@ -152,7 +152,7 @@ div.codeTextarea{
 	box-shadow: none !important;
 	border-color: #ccc;
 	height: 100px;
-	width: 100%;
+	width: 96%;
 	font-size: 12px;
 	line-height: 1em;
 	padding: 2px;
@@ -172,7 +172,7 @@ div.codeTextarea{
 	box-shadow: none !important;
 	border-color: #ccc;
 	height: 100px;
-	width: 100%;
+	width: 96%;
 	font-size: 12px;
 	line-height: 1em;
 	padding: 2px;
@@ -235,4 +235,30 @@ div.codeTextarea{
 
 .pull-right {
 	padding: 2px;
+}
+
+.option-clear {
+	margin-right: 17px;
+}
+
+.code-panel {
+	background-color: #0000cc;
+	padding: 3px 20px 3px 20px;
+	margin: 80px 3px 3px 80px;
+}
+
+.footer {
+	margin-right: 30px;
+}
+
+.stdin {
+	color: white;
+}
+
+.clearfix {
+	padding-bottom: 10px;
+}
+
+.output {
+	color: white;
 }

@@ -20,7 +20,7 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
-				$('#output2').html('<h5>' + response.compileOutput2 + '</h5>');
+				$('#output2').html('<h3 class=output>' + response.compileOutput2 + '</h3>');
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
@@ -54,5 +54,5 @@ $(document).ready(function() {
 				alert(resp + " " + code);
 			}
 		});
-	})
+	}) // C# 코드 부분에서 translate를 눌렀을때 액션.
 });//ready
