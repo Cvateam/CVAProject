@@ -44,6 +44,10 @@
 		<action name="compile1"  class="first.cva.action.JavaOperationAction" method="compile1">
             <result type = "json"/>
         </action>
+        <!-- 자바 C#로 변환 -->
+		<action name="translate1" class="first.cva.action.JavaOperationAction" method="translate1">
+			<result type="json"></result>
+		</action>
 		
 	</package>
 	

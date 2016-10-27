@@ -55,7 +55,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 
 	public String translate2() throws Exception {
 		KeywordDAO dao = new KeywordDAO();
-		List<KeywordVO> list = dao.searchKeyword();
+		List<KeywordVO> list = dao.searchKeyword(0); 
 		// 바꾼다 맨위 import <-> using
 		String javaForm = "import java.util.*;\nimport java.lang.*;\nimport java.io.*;";
 		String csharpForm = "using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n";

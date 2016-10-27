@@ -51,7 +51,7 @@ insert into keyword values(keyword_seq.nextval,'virtual','extends');
 insert into keyword values(keyword_seq.nextval,'string','String');
 insert into keyword values(keyword_seq.nextval,'Main','main');
 insert into keyword values(keyword_seq.nextval,'using','import');
-insert into keyword values(keyword_seq.nextval,'namespace', ' ');
+insert into keyword values(keyword_seq.nextval,'namespace', ' '); --문제 발견 
 insert into keyword values(keyword_seq.nextval,'Console.WriteLine','System.out.println');
 
 
