@@ -3,5 +3,10 @@
 <mapper namespace="mapper">
 	<select id="searchKeyword" resultType="KeywordVO">
 		select * from keyword
+		  <choose>
+		    <when test="value == 1"><!-- 인자로 넘어오는거 getter없이 떄문에 바로 사요하려면 vlaue 라고 쓰면 됌 -->
+		      where num not in  43
+		    </when>
+		  </choose>
 	</select>
 </mapper>

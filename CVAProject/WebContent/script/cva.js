@@ -47,12 +47,62 @@ $(document).ready(function() {
 				javaUnloadEditor();
 				//값을 java꺼에 붙인다.
 				$('#file1').val(response.translateOutput2);
-				$('#input1').val(response.input2);
+				$('#input1').val($('#input2').val());
 				javaLoadEditor();
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
 			}
 		});
-	}) // C# 코드 부분에서 translate를 눌렀을때 액션.
+	});
+	
+	//////////////// java compile connect  //////////////////////////
+	
+	$('#Submit1').on('click', function() {
+		javaUnloadEditor();
+		var item = {
+			"javaCode"  :  $('#file1').val()
+			,"javaCompileCode"  : $('#input1').val()
+		};                   
+		javaLoadEditor();
+		$.ajax({
+			type : 'get',
+			url : 'compile1',
+			data : item,
+			dataType : 'json',
+			success : function(response) {
+				$('#output1').html('<h5>' + response.javaCompileCode + '</h5>');
+			},
+			error : function(resp, code) {
+				alert(resp + " " + code);
+			}
+		});
+	});
+	/////////////// java translate ///////////////////////////
+	$('#Translate1').on('click', function() {
+		javaUnloadEditor();
+		var item = {
+			"javaCode" : $('#file1').val()
+			,"scannerInput" : $('#input1').val() 
+		};
+		javaLoadEditor();
+		$.ajax({
+			type : 'get',
+			url : 'translate1',
+			data : item,
+			dataType : 'json',
+			success : function(response) {
+				// 언로드 시킨다.
+				csharpUnloadEditor();
+				//값을 씨샵에 붙인다.
+				alert("success  " + response.javatranslatedCode);
+				$('#file2').val(response.javatranslatedCode);
+				$('#input2').val($('#input1').val());
+				csharpLoadEditor();
+			},
+			error : function(resp, code) {
+				alert(resp + " " + code);
+			}
+		});
+	});
 });//ready

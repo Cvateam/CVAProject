@@ -10,10 +10,10 @@ public class KeywordDAO {
 
 	SqlSession sqlSession;
 	
-	public List<KeywordVO> searchKeyword() throws Exception {
+	public List<KeywordVO> searchKeyword(int i) throws Exception {
 		List<KeywordVO> list = null;
 		sqlSession = MybatisConfig.getSqlSessionFactory().openSession();
-		list = sqlSession.selectList("searchKeyword");
+		list = sqlSession.selectList("searchKeyword" , i);
 		sqlSession.close();
 		return list;
 	}
