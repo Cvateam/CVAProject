@@ -166,6 +166,8 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		 * + "Console.WriteLine(\"x+y:{0}\",x+y)}}";
 		 */
 		// 1)주어진 String에 maches를 이용하여 원하는 "Console"을 찾는다.
+		System.out.println("file2 : "+file2);
+		System.out.println(file2.indexOf(so));
 		if (file2.indexOf(so) != -1) {
 			// 2)있는게 확인되면 "Console"을 기준으로 자른다.
 			String[] array = file2.split("Console.WriteLine");
