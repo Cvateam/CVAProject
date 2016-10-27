@@ -20,7 +20,7 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
-				$('#output2').html('<h3 class=output>' + response.compileOutput2 + '</h3>');
+				$('#output2').html("<h3  class='output'>" + response.compileOutput2 + '</h3>');
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
@@ -62,7 +62,7 @@ $(document).ready(function() {
 		javaUnloadEditor();
 		var item = {
 			"javaCode"  :  $('#file1').val()
-			,"javaCompileCode"  : $('#input1').val()
+			,"scannerInput"  : $('#input1').val()
 		};                   
 		javaLoadEditor();
 		$.ajax({
@@ -71,7 +71,7 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
-				$('#output1').html('<h5>' + response.javaCompileCode + '</h5>');
+				$('#output1').html("<h3  class='output'>" + response.javaCompileCode + '</h3>');
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);

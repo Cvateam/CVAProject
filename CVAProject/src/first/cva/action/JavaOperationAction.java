@@ -25,9 +25,41 @@ public class JavaOperationAction extends ActionSupport {
 		Runtime runtime = Runtime.getRuntime();
 		File directory = new File("WebJava/Request");
 		directory.mkdirs();
-
+		
+/*		//스캐너처리하다 맘 저장전에 scanner 사용하는지 확인해서 있으면 그부분 처리
+		ArrayList<String> oneSentenceList = null;
+		String temp = "";
+		if(javaCode.contains("Scanner") && scannerInput != null){
+			String sInputList [] = scannerInput.split("\n"); // 콘솔에 scanner 두번이상 사용할 때
+			int count = 0;
+			String oneSentence[] = javaCode.split("\n"); // 한줄씩 읽어들임;
+			oneSentenceList = new ArrayList<String> (Arrays.asList(oneSentence)); //list로 변환
+			for(int j = 0 ; j < oneSentence.length ; j++ ){
+				if(oneSentenceList.get(j).indexOf("new Scanner") != -1){
+						oneSentenceList.remove(j);
+				}
+					if(oneSentenceList.get(j).indexOf(".nextLine()") != -1){
+						if(count == 0){
+						oneSentenceList.set(j, "String a = \"" + sInputList[j] + "\"; Scanner h = new Scanner(a); String c = h.nextLine();");
+						count++;
+						}else{
+							oneSentenceList.set(j, "a = \"" + sInputList[j] + "\"; h = new Scanner(a); System.out.print(c +\"\t\"); c = h.nextLine();");
+						}	
+					}
+					break; // 일단 딱 1개만 
+			} // 한줄씩 읽어들일 때마다 
+//				For example, String message = String.join("-", "Java", "is", "cool");
+			     // message returned is: "Java-is-cool"	 
+			
+			for (int i = 0; i < oneSentenceList.size(); i++) {
+				temp += oneSentenceList.get(i);
+			}
+			
+			javaCode = temp;
+			System.out.println(javaCode);
+		}*/
+		
 		File source  = new File(directory.getAbsolutePath()+"/Test.java");
-		System.out.println(directory.getAbsolutePath());
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(source));
 			out.write(javaCode); out.newLine();
@@ -77,8 +109,8 @@ public class JavaOperationAction extends ActionSupport {
 				javaScanner1.close();
 				javaCompileCode =   javaLog.toString();
 
-				source.delete();//java파일삭제
 				new File(source.getParent(), name + ".class").delete();//class파일삭제
+				source.delete();//java파일삭제
 			}catch (InterruptedException e){
 				e.printStackTrace();
 			}
@@ -104,7 +136,7 @@ public class JavaOperationAction extends ActionSupport {
 		String packagename = javaCode.substring(namespacePosition, packagenamelastindex + 1);
 
 		 		javaCode = javaCode.replace("package", "namespace"); // 숙제 namespace 뒤에 { 이거 붙이기  */
-		 javaCode += "}"; //코드마지막에 } 덧붙혀서 마무리		
+		//네임스페이스 안주기로 함  javaCode += "\n}"; //코드마지막에 } 덧붙혀서 마무리		
 
 		 javaCode = javaCode.trim();
 
