@@ -1,3 +1,14 @@
+create table customer (
+	custid varchar2(50) primary key,
+	password varchar2(50) not null
+);
+insert into customer values ('a','a');
+
+commit;
+
+
+
+
 create table keyword (
 	num number primary key,
 	csharpkeyword varchar2(100),

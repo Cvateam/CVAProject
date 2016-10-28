@@ -6,6 +6,7 @@
 	<properties resource="db.properties" />
 	<typeAliases>
 		<typeAlias type="first.cva.vo.KeywordVO" alias="KeywordVO"/>
+		<typeAlias type="first.cva.vo.Customer" alias="Customer"/>
 	</typeAliases>
 	<!-- DB접속 정보 셋팅 -->
 	<environments default="development">

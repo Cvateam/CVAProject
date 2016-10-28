@@ -32,9 +32,9 @@
     <span class="text">LOGIN</span>
     <span class="loader"></span>
   </header>
-  <form class="form" action="customer/login" method="POST">  
-    <input class="input" type="text", placeholder="Username" id = "Username">
-    <input class="input" type="password" placeholder="Password" id = "Password">
+  <form class="form" action="login" method="POST" id="form"> 
+    <input class="input" type="text" placeholder="Username" id = "Username" name = "custid">
+    <input class="input" type="password" placeholder="Password" id = "Password" name = "password">
     <button class="btn" type="submit" ></button>
   </form>
 </div>

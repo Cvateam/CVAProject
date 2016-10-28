@@ -45,7 +45,7 @@ public class CustomerDAO {
 		
 		try {
 			ss = factory.openSession();
-			customer = ss.selectOne("customerMapper.selectCustomer", custid);
+			customer = ss.selectOne("mapper.selectCustomer", custid);
 			ss.commit();
 		}
 		catch (Exception e) {

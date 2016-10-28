@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib  prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
@@ -139,8 +140,13 @@
 				<h1 class="codrops-header__title">    A class 7 group</h1>
 				<nav class="codrops-demos">
 					<a class="current-demo" href="#">Home</a>
+					<s:if test='%{#session.loginId == null}'>
 					<a href="customer/loginForm.action">Login</a>
-					<a href="#">Menu</a>
+					</s:if>
+					<s:if test='%{#session.loginId != null}'>
+					<a href="customer/loginForm.action">Logout</a>
+					</s:if>
+					<a href="#" class="menu">Menu</a>
 				</nav>
 			</header><!-- /codrops-header -->
 			<div class="loader">

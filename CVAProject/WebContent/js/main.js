@@ -43,6 +43,7 @@
 
 	var mainContainer = document.querySelector('.landing-layout'),
 		triggerCtrl = mainContainer.querySelector('.button--trigger'),
+		triggerCtrl2 = mainContainer.querySelector('.menu'),
 		landingWrapper = mainContainer.querySelector('.landing-wrap'),
 		winsize = {width : window.innerWidth, height : window.innerHeight},
 		soundCtrl = mainContainer.querySelector('button.button--sound'),
@@ -223,6 +224,9 @@
 	function initEvents() {
 		// Trigger the main animation.
 		triggerCtrl.addEventListener('click', function() {
+			toggleMenu();
+		});
+		triggerCtrl2.addEventListener('click', function() {
 			toggleMenu();
 		});
 		// Mute sounds.

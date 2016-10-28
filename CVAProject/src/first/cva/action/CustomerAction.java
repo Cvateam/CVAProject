@@ -54,7 +54,7 @@ public class CustomerAction extends ActionSupport implements SessionAware {
 	 */
 	public String login() {
 		customer = dao.selectCustomer(custid);
-		
+		System.out.println(custid);
 		//ID가 없거나 비밀번호가 다르면 로그인 실패
 		if (customer == null) {
 			return INPUT;
@@ -64,11 +64,12 @@ public class CustomerAction extends ActionSupport implements SessionAware {
 		}
 		//로그인 성공하는 경우 세션에 로그인 정보 저장
 		session.put("loginId", custid);
-		
+		System.out.println(custid);
 		//"admin" 아이디로 로그인한 경우 세션에 관리자 여부 저장
-		if (custid.equals("admin")) {
+		if (custid.equals("a")) { // 관리자 파악 
 			session.put("isAdmin", true);
-			return "admin";
+			
+			return SUCCESS;
 		}
 		
 		return SUCCESS;	
