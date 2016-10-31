@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>C.va - java to c# translate</title>
-		<meta charset="UTF-8">
-		<link rel="shortcut icon" href="images/icon.png">
+		<meta charset="utf-8">
 
 		<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' type='text/css'>
+		<link rel="stylesheet" href="codemirror-3.21/codemirror.css">
 		<style type="text/css">
 			body
 			{
@@ -75,7 +76,7 @@
 				padding-top: 193px;
 				margin-top: -147px;
 			}
-			.logo
+			.beach
 			{
 				width: 1040px;
 				height: 404px;
@@ -84,7 +85,7 @@
 				background-position: center 147px;
 				background-repeat: no-repeat;
 			}
-			.logo-content
+			.beach-content
 			{
 				position: fixed;
 				margin-left: 14px;
@@ -93,52 +94,26 @@
 				overflow: hidden;
 			}
 			
-.button {
-	margin: 0;
-	padding: 0;
-	color: #fff;
-	border: none;
-	background: none;
-	width: 4em;
-	height: 4em;
-}
-polygon {
-  stroke-width: 0;
-  stroke: #0072bb;
-  fill: #0072bb;
-}
-
-.button:hover {
-	color: #84ff84;
-}
-
-.button:focus {
-	outline: none;
-}
-
-.button--trigger {
-	position: absolute;
-	right: 30em;
-	bottom: 0em;
-}
-	#slider1{
-	list-type: none;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-.slider{
- margin: 0 auto;
- width: 625px;
- height: 345px;	
-
-}
-			
 		</style>
-		
+		<style type="text/css">
+			.CodeMirror
+			{
+				border: 2px inset #dee;
+				width: 511px;
+				height: 267px;
+				font-size: 13px;
+			}
+			.CodeMirror-linenumber
+			{
+				min-width: 16px;
+			}
+		</style>
+
+		<script src="codemirror-3.21/codemirror.js"></script>
+		<script src="codemirror-3.21/clike.js"></script>
+		<script src="codemirror-3.21/matchbrackets.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js?ver=3.3"></script>
 		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="js/jquery.cycle.all.js"></script> 
 		<script>
 			var numberOfSections = 4;
 			var selectedSection = 1;
@@ -169,7 +144,7 @@ polygon {
 					{
 						var section = $("#section" + i);
 						var sectionTop = section.position().top + 46;
-						var sectionHeight = section.height() + 10;
+						var sectionHeight = section.height();
 						var sectionBottom = sectionTop + sectionHeight;
 						var percentage = 100 / sectionHeight * (Math.min(visibleBottom, sectionBottom) - Math.max(visibleTop, sectionTop));
 						if(percentage > biggestPercentage)
@@ -180,15 +155,144 @@ polygon {
 					}
 					if(biggestSection != selectedSection) selectSection(biggestSection);
 
-					// update logo content
-					$("#logo-content").height(Math.max(Math.min(257 - scrolled, 257), 0));
+					// update beach content
+					$("#beach-content").height(Math.max(Math.min(257 - scrolled, 257), 0));
 				});
 				selectSection(selectedSection);
 			});
 		</script>
+		<script>
+			var exampleMap =
+				{
+					"Intro":
+						"namespace Intro" +
+						"\n" +
+						"/*\n" +
+						"  You can write C# or Java code here or look at the examples.\n" +
+						"  It will be translated as \"demo/demo_translation.c\".\n" +
+						"  There are also translations of full programs below.\n" +
+						"*/\n" +
+						"{\n" +
+						"class Program\n"+
+						"\t{" + 
+						"      static void Main(string[] args)\n"+
+						"      {"+
+						"            System.Console.WriteLine(\"Hello World...\");"+
+						"        }"+
+						"    }"+
+						"}"
+						
+				};
+			var cEditor;
+			var javaEditor;
+			var maxCodeLength = 1111;
+			var warningThreshold = 10;
+			var currentlyTranslating = false;
+
+			function setupDemo()
+			{
+				cEditor = CodeMirror.fromTextArea(document.getElementById("c-code"), {
+						lineNumbers: true,
+						matchBrackets: true,
+						mode: "text/x-csrc"
+					});
+				javaEditor = CodeMirror.fromTextArea(document.getElementById("java-code"), {
+						lineNumbers: true,
+						matchBrackets: true,
+						readOnly: true,
+						mode: "text/x-java"
+					});
+/* 				cEditor.on("beforeChange", beforeChangeFunction);
+				cEditor.on("change", changeFunction); */
+
+				var exampleSelect = document.getElementById("demo-example");
+				for(var exampleName in exampleMap)
+				{
+					var option = document.createElement("option");
+					option.text = exampleName;
+					exampleSelect.add(option);
+				}
+
+				demoExampleChanged(); // 바꿀게 없음 하나만  예 들어놓음.. 허허허허
+			}
+
+			function demoExampleChanged()
+			{
+				cEditor.setValue(exampleMap[document.getElementById("demo-example").value]);
+				javaEditor.setValue("");
+			}
+
+			function maximizeDemoTable(maximize)
+			{
+				var demoTable = document.getElementById("demo-table");
+				var xGrowth = 0, yGrowth = 0;
+				if(maximize)
+				{
+					var spacing = 15;
+					var rect = demoTable.getBoundingClientRect();
+					var yScroll = rect.top - 140 - spacing;
+					window.scrollBy(0, yScroll);
+					xGrowth = Math.max(rect.left - spacing, 0);
+					yGrowth = Math.max($(window).height() - rect.bottom + yScroll - spacing, 0);
+				}
+				demoTable.style.marginLeft = -xGrowth + 'px';
+				demoTable.style.marginRight = -xGrowth + 'px';
+				cEditor.setSize(511 + xGrowth, 267 + yGrowth);
+				javaEditor.setSize(511 + xGrowth, 267 + yGrowth);
+			}
+
+			function runTranslation()
+			{
+				
+				var translateButton = document.getElementById("translate-button");
+
+				translateButton.disabled = true;
+				currentlyTranslating = true;
+				
+				
+				var  exampleMapJava = "package Intro;" +
+				"\n" +
+				"/*\n" +
+				"  You can write C# or Java code here or look at the examples.\n" +
+				"  It will be translated as \"demo/demo_translation.c\".\n" +
+				"  There are also translations of full programs below.\n" +
+				"*/\n" +
+				"public class Program{\n"+
+				"      public static void Main(string[] args){\n"+
+				"            System.out.println(\"Hello World...\");"+
+				"      }"+
+				"}"+
+					
+					javaEditor.setValue(exampleMapJava);
+					translateButton.disabled = !/\S/.test(cEditor.getValue());
+					currentlyTranslating = false;
+				};
+				
 		
+ 			function beforeChangeFunction(instance, changeObj)
+			{
+				var oldCode = cEditor.getValue();
+				var removed = instance.indexFromPos(changeObj.to) - instance.indexFromPos(changeObj.from);
+				var newCode = ""+changeObj.text; // make sure it's a string
+				if(oldCode.length - removed + newCode.length > maxCodeLength) changeObj.cancel();
+			}
+
+			function changeFunction(instance, changeObj)
+			{
+				var cCode = cEditor.getValue();
+
+				var limitSpan = document.getElementById("limitSpan");
+				var remaining = maxCodeLength - cCode.length;
+				limitSpan.textContent = remaining;
+				limitSpan.style.color = remaining <= warningThreshold ? 'red' : '';
+
+				var translateButton = document.getElementById("translate-button");
+				translateButton.disabled = currentlyTranslating || !/\S/.test(cCode);
+			} 
+		</script>
+
 	</head>
-	<body>
+	<body onload="setupDemo();">
 
 	<!-- header table -->
 	<table border="0" cellpadding="0" cellspacing="0" class="headerTable">
@@ -196,15 +300,15 @@ polygon {
 			<td style="padding-bottom: 1px;" align="center">
 				<table border="0" cellpadding="0" cellspacing="0" width="1040">
 					<tr>
-						<td align="left"><img src="images/Logomakr_1yE4r7.png" width="130" height="110"></td>
+						<td align="left"><img src="images/Logomakr_1yE4r7.png" width="145" height="119"></td>
 						<td align="right" valign="bottom">
 							<table border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td class="menuSection" id="menuSection1"><a class="smooth" href="#section1">Introduction</a></td>
 									<td width="1"></td>
-									<td class="menuSection" id="menuSection2"><a class="smooth" href="#section2">번역!</a></td>
-									<td width="1"></td>
 									<td class="menuSection" id="menuSection3"><a class="smooth" href="#section3">About Us</a></td>
+									<td width="1"></td>
+									<td class="menuSection" id="menuSection2"><a class="smooth" href="#section2">Converter</a></td>
 									<td width="1"></td>
 									<td class="menuSection" id="menuSection4"><a class="smooth" href="#section4">Contact Us</a></td>
 								</tr>
@@ -227,30 +331,15 @@ polygon {
 		<tr bgcolor="#e5e5e5">
 		<td>
 		<div id="section1" class="section">
-				<div class="logo">
-					<div id="logo-content" class="logo-content">
-						<span style="color:#4d79ff ; font-weight: 600; margin-left: 20em;">
-							<span style="font-size: 34px;">Java To C# Translation</span><br>
-							<span style="font-size: 24px; margin-left: 10em;">Automatic, Complete, Correct <i>By A Class 7 Group </i></span>
+				<div class="beach">
+					<div id="beach-content" class="beach-content">
+						<span style="color: white; font-weight: 600;">
+							<span style="font-size: 34px;">Java to C# Translation</span><br>
+							<span style="font-size: 24px;">Automatic, Complete, Correct;</span>
 						</span><br><br>
 					</div>
 				</div><br>
 
-				We translate Java source code to C# source code.
-				The translation is completely automatic, supports the entire C# language
-				and creates functionally equivalent Java code - ready to be executed.
-
-				<div style="margin-top: 8px; margin-bottom: 8px;">
-				Here are just a few ways you could benefit from our technology:
-				<ul style="margin-top:0px; margin-bottom:0px;">
-				<li>Good Point</li>
-				<li>Good Point</li>
-				<li>Good Point</li>
-				<li>Good Point</li>
-				</ul>
-				</div>
-				Take a look at the <a class="smooth" href="#section2">Converter</a> and <a class="smooth" href="#section3">About Us</a>
-				sections to get an impression of what you can expect from us.
 
 				<br><br>
 
@@ -260,31 +349,72 @@ polygon {
 
 		<!-- Separator -->
 		<tr><td height="1" bgcolor="#c7c5c5"></td></tr>
+		
+				<!-- About Us-->
+		<tr bgcolor="#e5e5e5">
+		<td>
+		<div id="section3" class="section">
+				<h1>About Us</h1>
 
-		<!-- Converter -->
+				<h2 style="margin-top:0px;">W</h2>
+				
+
+				<h2>W</h2>
+				
+
+				<h2>H</h2>
+			
+
+				<h2>D </h2>
+				
+		</div>
+		</td>
+		</tr>
+		<!-- Separator -->
+		<tr><td height="1" bgcolor="#c7c5c5"></td></tr>
+
+		<!-- Converter Sample -->
 		<tr bgcolor="#f2f2f2">
 		<td>
 		<div id="section2" class="section">
-				<h1>Converter </h1> <h2>Try it!</h2>
-		<svg class="hidden">
-			<defs>
-				<symbol id="icon-arrow"  viewbox='0, 0, 24, 100'>
-					<title>arrow</title>
-					<polygon points="0,0 100,50 0,100 20, 50" />
-				</symbol>
-			</defs>
-		</svg>
-			<button class="button button--trigger" aria-label="View more">
-				<svg class="icon icon--arrow-up icon--hidden"><use xlink:href="#icon-arrow"></use></svg>
-			</button>
-<!-- 		<div class="slider">
-		<ul id="slider1">
-			<li><img border="0" src="images/img1.jpg" width="624" height="345" /></li>
-			<li><img border="0" src="images/img2.jpg" width="624" height="345" /></li>
-			<li><img border="0" src="images/img3.jpg" width="624" height="345" /></li>
+				<h1>Converter</h1>
 
-		</ul>
-		</div> -->
+				<table border="0" cellpadding="0" cellspacing="0" id="demo-table">
+				<tr>
+					<td><h2 style="margin:2px;">C# Code</h2></td>
+					<td rowspan="3" width="10"></td>
+					<td><h2 style="margin:2px;">Translated Java Code</h2></td>
+				</tr>
+				<tr>
+					<td><textarea id="c-code"></textarea></td>
+					<td><textarea id="java-code"></textarea></td>
+				</tr>
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%"><tr>
+							<td nowrap>
+								Examples:
+								<select onchange="demoExampleChanged()" id="demo-example"></select>
+							</td>
+							<td width="100%" align="center">
+								<input type="button" value="Translate" onclick="runTranslation();" id="translate-button">
+							</td>
+							<td nowrap>
+								<span id="limitSpan"></span>
+								<input type="button" value="Clear" onclick="cEditor.setValue('');">
+							</td>
+						</tr></table>
+					</td>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%"><tr>
+							<td width="100%" align="center"><input type="checkbox" onclick="maximizeDemoTable(this.checked);" id="maximize-button">Maximize</td>
+							<td><input type="button" value="Clear" onclick="javaEditor.setValue('');"></td>
+						</tr></table>
+					</td>
+				</tr>
+				</table>
+
+				<br>
 		</div>
 		</td>
 		</tr>
@@ -292,39 +422,6 @@ polygon {
 		<!-- Separator -->
 		<tr><td height="1" bgcolor="#c7c5c5"></td></tr>
 
-		<!-- FAQ -->
-		<tr bgcolor="#e5e5e5">
-		<td>
-		<div id="section3" class="section">
-				<h1>팀명: </h1>
-
-				<h2 style="margin-top:0px;">조장 :  뽕상</h2>
-				1
-				2
-				3
-				4
-				
-
-				<h2>조원 : 김도경</h2>
-				1
-				2
-				3
-				4
-				
-				<h2>조원 :김두리나</h2>
-				1
-				2
-				3
-				4
-					
-				<h2>조원: 박유진</h2>
-				1
-				2
-				3
-				4
-		</div>
-		</td>
-		</tr>
 
 		<!-- Separator -->
 		<tr><td height="1" bgcolor="#c7c5c5"></td></tr>
@@ -339,7 +436,7 @@ polygon {
 					<tr>
 						<td nowrap>
 							Send us a message. We would be happy to hear from you.<br>
-							Email us at <a href="mailto:neverCheck@naver.com">neverCheck@naver.com</a> or use the contact form:
+							Email us at <a href="mailto:info@mtsystems.com">info@mtsystems.com</a> or use the contact form:
 						</td>
 					</tr>
 					<tr>
@@ -363,13 +460,16 @@ polygon {
 							</tr>
 							<tr>
 								<td></td>
+								<td><input type="checkbox" id="contact-sendCopy">Send me a copy.</td>
+							</tr>
+							<tr>
+								<td></td>
 								<td><br>
 									<table border="0" cellpadding="0" cellspacing="0" width="100%"><tr>
 										<td id="contact-result"></td>
 										<td align="right"><input type="button" value="Send" onclick="sendEmail();" id="contact-sendButton"></td>
 									</tr></table>
-<!--  sendEmail() 자바스크립트 없음 ㅋㅋㅋㅋ -->									
-						</td>
+								</td>
 							</tr>
 							</table>
 						</td>
@@ -382,11 +482,6 @@ polygon {
 		<!-- Separator -->
 		<tr><td height="1" bgcolor="#c7c5c5"></td></tr>
 
-		<!-- Copyright -->
-		<tr bgcolor="#e5e5e5">
-		<td>
-		</td>
-		</tr>
 
 	</table>
 
@@ -401,13 +496,7 @@ polygon {
 					}, 1500,'easeInOutExpo');
 				event.preventDefault();
 			});
-			$('#slider1') .cycle({
-				fx: 'turnDown', //'scrollLeft,scrollDown,scrollRight,scrollUp',blindX, blindY, blindZ, cover, curtainX, curtainY, fade, fadeZoom, growX, growY, none, scrollUp,scrollDown,scrollLeft,scrollRight,scrollHorz,scrollVert,shuffle,slideX,slideY,toss,turnUp,turnDown,turnLeft,turnRight,uncover,ipe ,zoom
-				speed:  'slow', 
-		   		timeout: 2000 
-			});
 		});
-		
 	</script>
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -421,3 +510,4 @@ polygon {
 
 	</body>
 </html>
+

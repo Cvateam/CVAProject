@@ -1,13 +1,4 @@
-/**
- * main.js
- * http://www.codrops.com
- *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * 
- * Copyright 2016, Codrops
- * http://www.codrops.com
- */
+
 ;(function(window) {
 
 	'use strict';
@@ -261,12 +252,12 @@
 			// Start the bubbles canvas animation.
 			bubbles.start();
 			// Sounds..
-			audio.fadeOut('lake');
+			audio.fadeOut('underwater');
 			audio.volume('splash', 0);
 			audio.play('splash', 700);
 			audio.loop('underwater');
 			audio.play('underwater', 700);
-			audio.fadeIn('underwater');
+			audio.fadeIn('lake');
 		}
 	}
 

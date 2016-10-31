@@ -69,7 +69,7 @@
 		<main class="landing-layout">
 			<!-- Landing wrap with sections -->
 			<div class="landing-wrap">
-				<section class="landing landing--above" style="background-image: url(img/main_img123.png);"></section>
+				<section class="landing landing--above" style="background-image: url(images/013.jpg);"></section>
 				<section class="landing landing--beneath" style="background-image: url(img/2.jpg);">
 					<canvas id="bubbles"></canvas>
 				</section>

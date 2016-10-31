@@ -21,7 +21,7 @@
 		<default-action-ref name="index"></default-action-ref>
 		
 		<action name="index">
-			<result>/index.jsp</result>
+			<result>/mainIndex.jsp</result>
 		</action>
 
 
