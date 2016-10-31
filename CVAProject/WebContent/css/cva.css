@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+hof@CHARSET "UTF-8";
 
 body > #_container > .container{
 	margin-top: 20px;
@@ -15,7 +15,7 @@ body.not-responsive {
 }
 
 body {
-	/*padding-top: 40px;*/
+	padding-top: 40px;
 	background-image: url(../img/main_img123opacity.PNG);
 	background-size: cover;
 }

@@ -1163,6 +1163,7 @@ transform
 <script src="http://ideone.com/gfx2/libs/ace-2013-08/mode-csharp.js"></script>
 <script src="http://ideone.com/gfx2/libs/ace-2013-08/mode-java.js"></script>
 
+<script src="js/main.js"></script>
 <script type="text/javascript" src="script/cva.js"></script>
 
 </head>
@@ -1170,8 +1171,8 @@ transform
 	<header class="codrops-header">
 		<h1 class="codrops-header__title">A class 7 group</h1>
 		<nav class="codrops-demos">
-			<a href="#">Home</a> <a href="customer/loginForm.action">Login</a> <a
-				href="customer/loginForm.action">Logout</a> <a href="#">Menu</a>
+			<a href="index">Home</a> <a href="customer/loginForm.action">Login</a> <a
+				href="index.action">Logout</a><a href="#" class= "menu ">Menu</a>
 		</nav>
 	</header>
 	<div id="_container_java">

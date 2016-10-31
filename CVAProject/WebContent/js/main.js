@@ -143,7 +143,7 @@
 		audio = {
 			sounds : {},
 			sources : [{
-				lake : 'sounds/quietlake070808.mp3',
+				lake : 'sounds/HappyBackgroundMusicUpbeat.mp3',
 				splash : 'sounds/Water Splash-SoundBible.com-800223477.mp3',
 				underwater : 'sounds/Underwater_Pool-Mike_Koenig-355864284.mp3'
 			}],
@@ -218,7 +218,7 @@
 		// Preload images..
 		imagesLoaded(landingWrapper, { background: true }, checkloaded);
 		// Preload sounds..
-		audio.load(checkloaded);
+		audio.load(checkloaded); //로딩해올지말지  div= loader wldnaus turn on music 뜨지 않음
 	}
 
 	function initEvents() {
@@ -262,7 +262,7 @@
 			bubbles.start();
 			// Sounds..
 			audio.fadeOut('lake');
-			audio.volume('splash', 0.5);
+			audio.volume('splash', 0);
 			audio.play('splash', 700);
 			audio.loop('underwater');
 			audio.play('underwater', 700);
