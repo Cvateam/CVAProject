@@ -55,7 +55,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 
 	public String translate2() throws Exception {
 		KeywordDAO dao = new KeywordDAO();
-		List<KeywordVO> list = dao.searchKeyword(0); 
+		List<KeywordVO> list = dao.searchKeyword(0);
 		// 바꾼다 맨위 import <-> using
 		String javaForm = "import java.util.*;\nimport java.lang.*;\nimport java.io.*;";
 		String csharpForm = "using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n";
@@ -108,7 +108,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		}
 
 		// 클래스 안에다 쳐넣기.
-		makeInnerClass();
+		// makeInnerClass();
 
 		translateOutput2 = file2;
 		return SUCCESS;
@@ -166,7 +166,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		 * + "Console.WriteLine(\"x+y:{0}\",x+y)}}";
 		 */
 		// 1)주어진 String에 maches를 이용하여 원하는 "Console"을 찾는다.
-		System.out.println("file2 : "+file2);
+		System.out.println("file2 : " + file2);
 		System.out.println(file2.indexOf(so));
 		if (file2.indexOf(so) != -1) {
 			// 2)있는게 확인되면 "Console"을 기준으로 자른다.
@@ -306,6 +306,7 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 		String a2 = "";
 		String a3 = "";
 		String a4 = "";
+		int check = 0;
 		int result = 0;
 
 		/*
@@ -364,14 +365,19 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 					a4 = checkArray[j];
 					// System.out.println(j);
 					if (a4.indexOf("get") != -1) {
+						check += 1;
 						result += 10;
 					}
 					if (a4.indexOf("set") != -1) {
+						check += 1;
 						result += 1;
 					}
 					String mid_mid1 = "\t\tpublic " + a2 + " get" + b1 + "(){\n\t\t\treturn " + a3
 							+ ";\n\t\t}\n\t\tpublic void set" + b1 + "(" + a2 + " " + a3 + "){\n\t\t\tthis." + a3 + "="
 							+ a3 + ";\n\t\t}\n";
+					String mid_mid11 = "public " + b2 + " get" + b1 + "(){\n\t\t\treturn " + a3
+							+ ";\n\t\t}\n\t\tpublic void set" + b1 + "(" + b2 + " " + a3 + "){\n\t\t\tthis." + a3 + "=" + a3
+							+ ";\n\t\t}\n";
 					String mid_mid2 = "public " + a2 + " get" + b1 + "(){\n\treturn " + a3 + ";\n}\n";
 					String mid_mid3 = "public void set" + b1 + "(" + a2 + " " + a3 + "){\n\tthis." + a3 + "=" + a3
 							+ ";\n}";
@@ -379,10 +385,17 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 					switch (result) {
 
 					case 11:// 둘다있다
-						file2 = file2.replace("public " + a4, mid_mid1);
-						a4 = "";
-						result = 0;
-						break;
+						if (check == 2) {
+							file2 = file2.replace("public " + a4, mid_mid11);
+							a4 = "";
+							result = 0;
+							break;
+						} else {
+							file2 = file2.replace("public " + a4, mid_mid1 + "\n\t}\n");
+							a4 = "";
+							result = 0;
+							break;
+						}
 					case 10:// get
 						file2 = file2.replace("public " + a4, mid_mid2);
 						a4 = "";
@@ -401,5 +414,6 @@ public class CsharpOperationAction extends ActionSupport implements SessionAware
 				}
 			}
 		}
+		/* file2 += "\n\t}"; */
 	}
 }

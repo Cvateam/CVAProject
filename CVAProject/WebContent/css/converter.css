@@ -2222,3 +2222,7 @@ button.new-label-button {
 .dropdown-menu>li>a:hover>[class^="icon-"] {
 	background-image: none;
 }
+
+.output {
+	color: black;
+}

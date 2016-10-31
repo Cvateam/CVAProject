@@ -24,9 +24,6 @@
 			<result>/mainIndex.jsp</result>
 		</action>
 
-
-
-
 		
 		<!-- 들어갈때 -->
 		<action name="converter" class="first.cva.action.CsharpOperationAction" method="index">

@@ -127,8 +127,8 @@ public class JavaOperationAction extends ActionSupport {
 		List<KeywordVO> list = dao.searchKeyword(1);
 
 		String javaForm = "import java.util.*;\nimport java.lang.*;\nimport java.io.*;";
-		String csharpForm = "using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n";
-		javaCode = javaCode.replace(csharpForm, javaForm);
+		String csharpForm = "using System;\nusing System.Collections.Generic;\nusing System.IO;\nusing System.Text;\nusing System.Threading.Tasks;\n\nnamespace CVa\n{";
+		javaCode = javaCode.replace(javaForm, csharpForm);
 
 		// namespace / java의 패키지개념
 		/*		int namespacePosition = javaCode.indexOf("package"); //ex// package Test1;
@@ -150,13 +150,15 @@ public class JavaOperationAction extends ActionSupport {
 			 }
 		 }
 		 javatranslatedCode= javaCode;
+		 javatranslatedCode += "\n}";
 		 
 		 return SUCCESS;
 	}
 
 	private void changeGetSet() {
 		// 원래의 코드를 보존한다.
-		 int result = 0;
+		int result = 0;
+		int check = 0;
 		String ori_j_code = javaCode;
 		// 줄을 기준으로 나눠서 전체의 코드를 정리한다.
 		String[] mainArray = javaCode.split("\n");
@@ -194,26 +196,36 @@ public class JavaOperationAction extends ActionSupport {
 					System.out.println("나와라" + a4);
 
 					if (a4.indexOf("get") != -1) {
+						check += 1;
 						result += 10;
 					}
 					if (a4.indexOf("set") != -1) {
+						check += 1;
 						result += 1;
 					}
 					System.out.println("result"+result);
-					String mid_mid1 = "\tpublic " + b2 + " " + b1 + "{\n\t\tget;\n\t\tset;\n\t}\n";
+					String mid_mid1 = "\t\tpublic " + b2 + " " + b1 + "{\n\t\t\tget;\n\t\t\tset;\n\t\t}\n";
+					String mid_mid11 = "public " + b2 + " " + b1 + "{\n\t\t\tget;\n\t\t\tset;\n\t\t}\n";
 					String mid_mid2 = "\tpublic " + b2 + " " + b1 + "{\n\t\tget;\n\t}\n";
 					String mid_mid3 = "\tpublic " + b2 + " " + b1 + "{\n\t\tset;\n\t}\n";
 					switch (result) {
 
 					case 11:// 둘다있다
-						System.out.println("getset 일함"); 
-						System.out.println("public " + a4);
-						System.out.println(mid_mid1);
-						javaCode = javaCode.replace("public " + a4, mid_mid1);
-						System.out.println(javaCode);
-						a4 = "";
-						result = 0;
-						break;
+						if(check==2){
+		                     System.out.println(mid_mid1);
+		                     javaCode = javaCode.replace("public " + a4, mid_mid11);
+		                     System.out.println(javaCode);
+		                     a4 = "";
+		                     result = 0;
+		                     break;
+		                  }else{
+		                     System.out.println(mid_mid1);
+		                     javaCode = javaCode.replace("public " + a4, mid_mid1+"\n\t}\n");
+		                     System.out.println(javaCode);
+		                     a4 = "";
+		                     result = 0;
+		                     break;
+		                  }
 					case 10:// get
 						System.out.println("get일함");
 						javaCode = javaCode.replace("public " + a4, mid_mid2);
@@ -238,9 +250,6 @@ public class JavaOperationAction extends ActionSupport {
 		}
 		System.out.println("==================");
 		System.out.println(javaCode);
-
-
-
 	}
 
 	private void sysoutToConsoleWriteLine() {

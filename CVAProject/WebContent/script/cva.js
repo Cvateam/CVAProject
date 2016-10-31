@@ -93,7 +93,6 @@ $(document).ready(function() {
 				// 언로드 시킨다.
 				csharpUnloadEditor();
 				//값을 씨샵에 붙인다.
-				alert("success  " + response.javatranslatedCode);
 				$('#file2').val(response.javatranslatedCode);
 				$('#input2').val($('#input1').val());
 				csharpLoadEditor();

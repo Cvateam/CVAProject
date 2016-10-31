@@ -7,8 +7,6 @@ insert into customer values ('a','a');
 commit;
 
 
-
-
 create table keyword (
 	num number primary key,
 	csharpkeyword varchar2(100),
@@ -65,6 +63,7 @@ insert into keyword values(keyword_seq.nextval,'using','import');
 insert into keyword values(keyword_seq.nextval,'namespace', ' '); --문제 발견 
 insert into keyword values(keyword_seq.nextval,'Console.WriteLine','System.out.println');
 
+delete from keyword where csharpkeyword='namespace';
 
 drop sequence keyword_seq;
 drop table keyword;
