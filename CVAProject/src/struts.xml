@@ -49,7 +49,10 @@
 		<action name="translate1" class="first.cva.action.JavaOperationAction" method="translate1">
 			<result type="json"></result>
 		</action>
-		
+		<!-- converterMain 화면가기 -->
+		<action name="converterMain" >
+			<result>/index.jsp</result>
+		</action>		
 	</package>
 	
 	<include file="first/cva/actionXml/customer.xml"/>

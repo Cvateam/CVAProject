@@ -11,7 +11,6 @@
 		<meta name="description" content="A landing page template with a featured content section and background sounds that change according to the view" />
 		<meta name="keywords" content="landing page, background sound, aquatic theme, effect, transition, animation" />
 		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="favicon.ico">
 		<link href="https://fonts.googleapis.com/css?family=Vidaloka" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
@@ -29,15 +28,15 @@
 				</symbol>
 				<symbol id="icon-grid" viewBox="0 0 100 100">
 					<title>grid</title>
-					<rect x="8.4" y="8.9" width="20.1" height="20.1"/>
-					<rect x="40" y="8.9" width="20.1" height="20.1"/>
-					<rect x="71.6" y="8.9" width="20.1" height="20.1"/>
-					<rect x="8.3" y="40" width="20.1" height="20.1"/>
-					<rect x="39.9" y="40" width="20.1" height="20.1"/>
-					<rect x="71.6" y="40" width="20.1" height="20.1"/>
-					<rect x="8.3" y="71" width="20.1" height="20.1"/>
-					<rect x="39.9" y="71" width="20.1" height="20.1"/>
-					<rect x="71.6" y="71" width="20.1" height="20.1"/>
+					<rect x="8.4" y="8.9" width="25.1" height="25.1"/>
+					<rect x="40" y="8.9" width="25.1" height="25.1"/>
+					<rect x="71.6" y="8.9" width="25.1" height="25.1"/>
+					<rect x="8.3" y="40" width="25.1" height="25.1"/>
+					<rect x="39.9" y="40" width="25.1" height="25.1"/>
+					<rect x="71.6" y="40" width="25.1" height="25.1"/>
+					<rect x="8.3" y="71" width="25.1" height="25.1"/>
+					<rect x="39.9" y="71" width="25.1" height="25.1"/>
+					<rect x="71.6" y="71" width="25.1" height="25.1"/>
 				</symbol>
 				<symbol id="icon-sound-on" viewBox="0 0 100 100">
 					<title>sound on</title>
@@ -70,7 +69,7 @@
 			<!-- Landing wrap with sections -->
 			<div class="landing-wrap">
 				<section class="landing landing--above" style="background-image: url(images/013.jpg);"></section>
-				<section class="landing landing--beneath" style="background-image: url(img/2.jpg);">
+				<section class="landing landing--beneath" style="background-image: url(img/whiteboard.jpg);">
 					<canvas id="bubbles"></canvas>
 				</section>
 			</div><!-- /landing-wrap -->
@@ -92,40 +91,29 @@
 				<ul class="featured-list">
 					<li class="featured-list__item">
 						<a href="converter" class="featured-list__link">
-							<img class="featured-list__img" src="img/icons/converter.png" alt="Seaweed 1">
+							<img class="featured-list__img" src="img/icons/converter.png" >
 							<h3 class="featured-list__title">Converter</h3>
 						</a>
 					</li>
 					<li class="featured-list__item">
 						<a href="#" class="featured-list__link">
-							<img class="featured-list__img" src="img/icons/board.png" alt="Seaweed 3">
+							<img class="featured-list__img" src="img/icons/board.png" >
 							<h3 class="featured-list__title">Board</h3>
-						</a>
-					</li>
-					<li class="featured-list__item">
-						<a href="#" class="featured-list__link">
-							<img class="featured-list__img" src="img/icons/contactus.png" alt="Seaweed 4">
-							<h3 class="featured-list__title">Contact Us</h3>
-						</a>
-					</li>
-					<li class="featured-list__item">
-						<a href="#" class="featured-list__link">
-							<img class="featured-list__img" src="img/icons/aboutus.png" alt="Seaweed 2">
-							<h3 class="featured-list__title">About Us</h3>
 						</a>
 					</li>
 <!-- 					<li class="featured-list__item">
 						<a href="#" class="featured-list__link">
-							<img class="featured-list__img" src="img/icons/sw5.svg" alt="Seaweed 5">
-							<h3 class="featured-list__title">Holy Water</h3>
-						</a>
-					</li>
-					<li class="featured-list__item">
-						<a href="#" class="featured-list__link">
-							<img class="featured-list__img" src="img/icons/sw6.svg" alt="Seaweed 6">
-							<h3 class="featured-list__title">Juicy Magic</h3>
+							<img class="featured-list__img" src="img/icons/contactus.png" >
+							<h3 class="featured-list__title">Contact Us</h3>
 						</a>
 					</li> -->
+					<li class="featured-list__item">
+						<a href="#" class="featured-list__link">
+							<img class="featured-list__img" src="img/icons/aboutus.png" >
+							<h3 class="featured-list__title">Study</h3>
+						</a>
+					</li>
+
 				</ul>
 			</section><!-- /featured-content -->
 			<!-- Codrops header -->
@@ -139,7 +127,7 @@
 				</div>
 				<h1 class="codrops-header__title">    A class 7 group</h1>
 				<nav class="codrops-demos">
-					<a class="current-demo" href="#">Home</a>
+					<a class="current-demo" href="index">Home</a>
 					<s:if test='%{#session.loginId == null}'>
 					<a href="customer/loginForm.action">Login</a>
 					</s:if>
@@ -160,5 +148,17 @@
 		<script src="js/howler.min.js"></script>
 		<script src="js/imagesloaded.pkgd.min.js"></script>
 		<script src="js/main.js"></script>
+		<script type="text/javascript" src="script/jquery-3.1.0.min.js"></script>
+		<script>
+		$(function(){
+			$('.featured-list__img').mouseenter(function() {
+				$(this).width(100);
+			});
+			$('.featured-list__img').mouseleave(function() {
+				$(this).width(30);
+			});
+			
+		});
+		</script>
 	</body>
 </html>

@@ -20,7 +20,7 @@
 	
 	</script>
   </head>
-  <body  style="background-image: url(../img/main_img123.png);">
+  <body  style="background-image: url(../images/img3.jpg); background-size: contain;  ">
   			<div class="codrops-header">
 				<nav class="codrops-demos">
 					<a href="joinForm">회원가입</a>

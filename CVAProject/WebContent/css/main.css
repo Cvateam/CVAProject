@@ -20,7 +20,7 @@ body {
 
 a {
 	outline: none;
-	color: #fff;
+	color: #090d31;
 	text-decoration: none;
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;
@@ -28,7 +28,7 @@ a {
 
 a:hover,
 a:focus {
-	color: #84ff84;
+	color: #4d79ff;
 	outline: none;
 }
 
@@ -68,17 +68,17 @@ a:focus {
 }
 
 .button {
-	margin: 0;
+	margin-right: 10em;
 	padding: 0;
-	color: #fff;
+	color: #090d31;
 	border: none;
 	background: none;
-	width: 4em;
-	height: 4em;
+	width: 6em;
+	height: 6em;
 }
 
 .button:hover {
-	color: #84ff84;
+	color: green;
 }
 
 .button:focus {
@@ -98,7 +98,7 @@ a:focus {
 .button--sound {
 	position: absolute;
 	left: 0em;
-	top: 5em;
+	top: 1em;
 }
 
 .button--sound-off .icon--shown {
@@ -313,7 +313,7 @@ a:focus {
 
 .codrops-demos a {
 	font-weight: 700;
-	font-size: 0.8em;
+	font-size: 1em;
 	line-height: 1;
 	display: inline-block;
 	margin: 2em 2em 0 0;
@@ -381,7 +381,7 @@ a:focus {
 }
 
 .landing-header__title span {
-	color: #fff;
+	color: #4d79ff;
 	-webkit-transition: color 1.5s;
 	transition: color 1.5s;
 	-webkit-transition-timing-function: cubic-bezier(1, 0.005, 0.33, 1);
@@ -411,7 +411,7 @@ a:focus {
 .landing-layout--open .landing-header__title span:nth-child(even) {
 	-webkit-transition: color 0.8s 0.4s;
 	transition: color 0.8s 0.4s;
-	color: #84ff84;
+	color:  #090d31;
 	-webkit-animation-play-state: running;
 	animation-play-state: running;
 }
@@ -611,8 +611,8 @@ a:focus {
 		content: 'Tap anywhere to turn on sound';
 		display: inline-block;
 		margin: 1em 0 0 0;
-		font-weight: bold;
-		color: #84ff84;
+		font-weight: bolder;
+		color: #4d79ff;
 	}
 	.landing-header__title {
 		font-size: 2.5em;

@@ -1233,7 +1233,7 @@ transform
 						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 					</a> <a href="/" class="brand scroll-page"><span
-						style="background-image: url('Logomakr_1yE4r7.png');"></span></a>
+						style="background-image: url('images/Logomakr_1yE4r7.png');"></span></a>
 					<div class="nav-collapse collapse " style="height: 0px;">
 						<ul class="nav pull-right">
 							<li class="active"><a href="/" class="scroll-page"><i
@@ -2814,7 +2814,7 @@ public class Test
 						<div class="pull-right">
 							<a
 								href="http://tradecampus.kita.net/front/SubjSeqF.do?cmd=compSubjSeqMain&amp;p_trainingclass=04&amp;next=compSubjSeqApplyMain&amp;p_isapply=Y&amp;p_contentid=06&amp;p_outmenuid=47">
-								<img src="banner_43.jpg" />
+								<img src="images/banner_43.jpg" />
 						</div>
 						<div id="fb-root" class=" fb_reset">
 							<div

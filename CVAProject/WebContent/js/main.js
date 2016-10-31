@@ -7,6 +7,7 @@
 	/**
 	 * from https://davidwalsh.name/javascript-debounce-function
 	 */
+	
 	function debounce(func, wait, immediate) {
 		var timeout;
 		return function() {
@@ -61,7 +62,7 @@
 					winsize = {width : window.innerWidth, height : window.innerHeight};
 					self.canvas.height = winsize.height;
 					self.canvas.width = winsize.width;
-				}, 10);
+				}, 100);
 				window.addEventListener('resize', this.debounceResize);
 			},
 			loop : function() {
@@ -70,7 +71,7 @@
 				this.render();
 			},
 			update : function() {
-				if( this.cntr++ % 1 == 0 ) {
+				if( this.cntr++ % 7 == 0 ) {
 					this.createCircle();
 				}
 
@@ -104,7 +105,7 @@
 				};
 			},
 			drawCircle : function(x, y, radius) {
-				this.ctx.fillStyle = "#012754";
+				this.ctx.fillStyle = "#4d79ff";
 				this.ctx.beginPath();
 				this.ctx.arc(x,y,radius, 0, Math.PI*2, false);
 				this.ctx.closePath();

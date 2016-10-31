@@ -196,14 +196,6 @@
 						matchBrackets: true,
 						mode: "text/x-csrc"
 					});
-				javaEditor = CodeMirror.fromTextArea(document.getElementById("java-code"), {
-						lineNumbers: true,
-						matchBrackets: true,
-						readOnly: true,
-						mode: "text/x-java"
-					});
-/* 				cEditor.on("beforeChange", beforeChangeFunction);
-				cEditor.on("change", changeFunction); */
 
 				var exampleSelect = document.getElementById("demo-example");
 				for(var exampleName in exampleMap)
@@ -219,7 +211,6 @@
 			function demoExampleChanged()
 			{
 				cEditor.setValue(exampleMap[document.getElementById("demo-example").value]);
-				javaEditor.setValue("");
 			}
 
 			function maximizeDemoTable(maximize)
@@ -259,36 +250,20 @@
 				"*/\n" +
 				"public class Program{\n"+
 				"      public static void Main(string[] args){\n"+
-				"            System.out.println(\"Hello World...\");"+
-				"      }"+
-				"}"+
-					
-					javaEditor.setValue(exampleMapJava);
+				"            System.out.println(\"Hello World...\");\n"+
+				"      }\n"+
+				"}";
+					document.getElementById("java-code").value = exampleMapJava;
+					javaEditor = CodeMirror.fromTextArea(document.getElementById("java-code"), {
+						lineNumbers: true,
+						matchBrackets: true,
+						readOnly: true,
+						mode: "text/x-java"
+					});
 					translateButton.disabled = !/\S/.test(cEditor.getValue());
 					currentlyTranslating = false;
 				};
 				
-		
- 			function beforeChangeFunction(instance, changeObj)
-			{
-				var oldCode = cEditor.getValue();
-				var removed = instance.indexFromPos(changeObj.to) - instance.indexFromPos(changeObj.from);
-				var newCode = ""+changeObj.text; // make sure it's a string
-				if(oldCode.length - removed + newCode.length > maxCodeLength) changeObj.cancel();
-			}
-
-			function changeFunction(instance, changeObj)
-			{
-				var cCode = cEditor.getValue();
-
-				var limitSpan = document.getElementById("limitSpan");
-				var remaining = maxCodeLength - cCode.length;
-				limitSpan.textContent = remaining;
-				limitSpan.style.color = remaining <= warningThreshold ? 'red' : '';
-
-				var translateButton = document.getElementById("translate-button");
-				translateButton.disabled = currentlyTranslating || !/\S/.test(cCode);
-			} 
 		</script>
 
 	</head>
@@ -333,15 +308,34 @@
 		<div id="section1" class="section">
 				<div class="beach">
 					<div id="beach-content" class="beach-content">
-						<span style="color: white; font-weight: 600;">
-							<span style="font-size: 34px;">Java to C# Translation</span><br>
-							<span style="font-size: 24px;">Automatic, Complete, Correct;</span>
-						</span><br><br>
+                  <span style="color:#4d79ff ; font-weight: 600; margin-left: 20em;">
+                     <span style="font-size: 34px;">Java To C# Translation</span><br>
+                     <span style="font-size: 24px; margin-left: 10em;">Automatic, Complete, Correct <i>By A Class 7 Group </i></span>
+                  </span><br><br>
 					</div>
 				</div><br>
-
-
+				
 				<br><br>
+										
+							<h2>What is C.VA?</h2>
+							C.VA is an online compiler and debugging tool which allows you to
+							compile source code and execute it online in C# and JAVA.
+							Furthermore, C.VA can translate C# source code to JAVA and JAVA
+							to C#.
+							<h2>How to use C.VA?</h2>
+							You have to type JAVA on left side, and C# on right side. enter
+							the source code with optional input data... and you are ready to
+							go! Plus, if you know what JAVA code is of C#, C# is of JAVA,
+							click the translate button!
+							<h2>Having problems?</h2>
+							Check the samples to see how to write code which works correctly.
+							If you find out more, please do not have a question on our
+							project. C.VA!!! We are proud to present our C.VA!!! technology,
+							which allows you to execute programs on a remote server in a
+							secure way within a complete runtime environment. Visit the on
+							the 4th floor COEX.
+						
+						<br> <br><br>
 
 		</div>
 		</td>
@@ -354,18 +348,19 @@
 		<tr bgcolor="#e5e5e5">
 		<td>
 		<div id="section3" class="section">
-				<h1>About Us</h1>
+				<h1>About Us &nbsp; </h1>
+				<img alt="팀 사진" src="images/photo.jpg">
+				<br>
+				<h2 style="margin-top:0px;">조장 : 뽕상</h2>
+						
 
-				<h2 style="margin-top:0px;">W</h2>
+				<h2>팀원 :  도리나</h2>
 				
 
-				<h2>W</h2>
-				
-
-				<h2>H</h2>
+				<h2>팀원: 김하늘</h2>
 			
 
-				<h2>D </h2>
+				<h2>팀원 : 유지누 </h2>
 				
 		</div>
 		</td>
@@ -387,7 +382,7 @@
 				</tr>
 				<tr>
 					<td><textarea id="c-code"></textarea></td>
-					<td><textarea id="java-code"></textarea></td>
+					<td><textarea rows="13" cols="70" id="java-code"></textarea></td>
 				</tr>
 				<tr>
 					<td>
@@ -413,7 +408,7 @@
 					</td>
 				</tr>
 				</table>
-
+					<h2>Do You Want To Try C.VA?   &nbsp;&nbsp; <a href="converterMain">Click Here! </a></h2>
 				<br>
 		</div>
 		</td>
