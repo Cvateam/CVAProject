@@ -1,13 +1,11 @@
 $(document).ready(function() {
 	//이것과 같이하지 않는다면 실행이 힘듬.
 	//csharp은 submit2 java는 submit1
-	
 	$('#Submit2').on('click', function() {
 		//다른 js파일에 javaUnloadEditor(); 있습니당.
 		csharpUnloadEditor();
 		var item = {
 			"file2" : $('#file2').val(),
-			
 			//이거 어떻게 해봐야댐. ㅅㅂ 존나 어려움
 			//C#에 ReadLine이 있을경우 어떻게 할것인가?
 			"input2" : $('#input2').val()
