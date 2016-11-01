@@ -1611,7 +1611,6 @@ class Ideone
 																		style="margin-left: 2px"><i
 																		class="icon-help-circled"></i></a>
 																</div>
-
 															</div>
 														</div>
 													</div>

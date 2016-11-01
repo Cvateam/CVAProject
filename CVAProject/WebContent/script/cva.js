@@ -1,4 +1,18 @@
 $(document).ready(function() {
+	
+	$('#class1-button').on('click', function() {
+		$('#class1').css('display','block');
+		$('#class2').css('display','none');
+		alert("hello?");
+	});
+	
+	$('#class2-button').on('click', function() {
+		$('#class1').css('display','none');
+		$('#class2').css('display','block');
+		alert("hello?");
+	});
+	
+	
 	//이것과 같이하지 않는다면 실행이 힘듬.
 	//csharp은 submit2 java는 submit1
 	$('#Submit2').on('click', function() {

@@ -390,7 +390,7 @@ a.help-link {
 	
 }
 
-#file1 {
+#file1, #file3 {
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 	border-color: #ccc;
@@ -454,11 +454,23 @@ a.help-link {
 	background-color: white;
 }
 
+#file_div3 {
+	display: none;
+	height: 300px;
+	position: relative;
+	width: 100%;
+	background-color: white;
+}
+
 #file_div1.mobile-size {
 	height: 140px;
 }
 
 #file_div2.mobile-size {
+	height: 140px;
+}
+
+#file_div3.mobile-size {
 	height: 140px;
 }
 

@@ -156,7 +156,7 @@ a.larger_link {
 	resize: none;
 }
 
-#file_div1 {
+#file_div1, #file_div3 {
 	height: 100%;
 	width: 100%;
 }
