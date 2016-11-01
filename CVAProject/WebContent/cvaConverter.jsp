@@ -1128,7 +1128,15 @@ transform
 
 
 
+
+
+
+
 :rotate(360deg)
+
+
+
+
 
 
 
@@ -1824,8 +1832,11 @@ class Ideone
 									</div> -->
 																	<div class="clearfix"></div>
 																</div>
-																<div id="output1"
-																	style="width: 100%; height: 70px; padding-left: 9px;"></div>
+																<div class="ex-more-options-box"
+																	style="padding: 10px; padding-top: 6px; color: #666">
+																	<textarea id="output1" rows="2" cols="80"
+																		readonly="readonly"></textarea>
+																</div>
 															</div>
 															<div class="ex-more-options-box"
 																style="padding-top: 4px; display: none;">
@@ -1845,7 +1856,7 @@ class Ideone
 												</div>
 											</div>
 
-											<div class="g" style="text-align: center; height: 90px;">
+											<div class="g" style="text-align: center; height: 90px; display: none;">
 
 
 												<!--<script type="text/javascript" src="//ap.lijit.com/www/delivery/fpi.js?z=357751&u=sphere-research&width=728&height=90"></script>-->
@@ -2501,8 +2512,11 @@ public class Test
 									</div> -->
 																	<div class="clearfix"></div>
 																</div>
-																<div id="output2"
-																	style="width: 100%; height: 70px; padding-left: 9px;"></div>
+																<div class="ex-more-options-box"
+																	style="padding: 10px; padding-top: 6px; color: #666">
+																	<textarea id="output2" rows="2" cols="80"
+																		readonly="readonly"></textarea>
+																</div>
 															</div>
 															<div class="ex-more-options-box"
 																style="padding-top: 4px; display: none;">
@@ -2522,7 +2536,7 @@ public class Test
 												</div>
 											</div>
 
-											<div class="g" style="text-align: center; height: 90px;">
+											<div class="g" style="text-align: center; height: 90px; display: none;">
 
 
 												<!--<script type="text/javascript" src="//ap.lijit.com/www/delivery/fpi.js?z=357751&u=sphere-research&width=728&height=90"></script>-->
@@ -3179,8 +3193,6 @@ public class Test
 })();
 </script>
 -->
-
-
 
 	<iframe name="oauth2relay645593108" id="oauth2relay645593108"
 		src="https://accounts.google.com/o/oauth2/postmessageRelay?parent=http%3A%2F%2Fideone.com&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.ko.b3EMGvUEw9Y.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCNJUTGcG5rVed37F3A_9H-H7f8Ogw#rpctoken=627441766&amp;forcesecure=1"

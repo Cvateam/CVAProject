@@ -474,7 +474,7 @@ a.help-link {
 	height: 140px;
 }
 
-#input1 {
+#input1, #output1 {
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 	border-color: #ccc;
@@ -494,7 +494,7 @@ a.help-link {
 	color: #333;
 }
 
-#input2 {
+#input2, #output2{
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 	border-color: #ccc;

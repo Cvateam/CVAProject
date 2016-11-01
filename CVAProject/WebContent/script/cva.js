@@ -29,7 +29,7 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
-				$('#output2').html("<h3  class='output'>" + response.compileOutput2 + '</h3>');
+				$('#output2').val(response.compileOutput2);
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
@@ -83,7 +83,7 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
-				$('#output1').html("<h3  class='output'>" + response.javaCompileCode + '</h3>');
+				$('#output1').val(response.javaCompileCode);
 			},
 			error : function(resp, code) {
 				alert(resp + " " + code);
