@@ -1245,7 +1245,7 @@ transform
 						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 					</a> <a href="/" class="brand scroll-page"><span
-						style="background-image: url('images/Logomakr_1yE4r7.png');"></span></a>
+						style="background-image: url('images/brandLogo.png');"></span></a>
 					<div class="nav-collapse collapse " style="height: 0px;">
 						<ul class="nav pull-right">
 							<li class="active"><a href="/" class="scroll-page"><i

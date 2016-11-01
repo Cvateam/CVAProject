@@ -235,9 +235,9 @@ body.is-mobile .shadow-inner-top-bottom {
 }
 
 .navbar .brand>span {
-	height: 25px;
-	width: 136px;
-	background: url(/gfx2/img/logo25h.png);
+	height: 103px;
+	width: 100px;
+	background: url("images/brandLogo.png");
 	display: block;
 }
 
