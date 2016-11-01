@@ -1,15 +1,12 @@
 $(document).ready(function() {
-	
 	$('#class1-button').on('click', function() {
 		$('#class1').css('display','block');
 		$('#class2').css('display','none');
-		alert("hello?");
 	});
 	
 	$('#class2-button').on('click', function() {
 		$('#class1').css('display','none');
 		$('#class2').css('display','block');
-		alert("hello?");
 	});
 	
 	
@@ -72,10 +69,13 @@ $(document).ready(function() {
 	
 	$('#Submit1').on('click', function() {
 		javaUnloadEditor();
+		javaUnloadEditor3();
 		var item = {
-			"javaCode"  :  $('#file1').val()
+			"javaCode"  :  $('#file1').val(),
+			"javaCode1"  :  $('#file3').val()
 			,"scannerInput"  : $('#input1').val()
-		};                   
+		};        
+		javaLoadEditor3();
 		javaLoadEditor();
 		$.ajax({
 			type : 'get',

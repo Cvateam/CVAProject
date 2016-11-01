@@ -1118,7 +1118,27 @@ transform
 
 
 
+
+
+
+
+
+
+
+
+
+
 :rotate(360deg)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1245,7 +1265,7 @@ transform
 						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 					</a> <a href="/" class="brand scroll-page"><span
-						style="background-image: url('images/brandLogo.png');"></span></a>
+						style="background-image: url('images/Logomakr_1yE4r7.png');"></span></a>
 					<div class="nav-collapse collapse " style="height: 0px;">
 						<ul class="nav pull-right">
 							<li class="active"><a href="/" class="scroll-page"><i
@@ -1374,7 +1394,8 @@ transform
 											</div>
 
 											<!-- editor + ad -->
-											<div style="border-bottom: 1px solid #ececec;">
+											<div id="class1" class="classEditor"
+												style="border-bottom: 1px solid #ececec;">
 												<div id="file_div1" class=" ace_editor ace-tm"
 													style="height: 320px; display: block;">
 													<textarea class="ace_text-input" wrap="off"
@@ -1557,6 +1578,183 @@ class Ideone
 		// your code goes here
 	}
 }">
+											<div id="class2" class="classEditor"
+												style="border-bottom: 1px solid #ececec; display: none;">
+												<div id="file_div3" class=" ace_editor ace-tm"
+													style="height: 320px; display: block;">
+													<textarea class="ace_text-input" wrap="off"
+														autocapitalize="off" spellcheck="false"
+														style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"></textarea>
+													<div class="ace_gutter">
+														<div
+															class="ace_layer ace_gutter-layer ace_folding-enabled"
+															style="margin-top: 0px; height: 348.8px; width: 47px;">
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">
+																1<span class="ace_fold-widget ace_start ace_open"
+																	style="height: 14.40000057220459px"></span>
+															</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">2</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">3</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">4</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">5</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">6</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">
+																7<span class="ace_fold-widget ace_start ace_open"
+																	style="height: 14.40000057220459px"></span>
+															</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">8</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">
+																9<span class="ace_fold-widget ace_start ace_open"
+																	style="height: 14.40000057220459px"></span>
+															</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">10</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">
+																11<span class="ace_fold-widget ace_start ace_open"
+																	style="height: 14.40000057220459px"></span>
+															</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">12</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">13</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">14</div>
+														</div>
+														<div class="ace_gutter-active-line"
+															style="top: 0px; height: 14.4px;"></div>
+													</div>
+													<div class="ace_scroller"
+														style="left: 47px; right: 0px; bottom: 0px;">
+														<div class="ace_content"
+															style="margin-top: 0px; width: 723px; height: 348.8px; margin-left: 0px;">
+															<div class="ace_layer ace_print-margin-layer">
+																<div class="ace_print-margin"
+																	style="left: 532px; visibility: visible;"></div>
+															</div>
+															<div class="ace_layer ace_marker-layer">
+																<div class="ace_active-line"
+																	style="height: 14.40000057220459px; top: 0px; left: 0; right: 0;"></div>
+															</div>
+															<div class="ace_layer ace_text-layer"
+																style="padding: 0px 4px;">
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_comment">/*&nbsp;package&nbsp;whatever;&nbsp;//&nbsp;don't&nbsp;place&nbsp;package&nbsp;name!&nbsp;*/</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px"></div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_keyword">import</span>&nbsp;<span
+																		class="ace_identifier">java</span>.<span
+																		class="ace_identifier">util</span>.<span
+																		class="ace_keyword ace_operator">*</span>;
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_keyword">import</span>&nbsp;<span
+																		class="ace_identifier">java</span>.<span
+																		class="ace_identifier">lang</span>.<span
+																		class="ace_keyword ace_operator">*</span>;
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_keyword">import</span>&nbsp;<span
+																		class="ace_identifier">java</span>.<span
+																		class="ace_identifier">io</span>.<span
+																		class="ace_keyword ace_operator">*</span>;
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px"></div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_comment">/*&nbsp;Name&nbsp;of&nbsp;the&nbsp;class&nbsp;has&nbsp;to&nbsp;be&nbsp;"Main"&nbsp;only&nbsp;if&nbsp;the&nbsp;class&nbsp;is&nbsp;public.&nbsp;*/</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_keyword">class</span>&nbsp;<span
+																		class="ace_identifier">Ideone</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">{</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
+																		class="ace_keyword">static</span>&nbsp;<span
+																		class="ace_keyword">void</span>&nbsp;<span
+																		class="ace_identifier">main</span>&nbsp;(<span
+																		class="ace_support ace_function">String</span>[]&nbsp;<span
+																		class="ace_identifier">args</span>)&nbsp;<span
+																		class="ace_keyword">throws</span>&nbsp;<span
+																		class="ace_identifier">java</span>.<span
+																		class="ace_identifier">lang</span>.<span
+																		class="ace_support ace_function">Exception</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+																		class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">}</div>
+															</div>
+															<div class="ace_layer ace_marker-layer"></div>
+															<div
+																class="ace_layer ace_cursor-layer ace_hidden-cursors">
+																<div class="ace_cursor"
+																	style="left: 4px; top: 0px; width: 6.6px; height: 14.4px;"></div>
+															</div>
+														</div>
+													</div>
+													<div
+														style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
+													<div class="ace_scrollbar"
+														style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
+														<div class="ace_scrollbar-inner" style="height: 201.6px;"></div>
+													</div>
+													<div class="ace_scrollbar-h"
+														style="height: 26px; display: none; overflow-x: scroll; left: 47px; right: 0px;">
+														<div class="ace_scrollbar-inner" style="width: 723px;"></div>
+													</div>
+												</div>
+												<div id="file_parent3" style="padding: 10px; display: none;">
+													<textarea name="file" id="file3" tabindex="1">/* package whatever; // don't place package name! */
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+</textarea>
+												</div>
+											</div>
+											<input type="hidden" id="file_template3"
+												value="/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be &quot;Main&quot; only if the class is public. */
+class Ideone
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+	}
+}">
 
 											<!-- advanced config: input -->
 											<div class="row visible" id="ex-input">
@@ -1626,7 +1824,8 @@ class Ideone
 									</div> -->
 																	<div class="clearfix"></div>
 																</div>
-																<div id="output1" style="width: 100%; height: 70px; padding-left: 9px;"></div>
+																<div id="output1"
+																	style="width: 100%; height: 70px; padding-left: 9px;"></div>
 															</div>
 															<div class="ex-more-options-box"
 																style="padding-top: 4px; display: none;">
@@ -1992,6 +2191,15 @@ class Ideone
 															style="display: none;" id="button-input1">
 															<i class="icon-inbox"></i> stdin
 														</button>
+														<button type="button" class="btn footer-item rel-tooltip"
+															data-toggle="button" title="Class1" id="class1-button">
+															<i class="icon-inbox"></i> 1
+														</button>
+														<button type="button" class="btn footer-item rel-tooltip"
+															data-toggle="button" title="Class2" id="class2-button">
+															<i class="icon-inbox"></i> 2
+														</button>
+
 
 														<!-- visibility -->
 														<input type="hidden" name="public" value="1">
@@ -2045,6 +2253,7 @@ class Ideone
 												</div>
 											</div>
 										</div>
+
 										<div id="csharp_container" class="span8 code-panel">
 											<div class="header">
 												<i class="icon-code"></i> enter your source code <span
@@ -2292,7 +2501,8 @@ public class Test
 									</div> -->
 																	<div class="clearfix"></div>
 																</div>
-																<div id="output2" style="width:100%; height:70px; padding-left: 9px;"></div>
+																<div id="output2"
+																	style="width: 100%; height: 70px; padding-left: 9px;"></div>
 															</div>
 															<div class="ex-more-options-box"
 																style="padding-top: 4px; display: none;">

@@ -96,6 +96,54 @@ function javaLoadEditor() {
 	editor.focus();
 }// javaLoadEditor
 
+function javaLoadEditor3() {
+	var site = $("#site").val();
+	var lang_id = 1;
+	var id = '';
+	if (site == "index") {
+		lang_id = $("#_lang1").val();
+		id = 'file3';
+	} else { // view
+		lang_id = $("#compiler").val();
+		id = 'view_edit_file';
+	}
+	var $elem = $("#" + id);
+	var syn = "text";
+
+	if (lang_map[lang_id] != undefined) {
+		syn = lang_map[lang_id];
+	}
+
+	var editor = ace.edit("file_div3");
+	// $elem.hide();
+	// jesli ktos zmieni rozmiar pola (uchwyt ala chrome/ff) to edytor sie
+	// dostosuje
+	var padding = 10;
+	if (site == "index") {
+		$("#file_div3").css({
+			'height' : ($("#file_parent1").height() + 2 * padding) + 'px'
+		});
+		$("#file_parent3").hide();
+	} else {
+		$("#view_edit_file").hide();
+	}
+	$("#file_div3").show();
+	editor.resize();
+	editor.getSession().modeName = '/gfx/ace/src/' + syn;
+	editor.getSession().setMode("ace/mode/" + syn);
+	editor.getSession().setUseSoftTabs(false);
+	editor.getSession().setValue($elem.val());
+	editor.on('change', function() {
+		$("#view_edit_save").removeClass('disabled');
+	});
+
+	if (!is_editor_active) {
+		is_editor_active = true;
+		editor.renderer.setHScrollBarAlwaysVisible(false);
+	}
+	editor.focus();
+}// javaLoadEditor
+
 function csharpLoadEditor() {
 	var site = $("#site").val();
 	var lang_id = 1;
@@ -162,6 +210,24 @@ function javaUnloadEditor() {
 	$elem.show().focus();
 }// javaUnloadEditor
 
+function javaUnloadEditor3() {
+	var site = $("#site").val();
+	var id = "";
+	if (site == "index") {
+		id = "file3";
+	} else { // view
+		id = "view_edit_file";
+	}
+	var $elem = $("#" + id);
+
+	var editor = ace.edit("file_div3");
+	$elem.val(editor.getSession().getValue());
+	$("#file_div3").hide();
+	// $elem.show();
+	$("#file_parent3").show();
+	$elem.show().focus();
+}// javaUnloadEditor
+
 function csharpUnloadEditor() {
 	var site = $("#site").val();
 	var id = "";
@@ -220,10 +286,13 @@ function csharpClearEditor() {
 
 function focusEditor1(){
 	if($("#syntax1").is(':checked')){
-		var editor = ace.edit("file_div1");
-		editor.focus();
+		var editor1 = ace.edit("file_div1");
+		var editor2 = ace.edit("file_div3");
+		editor1.focus();
+		editor2.focus();
 	} else {
 		$("#file1").focus();
+		$("#file3").focus();
 	}
 }
 
@@ -248,11 +317,13 @@ $(document).ready(function() {
 
 	if ($("#syntax1").is(':checked')) {
 		javaLoadEditor();
+		javaLoadEditor3();
 	} else {
 		// focus
 		var site = $("#site").val();
 		if (site == 'index') {
 			$("#file1").focus();
+			$("#file3").focus();
 		}
 	}
 
