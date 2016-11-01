@@ -69,10 +69,10 @@ $(document).ready(function() {
 	
 	$('#Submit1').on('click', function() {
 		javaUnloadEditor();
-		javaUnloadEditor3();
+		javaUnloadEditor();
 		var item = {
-			"javaCode"  :  $('#file1').val(),
-			"javaCode1"  :  $('#file3').val()
+			"javaCode"  :  $('#file1').val()
+			,"javaCode1"  :  $('#file3').val()
 			,"scannerInput"  : $('#input1').val()
 		};        
 		javaLoadEditor3();
@@ -85,8 +85,8 @@ $(document).ready(function() {
 			success : function(response) {
 				$('#output1').val(response.javaCompileCode);
 			},
-			error : function(resp, code) {
-				alert(resp + " " + code);
+			error : function(resp) {
+				alert(resp.javaCompileCode);
 			}
 		});
 	});

@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,6 +17,7 @@ import first.cva.vo.KeywordVO;
 public class JavaOperationAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String javaCode;
+	private String javaCode1;
 	private String javaCompileCode;
 	private String javatranslatedCode;	//씨샵으로 번역된 코드
 	private String scannerInput;		//스캐너이용했을때 사용자가 콘솔에서 입력하는 값
@@ -26,45 +29,30 @@ public class JavaOperationAction extends ActionSupport {
 		File directory = new File("WebJava/Request");
 		directory.mkdirs();
 		
-/*		//스캐너처리하다 맘 저장전에 scanner 사용하는지 확인해서 있으면 그부분 처리
-		ArrayList<String> oneSentenceList = null;
-		String temp = "";
-		if(javaCode.contains("Scanner") && scannerInput != null){
-			String sInputList [] = scannerInput.split("\n"); // 콘솔에 scanner 두번이상 사용할 때
-			int count = 0;
-			String oneSentence[] = javaCode.split("\n"); // 한줄씩 읽어들임;
-			oneSentenceList = new ArrayList<String> (Arrays.asList(oneSentence)); //list로 변환
-			for(int j = 0 ; j < oneSentence.length ; j++ ){
-				if(oneSentenceList.get(j).indexOf("new Scanner") != -1){
-						oneSentenceList.remove(j);
+		if (javaCode.indexOf("Scanner") != -1){
+			/*javaCode = javaCode.replace("Console.ReadLine();", "\"" + scannerInput + "\"";*/
+
+				if(javaCode.indexOf("new Scanner(System.in)") != -1){
+					javaCode = javaCode.replace("new Scanner(System.in)", "new Scanner(\"" + scannerInput + "\")");
 				}
-					if(oneSentenceList.get(j).indexOf(".nextLine()") != -1){
-						if(count == 0){
-						oneSentenceList.set(j, "String a = \"" + sInputList[j] + "\"; Scanner h = new Scanner(a); String c = h.nextLine();");
-						count++;
-						}else{
-							oneSentenceList.set(j, "a = \"" + sInputList[j] + "\"; h = new Scanner(a); System.out.print(c +\"\t\"); c = h.nextLine();");
-						}	
-					}
-					break; // 일단 딱 1개만 
-			} // 한줄씩 읽어들일 때마다 
-//				For example, String message = String.join("-", "Java", "is", "cool");
-			     // message returned is: "Java-is-cool"	 
+		}
+		if (scannerInput == null) {
+			javaCompileCode = "스캐너사용시에는  input칸에 입력해주셔야합니다.";
+			return ERROR;
 			
-			for (int i = 0; i < oneSentenceList.size(); i++) {
-				temp += oneSentenceList.get(i);
-			}
-			
-			javaCode = temp;
-			System.out.println(javaCode);
-		}*/
+		}
 		
-		File source  = new File(directory.getAbsolutePath()+"/Test.java");
+		File source  = new File(directory.getAbsolutePath()+"/Test1.java");
+		File source2  = new File(directory.getAbsolutePath()+"/Test2.java");
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(source));
 			out.write(javaCode); out.newLine();
-
+			
 			out.close();
+			BufferedWriter out2 = new BufferedWriter(new FileWriter(source2));
+			out.write(javaCode1); out.newLine();
+			
+			out2.close();
 		} catch (IOException e) {
 			System.err.println(e);
 			System.exit(1);
@@ -82,17 +70,18 @@ public class JavaOperationAction extends ActionSupport {
 		}
 
 		StringBuilder compileLog = new StringBuilder();
-		Scanner compileScanner= new Scanner(compile.getErrorStream());
+		Scanner compileScanner= new Scanner(compile.getErrorStream()); // error 코드 확인 
 
 		while (compileScanner.hasNextLine()){
-			compileLog.append(compileScanner.nextLine());
+		
+			compileLog.append(compileScanner.nextLine()+ "\n");
 		}
 
 		compileScanner.close();
-
+		
+		
 		String compileLog1 = compileLog.toString();
-		javaCompileCode =   compileLog1.toString();
-
+		
 		if (compileLog1.isEmpty()){
 			String name = source.getName();
 			Process java = runtime.exec("java -cp " + source.getParent() + " " + name.substring(0, name.lastIndexOf(".")) + " ");
@@ -103,19 +92,20 @@ public class JavaOperationAction extends ActionSupport {
 				Scanner javaScanner1 = new Scanner(java.getInputStream());
 
 				while (javaScanner1.hasNextLine()){
-					javaLog.append(javaScanner1.nextLine());
+					javaLog.append(javaScanner1.nextLine()+"\n");
 				}
 
 				javaScanner1.close();
+				System.out.println(javaLog.toString());
 				javaCompileCode =   javaLog.toString();
 
-				new File(source.getParent(), name + ".class").delete();//class파일삭제
 				source.delete();//java파일삭제
+				new File(source.getParent(), name + ".class").delete();//class파일삭제
 			}catch (InterruptedException e){
 				e.printStackTrace();
 			}
 		}else{
-			javaCompileCode=  compileLog1;
+			javaCompileCode =   compileLog1.replace( "C:\\SetUpFile\\eclipse\\eclipse-jee-neon-R-win32-x86_64\\eclipse\\WebJava\\Request\\", " ");
 
 		}
 		return SUCCESS;
@@ -305,6 +295,14 @@ public class JavaOperationAction extends ActionSupport {
 
 	public void setJavatranslatedCode(String javatranslatedCode) {
 		this.javatranslatedCode = javatranslatedCode;
+	}
+
+	public String getJavaCode1() {
+		return javaCode1;
+	}
+
+	public void setJavaCode1(String javaCode1) {
+		this.javaCode1 = javaCode1;
 	}
 
 }

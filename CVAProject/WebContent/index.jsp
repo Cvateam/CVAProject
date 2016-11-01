@@ -152,10 +152,10 @@
 		<script>
 		$(function(){
 			$('.featured-list__img').mouseenter(function() {
-				$(this).width(100);
+				$(this).width(500);
 			});
 			$('.featured-list__img').mouseleave(function() {
-				$(this).width(30);
+				$(this).width(200);
 			});
 			
 		});

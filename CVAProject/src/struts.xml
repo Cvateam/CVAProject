@@ -49,6 +49,9 @@
 		<!-- converterMain 화면가기 -->
 		<action name="converterMain" >
 			<result>/index.jsp</result>
+		</action>
+		<action name="TestList" >
+			<result>/TestList.jsp</result>
 		</action>		
 	</package>
 	
