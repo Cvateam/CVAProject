@@ -75,7 +75,6 @@ $(document).ready(function() {
 			,"javaCode1"  :  $('#file3').val()
 			,"scannerInput"  : $('#input1').val()
 		};        
-		javaLoadEditor3();
 		javaLoadEditor();
 		$.ajax({
 			type : 'get',

@@ -4,8 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,7 +29,7 @@ public class JavaOperationAction extends ActionSupport {
 		
 		if (javaCode.indexOf("Scanner") != -1){
 			/*javaCode = javaCode.replace("Console.ReadLine();", "\"" + scannerInput + "\"";*/
-
+				System.out.println(scannerInput);
 				if(javaCode.indexOf("new Scanner(System.in)") != -1){
 					javaCode = javaCode.replace("new Scanner(System.in)", "new Scanner(\"" + scannerInput + "\")");
 				}
@@ -42,21 +40,39 @@ public class JavaOperationAction extends ActionSupport {
 			
 		}
 		
-		File source  = new File(directory.getAbsolutePath()+"/Test1.java");
-		File source2  = new File(directory.getAbsolutePath()+"/Test2.java");
+		File source  = new File(directory.getAbsolutePath()+"/Test.java");  // 첫번째 파일 
+		File source2  = new File(directory.getAbsolutePath()+"/Test2.java"); // 패키지의 두번째 파일
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter(source));
 			out.write(javaCode); out.newLine();
 			
 			out.close();
-			BufferedWriter out2 = new BufferedWriter(new FileWriter(source2));
-			out.write(javaCode1); out.newLine();
-			
-			out2.close();
+			if(javaCode1 != null){
+				BufferedWriter out2 = new BufferedWriter(new FileWriter(source2));
+				out2.write(javaCode1); out2.newLine();
+				
+				out2.close();
+			}
 		} catch (IOException e) {
 			System.err.println(e);
 			System.exit(1);
 		}
+		//첫 라인 패키지명 읽어오기 
+		String toReadPackage = javaCode.trim();
+		if(toReadPackage.indexOf("package") != -1){
+			int beginIndex = javaCode.indexOf("package");
+			int endIndex = javaCode.indexOf(";");
+			
+			System.out.println(toReadPackage.substring(beginIndex, endIndex));
+		}
+		
+
+/*		  String zipFilePath = "C:\\excelfile\\realxlsx";//압축할 디렉토리 경로
+		  String zipFileName = "C:\\excelfile\\downloadXlsx";//압축할 파일명  
+		  //압축 메서드 
+		  CompressSource.zipDirectory(zipFilePath, zipFileName + ".zip");*/
+		
+		
 		/*	         String command = "javac -d D:/Test/classes ";
          command = command + "D:/Test/src/" + className+".java";        
          try {
@@ -81,6 +97,7 @@ public class JavaOperationAction extends ActionSupport {
 		
 		
 		String compileLog1 = compileLog.toString();
+		javaCompileCode =   compileLog1.replace( "C:\\SetUpFile\\eclipse\\eclipse-jee-neon-R-win32-x86_64\\eclipse\\WebJava\\Request\\", " ");
 		
 		if (compileLog1.isEmpty()){
 			String name = source.getName();
@@ -98,6 +115,7 @@ public class JavaOperationAction extends ActionSupport {
 				javaScanner1.close();
 				System.out.println(javaLog.toString());
 				javaCompileCode =   javaLog.toString();
+				System.out.println("javaCompileCode"+ javaCompileCode);
 
 				source.delete();//java파일삭제
 				new File(source.getParent(), name + ".class").delete();//class파일삭제
