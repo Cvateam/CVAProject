@@ -8,14 +8,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.opensymphony.xwork2.ActionSupport;
-
 import first.cva.dao.KeywordDAO;
 import first.cva.vo.KeywordVO;
 
 public class JavaOperationAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private String javaCode;
-	private String javaCode1;
+	private String javaCode1;			//패키지 사용했을 때 다른 클래스 	
 	private String javaCompileCode;
 	private String javatranslatedCode;	//씨샵으로 번역된 코드
 	private String scannerInput;		//스캐너이용했을때 사용자가 콘솔에서 입력하는 값
@@ -26,59 +25,86 @@ public class JavaOperationAction extends ActionSupport {
 		Runtime runtime = Runtime.getRuntime();
 		File directory = new File("WebJava/Request");
 		directory.mkdirs();
-		
+		System.out.println("javaCode1 :"+javaCode1 );
+		///////////////////////////////////////// Scanner 파트 /////////////////////////////////
+
 		if (javaCode.indexOf("Scanner") != -1){
 			/*javaCode = javaCode.replace("Console.ReadLine();", "\"" + scannerInput + "\"";*/
-				System.out.println(scannerInput);
-				if(javaCode.indexOf("new Scanner(System.in)") != -1){
-					javaCode = javaCode.replace("new Scanner(System.in)", "new Scanner(\"" + scannerInput + "\")");
-				}
+			System.out.println(scannerInput);
+			if(javaCode.indexOf("new Scanner(System.in)") != -1){
+				javaCode = javaCode.replace("new Scanner(System.in)", "new Scanner(\"" + scannerInput + "\")");
+			}
 		}
 		if (scannerInput == null) {
 			javaCompileCode = "스캐너사용시에는  input칸에 입력해주셔야합니다.";
 			return ERROR;
-			
+
 		}
+		////////////////////////////package 확인 /////////////////////////////////
+
+		File source = null;
 		
-		File source  = new File(directory.getAbsolutePath()+"/Test.java");  // 첫번째 파일 
-		File source2  = new File(directory.getAbsolutePath()+"/Test2.java"); // 패키지의 두번째 파일
-		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(source));
-			out.write(javaCode); out.newLine();
-			
-			out.close();
-			if(javaCode1 != null){
-				BufferedWriter out2 = new BufferedWriter(new FileWriter(source2));
-				out2.write(javaCode1); out2.newLine();
-				
-				out2.close();
-			}
-		} catch (IOException e) {
-			System.err.println(e);
-			System.exit(1);
-		}
-		//첫 라인 패키지명 읽어오기 
-		String toReadPackage = javaCode.trim();
+		//Test클래스명 이거 대신 한문장 읽어들인 뒤에 계속 트림 돌려서 없을때까지 컨테인 쓰든지 해서 그리고 클래스명 정확하게 읽어오기
+		//첫 라인 패키지명 읽어오기   //주석처리된 /* package whatever; // don't place package name! */이부분읽어들임 . 나중에 처리할 부분
+		String oneSentence[] = javaCode.split("\n"); // 한줄씩 읽어들임;
+		String toReadPackage = oneSentence[0].trim(); // package 첫라인이어야함
+
+		String packageName = null;
+
 		if(toReadPackage.indexOf("package") != -1){
 			int beginIndex = javaCode.indexOf("package");
 			int endIndex = javaCode.indexOf(";");
-			
-			System.out.println(toReadPackage.substring(beginIndex, endIndex));
-		}
-		
 
-/*		  String zipFilePath = "C:\\excelfile\\realxlsx";//압축할 디렉토리 경로
-		  String zipFileName = "C:\\excelfile\\downloadXlsx";//압축할 파일명  
-		  //압축 메서드 
-		  CompressSource.zipDirectory(zipFilePath, zipFileName + ".zip");*/
+
+			packageName = toReadPackage.substring(beginIndex+8, endIndex);//beginIndex+8 package+1 띄어쓰기
+
+			String dir = directory.getAbsolutePath()+"/"+packageName; // .java 파일들 놓을 위치(패키지명으로 처리)  	
+			File packagedir = new File(dir);
+			packagedir.mkdirs();
+
+			File file2  = new File(dir+"/Test2.java"); // 패키지의 두번째 파일
+			File file1  = new File(dir+"/Test.java");  // 첫번째 파일 
+			try {
+				BufferedWriter out = new BufferedWriter(new FileWriter(file1));
+				out.write(javaCode); out.newLine();
+
+				out.close();
+				if(javaCode1 != null){
+					BufferedWriter out2 = new BufferedWriter(new FileWriter(file2));
+					out2.write(javaCode1); out2.newLine();
+
+					out2.close();
+				}
+			} catch (IOException e) {
+				System.err.println(e);
+				System.exit(1);
+			}
+			  source  = new File(dir+"\\Test.java"); // package 컴파일 main emf
 		
-		
-		/*	         String command = "javac -d D:/Test/classes ";
+		}else{// 소스코드 하나 컴파일 
+			source =  new File(directory.getAbsolutePath()+"\\Test.java");
+			try {
+				BufferedWriter out = new BufferedWriter(new FileWriter(source));
+				out.write(javaCode); out.newLine();
+
+				out.close();
+			} catch (IOException e) {
+				System.err.println(e);
+				System.exit(1);
+			}
+		}
+
+		/*	간단 cmd 이용 소스코드 컴파일 코드      
+		 *     String command = "javac -d D:/Test/classes ";
          command = command + "D:/Test/src/" + className+".java";        
          try {
                 Process processor = Runtime.getRuntime().exec(command);
          }*/
-		Process compile = runtime.exec("javac -sourcepath " +source.getParent() +  " "+ source.getAbsolutePath() + " ");
+
+		System.out.println("source.getParent()" +source.getParent() );
+		System.out.println("source.getAbsolutePath()" + source.getAbsolutePath());
+		
+		Process compile = runtime.exec("javac -sourcepath  " +source.getParent()+" "+ source.getAbsolutePath() + " ");
 		try{
 			compile.waitFor();
 		}catch (InterruptedException e){
@@ -89,16 +115,16 @@ public class JavaOperationAction extends ActionSupport {
 		Scanner compileScanner= new Scanner(compile.getErrorStream()); // error 코드 확인 
 
 		while (compileScanner.hasNextLine()){
-		
+
 			compileLog.append(compileScanner.nextLine()+ "\n");
 		}
 
 		compileScanner.close();
-		
-		
+
+
 		String compileLog1 = compileLog.toString();
 		javaCompileCode =   compileLog1.replace( "C:\\SetUpFile\\eclipse\\eclipse-jee-neon-R-win32-x86_64\\eclipse\\WebJava\\Request\\", " ");
-		
+
 		if (compileLog1.isEmpty()){
 			String name = source.getName();
 			Process java = runtime.exec("java -cp " + source.getParent() + " " + name.substring(0, name.lastIndexOf(".")) + " ");
@@ -117,19 +143,19 @@ public class JavaOperationAction extends ActionSupport {
 				javaCompileCode =   javaLog.toString();
 				System.out.println("javaCompileCode"+ javaCompileCode);
 
-				source.delete();//java파일삭제
-				new File(source.getParent(), name + ".class").delete();//class파일삭제
+				//source.delete();//java파일삭제
+				//new File(source.getParent(), name + ".class").delete();//class파일삭제
 			}catch (InterruptedException e){
 				e.printStackTrace();
 			}
 		}else{
 			javaCompileCode =   compileLog1.replace( "C:\\SetUpFile\\eclipse\\eclipse-jee-neon-R-win32-x86_64\\eclipse\\WebJava\\Request\\", " ");
-
+			//source.delete();//java파일삭제
 		}
 		return SUCCESS;
 	}//java compile
-	
-	
+
+
 	public String translate1() throws Exception{
 		KeywordDAO dao = new KeywordDAO();
 		List<KeywordVO> list = dao.searchKeyword(1);
@@ -146,21 +172,21 @@ public class JavaOperationAction extends ActionSupport {
 		 		javaCode = javaCode.replace("package", "namespace"); // 숙제 namespace 뒤에 { 이거 붙이기  */
 		//네임스페이스 안주기로 함  javaCode += "\n}"; //코드마지막에 } 덧붙혀서 마무리		
 
-		 javaCode = javaCode.trim();
+		javaCode = javaCode.trim();
 
-		 sysoutToConsoleWriteLine();// Console.WriteLine 변환.
-		 changeGetSet(); // 겟셋
+		sysoutToConsoleWriteLine();// Console.WriteLine 변환.
+		changeGetSet(); // 겟셋
 
-		 // 키워드
-		 for (int ii = 0; ii < list.size(); ii++) {
-			 if (javaCode.indexOf(list.get(ii).getJavaKeyword()) != -1) {
-				 javaCode = javaCode.replace(list.get(ii).getJavaKeyword() , list.get(ii).getCsharpKeyword());
-			 }
-		 }
-		 javatranslatedCode= javaCode;
-		 javatranslatedCode += "\n}";
-		 
-		 return SUCCESS;
+		// 키워드
+		for (int ii = 0; ii < list.size(); ii++) {
+			if (javaCode.indexOf(list.get(ii).getJavaKeyword()) != -1) {
+				javaCode = javaCode.replace(list.get(ii).getJavaKeyword() , list.get(ii).getCsharpKeyword());
+			}
+		}
+		javatranslatedCode= javaCode;
+		javatranslatedCode += "\n}";
+
+		return SUCCESS;
 	}
 
 	private void changeGetSet() {
@@ -220,20 +246,20 @@ public class JavaOperationAction extends ActionSupport {
 
 					case 11:// 둘다있다
 						if(check==2){
-		                     System.out.println(mid_mid1);
-		                     javaCode = javaCode.replace("public " + a4, mid_mid11);
-		                     System.out.println(javaCode);
-		                     a4 = "";
-		                     result = 0;
-		                     break;
-		                  }else{
-		                     System.out.println(mid_mid1);
-		                     javaCode = javaCode.replace("public " + a4, mid_mid1+"\n\t}\n");
-		                     System.out.println(javaCode);
-		                     a4 = "";
-		                     result = 0;
-		                     break;
-		                  }
+							System.out.println(mid_mid1);
+							javaCode = javaCode.replace("public " + a4, mid_mid11);
+							System.out.println(javaCode);
+							a4 = "";
+							result = 0;
+							break;
+						}else{
+							System.out.println(mid_mid1);
+							javaCode = javaCode.replace("public " + a4, mid_mid1+"\n\t}\n");
+							System.out.println(javaCode);
+							a4 = "";
+							result = 0;
+							break;
+						}
 					case 10:// get
 						System.out.println("get일함");
 						javaCode = javaCode.replace("public " + a4, mid_mid2);
@@ -261,25 +287,25 @@ public class JavaOperationAction extends ActionSupport {
 	}
 
 	private void sysoutToConsoleWriteLine() {
-		   String x;
-		   String y;
-		   String z="\"+";
-		   String a="{0}\",";
-		   String so = ".*System.out.println.*";
-		   String so2 = "System.out.println";
-		   String xxx = "\""; 
-		       
-		      //1) 주어진 String에 matches를 이용하여 원하는 "sysout"이 있는지 확인
-		      if(javaCode.matches(so)==true){
-		         System.out.println("있다");
-		         // 2)있는게 확인되면  "sysout"을 기준으로 자르기
-		         String[] array = javaCode.split(so2);
-		         // 3) 잘라진 array의 length을 기준으로  length-1번 일하기
-		          int index =array.length;
-		          for(int i = 0;i<index;i++){
-		             javaCode = javaCode.replace(z, a);    
-		          }
-		      }
+		String x;
+		String y;
+		String z="\"+";
+		String a="{0}\",";
+		String so = ".*System.out.println.*";
+		String so2 = "System.out.println";
+		String xxx = "\""; 
+
+		//1) 주어진 String에 matches를 이용하여 원하는 "sysout"이 있는지 확인
+		if(javaCode.matches(so)==true){
+			System.out.println("있다");
+			// 2)있는게 확인되면  "sysout"을 기준으로 자르기
+			String[] array = javaCode.split(so2);
+			// 3) 잘라진 array의 length을 기준으로  length-1번 일하기
+			int index =array.length;
+			for(int i = 0;i<index;i++){
+				javaCode = javaCode.replace(z, a);    
+			}
+		}
 
 	}
 

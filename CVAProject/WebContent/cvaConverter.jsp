@@ -1556,7 +1556,7 @@ transform
 													</div>
 												</div>
 												<div id="file_parent1" style="padding: 10px; display: none;">
-													<textarea name="file" id="file1" tabindex="1">/* package whatever; // don't place package name! */
+													<textarea name="file" id="file1" tabindex="1">
 import java.util.*;
 import java.lang.*;
 import java.io.*;
@@ -1740,10 +1740,18 @@ class Ideone
 													</div>
 												</div>
 												<div id="file_parent3" style="padding: 10px; display: none;">
-													<textarea name="file" id="file3" tabindex="1">/* package whatever; // don't place package name! */
-import java.util.*;
+													<textarea name="file" id="file3" tabindex="1">import java.util.*;
 import java.lang.*;
 import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Test2
+{
+	
+	
+		// your code goes here
+	
+}
 
 </textarea>
 												</div>
