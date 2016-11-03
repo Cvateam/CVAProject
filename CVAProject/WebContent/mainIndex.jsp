@@ -351,16 +351,16 @@
 				<h1>About Us &nbsp; </h1>
 				<img alt="팀 사진" src="images/photo.jpg">
 				<br>
-				<h2 style="margin-top:0px;">조장 : 뽕상</h2>
+				<h2 style="margin-top:0px;">Leader : Gim Beom Uk</h2>
 						
 
-				<h2>팀원 :  도리나</h2>
+				<h2>Member :  Kim Durina</h2>
 				
 
-				<h2>팀원: 김하늘</h2>
+				<h2>Member : Kim Do Kyung</h2>
 			
 
-				<h2>팀원 : 유지누 </h2>
+				<h2>Member : Park Yu Jin </h2>
 				
 		</div>
 		</td>
