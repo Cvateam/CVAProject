@@ -116,4 +116,32 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	/////////////////기록한 자바소스 저장 /////////////////////
+	
+	$("#downloadBtn").on("click" , function(){ //downloadBtn --- 자바쪽 다운로드 아이디
+		javaUnloadEditor();
+		var title = prompt("Please enter a title ", "practice1");
+		javaLoadEditor();
+
+		var item = {
+			"board.javaCode" : $('#file1').val()
+			,"board.javaScannerInput" : $('#input1').val()
+			,"board.boardTitle1" : title
+		};
+		$.ajax({
+			type : 'get',
+			url : 'save1',
+			data : item,
+			dataType : 'json',
+			success : function(response) {
+				alert(response.message);
+				// board로 가시겠습니까 만들지 말지 
+			},
+			error : function(resp) {
+				alert(resp.message);
+			}
+		});
+		
+	})
 });//ready

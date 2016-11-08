@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib  prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -96,7 +96,7 @@
 						</a>
 					</li>
 					<li class="featured-list__item">
-						<a href="#" class="featured-list__link">
+						<a href="boardList" class="featured-list__link">
 							<img class="featured-list__img" src="img/icons/board.png" >
 							<h3 class="featured-list__title">Board</h3>
 						</a>

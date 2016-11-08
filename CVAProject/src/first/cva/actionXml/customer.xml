@@ -16,7 +16,7 @@
 		<!-- 고객 가입 처리 -->
 		<action name="insertCustomer" method="insertCustomer"
 			class = "first.cva.action.CustomerAction">
-			<result name="success" type="redirect">/index.action</result>
+			<result name="success" type="redirect">/converterMain.action</result>
 			<result name="input">/customer/joinCustomer.jsp</result>
 		</action>
 
@@ -41,7 +41,7 @@
 
 		<action name="login" method="login"
 			class = "first.cva.action.CustomerAction">
-			<result name="success" type="redirect">/index.action</result>
+			<result name="success" type="redirect">/converterMain.action</result>
 			<result name="input" type="redirect">/index.action</result>
 			<result name="admin" type="redirect">/admin/listLoan.action</result>
 		</action>

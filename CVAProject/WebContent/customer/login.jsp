@@ -13,7 +13,7 @@
 		<script>
 		$(function(){
 			$("#previousBtn").on('click' , function(){
-				location.href = "../index";
+				location.href = "../converterMain";
 			});
 			
 		});

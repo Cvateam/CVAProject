@@ -14,4 +14,26 @@
 	<select id = "selectCustomer" resultType="Customer" parameterType="string">
 		select * from customer where custid = #{custid}	
 	</select>
+	
+	<!--  Board 저장 Java -->
+	<insert id = "insertBoard" parameterType="Board">
+		insert into board values javacode , javascannerinput , boardtitle1 , custid , boardnum(
+		
+			#{javaCode} 
+			<if test="#{javaScannerInput != null}">
+			,#{javaScannerInput}
+			</if>
+			<if test="#{javaScannerInput == null}">
+			, null
+			</if>
+			,#{boardTitle1}			
+			,#{custid}	
+			,board_seq.nextval
+			})	
+		
+	</insert>
+	<select id="boardList" parameterType="String" resultType="Board">
+		select * from board 
+	
+	</select>
 </mapper>
