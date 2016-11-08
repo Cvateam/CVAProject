@@ -68,13 +68,13 @@ $(document).ready(function() {
 	//////////////// java compile connect  //////////////////////////
 	
 	$('#Submit1').on('click', function() {
-		javaUnloadEditor();
 		javaUnloadEditor3();
+		javaUnloadEditor();
 		var item = {
 			"javaCode"  :  $('#file1').val()
 			,"javaCode1"  :  $('#file3').val()
 			,"scannerInput"  : $('#input1').val()
-		};        
+		};
 		javaLoadEditor();
 		javaLoadEditor3();
 		$.ajax({
@@ -83,6 +83,7 @@ $(document).ready(function() {
 			data : item,
 			dataType : 'json',
 			success : function(response) {
+				
 				$('#output1').val(response.javaCompileCode);
 			},
 			error : function(resp) {
