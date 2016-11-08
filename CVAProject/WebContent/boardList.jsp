@@ -14,37 +14,40 @@
 <link rel="stylesheet" href="css/5grid/core-noscript.css" />
 <link rel="stylesheet" href="css/styleBoard.css" />
 <link rel="stylesheet" href="css/style-desktop.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 </head>
 <body>
-<div id="wrapper">
+<!-- <div id="wrapper"> -->
 	<div id="header-wrapper">
-		<header id="header">
 			<div class="5grid-layout">
 				<div class="row">
 					<div class="12u" id="logo"> <!-- Logo -->
-						<h1><a href="#" class="mobileUI-site-name">Board</a></h1>
+						<h1><a href="#" class="mobileUI-site-name">C.VA</a></h1>
 					</div>
 				</div>
 			</div>
-			<div class="5grid-layout">
+			<header class="codrops-header" ><!-- id = "header" -->
+<!-- 			<div class="5grid-layout">
 				<div class="row">
-					<div class="12u" id="menu">
-						<div id="menu-wrapper">
-							<nav class="mobileUI-site-nav">
-								<ul>
-									<li><a href="index.html">Converter</a></li>
-									<li class="current_page_item"><a href="threecolumn.html">Board</a></li><!-- here -->
-									<li><a href="twocolumn1.html">Main</a></li>
-
-								</ul>
-							</nav>
-						</div>
-					</div>
+					<div class="12u" id="menu"> -->
+						<h1 class="codrops-header__title">    A class 7 group</h1>
+						<!-- 	<nav class="mobileUI-site-nav"> -->
+						<nav class="codrops-demos">
+							<a class="current-demo" href="index">Home</a>
+							<s:if test='%{#session.loginId == null}'>
+							<a href="customer/loginForm.action">Login</a>
+							</s:if>
+							<s:if test='%{#session.loginId != null}'>
+							<a href="customer/loginForm.action">Logout</a>
+							</s:if>
+							<a href="#" class="menu">Converter</a>
+						</nav>
+<!-- 					</div>
 				</div>
-			</div>
+			</div> -->
 		</header>
 	</div>
 	<div id="page-wrapper" class="5grid-layout">
@@ -55,7 +58,7 @@
 						<section>
 							<div class="post">
 								<h2>사용자 ID</h2>
-								<p><a href="#"><img src="images/pics02.jpg" alt="" class="img-alignleft"></a> Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit nulla suscipit interdum. Aenean lectus lorem, imperdiet at, ultrices eget, ornare et, wisi. Pellentesque adipiscing purus ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.	 Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis.</p>
+								<p><a href="#"><img src="images/spongiBob.jpg" alt="" class="img-alignleft"></a> Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit nulla suscipit interdum. Aenean lectus lorem, imperdiet at, ultrices eget, ornare et, wisi. Pellentesque adipiscing purus ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.	 Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis.</p>
 								<p class="button-style"><a href="#">Profile Update</a></p>
 							</div>
 						</section>

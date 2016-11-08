@@ -5,7 +5,7 @@
 
 /* Header */
 
-#header-wrapper {
+ #header-wrapper {
 	background: url(images/img07.png) no-repeat center top;
 }
 
@@ -28,23 +28,61 @@
 
 #logo h1 a {
 	display: block;
-	letter-spacing: -1px;
 	text-align: center;
 	text-decoration: none;
-	text-shadow: -1px -1px 0px #AC531B;
-	text-transform: lowercase;
-	font-family: 'Allura', cursive;
+	text-shadow: -1px -1px 0px black;
+	/* font-family: 'Allura', cursive; */
 	font-size: 70pt;
 	font-weight: 200;
-	color: #FFFFFF;
+	color: gray;
+}
+.codrops-demos {
+	margin: 0 0 0 auto;
+}
+
+.codrops-demos a {
+	font-weight: 700;
+	font-size: 1em;
+	line-height: 1;
+	display: inline-block;
+	margin: 2em 2em 0 0;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+.codrops-header {
+	padding: 0.185em 0.5em;
+	width: calc(100% - 4em);
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-flex-wrap: wrap;
+	flex-wrap: wrap;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.codrops-demos a.current-demo {
+	opacity: 0.5;
+}
+.codrops-header__title {
+	font-size: 1em;
+	font-weight: 500;
+	margin: 0;
+	padding: 0 0.75em;
 }
 
 /* Menu */
-
+/* 
 #menu-wrapper {
 	background: url(images/img06.png) top right repeat;
 }
-
+ */
 #menu {
 	height: 60px;
 }
