@@ -71,8 +71,8 @@ drop table keyword;
 
 
 create table board(
-javaCode varchar2(3000) 
-,cSharpCode varchar2(3000)
+javaCode varchar2(4000)
+,cSharpCode varchar2(4000)
 , javaScannerInput varchar2(100) 
 ,cShrapScannerInput varchar2(100)
 , boardTitle1 varchar2(100)   

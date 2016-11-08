@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper">
-	
+
 
 	<select id="searchKeyword" resultType="KeywordVO">
 		select * from keyword
-		  <choose>
-		    <when test="value == 1"><!-- 인자로 넘어오는거 getter없이 떄문에 바로 사요하려면 vlaue 라고 쓰면 됌 -->
-		      where num not in  43
-		    </when>
-		  </choose>
+		<choose>
+			<when test="value == 1"><!-- 인자로 넘어오는거 getter없이 떄문에 바로 사요하려면 vlaue 라고 쓰면 됌 -->
+				where num not in 43
+			</when>
+		</choose>
 	</select>
-	<select id = "selectCustomer" resultType="Customer" parameterType="string">
-		select * from customer where custid = #{custid}	
+	<select id="selectCustomer" resultType="Customer" parameterType="string">
+		select * from customer where custid = #{custid}
 	</select>
-	
-	<!--  Board 저장 Java -->
-	<insert id = "insertBoard" parameterType="Board">
-		insert into board values javacode , javascannerinput , boardtitle1 , custid , boardnum(
-		
-			#{javaCode} 
-			<if test="#{javaScannerInput != null}">
-			,#{javaScannerInput}
-			</if>
-			<if test="#{javaScannerInput == null}">
-			, null
-			</if>
-			,#{boardTitle1}			
-			,#{custid}	
-			,board_seq.nextval
-			})	
-		
+
+	<!-- Board 저장 Java -->
+	<insert id="insertBoard" parameterType="Board">
+		insert into board (javacode , javascannerinput , boardtitle1 ,
+		custid ,
+		boardnum) values (
+		#{javaCode}
+		,#{javaScannerInput}
+		,#{boardTitle1}
+		,#{custid}
+		,board_seq.nextval
+		)
+
 	</insert>
 	<select id="boardList" parameterType="String" resultType="Board">
-		select * from board 
-	
+		select
+		* from board
+
 	</select>
 </mapper>
