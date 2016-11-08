@@ -68,3 +68,29 @@ delete from keyword where csharpkeyword='namespace';
 
 drop sequence keyword_seq;
 drop table keyword;
+
+
+create table board(
+javaCode varchar2(3000) 
+,cSharpCode varchar2(3000)
+, javaScannerInput varchar2(100) 
+,cShrapScannerInput varchar2(100)
+, boardTitle1 varchar2(100)   
+, boardTitle2 varchar2(100)
+,custid varchar2(50)   not null
+, boardMemo varchar2(1000)
+,boardnum  number primary key
+);
+
+create sequence board_seq;
+
+insert into board values ('public class Test
+{
+	public static void main (String[] args)
+	{
+	System.out.println("success");
+	}
+}' , null, null,null,'sysout',null , 'a' , '처음인데 재밌네' , board_seq.nextval);
+
+select * from board;
+                           

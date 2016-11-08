@@ -18,13 +18,11 @@
 			<interceptor-ref name="loginInterceptor" />
 		</interceptor-stack>
 	</interceptors> -->
-		<default-action-ref name="index"></default-action-ref>
+		<default-action-ref name="index"/>
 		
 		<action name="index">
 			<result>/mainIndex.jsp</result>
 		</action>
-
-		
 		<!-- 들어갈때 -->
 		<action name="converter" class="first.cva.action.CsharpOperationAction" method="index">
 			<result>/cvaConverter.jsp</result>
@@ -52,7 +50,19 @@
 		</action>
 		<action name="TestList" >
 			<result>/TestList.jsp</result>
-		</action>		
+		</action>	
+				<!--  java 쓴 코드 저장하기 -->
+		<action name = "save1" class = "first.cva.action.BoardAction" method = "boardSave1"> 
+			<result type = "json"></result>
+		</action>
+			
+		<!--  cSharp 쓴 코드 저장하기 -->
+		<action name = "save2" class = "first.cva.action.BoardAction" method = "boardSave2"> 
+			<result type = "json"></result>
+		</action>
+	    <action name="boardList" class="first.cva.action.BoardAction" method="boardList">
+			<result >/boardList.jsp</result>
+		</action>
 	</package>
 	
 	<include file="first/cva/actionXml/customer.xml"/>

@@ -2253,6 +2253,7 @@ class Ideone
 														<!-- submit -->
 														<div class="pull-right">
 															<input type="hidden" name="run" value="1">
+															<button id = "downloadBtn"><img alt="" src="images/download.png" width="30px" > </button>
 															<button type="submit" name="Submit" id="Translate1"
 																tabindex="2"
 																class="btn btn-success footer-item rel-tooltip"

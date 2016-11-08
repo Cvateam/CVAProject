@@ -43,7 +43,7 @@ public class JavaOperationAction extends ActionSupport {
 		////////////////////////////package 확인 /////////////////////////////////
 
 		File source = null;
-		
+		File file2 = null;
 		//Test클래스명 이거 대신 한문장 읽어들인 뒤에 계속 트림 돌려서 없을때까지 컨테인 쓰든지 해서 그리고 클래스명 정확하게 읽어오기
 		//첫 라인 패키지명 읽어오기   //주석처리된 /* package whatever; // don't place package name! */이부분읽어들임 . 나중에 처리할 부분
 		String oneSentence[] = javaCode.split("\n"); // 한줄씩 읽어들임;
@@ -62,7 +62,7 @@ public class JavaOperationAction extends ActionSupport {
 			File packagedir = new File(dir);
 			packagedir.mkdirs();
 
-			File file2  = new File(dir+"/Test2.java"); // 패키지의 두번째 파일
+			file2  = new File(dir+"/Test2.java"); // 패키지의 두번째 파일
 			File file1  = new File(dir+"/Test.java");  // 첫번째 파일 
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(file1));
@@ -79,7 +79,7 @@ public class JavaOperationAction extends ActionSupport {
 				System.err.println(e);
 				System.exit(1);
 			}
-			  source  = new File(dir+"\\Test.java"); // package 컴파일 main emf
+			  source  = new File(dir+"\\Test.java"); // package 컴파일 main 
 		
 		}else{// 소스코드 하나 컴파일 
 			source =  new File(directory.getAbsolutePath()+"\\Test.java");
@@ -93,7 +93,8 @@ public class JavaOperationAction extends ActionSupport {
 				System.exit(1);
 			}
 		}
-
+		////////////////////////////////////// 소스코드 확인  //////////////////////////
+		
 		/*	간단 cmd 이용 소스코드 컴파일 코드      
 		 *     String command = "javac -d D:/Test/classes ";
          command = command + "D:/Test/src/" + className+".java";        
@@ -103,8 +104,18 @@ public class JavaOperationAction extends ActionSupport {
 
 		System.out.println("source.getParent()" +source.getParent() );
 		System.out.println("source.getAbsolutePath()" + source.getAbsolutePath());
+		// for문 돌려서  main 외의 것 컴파일 시킨후 메인 컴파일 해야함 일단은 2개  
+/*		for(int i = 0; i <= 1 ; i++ ){
+			
+			
+		}*/
+		Process compile = null;
 		
-		Process compile = runtime.exec("javac -sourcepath  " +source.getParent()+" "+ source.getAbsolutePath() + " ");
+		compile = runtime.exec("javac -sourcepath  " +source.getParent()+" "+ file2.getAbsolutePath() + " ");
+		System.out.println("=========================Test2 컴파일 끝");
+		compile = runtime.exec("javac -classpath  " +file2.getAbsolutePath()+" "+ source.getAbsolutePath() + " ");
+		//compile = runtime.exec("javac -classpath  " +source.getParent()+" "+ source.getAbsolutePath() + " ");
+		System.out.println("=========================Test 컴파일 끝");
 		try{
 			compile.waitFor();
 		}catch (InterruptedException e){
@@ -124,10 +135,11 @@ public class JavaOperationAction extends ActionSupport {
 
 		String compileLog1 = compileLog.toString();
 		javaCompileCode =   compileLog1.replace( "C:\\SetUpFile\\eclipse\\eclipse-jee-neon-R-win32-x86_64\\eclipse\\WebJava\\Request\\", " ");
-
+		System.out.println("에러코드 생성 ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ");
 		if (compileLog1.isEmpty()){
 			String name = source.getName();
 			Process java = runtime.exec("java -cp " + source.getParent() + " " + name.substring(0, name.lastIndexOf(".")) + " ");
+			System.out.println("run 실행 ");
 			try{
 				java.waitFor();
 
