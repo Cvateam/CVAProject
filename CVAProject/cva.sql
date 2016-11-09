@@ -13,6 +13,25 @@ create table keyword (
 	javakeyword varchar2(100)
 )
 
+create table question(
+	qno number primary key,
+	title varchar2(100) not null,
+	content varchar2(1000) not null,
+	lv varchar2(10) not null,
+	solution varchar2(4000) not null
+)
+
+create sequence question_seq
+
+select * from question;
+insert into question values(question_seq.nextval,'원의면적구하기','원의 반지름을 입력받아 원의 면적을 구하시오','<중>','import java.util.Scanner;\n\npublic class test{\n\tpublic static void main(String[] args) {\n\t\tScanner input = new Scanner(System.in);\n\n\t\tdouble area, area1;\n\t\tSystem.out.print(\"원의 반지름을 입력하세요:\");\n\t\tarea = input.nextInt();\n\t\tarea1 = area * area * Math.E;\n\t\tSystem.out.printf(\"%,10.2f\", area1);\n\t}\n}\n')
+insert into question values(question_seq.nextval,'숫자찍기','그림과 같이 모양으로 숫자를 출력하시오','<상>','public class test {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println(\"\");\n\t\tdraw(5);\n\t\tdraw(7);\n\t\tdraw(9);\n\t}\n\n\tprivate static void draw(int size) {\n\t\tfor (int i = 1; i < size - 1; i++) {\n\t\t\tfor (int j = 0; j < size - 2 - i; j++) {\n\t\t\t\tSystem.out.printf(\"0\");\n\t\t\t}\n\t\t\tfor (int k = 0; k < 2 * i - 1; k++) {\n\t\t\t\tSystem.out.printf(\"1\");\n\t\t\t}\n\t\t\tfor (int m = 0; m < size - 2 - i; m++) {\n\t\t\t\tSystem.out.printf(\"0\");\n\t\t\t}\n\t\t\tSystem.out.println(\"\");\n\t\t}\n\t\tSystem.out.println(\"\");\n\t\n\t}\n}\n')
+insert into question values(question_seq.nextval,'구구단','그림과 같이 구구단을 출력하시오','<하>','public class test{\n\tpublic static void main(String[] args) {\n\t\tfor(int i=1;i<10;i++){\n\t\t\tfor(int j=2;j<10;j++){\n\t\t\t\tSystem.out.print(j+\"X\"+i+\"=\"+i*j);\n\t\t\t\tSystem.out.print(\"\t\t\");\n\t\t\t}\n\t\t\tSystem.out.println();\n\t\t}\n\t}\n\n}\n')
+insert into question values(question_seq.nextval,'홀수짝수구분','숫자를 입력받아 홀수인지 짝수인지 구분하여 출력하시오','<하>','public class odd_number {\n\tpublic static void main(String[] args) {\n\n\t\tScanner scan = new Scanner(System.in);\n\t\tint number;\n\n\t\tSystem.out.print(\"숫자를 입력하세요:\");\n\t\tnumber = scan.nextInt();\n\t\tif (number % 2 != 0) {\n\t\t\tSystem.out.println(number + \"는 홀수 입니다.\");\n\t\t} else {\n\t\t\tSystem.out.println(number + \"는 짝수 입니다.\");\n\t\t}\n\t}\n}\n')
+insert into question values(question_seq.nextval,'2진법을 10진법으로 변환','0과1로 이루어진 2진법을 입력받아 10진법으로 변환하여 출력하시오','<중>','public class number_representation_system {\n\tstatic double number;\n\tpublic static void main(String[] args) {\n\t\tScanner scan =  new Scanner(System.in);\n\t\tSystem.out.print(\"2진법을 입력하시오(input:0,1):\");\n\t\tnumber = scan.nextDouble();\n\t\tint count =0;\n\t\tint dec =0;\n\t\tint doublebin =1;\n\t\twhile((int)number/10>0){\n\t\t\tdec =((int)number%10)*doublebin+dec;\n\t\t\tnumber =(int)number/10;\n\t\t\tcount++;\n\t\t\tdoublebin*=2;\n\t\t}\n\t\tdec +=doublebin;\n\t\tSystem.out.println(dec);\n\t}\n}\n')
+
+
+
 create sequence keyword_seq;
 
 select * from keyword;
