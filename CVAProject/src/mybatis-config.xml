@@ -8,6 +8,7 @@
 		<typeAlias type="first.cva.vo.KeywordVO" alias="KeywordVO"/>
 		<typeAlias type="first.cva.vo.Customer" alias="Customer"/>
 		<typeAlias type="first.cva.vo.Board" alias="Board"/>
+		<typeAlias type="first.cva.vo.Question" alias="Question"/>
 	</typeAliases>
 	<!-- DB접속 정보 셋팅 -->
 	<environments default="development">

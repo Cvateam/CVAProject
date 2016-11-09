@@ -63,6 +63,14 @@
 	    <action name="boardList" class="first.cva.action.BoardAction" method="boardList">
 			<result >/boardList.jsp</result>
 		</action>
+		<!-- 문제페이지로 넘어가기 -->
+		<action name="questionList" class="first.cva.action.QuestionAction" method="questionListRead">
+			<result>/questionList.jsp</result>
+		</action>
+		<!-- 문제상세페이지로 넘어가기 -->
+		<action name="questiondetail" class="first.cva.action.QuestionAction" method="questiondetail">
+			<result>/questiondetail.jsp</result>
+		</action>
 	</package>
 	
 	<include file="first/cva/actionXml/customer.xml"/>

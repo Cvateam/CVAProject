@@ -108,7 +108,7 @@
 						</a>
 					</li> -->
 					<li class="featured-list__item">
-						<a href="#" class="featured-list__link">
+						<a href="questionList.action" class="featured-list__link">
 							<img class="featured-list__img" src="img/icons/aboutus.png" >
 							<h3 class="featured-list__title">Study</h3>
 						</a>

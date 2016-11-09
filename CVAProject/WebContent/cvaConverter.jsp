@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en" xml:lang="en">
+<%@taglib prefix="s" uri="/struts-tags"%>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<!-- node ideone-www2 -->
 <title>C.VA</title>
-
+<link rel="shortcut icon" type="image/png"	href="images/faviconLogo.png">
 <link
 	href="//stx1.ideone.com/gfx2/libs/bootstrap/css/bootstrap-with-responsive-1200-only.min.css"
 	rel="stylesheet">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- , initial-scale=0.25 -->
-
+	
 <style>
 [class^="icon-"], [class*=" icon-"] {
 	display: inline;
@@ -57,15 +57,212 @@ a [class^="icon-"], a [class*=" icon-"] {
 
 <script type="text/javascript" src="script/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="script/jquery-migrate-1.0.0.js"></script>
-
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<!--원래 1.4였음  -->
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	var cookie_name = 'settings';
 	var cookie_time = '15552000';
 	var is_mobile = 0;
+
+	$(function() {
+		/*최초 테이블 띄우기  */
+		$
+				.ajax({
+					method : "get",
+					url : "list"//struts.xml
+					,
+					success : function(response) {
+						var txt = "";
+						$
+								.each(
+										response.boardList,
+										function(index, item) {
+											var javaFile = item.savedfile;
+											var csharpFile = item.savedfile2;
+
+											if (javaFile != null
+													&& csharpFile != null) {
+												txt = "<tr id='conTr'><td>"
+														+ item.boardnum
+														+ "</td><td>"
+														+ item.title
+														+ "</td><td>"
+														+ item.inputdate
+														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+											}
+											if (javaFile != null
+													&& csharpFile == null) {
+												txt = "<tr id='conTr'><td>"
+														+ item.boardnum
+														+ "</td><td>"
+														+ item.title
+														+ "</td><td>"
+														+ item.inputdate
+														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+											}
+											if (javaFile == null
+													&& csharpFile != null) {
+												txt = "<tr id='conTr'><td>"
+														+ item.boardnum
+														+ "</td><td>"
+														+ item.title
+														+ "</td><td>"
+														+ item.inputdate
+														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+											}
+											if (javaFile == null
+													&& csharpFile == null) {
+												txt = "<tr id='conTr'><td>"
+														+ item.boardnum
+														+ "</td><td>"
+														+ item.title
+														+ "</td><td>"
+														+ item.inputdate
+														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+											}
+											$("div.contents table").append(txt);
+										});
+					}
+				});
+		/* 테이블 검색 시  */
+		$('#searchBtn')
+				.on(
+						'click',
+						function() {
+							var searchText = $("#searchText").val();
+							var item = {
+								"searchText" : searchText
+							};//json Type으로 보내기
+							$
+									.ajax({
+										type : "GET",
+										url : "search",
+										dataType : "json",
+										data : item,
+										success : function(response) {
+											var txt = "";
+											var txt2 = response.boardList;//파일 넣기부분 만들기
+											$("div.contents table #conTr")
+													.remove(txt);
+
+											$
+													.each(
+															response.boardList,
+															function(index,
+																	item) {
+																var javaFile = item.savedfile;
+																var csharpFile = item.savedfile2;
+
+																if (javaFile != null
+																		&& csharpFile != null) {
+																	txt = "<tr id='conTr'><td>"
+																			+ item.boardnum
+																			+ "</td><td>"
+																			+ item.title
+																			+ "</td><td>"
+																			+ item.inputdate
+																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+																}
+																if (javaFile != null
+																		&& csharpFile == null) {
+																	txt = "<tr id='conTr'><td>"
+																			+ item.boardnum
+																			+ "</td><td>"
+																			+ item.title
+																			+ "</td><td>"
+																			+ item.inputdate
+																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+																}
+																if (javaFile == null
+																		&& csharpFile != null) {
+																	txt = "<tr id='conTr'><td>"
+																			+ item.boardnum
+																			+ "</td><td>"
+																			+ item.title
+																			+ "</td><td>"
+																			+ item.inputdate
+																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+																}
+																if (javaFile == null
+																		&& csharpFile == null) {
+																	txt = "<tr id='conTr'><td>"
+																			+ item.boardnum
+																			+ "</td><td>"
+																			+ item.title
+																			+ "</td><td>"
+																			+ item.inputdate
+																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+																}
+																$(
+																		"div.contents table")
+																		.append(
+																				txt);
+															});
+
+										}
+									});
+						});
+		/* JavaPop버튼 클릭 시  */
+		$('table').on(
+				'click',
+				'.javaPop',
+				function() {
+					var boardnum = $(this).parent().parent().parent()
+							.children().first().text();
+					$.ajax({
+						type : "GET",
+						url : "javaPopLoad",
+						dataType : "json",
+						data : {
+							"boardnum" : boardnum
+						},
+						success : function(response) {
+							var txt = "";
+							var txt2 = response.board;
+							txt = "<h3>" + txt2.savedfile + "<h3>";
+							$("#javaSource").append(txt);
+						}
+					});
+				});
+		/* CsharpPop버튼 클릭 시  */
+		$('table').on(
+				'click',
+				'.csharpPop',
+				function() {
+
+					var boardnum = $(this).parent().parent().parent()
+							.children().first().text();
+
+					$.ajax({
+						type : "GET",
+						url : "csharpPopLoad",
+						dataType : "json",
+						data : {
+							"boardnum" : boardnum
+						},
+						success : function(response) {
+							var txt = "";
+							var txt2 = response.board;
+							txt = "<h3>" + txt2.savedfile2 + "<h3>";
+							$("#csharpSource").append(txt);
+						}
+					});
+				});
+
+		/* JavaPop 닫기버튼 클릭 시  */
+		$('#closeBtnJ').on('click', function() {
+			$("#javaSource > ").remove();
+		});
+		/* CsharpPop 닫기버튼 클릭 시  */
+		$('#closeBtnC').on('click', function() {
+			$("#csharpSource > ").remove();
+		});
+
+	});
 </script>
-
-<!-- 2013-02-07 by wiele: na czas develu wyrzucam to z bundle zeby moc latwiej debugowac w firebugu -->
-
 <script type="text/javascript"
 	src="//stx1.ideone.com/gfx2/js/jquery-ui-1.10.1.custom.min.js"></script>
 <script type="text/javascript"
@@ -1093,84 +1290,7 @@ transform
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :rotate(360deg)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1263,19 +1383,64 @@ transform
 }
 </style>
 </head>
-
 <body class="home  not-responsive">
-	<div id="_container">
-		<div class="navbar " id="primary-navigation">
+
+
+
+
+	<div id="outer_container" style="background-color:gray ; width: 530px;" >
+
+		<div id="customScrollBox">
+			<div class="container" style="width: 500px">
+				<div class="contents">
+					<h1 align="center" style="color: black">
+						게시판<br />
+					</h1>
+
+					<!-- 검색폼 -->
+					<s:form name="pagingForm" method="post" action="board"
+						theme="simple">
+						<p class="board_search">
+							<a><img src="images/glass.png" width="30" height="30" id="glass" ></a>
+							<s:textfield name="searchText" size="40" id="searchText" />
+							<input type="button" value="검색" id="searchBtn" class="searchBtn">
+						</p>
+					</s:form>
+
+					<table border="1" id="boardTable">
+						<tr>
+							<th id="boardSmall">No</th>
+							<th id="boardTitle">제목</th>
+							<th id="boardDate">일자</th>
+							<th id="boardSmall">JAVA</th>
+							<th id="boardSmall">C#</th>
+						</tr>
+					</table>
+
+
+
+					<img src="images/hide.png" id="arrow">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="bg">
+		<div id="tag"></div>
+		<div id="middle" style="position: relative; left: 50px">
+		
+		
+		<div class="navbar " id="primary-navigation" style="position: relative; left: 20px">
 			<div class="navbar-inner">
-				<div class="container">
+
+				<div class="container" style="margin-left: 0;">
 					<a class="btn btn-navbar collapsed" data-toggle="collapse"
 						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 					</a> <a href="/" class="brand scroll-page"><span
 						style="background-image: url('images/Logomakr_1yE4r7.png');"></span></a>
 					<div class="nav-collapse collapse " style="height: 0px;">
-						<ul class="nav pull-right">
+						<ul class="nav pull-right" style="margin-right: -400px ">
 							<li class="active"><a href="/" class="scroll-page"><i
 									class="icon-home"></i>new code</a></li>
 							<li class=""><a href="/samples" class="scroll-page"><i
@@ -1353,210 +1518,180 @@ transform
 			</div>
 			<!-- /.navbar-inner -->
 		</div>
-		<script src="script/custom-index.js"></script>
-
-		<input type="hidden" id="site" value="index"> <input
-			type="hidden" name="p1" id="p1"
-			value="10995f790962d0d24a86cfc233e4c4bf"> <input
-			type="hidden" name="p2" id="p2" value="8"> <input
-			type="hidden" name="p3" id="p3" value="19"> <input
-			type="hidden" name="p4" id="p4" value="1368"> <input
-			type="hidden" name="clone_link" value="/">
-
-		<div id="main_form_files"></div>
-
-		<section
-			class="project-carousel thebackground shadow-inner-top-bottom">
-			<div class="container" id="code_position">
-				<div class="row">
-					<div class="span12 home-main-box">
-						<div id="featured-project-carousel" class="carousel slide">
-							<div class="carousel-inner overflow-visible">
-								<div class="item active">
-									<div class="row">
-										<div id="java_container" class="span8 code-panel">
-											<div class="header">
-												<i class="icon-code"></i> enter your source code <span
-													id="insert-part-or" style="display: inline">or</span> <span
-													id="insert-part-insert" style="display: inline">insert</span>
-												<span id="insert-part-template" style="display: inline"><a
-													id="insert-template-link" href="#" class="rel-tooltip"
-													title="Insert template">template</a></span> <span
-													id="insert-part-or2" style="display: inline">or</span> <span
-													id="insert-part-sample" style="display: inline"><a
-													id="insert-sample-link" href="#" class="rel-tooltip"
-													title="Insert sample program">sample</a></span> <span
-													id="insert-part-or3" style="display: inline">or</span> <span
-													id="insert-part-users-template" style="display: inline"><a
-													id="insert-users-template-link" href="#"
-													class="rel-tooltip" title="Insert your template">your
-														template</a></span> <img id="insert-loader"
-													style="display: none; height: 11px"
-													src="//stx1.ideone.com/gfx/loader.gif" alt="loading...">
-												<div class="pull-right option-clear">
-													<a href="#" class="rel-tooltip with-margin-right"
-														title="Clear the editor"
-														onclick="clearEditor(); return false;">clear</a>
-												</div>
-												<div class="clearfix"></div>
+			<section class="project-carousel">
+		<div class="container" id="code_position">
+			<div class="row">
+				<div class="span12 home-main-box">
+					<div id="featured-project-carousel" class="carousel slide">
+						<div class="carousel-inner overflow-visible">
+							<div class="item active">
+								<div class="row">
+									<div id="java_container" class="span8 code-panel">
+										<div class="header">
+											<i class="icon-code"></i> enter your source code <span
+												id="insert-part-or" style="display: inline">or</span> <span
+												id="insert-part-insert" style="display: inline">insert</span>
+											<span id="insert-part-template" style="display: inline"><a
+												id="insert-template-link" href="#" class="rel-tooltip"
+												title="Insert template">template</a></span> <span
+												id="insert-part-or2" style="display: inline">or</span> <span
+												id="insert-part-sample" style="display: inline"><a
+												id="insert-sample-link" href="#" class="rel-tooltip"
+												title="Insert sample program">sample</a></span> <span
+												id="insert-part-or3" style="display: inline">or</span> <span
+												id="insert-part-users-template" style="display: inline"><a
+												id="insert-users-template-link" href="#" class="rel-tooltip"
+												title="Insert your template">your template</a></span> <img
+												id="insert-loader" style="display: none; height: 11px"
+												src="//stx1.ideone.com/gfx/loader.gif" alt="loading...">
+											<div class="pull-right option-clear">
+												<a href="#" class="rel-tooltip with-margin-right"
+													title="Clear the editor"
+													onclick="clearEditor(); return false;">clear</a>
 											</div>
+											<div class="clearfix"></div>
+										</div>
 
-											<!-- editor + ad -->
-											<div id="class1" class="classEditor"
-												style="border-bottom: 1px solid #ececec;">
-												<div id="file_div1" class=" ace_editor ace-tm"
-													style="height: 320px; display: block;">
-													<textarea class="ace_text-input" wrap="off"
-														autocapitalize="off" spellcheck="false"
-														style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"></textarea>
-													<div class="ace_gutter">
-														<div
-															class="ace_layer ace_gutter-layer ace_folding-enabled"
-															style="margin-top: 0px; height: 348.8px; width: 47px;">
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																1<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
-															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">2</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">3</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">4</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">5</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">6</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																7<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
-															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">8</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																9<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
-															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">10</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																11<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
-															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">12</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">13</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">14</div>
+										<!-- editor + ad -->
+										<div id="class1" class="classEditor"
+											style="border-bottom: 1px solid #ececec;">
+											<div id="file_div1" class=" ace_editor ace-tm"
+												style="height: 320px; display: block;">
+												<textarea class="ace_text-input" wrap="off"
+													autocapitalize="off" spellcheck="false"
+													style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"></textarea>
+												<div class="ace_gutter">
+													<div class="ace_layer ace_gutter-layer ace_folding-enabled"
+														style="margin-top: 0px; height: 348.8px; width: 47px;">
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															1<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
 														</div>
-														<div class="ace_gutter-active-line"
-															style="top: 0px; height: 14.4px;"></div>
-													</div>
-													<div class="ace_scroller"
-														style="left: 47px; right: 0px; bottom: 0px;">
-														<div class="ace_content"
-															style="margin-top: 0px; width: 723px; height: 348.8px; margin-left: 0px;">
-															<div class="ace_layer ace_print-margin-layer">
-																<div class="ace_print-margin"
-																	style="left: 532px; visibility: visible;"></div>
-															</div>
-															<div class="ace_layer ace_marker-layer">
-																<div class="ace_active-line"
-																	style="height: 14.40000057220459px; top: 0px; left: 0; right: 0;"></div>
-															</div>
-															<div class="ace_layer ace_text-layer"
-																style="padding: 0px 4px;">
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_comment">/*&nbsp;package&nbsp;whatever;&nbsp;//&nbsp;don't&nbsp;place&nbsp;package&nbsp;name!&nbsp;*/</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px"></div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">import</span>&nbsp;<span
-																		class="ace_identifier">java</span>.<span
-																		class="ace_identifier">util</span>.<span
-																		class="ace_keyword ace_operator">*</span>;
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">import</span>&nbsp;<span
-																		class="ace_identifier">java</span>.<span
-																		class="ace_identifier">lang</span>.<span
-																		class="ace_keyword ace_operator">*</span>;
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">import</span>&nbsp;<span
-																		class="ace_identifier">java</span>.<span
-																		class="ace_identifier">io</span>.<span
-																		class="ace_keyword ace_operator">*</span>;
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px"></div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_comment">/*&nbsp;Name&nbsp;of&nbsp;the&nbsp;class&nbsp;has&nbsp;to&nbsp;be&nbsp;"Main"&nbsp;only&nbsp;if&nbsp;the&nbsp;class&nbsp;is&nbsp;public.&nbsp;*/</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">class</span>&nbsp;<span
-																		class="ace_identifier">Ideone</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">{</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
-																		class="ace_keyword">static</span>&nbsp;<span
-																		class="ace_keyword">void</span>&nbsp;<span
-																		class="ace_identifier">main</span>&nbsp;(<span
-																		class="ace_support ace_function">String</span>[]&nbsp;<span
-																		class="ace_identifier">args</span>)&nbsp;<span
-																		class="ace_keyword">throws</span>&nbsp;<span
-																		class="ace_identifier">java</span>.<span
-																		class="ace_identifier">lang</span>.<span
-																		class="ace_support ace_function">Exception</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-																		class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">}</div>
-															</div>
-															<div class="ace_layer ace_marker-layer"></div>
-															<div
-																class="ace_layer ace_cursor-layer ace_hidden-cursors">
-																<div class="ace_cursor"
-																	style="left: 4px; top: 0px; width: 6.6px; height: 14.4px;"></div>
-															</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">2</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">3</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">4</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">5</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">6</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															7<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
 														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">8</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															9<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
+														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">10</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															11<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
+														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">12</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">13</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">14</div>
 													</div>
-													<div
-														style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
-													<div class="ace_scrollbar"
-														style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
-														<div class="ace_scrollbar-inner" style="height: 201.6px;"></div>
-													</div>
-													<div class="ace_scrollbar-h"
-														style="height: 26px; display: none; overflow-x: scroll; left: 47px; right: 0px;">
-														<div class="ace_scrollbar-inner" style="width: 723px;"></div>
+													<div class="ace_gutter-active-line"
+														style="top: 0px; height: 14.4px;"></div>
+												</div>
+												<div class="ace_scroller"
+													style="left: 47px; right: 0px; bottom: 0px;">
+													<div class="ace_content"
+														style="margin-top: 0px; width: 723px; height: 348.8px; margin-left: 0px;">
+														<div class="ace_layer ace_print-margin-layer">
+															<div class="ace_print-margin"
+																style="left: 532px; visibility: visible;"></div>
+														</div>
+														<div class="ace_layer ace_marker-layer">
+															<div class="ace_active-line"
+																style="height: 14.40000057220459px; top: 0px; left: 0; right: 0;"></div>
+														</div>
+														<div class="ace_layer ace_text-layer"
+															style="padding: 0px 4px;">
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_comment">/*&nbsp;package&nbsp;whatever;&nbsp;//&nbsp;don't&nbsp;place&nbsp;package&nbsp;name!&nbsp;*/</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px"></div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">import</span>&nbsp;<span
+																	class="ace_identifier">java</span>.<span
+																	class="ace_identifier">util</span>.<span
+																	class="ace_keyword ace_operator">*</span>;
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">import</span>&nbsp;<span
+																	class="ace_identifier">java</span>.<span
+																	class="ace_identifier">lang</span>.<span
+																	class="ace_keyword ace_operator">*</span>;
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">import</span>&nbsp;<span
+																	class="ace_identifier">java</span>.<span
+																	class="ace_identifier">io</span>.<span
+																	class="ace_keyword ace_operator">*</span>;
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px"></div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_comment">/*&nbsp;Name&nbsp;of&nbsp;the&nbsp;class&nbsp;has&nbsp;to&nbsp;be&nbsp;"Main"&nbsp;only&nbsp;if&nbsp;the&nbsp;class&nbsp;is&nbsp;public.&nbsp;*/</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">class</span>&nbsp;<span
+																	class="ace_identifier">Ideone</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">{</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
+																	class="ace_keyword">static</span>&nbsp;<span
+																	class="ace_keyword">void</span>&nbsp;<span
+																	class="ace_identifier">main</span>&nbsp;(<span
+																	class="ace_support ace_function">String</span>[]&nbsp;<span
+																	class="ace_identifier">args</span>)&nbsp;<span
+																	class="ace_keyword">throws</span>&nbsp;<span
+																	class="ace_identifier">java</span>.<span
+																	class="ace_identifier">lang</span>.<span
+																	class="ace_support ace_function">Exception</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+																	class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+															<div class="ace_line" style="height: 14.40000057220459px">}</div>
+														</div>
+														<div class="ace_layer ace_marker-layer"></div>
+														<div class="ace_layer ace_cursor-layer ace_hidden-cursors">
+															<div class="ace_cursor"
+																style="left: 4px; top: 0px; width: 6.6px; height: 14.4px;"></div>
+														</div>
 													</div>
 												</div>
-												<div id="file_parent1" style="padding: 10px; display: none;">
-													<textarea name="file" id="file1" tabindex="1">
+												<div
+													style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
+												<div class="ace_scrollbar"
+													style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
+													<div class="ace_scrollbar-inner" style="height: 201.6px;"></div>
+												</div>
+												<div class="ace_scrollbar-h"
+													style="height: 26px; display: none; overflow-x: scroll; left: 47px; right: 0px;">
+													<div class="ace_scrollbar-inner" style="width: 723px;"></div>
+												</div>
+											</div>
+											<div id="file_parent1" style="padding: 10px; display: none;">
+												<textarea name="file" id="file1" tabindex="1">/* package whatever; // don't place package name! */
 import java.util.*;
 import java.lang.*;
 import java.io.*;
@@ -1569,10 +1704,10 @@ class Test
 		// your code goes here
 	}
 }</textarea>
-												</div>
 											</div>
-											<input type="hidden" id="file_template1"
-												value="/* package whatever; // don't place package name! */
+										</div>
+										<input type="hidden" id="file_template1"
+											value="/* package whatever; // don't place package name! */
 
 import java.util.*;
 import java.lang.*;
@@ -1586,178 +1721,154 @@ class Ideone
 		// your code goes here
 	}
 }">
-											<div id="class2" class="classEditor"
-												style="border-bottom: 1px solid #ececec; display: none;">
-												<div id="file_div3" class=" ace_editor ace-tm"
-													style="height: 320px; display: block;">
-													<textarea class="ace_text-input" wrap="off"
-														autocapitalize="off" spellcheck="false"
-														style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"></textarea>
-													<div class="ace_gutter">
-														<div
-															class="ace_layer ace_gutter-layer ace_folding-enabled"
-															style="margin-top: 0px; height: 348.8px; width: 47px;">
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																1<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
-															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">2</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">3</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">4</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">5</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">6</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																7<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
-															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">8</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																9<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
-															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">10</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																11<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
-															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">12</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">13</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">14</div>
+										<div id="class2" class="classEditor"
+											style="border-bottom: 1px solid #ececec; display: none;">
+											<div id="file_div3" class=" ace_editor ace-tm"
+												style="height: 320px; display: block;">
+												<textarea class="ace_text-input" wrap="off"
+													autocapitalize="off" spellcheck="false"
+													style="bottom: 305.6px; height: 14.4px; width: 6.6px; right: 712.4px;"></textarea>
+												<div class="ace_gutter">
+													<div class="ace_layer ace_gutter-layer ace_folding-enabled"
+														style="margin-top: 0px; height: 348.8px; width: 47px;">
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															1<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
 														</div>
-														<div class="ace_gutter-active-line"
-															style="top: 0px; height: 14.4px;"></div>
-													</div>
-													<div class="ace_scroller"
-														style="left: 47px; right: 0px; bottom: 0px;">
-														<div class="ace_content"
-															style="margin-top: 0px; width: 723px; height: 348.8px; margin-left: 0px;">
-															<div class="ace_layer ace_print-margin-layer">
-																<div class="ace_print-margin"
-																	style="left: 532px; visibility: visible;"></div>
-															</div>
-															<div class="ace_layer ace_marker-layer">
-																<div class="ace_active-line"
-																	style="height: 14.40000057220459px; top: 0px; left: 0; right: 0;"></div>
-															</div>
-															<div class="ace_layer ace_text-layer"
-																style="padding: 0px 4px;">
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_comment">/*&nbsp;package&nbsp;whatever;&nbsp;//&nbsp;don't&nbsp;place&nbsp;package&nbsp;name!&nbsp;*/</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px"></div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">import</span>&nbsp;<span
-																		class="ace_identifier">java</span>.<span
-																		class="ace_identifier">util</span>.<span
-																		class="ace_keyword ace_operator">*</span>;
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">import</span>&nbsp;<span
-																		class="ace_identifier">java</span>.<span
-																		class="ace_identifier">lang</span>.<span
-																		class="ace_keyword ace_operator">*</span>;
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">import</span>&nbsp;<span
-																		class="ace_identifier">java</span>.<span
-																		class="ace_identifier">io</span>.<span
-																		class="ace_keyword ace_operator">*</span>;
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px"></div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_comment">/*&nbsp;Name&nbsp;of&nbsp;the&nbsp;class&nbsp;has&nbsp;to&nbsp;be&nbsp;"Main"&nbsp;only&nbsp;if&nbsp;the&nbsp;class&nbsp;is&nbsp;public.&nbsp;*/</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">class</span>&nbsp;<span
-																		class="ace_identifier">Ideone</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">{</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
-																		class="ace_keyword">static</span>&nbsp;<span
-																		class="ace_keyword">void</span>&nbsp;<span
-																		class="ace_identifier">main</span>&nbsp;(<span
-																		class="ace_support ace_function">String</span>[]&nbsp;<span
-																		class="ace_identifier">args</span>)&nbsp;<span
-																		class="ace_keyword">throws</span>&nbsp;<span
-																		class="ace_identifier">java</span>.<span
-																		class="ace_identifier">lang</span>.<span
-																		class="ace_support ace_function">Exception</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-																		class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">}</div>
-															</div>
-															<div class="ace_layer ace_marker-layer"></div>
-															<div
-																class="ace_layer ace_cursor-layer ace_hidden-cursors">
-																<div class="ace_cursor"
-																	style="left: 4px; top: 0px; width: 6.6px; height: 14.4px;"></div>
-															</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">2</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">3</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">4</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">5</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">6</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															7<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
 														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">8</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															9<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
+														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">10</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															11<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
+														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">12</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">13</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">14</div>
 													</div>
-													<div
-														style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
-													<div class="ace_scrollbar"
-														style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
-														<div class="ace_scrollbar-inner" style="height: 201.6px;"></div>
-													</div>
-													<div class="ace_scrollbar-h"
-														style="height: 26px; display: none; overflow-x: scroll; left: 47px; right: 0px;">
-														<div class="ace_scrollbar-inner" style="width: 723px;"></div>
+													<div class="ace_gutter-active-line"
+														style="top: 0px; height: 14.4px;"></div>
+												</div>
+												<div class="ace_scroller"
+													style="left: 47px; right: 0px; bottom: 0px;">
+													<div class="ace_content"
+														style="margin-top: 0px; width: 723px; height: 348.8px; margin-left: 0px;">
+														<div class="ace_layer ace_print-margin-layer">
+															<div class="ace_print-margin"
+																style="left: 532px; visibility: visible;"></div>
+														</div>
+														<div class="ace_layer ace_marker-layer">
+															<div class="ace_active-line"
+																style="height: 14.40000057220459px; top: 0px; left: 0; right: 0;"></div>
+														</div>
+														<div class="ace_layer ace_text-layer"
+															style="padding: 0px 4px;">
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_comment">/*&nbsp;package&nbsp;whatever;&nbsp;//&nbsp;don't&nbsp;place&nbsp;package&nbsp;name!&nbsp;*/</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px"></div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">import</span>&nbsp;<span
+																	class="ace_identifier">java</span>.<span
+																	class="ace_identifier">util</span>.<span
+																	class="ace_keyword ace_operator">*</span>;
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">import</span>&nbsp;<span
+																	class="ace_identifier">java</span>.<span
+																	class="ace_identifier">lang</span>.<span
+																	class="ace_keyword ace_operator">*</span>;
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">import</span>&nbsp;<span
+																	class="ace_identifier">java</span>.<span
+																	class="ace_identifier">io</span>.<span
+																	class="ace_keyword ace_operator">*</span>;
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px"></div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_comment">/*&nbsp;Name&nbsp;of&nbsp;the&nbsp;class&nbsp;has&nbsp;to&nbsp;be&nbsp;"Main"&nbsp;only&nbsp;if&nbsp;the&nbsp;class&nbsp;is&nbsp;public.&nbsp;*/</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">class</span>&nbsp;<span
+																	class="ace_identifier">Ideone</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">{</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
+																	class="ace_keyword">static</span>&nbsp;<span
+																	class="ace_keyword">void</span>&nbsp;<span
+																	class="ace_identifier">main</span>&nbsp;(<span
+																	class="ace_support ace_function">String</span>[]&nbsp;<span
+																	class="ace_identifier">args</span>)&nbsp;<span
+																	class="ace_keyword">throws</span>&nbsp;<span
+																	class="ace_identifier">java</span>.<span
+																	class="ace_identifier">lang</span>.<span
+																	class="ace_support ace_function">Exception</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+																	class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+															<div class="ace_line" style="height: 14.40000057220459px">}</div>
+														</div>
+														<div class="ace_layer ace_marker-layer"></div>
+														<div class="ace_layer ace_cursor-layer ace_hidden-cursors">
+															<div class="ace_cursor"
+																style="left: 4px; top: 0px; width: 6.6px; height: 14.4px;"></div>
+														</div>
 													</div>
 												</div>
-												<div id="file_parent3" style="padding: 10px; display: none;">
-													<textarea name="file" id="file3" tabindex="1">import java.util.*;
+												<div
+													style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
+												<div class="ace_scrollbar"
+													style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
+													<div class="ace_scrollbar-inner" style="height: 201.6px;"></div>
+												</div>
+												<div class="ace_scrollbar-h"
+													style="height: 26px; display: none; overflow-x: scroll; left: 47px; right: 0px;">
+													<div class="ace_scrollbar-inner" style="width: 723px;"></div>
+												</div>
+											</div>
+											<div id="file_parent3" style="padding: 10px; display: none;">
+												<textarea name="file" id="file3" tabindex="1">/* package whatever; // don't place package name! */
+import java.util.*;
 import java.lang.*;
 import java.io.*;
-
-/* Name of the class has to be "Main" only if the class is public. */
-class Test2
-{
-	
-	
-		// your code goes here
-	
-}
 
 </textarea>
-												</div>
 											</div>
-											<input type="hidden" id="file_template3"
-												value="/* package whatever; // don't place package name! */
+										</div>
+										<input type="hidden" id="file_template3"
+											value="/* package whatever; // don't place package name! */
 
 import java.util.*;
 import java.lang.*;
@@ -1772,658 +1883,642 @@ class Ideone
 	}
 }">
 
-											<!-- advanced config: input -->
-											<div class="row visible" id="ex-input">
-												<div class="span8">
-													<div class="ex-more-options-box"
-														style="padding: 10px; padding-top: 6px; color: #666">
-														<div style="margin-bottom: 5px">
-															<i class="icon-inbox"></i> enter input (stdin)
-															<div class="pull-right option-clear">
-																<a href="#" class="rel-tooltip" title="Clear the input"
-																	onclick="$('#input').val(''); return false;">clear</a>
-															</div>
-															<div class="clearfix"></div>
+										<!-- advanced config: input -->
+										<div class="row visible" id="ex-input">
+											<div class="span8">
+												<div class="ex-more-options-box"
+													style="padding: 10px; padding-top: 6px; color: #666">
+													<div style="margin-bottom: 5px">
+														<i class="icon-inbox"></i> enter input (stdin)
+														<div class="pull-right option-clear">
+															<a href="#" class="rel-tooltip" title="Clear the input"
+																onclick="$('#input').val(''); return false;">clear</a>
 														</div>
-														<textarea name="input" id="input1" rows="2" cols="80"></textarea>
+														<div class="clearfix"></div>
 													</div>
+													<textarea name="input" id="input1" rows="2" cols="80"></textarea>
 												</div>
 											</div>
+										</div>
 
-											<!-- advanced config: more options -->
-											<div class="row visible" id="ex-more-options">
-												<div class="span8">
-													<!--
+										<!-- advanced config: more options -->
+										<div class="row visible" id="ex-more-options">
+											<div class="span8">
+												<!--
 							<div class="row">
 								<div class="span8 top-border">
 								</div>
 							</div>
 							-->
-													<div class="row">
-														<div class="span8">
-															<div class="ex-more-options-box"
-																style="padding-bottom: 0px; padding-top: 6px">
-																<!-- syntax -->
-																<div class="syntax-box" style="display: none;">
-																	<input type="hidden" name="syntax" value="0"> <label
-																		for="syntax" class="checkbox"><input
-																		type="checkbox" name="syntax" id="syntax1" value="1"
-																		checked="checked"> <span>syntax
-																			highlight</span></label>
-																</div>
+												<div class="row">
+													<div class="span8">
+														<div class="ex-more-options-box"
+															style="padding-bottom: 0px; padding-top: 6px">
+															<!-- syntax -->
+															<div class="syntax-box" style="display: none;">
+																<input type="hidden" name="syntax" value="0"> <label
+																	for="syntax" class="checkbox"><input
+																	type="checkbox" name="syntax" id="syntax1" value="1"
+																	checked="checked"> <span>syntax
+																		highlight</span></label>
+															</div>
 
-																<div class="timelimit-box" style="display: none">
-																	<i class="icon-time"></i> time limit: <label
-																		for="timelimit-0"><input type="radio"
-																		name="timelimit" value="0" id="timelimit-0"
-																		checked="checked"> <span>5s</span></label> <label
-																		for="timelimit-1"><input type="radio"
-																		name="timelimit" value="1" id="timelimit-1"
-																		disabled="disabled"> <span>15s</span></label> <a
-																		href="/faq#constraints" class="help-link rel-tooltip"
-																		target="_blank" title="What's the time limit?"
-																		style="margin-left: 2px"><i
-																		class="icon-help-circled"></i></a>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="span8">
-															<div class="ex-more-options-box" style="padding-top: 4px">
-																<!-- note -->
-																<div style="margin-bottom: 5px">
-																	<i class="icon-pencil"></i> &nbsp;&nbsp;Output
-																	<!-- <div class="pull-right option-clear">
-										<a href="#" class="rel-tooltip" title="Clear the note"
-											onclick="$('#note1').val(''); return false;">clear</a>
-									</div> -->
-																	<div class="clearfix"></div>
-																</div>
-																<div class="ex-more-options-box"
-																	style="padding: 10px; padding-top: 6px; color: #666">
-																	<textarea id="output1" rows="2" cols="80"
-																		readonly="readonly"></textarea>
-																</div>
-															</div>
-															<div class="ex-more-options-box"
-																style="padding-top: 4px; display: none;">
-																<!-- note -->
-																<div style="margin-bottom: 5px">
-																	<i class="icon-pencil"></i> enter your note
-																	<div class="pull-right option-clear">
-																		<a href="#" class="rel-tooltip" title="Clear the note"
-																			onclick="$('#note').val(''); return false;">clear</a>
-																	</div>
-																	<div class="clearfix"></div>
-																</div>
-																<textarea name="note" id="note" rows="2" cols="80"></textarea>
+															<div class="timelimit-box" style="display: none">
+																<i class="icon-time"></i> time limit: <label
+																	for="timelimit-0"><input type="radio"
+																	name="timelimit" value="0" id="timelimit-0"
+																	checked="checked"> <span>5s</span></label> <label
+																	for="timelimit-1"><input type="radio"
+																	name="timelimit" value="1" id="timelimit-1"
+																	disabled="disabled"> <span>15s</span></label> <a
+																	href="/faq#constraints" class="help-link rel-tooltip"
+																	target="_blank" title="What's the time limit?"
+																	style="margin-left: 2px"><i
+																	class="icon-help-circled"></i></a>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-
-											<div class="g" style="text-align: center; height: 90px; display: none;">
-
-
-												<!--<script type="text/javascript" src="//ap.lijit.com/www/delivery/fpi.js?z=357751&u=sphere-research&width=728&height=90"></script>-->
-
-												<!-- ideone_main_728x90_center -->
-												<ins class="adsbygoogle"
-													style="display: inline-block; width: 728px; height: 90px"
-													data-ad-client="ca-pub-4453360425583535"
-													data-ad-slot="4445601430"></ins>
-												<script>
-													(adsbygoogle = window.adsbygoogle
-															|| []).push({});
-												</script>
-
-
-											</div>
-
-											<!-- visible options + submit -->
-											<div class="row">
-												<div class="span8">
-													<div class="footer">
-														<!-- lang -->
-														<input type="hidden" name="_lang" id="_lang1" value="10">
-
-														<!-- simple lang select -->
-
-														<!-- advanced lang select -->
-														<div class="dropdown dropup" id="lang_advselect"
-															style="display: none;">
-															<a class="dropdown-toggle btn footer-item rel-tooltip"
-																data-toggle="dropdown" href="#" title="Choose language"
-																id="lang-dropdown-menu-button"><span>Java</span> <b
-																class="caret"></b></a>
-															<div id="lang-dropdown-menu" class="dropdown-menu"
-																role="menu" aria-labelledby="lang-dropdown-menu-button">
-																<div id="language-details"></div>
+												<div class="row">
+													<div class="span8">
+														<div class="ex-more-options-box" style="padding-top: 4px">
+															<!-- note -->
+															<div style="margin-bottom: 5px">
+																<i class="icon-pencil"></i> &nbsp;&nbsp;Output
+																<!-- <div class="pull-right option-clear">
+										<a href="#" class="rel-tooltip" title="Clear the note"
+											onclick="$('#note1').val(''); return false;">clear</a>
+									</div> -->
 																<div class="clearfix"></div>
-																<div class="popular-box">
-																	<legend>popular</legend>
-																	<ul class="popular">
-																		<li class=""><a href="#" id="menu-lang-28"
-																			data-id="28" data-label="Bash"
-																			title="Bash (bash 4.3.33)" class="lang "
-																			tabindex="1000">Bash</a></li>
-																		<li class=""><a href="#" id="menu-lang-22"
-																			data-id="22" data-label="Pascal (fpc)"
-																			title="Pascal (fpc) (fpc 2.6.4)" class="lang "
-																			tabindex="1009">Pascal (fpc)</a></li>
-																		<li class=""><a href="#" id="menu-lang-11"
-																			data-id="11" data-label="C" title="C (gcc-5.1)"
-																			class="lang " tabindex="1001">C</a></li>
-																		<li class=""><a href="#" id="menu-lang-2"
-																			data-id="2" data-label="Pascal (gpc)"
-																			title="Pascal (gpc) (gpc 20070904)" class="lang "
-																			tabindex="1010">Pascal (gpc)</a></li>
-																		<li class=""><a href="#" id="menu-lang-27"
-																			data-id="27" data-label="C#" title="C# (mono-4.0.2)"
-																			class="lang " tabindex="1002">C#</a></li>
-																		<li class=""><a href="#" id="menu-lang-3"
-																			data-id="3" data-label="Perl"
-																			title="Perl (perl 5.20.1)" class="lang "
-																			tabindex="1011">Perl</a></li>
-																		<li class=""><a href="#" id="menu-lang-1"
-																			data-id="1" data-label="C++ 5.1"
-																			title="C++ 5.1 (gcc-5.1)" class="lang "
-																			tabindex="1003">C++ 5.1</a></li>
-																		<li class=""><a href="#" id="menu-lang-29"
-																			data-id="29" data-label="PHP" title="PHP (php 5.6.4)"
-																			class="lang " tabindex="1012">PHP</a></li>
-																		<li class=""><a href="#" id="menu-lang-44"
-																			data-id="44" data-label="C++14"
-																			title="C++14 (gcc-5.1)" class="lang " tabindex="1004">C++14</a></li>
-																		<li class=""><a href="#" id="menu-lang-4"
-																			data-id="4" data-label="Python"
-																			title="Python (python 2.7.10)" class="lang "
-																			tabindex="1013">Python</a></li>
-																		<li class=""><a href="#" id="menu-lang-21"
-																			data-id="21" data-label="Haskell"
-																			title="Haskell (ghc-7.8)" class="lang "
-																			tabindex="1005">Haskell</a></li>
-																		<li class=""><a href="#" id="menu-lang-116"
-																			data-id="116" data-label="Python 3"
-																			title="Python 3 (python-3.4)" class="lang "
-																			tabindex="1014">Python 3</a></li>
-																		<li class="active"><a href="#" id="menu-lang-10"
-																			data-id="10" data-label="Java"
-																			title="Java (sun-jdk-8u51)" class="lang "
-																			tabindex="1006">Java</a></li>
-																		<li class=""><a href="#" id="menu-lang-17"
-																			data-id="17" data-label="Ruby"
-																			title="Ruby (ruby-2.1)" class="lang " tabindex="1015">Ruby</a></li>
-																		<li class=""><a href="#" id="menu-lang-55"
-																			data-id="55" data-label="Java7"
-																			title="Java7 (sun-jdk-1.7.0_10)" class="lang "
-																			tabindex="1007">Java7</a></li>
-																		<li class=""><a href="#" id="menu-lang-40"
-																			data-id="40" data-label="SQL"
-																			title="SQL (sqlite3-3.8.7)" class="lang "
-																			tabindex="1016">SQL</a></li>
-																		<li class=""><a href="#" id="menu-lang-43"
-																			data-id="43" data-label="Objective-C"
-																			title="Objective-C (gcc-5.1)" class="lang "
-																			tabindex="1008">Objective-C</a></li>
-																		<li class=""><a href="#" id="menu-lang-101"
-																			data-id="101" data-label="VB.NET"
-																			title="VB.NET (mono-3.10)" class="lang "
-																			tabindex="1017">VB.NET</a></li>
-																	</ul>
-																</div>
-																<div class="rest-box">
-																	<legend>others</legend>
-																	<ul class="rest">
-																		<li class=""><a href="#" id="menu-lang-7"
-																			data-id="7" data-label="Ada" title="Ada (gnat-5.1)"
-																			class="lang " tabindex="1018">Ada</a></li>
-																		<li class=""><a href="#" id="menu-lang-91"
-																			data-id="91" data-label="CoffeeScript"
-																			title="CoffeeScript (1.9.3)" class="lang "
-																			tabindex="1033">CoffeeScript</a></li>
-																		<li class=""><a href="#" id="menu-lang-16"
-																			data-id="16" data-label="Icon"
-																			title="Icon (iconc 9.4.3)" class="lang "
-																			tabindex="1048">Icon</a></li>
-																		<li class=""><a href="#" id="menu-lang-19"
-																			data-id="19" data-label="Pike"
-																			title="Pike (pike 7.8)" class="lang " tabindex="1063">Pike</a></li>
-																		<li class=""><a href="#" id="menu-lang-45"
-																			data-id="45" data-label="Assembler"
-																			title="Assembler (gcc-5.1)" class="lang "
-																			tabindex="1019">Assembler</a></li>
-																		<li class=""><a href="#" id="menu-lang-32"
-																			data-id="32" data-label="Common Lisp (clisp)"
-																			title="Common Lisp (clisp) (clisp 2.49)"
-																			class="lang " tabindex="1034">Common Lisp (clisp)</a></li>
-																		<li class=""><a href="#" id="menu-lang-9"
-																			data-id="9" data-label="Intercal"
-																			title="Intercal (c-intercal 28.0-r1)" class="lang "
-																			tabindex="1049">Intercal</a></li>
-																		<li class=""><a href="#" id="menu-lang-108"
-																			data-id="108" data-label="Prolog (gnu)"
-																			title="Prolog (gnu) (gprolog-1.3.1)" class="lang "
-																			tabindex="1064">Prolog (gnu)</a></li>
-																		<li class=""><a href="#" id="menu-lang-13"
-																			data-id="13" data-label="Assembler"
-																			title="Assembler (nasm-2.11.05)" class="lang "
-																			tabindex="1020">Assembler</a></li>
-																		<li class=""><a href="#" id="menu-lang-84"
-																			data-id="84" data-label="D" title="D (ldc 0.14)"
-																			class="lang " tabindex="1035">D</a></li>
-																		<li class=""><a href="#" id="menu-lang-35"
-																			data-id="35" data-label="JavaScript (rhino)"
-																			title="JavaScript (rhino) (rhino-1.7.7)"
-																			class="lang " tabindex="1050">JavaScript (rhino)</a>
-																		</li>
-																		<li class=""><a href="#" id="menu-lang-15"
-																			data-id="15" data-label="Prolog (swi)"
-																			title="Prolog (swi) (swipl 5.6.64)" class="lang "
-																			tabindex="1065">Prolog (swi)</a></li>
-																		<li class=""><a href="#" id="menu-lang-104"
-																			data-id="104" data-label="AWK (gawk)"
-																			title="AWK (gawk) (gawk-4.1.1)" class="lang "
-																			tabindex="1021">AWK (gawk)</a></li>
-																		<li class=""><a href="#" id="menu-lang-20"
-																			data-id="20" data-label="D" title="D (gdc 5.1)"
-																			class="lang " tabindex="1036">D</a></li>
-																		<li class=""><a href="#" id="menu-lang-112"
-																			data-id="112" data-label="JavaScript (spidermonkey)"
-																			title="JavaScript (spidermonkey) (spidermonkey 24.2)"
-																			class="lang " tabindex="1051">JavaScript
-																				(spidermonkey)</a></li>
-																		<li class=""><a href="#" id="menu-lang-99"
-																			data-id="99" data-label="Python (Pypy)"
-																			title="Python (Pypy) (Pypy)" class="lang "
-																			tabindex="1066">Python (Pypy)</a></li>
-																		<li class=""><a href="#" id="menu-lang-105"
-																			data-id="105" data-label="AWK (mawk)"
-																			title="AWK (mawk) (mawk-3.3)" class="lang "
-																			tabindex="1022">AWK (mawk)</a></li>
-																		<li class=""><a href="#" id="menu-lang-102"
-																			data-id="102" data-label="D (dmd)"
-																			title="D (dmd) (dmd-2.067.1)" class="lang "
-																			tabindex="1037">D (dmd)</a></li>
-																		<li class=""><a href="#" id="menu-lang-26"
-																			data-id="26" data-label="Lua" title="Lua (luac 5.2)"
-																			class="lang " tabindex="1052">Lua</a></li>
-																		<li class=""><a href="#" id="menu-lang-117"
-																			data-id="117" data-label="R" title="R (R-2.11.1)"
-																			class="lang " tabindex="1067">R</a></li>
-																		<li class=""><a href="#" id="menu-lang-110"
-																			data-id="110" data-label="bc" title="bc (bc-1.06.95)"
-																			class="lang " tabindex="1023">bc</a></li>
-																		<li class=""><a href="#" id="menu-lang-96"
-																			data-id="96" data-label="Elixir"
-																			title="Elixir (1.1.0)" class="lang " tabindex="1038">Elixir</a>
-																		</li>
-																		<li class=""><a href="#" id="menu-lang-30"
-																			data-id="30" data-label="Nemerle"
-																			title="Nemerle (ncc 0.9.3)" class="lang "
-																			tabindex="1053">Nemerle</a></li>
-																		<li class=""><a href="#" id="menu-lang-93"
-																			data-id="93" data-label="Rust" title="Rust (1.0.0)"
-																			class="lang " tabindex="1068">Rust</a></li>
-																		<li class=""><a href="#" id="menu-lang-12"
-																			data-id="12" data-label="Brainf**k"
-																			title="Brainf**k (bff-1.0.5)" class="lang "
-																			tabindex="1024">Brainf**k</a></li>
-																		<li class=""><a href="#" id="menu-lang-36"
-																			data-id="36" data-label="Erlang"
-																			title="Erlang (erl-18)" class="lang " tabindex="1039">Erlang</a></li>
-																		<li class=""><a href="#" id="menu-lang-25"
-																			data-id="25" data-label="Nice"
-																			title="Nice (nicec 0.9.6)" class="lang "
-																			tabindex="1054">Nice</a></li>
-																		<li class=""><a href="#" id="menu-lang-39"
-																			data-id="39" data-label="Scala"
-																			title="Scala (scala-2.11.7)" class="lang "
-																			tabindex="1069">Scala</a></li>
-																		<li class=""><a href="#" id="menu-lang-81"
-																			data-id="81" data-label="C" title="C (clang 3.7)"
-																			class="lang " tabindex="1025">C</a></li>
-																		<li class=""><a href="#" id="menu-lang-124"
-																			data-id="124" data-label="F#" title="F# (fsharp-3.1)"
-																			class="lang " tabindex="1040">F#</a></li>
-																		<li class=""><a href="#" id="menu-lang-122"
-																			data-id="122" data-label="Nim" title="Nim (0.11.2)"
-																			class="lang " tabindex="1055">Nim</a></li>
-																		<li class=""><a href="#" id="menu-lang-97"
-																			data-id="97" data-label="Scheme (chicken)"
-																			title="Scheme (chicken) (4.9)" class="lang "
-																			tabindex="1070">Scheme (chicken)</a></li>
-																		<li class=""><a href="#" id="menu-lang-82"
-																			data-id="82" data-label="C++" title="C++ (clang 3.7)"
-																			class="lang " tabindex="1026">C++</a></li>
-																		<li class=""><a href="#" id="menu-lang-123"
-																			data-id="123" data-label="Factor"
-																			title="Factor (factor-0.93)" class="lang "
-																			tabindex="1041">Factor</a></li>
-																		<li class=""><a href="#" id="menu-lang-56"
-																			data-id="56" data-label="Node.js"
-																			title="Node.js (0.12.7)" class="lang "
-																			tabindex="1056">Node.js</a></li>
-																		<li class=""><a href="#" id="menu-lang-33"
-																			data-id="33" data-label="Scheme (guile)"
-																			title="Scheme (guile) (guile 2.0.11)" class="lang "
-																			tabindex="1071">Scheme (guile)</a></li>
-																		<li class=""><a href="#" id="menu-lang-41"
-																			data-id="41" data-label="C++ 4.3.2"
-																			title="C++ 4.3.2 (gcc-4.3.2)" class="lang "
-																			tabindex="1027">C++ 4.3.2</a></li>
-																		<li class=""><a href="#" id="menu-lang-125"
-																			data-id="125" data-label="Falcon"
-																			title="Falcon (falcon-0.9.6.6)" class="lang "
-																			tabindex="1042">Falcon</a></li>
-																		<li class=""><a href="#" id="menu-lang-83"
-																			data-id="83" data-label="Objective-C"
-																			title="Objective-C (clang 3.7)" class="lang "
-																			tabindex="1057">Objective-C</a></li>
-																		<li class=""><a href="#" id="menu-lang-23"
-																			data-id="23" data-label="Smalltalk"
-																			title="Smalltalk (gst 3.2.4)" class="lang "
-																			tabindex="1072">Smalltalk</a></li>
-																		<li class=""><a href="#" id="menu-lang-34"
-																			data-id="34" data-label="C99 strict"
-																			title="C99 strict (gcc-5.1)" class="lang "
-																			tabindex="1028">C99 strict</a></li>
-																		<li class=""><a href="#" id="menu-lang-92"
-																			data-id="92" data-label="Fantom"
-																			title="Fantom (1.0.67)" class="lang " tabindex="1043">Fantom</a></li>
-																		<li class=""><a href="#" id="menu-lang-8"
-																			data-id="8" data-label="Ocaml"
-																			title="Ocaml (ocamlopt 4.01.0)" class="lang "
-																			tabindex="1058">Ocaml</a></li>
-																		<li class=""><a href="#" id="menu-lang-38"
-																			data-id="38" data-label="Tcl" title="Tcl (tclsh 8.6)"
-																			class="lang " tabindex="1073">Tcl</a></li>
-																		<li class=""><a href="#" id="menu-lang-14"
-																			data-id="14" data-label="CLIPS"
-																			title="CLIPS (clips 6.24)" class="lang "
-																			tabindex="1029">CLIPS</a></li>
-																		<li class=""><a href="#" id="menu-lang-107"
-																			data-id="107" data-label="Forth"
-																			title="Forth (gforth-0.7.2)" class="lang "
-																			tabindex="1044">Forth</a></li>
-																		<li class=""><a href="#" id="menu-lang-127"
-																			data-id="127" data-label="Octave"
-																			title="Octave (3.6.2)" class="lang " tabindex="1059">Octave</a>
-																		</li>
-																		<li class=""><a href="#" id="menu-lang-62"
-																			data-id="62" data-label="Text"
-																			title="Text (text 6.10)" class="lang "
-																			tabindex="1074">Text</a></li>
-																		<li class=""><a href="#" id="menu-lang-111"
-																			data-id="111" data-label="Clojure"
-																			title="Clojure (clojure 1.7)" class="lang "
-																			tabindex="1030">Clojure</a></li>
-																		<li class=""><a href="#" id="menu-lang-5"
-																			data-id="5" data-label="Fortran"
-																			title="Fortran (gfortran-5.1)" class="lang "
-																			tabindex="1045">Fortran</a></li>
-																		<li class=""><a href="#" id="menu-lang-119"
-																			data-id="119" data-label="Oz"
-																			title="Oz (mozart-1.4.0)" class="lang "
-																			tabindex="1060">Oz</a></li>
-																		<li class=""><a href="#" id="menu-lang-115"
-																			data-id="115" data-label="Unlambda"
-																			title="Unlambda (unlambda-2.0.0)" class="lang "
-																			tabindex="1075">Unlambda</a></li>
-																		<li class=""><a href="#" id="menu-lang-118"
-																			data-id="118" data-label="COBOL"
-																			title="COBOL (open-cobol-1.1)" class="lang "
-																			tabindex="1031">COBOL</a></li>
-																		<li class=""><a href="#" id="menu-lang-114"
-																			data-id="114" data-label="Go" title="Go (1.4.2)"
-																			class="lang " tabindex="1046">Go</a></li>
-																		<li class=""><a href="#" id="menu-lang-54"
-																			data-id="54" data-label="Perl 6"
-																			title="Perl 6 (rakudo-2014.07)" class="lang "
-																			tabindex="1061">Perl 6</a></li>
-																		<li class=""><a href="#" id="menu-lang-6"
-																			data-id="6" data-label="Whitespace"
-																			title="Whitespace (wspace 0.3)" class="lang "
-																			tabindex="1076">Whitespace</a></li>
-																		<li class=""><a href="#" id="menu-lang-106"
-																			data-id="106" data-label="COBOL 85"
-																			title="COBOL 85 (tinycobol-0.65.9)" class="lang "
-																			tabindex="1032">COBOL 85</a></li>
-																		<li class=""><a href="#" id="menu-lang-121"
-																			data-id="121" data-label="Groovy"
-																			title="Groovy (groovy-2.4)" class="lang "
-																			tabindex="1047">Groovy</a></li>
-																		<li class=""><a href="#" id="menu-lang-94"
-																			data-id="94" data-label="PicoLisp"
-																			title="PicoLisp (3.1.1)" class="lang "
-																			tabindex="1062">PicoLisp</a></li>
-																	</ul>
-																</div>
+															</div>
+															<div class="ex-more-options-box"
+																style="padding: 10px; padding-top: 6px; color: #666">
+																<textarea id="output1" rows="2" cols="80"
+																	readonly="readonly"></textarea>
 															</div>
 														</div>
-
-														<!-- show input -->
-														<button type="button" class="btn footer-item rel-tooltip"
-															data-toggle="button" title="Specify input (stdin)"
-															style="display: none;" id="button-input1">
-															<i class="icon-inbox"></i> stdin
-														</button>
-														<button type="button" class="btn footer-item rel-tooltip"
-															data-toggle="button" title="Class1" id="class1-button">
-															<i class="icon-inbox"></i> 1
-														</button>
-														<button type="button" class="btn footer-item rel-tooltip"
-															data-toggle="button" title="Class2" id="class2-button">
-															<i class="icon-inbox"></i> 2
-														</button>
-
-
-														<!-- visibility -->
-														<input type="hidden" name="public" value="1">
-														<div class="btn-group footer-item" style="display: none;"
-															data-toggle="buttons-radio" id="btn-group-visibility">
-															<button type="button" class="rel-tooltip btn active"
-																data-value="1"
-																title="Public - your code will be available to everyone.">
-																<i class="icon-globe"></i>
-															</button>
-															<button type="button" class="rel-tooltip btn "
-																data-value="0"
-																title="Secret - your code will be available only to those with whom you share a link.">
-																<i class="icon-glasses"></i>
-															</button>
-															<button type="button" class="rel-tooltip btn  disabled"
-																disabled="disabled" data-value="-1"
-																title="Private - only you will be able to access the code. You have to be signed in to use this option.">
-																<i class="icon-lock"></i>
-															</button>
+														<div class="ex-more-options-box"
+															style="padding-top: 4px; display: none;">
+															<!-- note -->
+															<div style="margin-bottom: 5px">
+																<i class="icon-pencil"></i> enter your note
+																<div class="pull-right option-clear">
+																	<a href="#" class="rel-tooltip" title="Clear the note"
+																		onclick="$('#note').val(''); return false;">clear</a>
+																</div>
+																<div class="clearfix"></div>
+															</div>
+															<textarea name="note" id="note" rows="2" cols="80"></textarea>
 														</div>
-
-
-														<!-- more options -->
-														<a href="#" id="button-more-options1" class="reverse"
-															style="display: none;"> <span
-															class="more-options-more">more&nbsp;options</span> <span
-															class="more-options-less">fewer&nbsp;options</span>
-														</a>
-
-
-														<!-- submit -->
-														<div class="pull-right">
-															<input type="hidden" name="run" value="1">
-															<button id = "downloadBtn"><img alt="" src="images/download.png" width="30px" > </button>
-															<button type="submit" name="Submit" id="Translate1"
-																tabindex="2"
-																class="btn btn-success footer-item rel-tooltip"
-																title="Translate">
-																<i class="icon-cog-alt"></i> Translate
-															</button>
-															<button type="submit" name="Submit" id="Submit1"
-																tabindex="2"
-																class="btn btn-success footer-item rel-tooltip"
-																title="Run the program">
-																<i class="icon-cog-alt"></i> Run
-															</button>
-														</div>
-
-														<div class="clearfix"></div>
 													</div>
 												</div>
 											</div>
 										</div>
 
-										<div id="csharp_container" class="span8 code-panel">
-											<div class="header">
-												<i class="icon-code"></i> enter your source code <span
-													id="insert-part-or" style="display: inline">or</span> <span
-													id="insert-part-insert" style="display: inline">insert</span>
-												<span id="insert-part-template" style="display: inline"><a
-													id="insert-template-link" href="#" class="rel-tooltip"
-													title="" data-original-title="Insert template">template</a></span>
-												<span id="insert-part-or2" style="display: inline">or</span>
-												<span id="insert-part-sample" style="display: inline"><a
-													id="insert-sample-link" href="#" class="rel-tooltip"
-													title="Insert sample program">sample</a></span> <span
-													id="insert-part-or3" style="display: inline">or</span> <span
-													id="insert-part-users-template" style="display: inline"><a
-													id="insert-users-template-link" href="#"
-													class="rel-tooltip" title="Insert your template">your
-														template</a></span> <img id="insert-loader"
-													style="display: none; height: 11px"
-													src="//stx1.ideone.com/gfx/loader.gif" alt="loading...">
-												<div class="pull-right option-clear">
-													<a href="#" class="rel-tooltip with-margin-right"
-														title="Clear the editor"
-														onclick="clearEditor(); return false;">clear</a>
-												</div>
-												<div class="clearfix"></div>
-											</div>
+										<div class="g"
+											style="text-align: center; height: 90px; display: none;">
 
-											<!-- editor + ad -->
-											<div style="border-bottom: 1px solid #ececec;">
-												<div id="file_div2" class=" ace_editor ace-tm"
-													style="height: 320px; display: block;">
-													<textarea class="ace_text-input" wrap="off"
-														autocapitalize="off" spellcheck="false"
-														style="bottom: 190.4px; height: 14.4px; width: 6.6px; right: 712.8px;"></textarea>
-													<div class="ace_gutter">
-														<div
-															class="ace_layer ace_gutter-layer ace_folding-enabled"
-															style="margin-top: 0px; height: 348.8px; width: 40px;">
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">1</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">2</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">3</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																4<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
+
+											<!--<script type="text/javascript" src="//ap.lijit.com/www/delivery/fpi.js?z=357751&u=sphere-research&width=728&height=90"></script>-->
+
+											<!-- ideone_main_728x90_center -->
+											<ins class="adsbygoogle"
+												style="display: inline-block; width: 728px; height: 90px"
+												data-ad-client="ca-pub-4453360425583535"
+												data-ad-slot="4445601430"></ins>
+											<script>
+												(adsbygoogle = window.adsbygoogle
+														|| []).push({});
+											</script>
+
+
+										</div>
+
+										<!-- visible options + submit -->
+										<div class="row">
+											<div class="span8">
+												<div class="footer">
+													<!-- lang -->
+													<input type="hidden" name="_lang" id="_lang1" value="10">
+
+													<!-- simple lang select -->
+
+													<!-- advanced lang select -->
+													<div class="dropdown dropup" id="lang_advselect"
+														style="display: none;">
+														<a class="dropdown-toggle btn footer-item rel-tooltip"
+															data-toggle="dropdown" href="#" title="Choose language"
+															id="lang-dropdown-menu-button"><span>Java</span> <b
+															class="caret"></b></a>
+														<div id="lang-dropdown-menu" class="dropdown-menu"
+															role="menu" aria-labelledby="lang-dropdown-menu-button">
+															<div id="language-details"></div>
+															<div class="clearfix"></div>
+															<div class="popular-box">
+																<legend>popular</legend>
+																<ul class="popular">
+																	<li class=""><a href="#" id="menu-lang-28"
+																		data-id="28" data-label="Bash"
+																		title="Bash (bash 4.3.33)" class="lang "
+																		tabindex="1000">Bash</a></li>
+																	<li class=""><a href="#" id="menu-lang-22"
+																		data-id="22" data-label="Pascal (fpc)"
+																		title="Pascal (fpc) (fpc 2.6.4)" class="lang "
+																		tabindex="1009">Pascal (fpc)</a></li>
+																	<li class=""><a href="#" id="menu-lang-11"
+																		data-id="11" data-label="C" title="C (gcc-5.1)"
+																		class="lang " tabindex="1001">C</a></li>
+																	<li class=""><a href="#" id="menu-lang-2"
+																		data-id="2" data-label="Pascal (gpc)"
+																		title="Pascal (gpc) (gpc 20070904)" class="lang "
+																		tabindex="1010">Pascal (gpc)</a></li>
+																	<li class=""><a href="#" id="menu-lang-27"
+																		data-id="27" data-label="C#" title="C# (mono-4.0.2)"
+																		class="lang " tabindex="1002">C#</a></li>
+																	<li class=""><a href="#" id="menu-lang-3"
+																		data-id="3" data-label="Perl"
+																		title="Perl (perl 5.20.1)" class="lang "
+																		tabindex="1011">Perl</a></li>
+																	<li class=""><a href="#" id="menu-lang-1"
+																		data-id="1" data-label="C++ 5.1"
+																		title="C++ 5.1 (gcc-5.1)" class="lang "
+																		tabindex="1003">C++ 5.1</a></li>
+																	<li class=""><a href="#" id="menu-lang-29"
+																		data-id="29" data-label="PHP" title="PHP (php 5.6.4)"
+																		class="lang " tabindex="1012">PHP</a></li>
+																	<li class=""><a href="#" id="menu-lang-44"
+																		data-id="44" data-label="C++14"
+																		title="C++14 (gcc-5.1)" class="lang " tabindex="1004">C++14</a></li>
+																	<li class=""><a href="#" id="menu-lang-4"
+																		data-id="4" data-label="Python"
+																		title="Python (python 2.7.10)" class="lang "
+																		tabindex="1013">Python</a></li>
+																	<li class=""><a href="#" id="menu-lang-21"
+																		data-id="21" data-label="Haskell"
+																		title="Haskell (ghc-7.8)" class="lang "
+																		tabindex="1005">Haskell</a></li>
+																	<li class=""><a href="#" id="menu-lang-116"
+																		data-id="116" data-label="Python 3"
+																		title="Python 3 (python-3.4)" class="lang "
+																		tabindex="1014">Python 3</a></li>
+																	<li class="active"><a href="#" id="menu-lang-10"
+																		data-id="10" data-label="Java"
+																		title="Java (sun-jdk-8u51)" class="lang "
+																		tabindex="1006">Java</a></li>
+																	<li class=""><a href="#" id="menu-lang-17"
+																		data-id="17" data-label="Ruby" title="Ruby (ruby-2.1)"
+																		class="lang " tabindex="1015">Ruby</a></li>
+																	<li class=""><a href="#" id="menu-lang-55"
+																		data-id="55" data-label="Java7"
+																		title="Java7 (sun-jdk-1.7.0_10)" class="lang "
+																		tabindex="1007">Java7</a></li>
+																	<li class=""><a href="#" id="menu-lang-40"
+																		data-id="40" data-label="SQL"
+																		title="SQL (sqlite3-3.8.7)" class="lang "
+																		tabindex="1016">SQL</a></li>
+																	<li class=""><a href="#" id="menu-lang-43"
+																		data-id="43" data-label="Objective-C"
+																		title="Objective-C (gcc-5.1)" class="lang "
+																		tabindex="1008">Objective-C</a></li>
+																	<li class=""><a href="#" id="menu-lang-101"
+																		data-id="101" data-label="VB.NET"
+																		title="VB.NET (mono-3.10)" class="lang "
+																		tabindex="1017">VB.NET</a></li>
+																</ul>
 															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">5</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">
-																6<span class="ace_fold-widget ace_start ace_open"
-																	style="height: 14.40000057220459px"></span>
+															<div class="rest-box">
+																<legend>others</legend>
+																<ul class="rest">
+																	<li class=""><a href="#" id="menu-lang-7"
+																		data-id="7" data-label="Ada" title="Ada (gnat-5.1)"
+																		class="lang " tabindex="1018">Ada</a></li>
+																	<li class=""><a href="#" id="menu-lang-91"
+																		data-id="91" data-label="CoffeeScript"
+																		title="CoffeeScript (1.9.3)" class="lang "
+																		tabindex="1033">CoffeeScript</a></li>
+																	<li class=""><a href="#" id="menu-lang-16"
+																		data-id="16" data-label="Icon"
+																		title="Icon (iconc 9.4.3)" class="lang "
+																		tabindex="1048">Icon</a></li>
+																	<li class=""><a href="#" id="menu-lang-19"
+																		data-id="19" data-label="Pike" title="Pike (pike 7.8)"
+																		class="lang " tabindex="1063">Pike</a></li>
+																	<li class=""><a href="#" id="menu-lang-45"
+																		data-id="45" data-label="Assembler"
+																		title="Assembler (gcc-5.1)" class="lang "
+																		tabindex="1019">Assembler</a></li>
+																	<li class=""><a href="#" id="menu-lang-32"
+																		data-id="32" data-label="Common Lisp (clisp)"
+																		title="Common Lisp (clisp) (clisp 2.49)" class="lang "
+																		tabindex="1034">Common Lisp (clisp)</a></li>
+																	<li class=""><a href="#" id="menu-lang-9"
+																		data-id="9" data-label="Intercal"
+																		title="Intercal (c-intercal 28.0-r1)" class="lang "
+																		tabindex="1049">Intercal</a></li>
+																	<li class=""><a href="#" id="menu-lang-108"
+																		data-id="108" data-label="Prolog (gnu)"
+																		title="Prolog (gnu) (gprolog-1.3.1)" class="lang "
+																		tabindex="1064">Prolog (gnu)</a></li>
+																	<li class=""><a href="#" id="menu-lang-13"
+																		data-id="13" data-label="Assembler"
+																		title="Assembler (nasm-2.11.05)" class="lang "
+																		tabindex="1020">Assembler</a></li>
+																	<li class=""><a href="#" id="menu-lang-84"
+																		data-id="84" data-label="D" title="D (ldc 0.14)"
+																		class="lang " tabindex="1035">D</a></li>
+																	<li class=""><a href="#" id="menu-lang-35"
+																		data-id="35" data-label="JavaScript (rhino)"
+																		title="JavaScript (rhino) (rhino-1.7.7)" class="lang "
+																		tabindex="1050">JavaScript (rhino)</a></li>
+																	<li class=""><a href="#" id="menu-lang-15"
+																		data-id="15" data-label="Prolog (swi)"
+																		title="Prolog (swi) (swipl 5.6.64)" class="lang "
+																		tabindex="1065">Prolog (swi)</a></li>
+																	<li class=""><a href="#" id="menu-lang-104"
+																		data-id="104" data-label="AWK (gawk)"
+																		title="AWK (gawk) (gawk-4.1.1)" class="lang "
+																		tabindex="1021">AWK (gawk)</a></li>
+																	<li class=""><a href="#" id="menu-lang-20"
+																		data-id="20" data-label="D" title="D (gdc 5.1)"
+																		class="lang " tabindex="1036">D</a></li>
+																	<li class=""><a href="#" id="menu-lang-112"
+																		data-id="112" data-label="JavaScript (spidermonkey)"
+																		title="JavaScript (spidermonkey) (spidermonkey 24.2)"
+																		class="lang " tabindex="1051">JavaScript
+																			(spidermonkey)</a></li>
+																	<li class=""><a href="#" id="menu-lang-99"
+																		data-id="99" data-label="Python (Pypy)"
+																		title="Python (Pypy) (Pypy)" class="lang "
+																		tabindex="1066">Python (Pypy)</a></li>
+																	<li class=""><a href="#" id="menu-lang-105"
+																		data-id="105" data-label="AWK (mawk)"
+																		title="AWK (mawk) (mawk-3.3)" class="lang "
+																		tabindex="1022">AWK (mawk)</a></li>
+																	<li class=""><a href="#" id="menu-lang-102"
+																		data-id="102" data-label="D (dmd)"
+																		title="D (dmd) (dmd-2.067.1)" class="lang "
+																		tabindex="1037">D (dmd)</a></li>
+																	<li class=""><a href="#" id="menu-lang-26"
+																		data-id="26" data-label="Lua" title="Lua (luac 5.2)"
+																		class="lang " tabindex="1052">Lua</a></li>
+																	<li class=""><a href="#" id="menu-lang-117"
+																		data-id="117" data-label="R" title="R (R-2.11.1)"
+																		class="lang " tabindex="1067">R</a></li>
+																	<li class=""><a href="#" id="menu-lang-110"
+																		data-id="110" data-label="bc" title="bc (bc-1.06.95)"
+																		class="lang " tabindex="1023">bc</a></li>
+																	<li class=""><a href="#" id="menu-lang-96"
+																		data-id="96" data-label="Elixir"
+																		title="Elixir (1.1.0)" class="lang " tabindex="1038">Elixir</a>
+																	</li>
+																	<li class=""><a href="#" id="menu-lang-30"
+																		data-id="30" data-label="Nemerle"
+																		title="Nemerle (ncc 0.9.3)" class="lang "
+																		tabindex="1053">Nemerle</a></li>
+																	<li class=""><a href="#" id="menu-lang-93"
+																		data-id="93" data-label="Rust" title="Rust (1.0.0)"
+																		class="lang " tabindex="1068">Rust</a></li>
+																	<li class=""><a href="#" id="menu-lang-12"
+																		data-id="12" data-label="Brainf**k"
+																		title="Brainf**k (bff-1.0.5)" class="lang "
+																		tabindex="1024">Brainf**k</a></li>
+																	<li class=""><a href="#" id="menu-lang-36"
+																		data-id="36" data-label="Erlang"
+																		title="Erlang (erl-18)" class="lang " tabindex="1039">Erlang</a></li>
+																	<li class=""><a href="#" id="menu-lang-25"
+																		data-id="25" data-label="Nice"
+																		title="Nice (nicec 0.9.6)" class="lang "
+																		tabindex="1054">Nice</a></li>
+																	<li class=""><a href="#" id="menu-lang-39"
+																		data-id="39" data-label="Scala"
+																		title="Scala (scala-2.11.7)" class="lang "
+																		tabindex="1069">Scala</a></li>
+																	<li class=""><a href="#" id="menu-lang-81"
+																		data-id="81" data-label="C" title="C (clang 3.7)"
+																		class="lang " tabindex="1025">C</a></li>
+																	<li class=""><a href="#" id="menu-lang-124"
+																		data-id="124" data-label="F#" title="F# (fsharp-3.1)"
+																		class="lang " tabindex="1040">F#</a></li>
+																	<li class=""><a href="#" id="menu-lang-122"
+																		data-id="122" data-label="Nim" title="Nim (0.11.2)"
+																		class="lang " tabindex="1055">Nim</a></li>
+																	<li class=""><a href="#" id="menu-lang-97"
+																		data-id="97" data-label="Scheme (chicken)"
+																		title="Scheme (chicken) (4.9)" class="lang "
+																		tabindex="1070">Scheme (chicken)</a></li>
+																	<li class=""><a href="#" id="menu-lang-82"
+																		data-id="82" data-label="C++" title="C++ (clang 3.7)"
+																		class="lang " tabindex="1026">C++</a></li>
+																	<li class=""><a href="#" id="menu-lang-123"
+																		data-id="123" data-label="Factor"
+																		title="Factor (factor-0.93)" class="lang "
+																		tabindex="1041">Factor</a></li>
+																	<li class=""><a href="#" id="menu-lang-56"
+																		data-id="56" data-label="Node.js"
+																		title="Node.js (0.12.7)" class="lang " tabindex="1056">Node.js</a></li>
+																	<li class=""><a href="#" id="menu-lang-33"
+																		data-id="33" data-label="Scheme (guile)"
+																		title="Scheme (guile) (guile 2.0.11)" class="lang "
+																		tabindex="1071">Scheme (guile)</a></li>
+																	<li class=""><a href="#" id="menu-lang-41"
+																		data-id="41" data-label="C++ 4.3.2"
+																		title="C++ 4.3.2 (gcc-4.3.2)" class="lang "
+																		tabindex="1027">C++ 4.3.2</a></li>
+																	<li class=""><a href="#" id="menu-lang-125"
+																		data-id="125" data-label="Falcon"
+																		title="Falcon (falcon-0.9.6.6)" class="lang "
+																		tabindex="1042">Falcon</a></li>
+																	<li class=""><a href="#" id="menu-lang-83"
+																		data-id="83" data-label="Objective-C"
+																		title="Objective-C (clang 3.7)" class="lang "
+																		tabindex="1057">Objective-C</a></li>
+																	<li class=""><a href="#" id="menu-lang-23"
+																		data-id="23" data-label="Smalltalk"
+																		title="Smalltalk (gst 3.2.4)" class="lang "
+																		tabindex="1072">Smalltalk</a></li>
+																	<li class=""><a href="#" id="menu-lang-34"
+																		data-id="34" data-label="C99 strict"
+																		title="C99 strict (gcc-5.1)" class="lang "
+																		tabindex="1028">C99 strict</a></li>
+																	<li class=""><a href="#" id="menu-lang-92"
+																		data-id="92" data-label="Fantom"
+																		title="Fantom (1.0.67)" class="lang " tabindex="1043">Fantom</a></li>
+																	<li class=""><a href="#" id="menu-lang-8"
+																		data-id="8" data-label="Ocaml"
+																		title="Ocaml (ocamlopt 4.01.0)" class="lang "
+																		tabindex="1058">Ocaml</a></li>
+																	<li class=""><a href="#" id="menu-lang-38"
+																		data-id="38" data-label="Tcl" title="Tcl (tclsh 8.6)"
+																		class="lang " tabindex="1073">Tcl</a></li>
+																	<li class=""><a href="#" id="menu-lang-14"
+																		data-id="14" data-label="CLIPS"
+																		title="CLIPS (clips 6.24)" class="lang "
+																		tabindex="1029">CLIPS</a></li>
+																	<li class=""><a href="#" id="menu-lang-107"
+																		data-id="107" data-label="Forth"
+																		title="Forth (gforth-0.7.2)" class="lang "
+																		tabindex="1044">Forth</a></li>
+																	<li class=""><a href="#" id="menu-lang-127"
+																		data-id="127" data-label="Octave"
+																		title="Octave (3.6.2)" class="lang " tabindex="1059">Octave</a>
+																	</li>
+																	<li class=""><a href="#" id="menu-lang-62"
+																		data-id="62" data-label="Text"
+																		title="Text (text 6.10)" class="lang " tabindex="1074">Text</a></li>
+																	<li class=""><a href="#" id="menu-lang-111"
+																		data-id="111" data-label="Clojure"
+																		title="Clojure (clojure 1.7)" class="lang "
+																		tabindex="1030">Clojure</a></li>
+																	<li class=""><a href="#" id="menu-lang-5"
+																		data-id="5" data-label="Fortran"
+																		title="Fortran (gfortran-5.1)" class="lang "
+																		tabindex="1045">Fortran</a></li>
+																	<li class=""><a href="#" id="menu-lang-119"
+																		data-id="119" data-label="Oz"
+																		title="Oz (mozart-1.4.0)" class="lang "
+																		tabindex="1060">Oz</a></li>
+																	<li class=""><a href="#" id="menu-lang-115"
+																		data-id="115" data-label="Unlambda"
+																		title="Unlambda (unlambda-2.0.0)" class="lang "
+																		tabindex="1075">Unlambda</a></li>
+																	<li class=""><a href="#" id="menu-lang-118"
+																		data-id="118" data-label="COBOL"
+																		title="COBOL (open-cobol-1.1)" class="lang "
+																		tabindex="1031">COBOL</a></li>
+																	<li class=""><a href="#" id="menu-lang-114"
+																		data-id="114" data-label="Go" title="Go (1.4.2)"
+																		class="lang " tabindex="1046">Go</a></li>
+																	<li class=""><a href="#" id="menu-lang-54"
+																		data-id="54" data-label="Perl 6"
+																		title="Perl 6 (rakudo-2014.07)" class="lang "
+																		tabindex="1061">Perl 6</a></li>
+																	<li class=""><a href="#" id="menu-lang-6"
+																		data-id="6" data-label="Whitespace"
+																		title="Whitespace (wspace 0.3)" class="lang "
+																		tabindex="1076">Whitespace</a></li>
+																	<li class=""><a href="#" id="menu-lang-106"
+																		data-id="106" data-label="COBOL 85"
+																		title="COBOL 85 (tinycobol-0.65.9)" class="lang "
+																		tabindex="1032">COBOL 85</a></li>
+																	<li class=""><a href="#" id="menu-lang-121"
+																		data-id="121" data-label="Groovy"
+																		title="Groovy (groovy-2.4)" class="lang "
+																		tabindex="1047">Groovy</a></li>
+																	<li class=""><a href="#" id="menu-lang-94"
+																		data-id="94" data-label="PicoLisp"
+																		title="PicoLisp (3.1.1)" class="lang " tabindex="1062">PicoLisp</a></li>
+																</ul>
 															</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">7</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">8</div>
-															<div class="ace_gutter-cell "
-																style="height: 14.40000057220459px;">9</div>
 														</div>
-														<div class="ace_gutter-active-line"
-															style="top: 115.2px; height: 14.4px;"></div>
 													</div>
-													<div class="ace_scroller"
-														style="left: 40px; right: 0px; bottom: 0px;">
-														<div class="ace_content"
-															style="margin-top: 0px; width: 730px; height: 348.8px; margin-left: 0px;">
-															<div class="ace_layer ace_print-margin-layer">
-																<div class="ace_print-margin"
-																	style="left: 532px; visibility: visible;"></div>
+
+													<!-- show input -->
+													<button type="button" class="btn footer-item rel-tooltip"
+														data-toggle="button" title="Specify input (stdin)"
+														style="display: none;" id="button-input1">
+														<i class="icon-inbox"></i> stdin
+													</button>
+													<button type="button" class="btn footer-item rel-tooltip"
+														data-toggle="button" title="Class1" id="class1-button">
+														<i class="icon-inbox"></i> 1
+													</button>
+													<button type="button" class="btn footer-item rel-tooltip"
+														data-toggle="button" title="Class2" id="class2-button">
+														<i class="icon-inbox"></i> 2
+													</button>
+
+
+													<!-- visibility -->
+													<input type="hidden" name="public" value="1">
+													<div class="btn-group footer-item" style="display: none;"
+														data-toggle="buttons-radio" id="btn-group-visibility">
+														<button type="button" class="rel-tooltip btn active"
+															data-value="1"
+															title="Public - your code will be available to everyone.">
+															<i class="icon-globe"></i>
+														</button>
+														<button type="button" class="rel-tooltip btn "
+															data-value="0"
+															title="Secret - your code will be available only to those with whom you share a link.">
+															<i class="icon-glasses"></i>
+														</button>
+														<button type="button" class="rel-tooltip btn  disabled"
+															disabled="disabled" data-value="-1"
+															title="Private - only you will be able to access the code. You have to be signed in to use this option.">
+															<i class="icon-lock"></i>
+														</button>
+													</div>
+
+
+													<!-- more options -->
+													<a href="#" id="button-more-options1" class="reverse"
+														style="display: none;"> <span
+														class="more-options-more">more&nbsp;options</span> <span
+														class="more-options-less">fewer&nbsp;options</span>
+													</a>
+
+
+													<!-- submit -->
+													<div class="pull-right">
+														<input type="hidden" name="run" value="1">
+														<button type="submit" name="Submit" id="Translate1"
+															tabindex="2"
+															class="btn btn-success footer-item rel-tooltip"
+															title="Translate">
+															<i class="icon-cog-alt"></i> Translate
+														</button>
+														<button type="submit" name="Submit" id="Submit1"
+															tabindex="2"
+															class="btn btn-success footer-item rel-tooltip"
+															title="Run the program">
+															<i class="icon-cog-alt"></i> Run
+														</button>
+													</div>
+
+													<div class="clearfix"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div id="csharp_container" class="span8 code-panel">
+										<div class="header">
+											<i class="icon-code"></i> enter your source code <span
+												id="insert-part-or" style="display: inline">or</span> <span
+												id="insert-part-insert" style="display: inline">insert</span>
+											<span id="insert-part-template" style="display: inline"><a
+												id="insert-template-link" href="#" class="rel-tooltip"
+												title="" data-original-title="Insert template">template</a></span>
+											<span id="insert-part-or2" style="display: inline">or</span>
+											<span id="insert-part-sample" style="display: inline"><a
+												id="insert-sample-link" href="#" class="rel-tooltip"
+												title="Insert sample program">sample</a></span> <span
+												id="insert-part-or3" style="display: inline">or</span> <span
+												id="insert-part-users-template" style="display: inline"><a
+												id="insert-users-template-link" href="#" class="rel-tooltip"
+												title="Insert your template">your template</a></span> <img
+												id="insert-loader" style="display: none; height: 11px"
+												src="//stx1.ideone.com/gfx/loader.gif" alt="loading...">
+											<div class="pull-right option-clear">
+												<a href="#" class="rel-tooltip with-margin-right"
+													title="Clear the editor"
+													onclick="clearEditor(); return false;">clear</a>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+
+										<!-- editor + ad -->
+										<div style="border-bottom: 1px solid #ececec;">
+											<div id="file_div2" class=" ace_editor ace-tm"
+												style="height: 320px; display: block;">
+												<textarea class="ace_text-input" wrap="off"
+													autocapitalize="off" spellcheck="false"
+													style="bottom: 190.4px; height: 14.4px; width: 6.6px; right: 712.8px;"></textarea>
+												<div class="ace_gutter">
+													<div class="ace_layer ace_gutter-layer ace_folding-enabled"
+														style="margin-top: 0px; height: 348.8px; width: 40px;">
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">1</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">2</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">3</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															4<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
+														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">5</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															6<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
+														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">7</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">8</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">9</div>
+													</div>
+													<div class="ace_gutter-active-line"
+														style="top: 115.2px; height: 14.4px;"></div>
+												</div>
+												<div class="ace_scroller"
+													style="left: 40px; right: 0px; bottom: 0px;">
+													<div class="ace_content"
+														style="margin-top: 0px; width: 730px; height: 348.8px; margin-left: 0px;">
+														<div class="ace_layer ace_print-margin-layer">
+															<div class="ace_print-margin"
+																style="left: 532px; visibility: visible;"></div>
+														</div>
+														<div class="ace_layer ace_marker-layer">
+															<div class="ace_active-line"
+																style="height: 14.40000057220459px; top: 115.20000457763672px; left: 0; right: 0;"></div>
+															<div class="ace_bracket ace_start"
+																style="height: 14.40000057220459px; width: 6.599999904632568px; top: 43.20000171661377px; left: 4px;"></div>
+														</div>
+														<div class="ace_layer ace_text-layer"
+															style="padding: 0px 4px;">
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">using</span>&nbsp;<span
+																	class="ace_identifier">System</span><span
+																	class="ace_punctuation ace_operator">;</span>
 															</div>
-															<div class="ace_layer ace_marker-layer">
-																<div class="ace_active-line"
-																	style="height: 14.40000057220459px; top: 115.20000457763672px; left: 0; right: 0;"></div>
-																<div class="ace_bracket ace_start"
-																	style="height: 14.40000057220459px; width: 6.599999904632568px; top: 43.20000171661377px; left: 4px;"></div>
+															<div class="ace_line" style="height: 14.40000057220459px"></div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">public</span>&nbsp;<span
+																	class="ace_keyword">class</span>&nbsp;<span
+																	class="ace_identifier">Test</span>
 															</div>
-															<div class="ace_layer ace_text-layer"
-																style="padding: 0px 4px;">
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">using</span>&nbsp;<span
-																		class="ace_identifier">System</span><span
-																		class="ace_punctuation ace_operator">;</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px"></div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_keyword">public</span>&nbsp;<span
-																		class="ace_keyword">class</span>&nbsp;<span
-																		class="ace_identifier">Test</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_paren ace_lparen">{</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
-																		class="ace_keyword">static</span>&nbsp;<span
-																		class="ace_keyword">void</span>&nbsp;<span
-																		class="ace_identifier">Main</span><span
-																		class="ace_paren ace_lparen">(</span><span
-																		class="ace_paren ace_rparen">)</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	&nbsp;&nbsp;&nbsp;&nbsp;<span
-																		class="ace_paren ace_lparen">{</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-																		class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	&nbsp;&nbsp;&nbsp;&nbsp;<span
-																		class="ace_paren ace_rparen">}</span>
-																</div>
-																<div class="ace_line"
-																	style="height: 14.40000057220459px">
-																	<span class="ace_paren ace_rparen">}</span>
-																</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_paren ace_lparen">{</span>
 															</div>
-															<div class="ace_layer ace_marker-layer"></div>
-															<div
-																class="ace_layer ace_cursor-layer ace_hidden-cursors">
-																<div class="ace_cursor"
-																	style="left: 10.6px; top: 115.2px; width: 6.6px; height: 14.4px;"></div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
+																	class="ace_keyword">static</span>&nbsp;<span
+																	class="ace_keyword">void</span>&nbsp;<span
+																	class="ace_identifier">Main</span><span
+																	class="ace_paren ace_lparen">(</span><span
+																	class="ace_paren ace_rparen">)</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																&nbsp;&nbsp;&nbsp;&nbsp;<span
+																	class="ace_paren ace_lparen">{</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+																	class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																&nbsp;&nbsp;&nbsp;&nbsp;<span
+																	class="ace_paren ace_rparen">}</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_paren ace_rparen">}</span>
 															</div>
 														</div>
-													</div>
-													<div
-														style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
-													<div class="ace_scrollbar"
-														style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
-														<div class="ace_scrollbar-inner" style="height: 129.6px;"></div>
-													</div>
-													<div class="ace_scrollbar-h"
-														style="height: 26px; display: none; overflow-x: scroll; left: 40px; right: 0px;">
-														<div class="ace_scrollbar-inner" style="width: 730px;"></div>
+														<div class="ace_layer ace_marker-layer"></div>
+														<div class="ace_layer ace_cursor-layer ace_hidden-cursors">
+															<div class="ace_cursor"
+																style="left: 10.6px; top: 115.2px; width: 6.6px; height: 14.4px;"></div>
+														</div>
 													</div>
 												</div>
-												<div id="file_parent2" style="padding: 10px; display: none;">
-													<textarea name="file" id="file2" tabindex="1">using System;
+												<div
+													style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
+												<div class="ace_scrollbar"
+													style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
+													<div class="ace_scrollbar-inner" style="height: 129.6px;"></div>
+												</div>
+												<div class="ace_scrollbar-h"
+													style="height: 26px; display: none; overflow-x: scroll; left: 40px; right: 0px;">
+													<div class="ace_scrollbar-inner" style="width: 730px;"></div>
+												</div>
+											</div>
+											<div id="file_parent2" style="padding: 10px; display: none;">
+												<textarea name="file" id="file2" tabindex="1">using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -2439,10 +2534,10 @@ namespace CVa
 		}
 	}
 }</textarea>
-												</div>
 											</div>
-											<input type="hidden" id="file_template2"
-												value="using System;
+										</div>
+										<input type="hidden" id="file_template2"
+											value="using System;
 
 public class Test
 {
@@ -2452,500 +2547,495 @@ public class Test
 	}
 }">
 
-											<!-- advanced config: input -->
-											<div class="row visible" id="ex-input2">
-												<div class="span8">
-													<div class="ex-more-options-box"
-														style="padding: 10px; padding-top: 6px; color: #666">
-														<div style="margin-bottom: 5px">
-															<i class="icon-inbox"></i> enter input (stdin)
-															<div class="pull-right option-clear">
-																<a href="#" class="rel-tooltip" title="Clear the input"
-																	onclick="$('#input').val(''); return false;">clear</a>
-															</div>
-															<div class="clearfix"></div>
+										<!-- advanced config: input -->
+										<div class="row visible" id="ex-input2">
+											<div class="span8">
+												<div class="ex-more-options-box"
+													style="padding: 10px; padding-top: 6px; color: #666">
+													<div style="margin-bottom: 5px">
+														<i class="icon-inbox"></i> enter input (stdin)
+														<div class="pull-right option-clear">
+															<a href="#" class="rel-tooltip" title="Clear the input"
+																onclick="$('#input').val(''); return false;">clear</a>
 														</div>
-														<textarea name="input" id="input2" rows="2" cols="80"></textarea>
+														<div class="clearfix"></div>
 													</div>
+													<textarea name="input" id="input2" rows="2" cols="80"></textarea>
 												</div>
 											</div>
+										</div>
 
-											<!-- advanced config: more options -->
-											<div class="row visible" id="ex-more-options">
-												<div class="span8">
-													<!--
+										<!-- advanced config: more options -->
+										<div class="row visible" id="ex-more-options">
+											<div class="span8">
+												<!--
 							<div class="row">
 								<div class="span8 top-border">
 								</div>
 							</div>
 							-->
-													<div class="row">
-														<div class="span8">
-															<div class="ex-more-options-box"
-																style="padding-bottom: 0px; padding-top: 6px">
-																<!-- syntax -->
-																<div class="syntax-box" style="display: none;">
-																	<input type="hidden" name="syntax" value="0"> <label
-																		for="syntax" class="checkbox"><input
-																		type="checkbox" name="syntax" id="syntax2" value="1"
-																		checked="checked"> <span>syntax
-																			highlight</span></label>
-																</div>
+												<div class="row">
+													<div class="span8">
+														<div class="ex-more-options-box"
+															style="padding-bottom: 0px; padding-top: 6px">
+															<!-- syntax -->
+															<div class="syntax-box" style="display: none;">
+																<input type="hidden" name="syntax" value="0"> <label
+																	for="syntax" class="checkbox"><input
+																	type="checkbox" name="syntax" id="syntax2" value="1"
+																	checked="checked"> <span>syntax
+																		highlight</span></label>
+															</div>
 
-																<div class="timelimit-box" style="display: none;">
-																	<i class="icon-time"></i> time limit: <label
-																		for="timelimit-0"><input type="radio"
-																		name="timelimit" value="0" id="timelimit-0"
-																		checked="checked"> <span>5s</span></label> <label
-																		for="timelimit-1"><input type="radio"
-																		name="timelimit" value="1" id="timelimit-1"
-																		disabled="disabled"> <span>15s</span></label> <a
-																		href="/faq#constraints" class="help-link rel-tooltip"
-																		target="_blank" title="What's the time limit?"
-																		style="margin-left: 2px"><i
-																		class="icon-help-circled"></i></a>
-																</div>
+															<div class="timelimit-box" style="display: none;">
+																<i class="icon-time"></i> time limit: <label
+																	for="timelimit-0"><input type="radio"
+																	name="timelimit" value="0" id="timelimit-0"
+																	checked="checked"> <span>5s</span></label> <label
+																	for="timelimit-1"><input type="radio"
+																	name="timelimit" value="1" id="timelimit-1"
+																	disabled="disabled"> <span>15s</span></label> <a
+																	href="/faq#constraints" class="help-link rel-tooltip"
+																	target="_blank" title="What's the time limit?"
+																	style="margin-left: 2px"><i
+																	class="icon-help-circled"></i></a>
+															</div>
 
-															</div>
-														</div>
-													</div>
-													<div class="row">
-														<div class="span8">
-															<div class="ex-more-options-box" style="padding-top: 4px">
-																<!-- note -->
-																<div style="margin-bottom: 5px">
-																	<i class="icon-pencil"></i> &nbsp;&nbsp;Output
-																	<!-- <div class="pull-right option-clear">
-										<a href="#" class="rel-tooltip" title="Clear the note"
-											onclick="$('#note1').val(''); return false;">clear</a>
-									</div> -->
-																	<div class="clearfix"></div>
-																</div>
-																<div class="ex-more-options-box"
-																	style="padding: 10px; padding-top: 6px; color: #666">
-																	<textarea id="output2" rows="2" cols="80"
-																		readonly="readonly"></textarea>
-																</div>
-															</div>
-															<div class="ex-more-options-box"
-																style="padding-top: 4px; display: none;">
-																<!-- note -->
-																<div style="margin-bottom: 5px">
-																	<i class="icon-pencil"></i> enter your note
-																	<div class="pull-right option-clear">
-																		<a href="#" class="rel-tooltip" title="Clear the note"
-																			onclick="$('#note').val(''); return false;">clear</a>
-																	</div>
-																	<div class="clearfix"></div>
-																</div>
-																<textarea name="note" id="note" rows="2" cols="80"></textarea>
-															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-
-											<div class="g" style="text-align: center; height: 90px; display: none;">
-
-
-												<!--<script type="text/javascript" src="//ap.lijit.com/www/delivery/fpi.js?z=357751&u=sphere-research&width=728&height=90"></script>-->
-
-												<!-- ideone_main_728x90_center -->
-												<ins class="adsbygoogle"
-													style="display: inline-block; width: 728px; height: 90px"
-													data-ad-client="ca-pub-4453360425583535"
-													data-ad-slot="4445601430"></ins>
-												<script>
-													(adsbygoogle = window.adsbygoogle
-															|| []).push({});
-												</script>
-
-
-											</div>
-
-											<!-- visible options + submit -->
-											<div class="row">
-												<div class="span8">
-													<div class="footer">
-														<!-- lang -->
-														<input type="hidden" name="_lang" id="_lang2" value="27">
-
-														<!-- simple lang select -->
-
-														<!-- advanced lang select -->
-														<div class="dropdown dropup" id="lang_advselect"
-															style="display: none;">
-															<a class="dropdown-toggle btn footer-item rel-tooltip"
-																data-toggle="dropdown" href="#" title="Choose language"
-																id="lang-dropdown-menu-button"><span>C#</span> <b
-																class="caret"></b></a>
-															<div id="lang-dropdown-menu" class="dropdown-menu"
-																role="menu" aria-labelledby="lang-dropdown-menu-button">
-																<div id="language-details"></div>
+												<div class="row">
+													<div class="span8">
+														<div class="ex-more-options-box" style="padding-top: 4px">
+															<!-- note -->
+															<div style="margin-bottom: 5px">
+																<i class="icon-pencil"></i> &nbsp;&nbsp;Output
+																<!-- <div class="pull-right option-clear">
+										<a href="#" class="rel-tooltip" title="Clear the note"
+											onclick="$('#note1').val(''); return false;">clear</a>
+									</div> -->
 																<div class="clearfix"></div>
-																<div class="popular-box">
-																	<legend>popular</legend>
-																	<ul class="popular">
-																		<li class=""><a href="#" id="menu-lang-28"
-																			data-id="28" data-label="Bash"
-																			title="Bash (bash 4.3.33)" class="lang "
-																			tabindex="1000">Bash</a></li>
-																		<li class=""><a href="#" id="menu-lang-22"
-																			data-id="22" data-label="Pascal (fpc)"
-																			title="Pascal (fpc) (fpc 2.6.4)" class="lang "
-																			tabindex="1009">Pascal (fpc)</a></li>
-																		<li class=""><a href="#" id="menu-lang-11"
-																			data-id="11" data-label="C" title="C (gcc-5.1)"
-																			class="lang " tabindex="1001">C</a></li>
-																		<li class=""><a href="#" id="menu-lang-2"
-																			data-id="2" data-label="Pascal (gpc)"
-																			title="Pascal (gpc) (gpc 20070904)" class="lang "
-																			tabindex="1010">Pascal (gpc)</a></li>
-																		<li class="active"><a href="#" id="menu-lang-27"
-																			data-id="27" data-label="C#" title="C# (mono-4.0.2)"
-																			class="lang " tabindex="1002">C#</a></li>
-																		<li class=""><a href="#" id="menu-lang-3"
-																			data-id="3" data-label="Perl"
-																			title="Perl (perl 5.20.1)" class="lang "
-																			tabindex="1011">Perl</a></li>
-																		<li class=""><a href="#" id="menu-lang-1"
-																			data-id="1" data-label="C++ 5.1"
-																			title="C++ 5.1 (gcc-5.1)" class="lang "
-																			tabindex="1003">C++ 5.1</a></li>
-																		<li class=""><a href="#" id="menu-lang-29"
-																			data-id="29" data-label="PHP" title="PHP (php 5.6.4)"
-																			class="lang " tabindex="1012">PHP</a></li>
-																		<li class=""><a href="#" id="menu-lang-44"
-																			data-id="44" data-label="C++14"
-																			title="C++14 (gcc-5.1)" class="lang " tabindex="1004">C++14</a></li>
-																		<li class=""><a href="#" id="menu-lang-4"
-																			data-id="4" data-label="Python"
-																			title="Python (python 2.7.10)" class="lang "
-																			tabindex="1013">Python</a></li>
-																		<li class=""><a href="#" id="menu-lang-21"
-																			data-id="21" data-label="Haskell"
-																			title="Haskell (ghc-7.8)" class="lang "
-																			tabindex="1005">Haskell</a></li>
-																		<li class=""><a href="#" id="menu-lang-116"
-																			data-id="116" data-label="Python 3"
-																			title="Python 3 (python-3.4)" class="lang "
-																			tabindex="1014">Python 3</a></li>
-																		<li class=""><a href="#" id="menu-lang-10"
-																			data-id="10" data-label="Java"
-																			title="Java (sun-jdk-8u51)" class="lang "
-																			tabindex="1006">Java</a></li>
-																		<li class=""><a href="#" id="menu-lang-17"
-																			data-id="17" data-label="Ruby"
-																			title="Ruby (ruby-2.1)" class="lang " tabindex="1015">Ruby</a></li>
-																		<li class=""><a href="#" id="menu-lang-55"
-																			data-id="55" data-label="Java7"
-																			title="Java7 (sun-jdk-1.7.0_10)" class="lang "
-																			tabindex="1007">Java7</a></li>
-																		<li class=""><a href="#" id="menu-lang-40"
-																			data-id="40" data-label="SQL"
-																			title="SQL (sqlite3-3.8.7)" class="lang "
-																			tabindex="1016">SQL</a></li>
-																		<li class=""><a href="#" id="menu-lang-43"
-																			data-id="43" data-label="Objective-C"
-																			title="Objective-C (gcc-5.1)" class="lang "
-																			tabindex="1008">Objective-C</a></li>
-																		<li class=""><a href="#" id="menu-lang-101"
-																			data-id="101" data-label="VB.NET"
-																			title="VB.NET (mono-3.10)" class="lang "
-																			tabindex="1017">VB.NET</a></li>
-																	</ul>
-																</div>
-																<div class="rest-box">
-																	<legend>others</legend>
-																	<ul class="rest">
-																		<li class=""><a href="#" id="menu-lang-7"
-																			data-id="7" data-label="Ada" title="Ada (gnat-5.1)"
-																			class="lang " tabindex="1018">Ada</a></li>
-																		<li class=""><a href="#" id="menu-lang-91"
-																			data-id="91" data-label="CoffeeScript"
-																			title="CoffeeScript (1.9.3)" class="lang "
-																			tabindex="1033">CoffeeScript</a></li>
-																		<li class=""><a href="#" id="menu-lang-16"
-																			data-id="16" data-label="Icon"
-																			title="Icon (iconc 9.4.3)" class="lang "
-																			tabindex="1048">Icon</a></li>
-																		<li class=""><a href="#" id="menu-lang-19"
-																			data-id="19" data-label="Pike"
-																			title="Pike (pike 7.8)" class="lang " tabindex="1063">Pike</a></li>
-																		<li class=""><a href="#" id="menu-lang-45"
-																			data-id="45" data-label="Assembler"
-																			title="Assembler (gcc-5.1)" class="lang "
-																			tabindex="1019">Assembler</a></li>
-																		<li class=""><a href="#" id="menu-lang-32"
-																			data-id="32" data-label="Common Lisp (clisp)"
-																			title="Common Lisp (clisp) (clisp 2.49)"
-																			class="lang " tabindex="1034">Common Lisp (clisp)</a></li>
-																		<li class=""><a href="#" id="menu-lang-9"
-																			data-id="9" data-label="Intercal"
-																			title="Intercal (c-intercal 28.0-r1)" class="lang "
-																			tabindex="1049">Intercal</a></li>
-																		<li class=""><a href="#" id="menu-lang-108"
-																			data-id="108" data-label="Prolog (gnu)"
-																			title="Prolog (gnu) (gprolog-1.3.1)" class="lang "
-																			tabindex="1064">Prolog (gnu)</a></li>
-																		<li class=""><a href="#" id="menu-lang-13"
-																			data-id="13" data-label="Assembler"
-																			title="Assembler (nasm-2.11.05)" class="lang "
-																			tabindex="1020">Assembler</a></li>
-																		<li class=""><a href="#" id="menu-lang-84"
-																			data-id="84" data-label="D" title="D (ldc 0.14)"
-																			class="lang " tabindex="1035">D</a></li>
-																		<li class=""><a href="#" id="menu-lang-35"
-																			data-id="35" data-label="JavaScript (rhino)"
-																			title="JavaScript (rhino) (rhino-1.7.7)"
-																			class="lang " tabindex="1050">JavaScript (rhino)</a>
-																		</li>
-																		<li class=""><a href="#" id="menu-lang-15"
-																			data-id="15" data-label="Prolog (swi)"
-																			title="Prolog (swi) (swipl 5.6.64)" class="lang "
-																			tabindex="1065">Prolog (swi)</a></li>
-																		<li class=""><a href="#" id="menu-lang-104"
-																			data-id="104" data-label="AWK (gawk)"
-																			title="AWK (gawk) (gawk-4.1.1)" class="lang "
-																			tabindex="1021">AWK (gawk)</a></li>
-																		<li class=""><a href="#" id="menu-lang-20"
-																			data-id="20" data-label="D" title="D (gdc 5.1)"
-																			class="lang " tabindex="1036">D</a></li>
-																		<li class=""><a href="#" id="menu-lang-112"
-																			data-id="112" data-label="JavaScript (spidermonkey)"
-																			title="JavaScript (spidermonkey) (spidermonkey 24.2)"
-																			class="lang " tabindex="1051">JavaScript
-																				(spidermonkey)</a></li>
-																		<li class=""><a href="#" id="menu-lang-99"
-																			data-id="99" data-label="Python (Pypy)"
-																			title="Python (Pypy) (Pypy)" class="lang "
-																			tabindex="1066">Python (Pypy)</a></li>
-																		<li class=""><a href="#" id="menu-lang-105"
-																			data-id="105" data-label="AWK (mawk)"
-																			title="AWK (mawk) (mawk-3.3)" class="lang "
-																			tabindex="1022">AWK (mawk)</a></li>
-																		<li class=""><a href="#" id="menu-lang-102"
-																			data-id="102" data-label="D (dmd)"
-																			title="D (dmd) (dmd-2.067.1)" class="lang "
-																			tabindex="1037">D (dmd)</a></li>
-																		<li class=""><a href="#" id="menu-lang-26"
-																			data-id="26" data-label="Lua" title="Lua (luac 5.2)"
-																			class="lang " tabindex="1052">Lua</a></li>
-																		<li class=""><a href="#" id="menu-lang-117"
-																			data-id="117" data-label="R" title="R (R-2.11.1)"
-																			class="lang " tabindex="1067">R</a></li>
-																		<li class=""><a href="#" id="menu-lang-110"
-																			data-id="110" data-label="bc" title="bc (bc-1.06.95)"
-																			class="lang " tabindex="1023">bc</a></li>
-																		<li class=""><a href="#" id="menu-lang-96"
-																			data-id="96" data-label="Elixir"
-																			title="Elixir (1.1.0)" class="lang " tabindex="1038">Elixir</a>
-																		</li>
-																		<li class=""><a href="#" id="menu-lang-30"
-																			data-id="30" data-label="Nemerle"
-																			title="Nemerle (ncc 0.9.3)" class="lang "
-																			tabindex="1053">Nemerle</a></li>
-																		<li class=""><a href="#" id="menu-lang-93"
-																			data-id="93" data-label="Rust" title="Rust (1.0.0)"
-																			class="lang " tabindex="1068">Rust</a></li>
-																		<li class=""><a href="#" id="menu-lang-12"
-																			data-id="12" data-label="Brainf**k"
-																			title="Brainf**k (bff-1.0.5)" class="lang "
-																			tabindex="1024">Brainf**k</a></li>
-																		<li class=""><a href="#" id="menu-lang-36"
-																			data-id="36" data-label="Erlang"
-																			title="Erlang (erl-18)" class="lang " tabindex="1039">Erlang</a></li>
-																		<li class=""><a href="#" id="menu-lang-25"
-																			data-id="25" data-label="Nice"
-																			title="Nice (nicec 0.9.6)" class="lang "
-																			tabindex="1054">Nice</a></li>
-																		<li class=""><a href="#" id="menu-lang-39"
-																			data-id="39" data-label="Scala"
-																			title="Scala (scala-2.11.7)" class="lang "
-																			tabindex="1069">Scala</a></li>
-																		<li class=""><a href="#" id="menu-lang-81"
-																			data-id="81" data-label="C" title="C (clang 3.7)"
-																			class="lang " tabindex="1025">C</a></li>
-																		<li class=""><a href="#" id="menu-lang-124"
-																			data-id="124" data-label="F#" title="F# (fsharp-3.1)"
-																			class="lang " tabindex="1040">F#</a></li>
-																		<li class=""><a href="#" id="menu-lang-122"
-																			data-id="122" data-label="Nim" title="Nim (0.11.2)"
-																			class="lang " tabindex="1055">Nim</a></li>
-																		<li class=""><a href="#" id="menu-lang-97"
-																			data-id="97" data-label="Scheme (chicken)"
-																			title="Scheme (chicken) (4.9)" class="lang "
-																			tabindex="1070">Scheme (chicken)</a></li>
-																		<li class=""><a href="#" id="menu-lang-82"
-																			data-id="82" data-label="C++" title="C++ (clang 3.7)"
-																			class="lang " tabindex="1026">C++</a></li>
-																		<li class=""><a href="#" id="menu-lang-123"
-																			data-id="123" data-label="Factor"
-																			title="Factor (factor-0.93)" class="lang "
-																			tabindex="1041">Factor</a></li>
-																		<li class=""><a href="#" id="menu-lang-56"
-																			data-id="56" data-label="Node.js"
-																			title="Node.js (0.12.7)" class="lang "
-																			tabindex="1056">Node.js</a></li>
-																		<li class=""><a href="#" id="menu-lang-33"
-																			data-id="33" data-label="Scheme (guile)"
-																			title="Scheme (guile) (guile 2.0.11)" class="lang "
-																			tabindex="1071">Scheme (guile)</a></li>
-																		<li class=""><a href="#" id="menu-lang-41"
-																			data-id="41" data-label="C++ 4.3.2"
-																			title="C++ 4.3.2 (gcc-4.3.2)" class="lang "
-																			tabindex="1027">C++ 4.3.2</a></li>
-																		<li class=""><a href="#" id="menu-lang-125"
-																			data-id="125" data-label="Falcon"
-																			title="Falcon (falcon-0.9.6.6)" class="lang "
-																			tabindex="1042">Falcon</a></li>
-																		<li class=""><a href="#" id="menu-lang-83"
-																			data-id="83" data-label="Objective-C"
-																			title="Objective-C (clang 3.7)" class="lang "
-																			tabindex="1057">Objective-C</a></li>
-																		<li class=""><a href="#" id="menu-lang-23"
-																			data-id="23" data-label="Smalltalk"
-																			title="Smalltalk (gst 3.2.4)" class="lang "
-																			tabindex="1072">Smalltalk</a></li>
-																		<li class=""><a href="#" id="menu-lang-34"
-																			data-id="34" data-label="C99 strict"
-																			title="C99 strict (gcc-5.1)" class="lang "
-																			tabindex="1028">C99 strict</a></li>
-																		<li class=""><a href="#" id="menu-lang-92"
-																			data-id="92" data-label="Fantom"
-																			title="Fantom (1.0.67)" class="lang " tabindex="1043">Fantom</a></li>
-																		<li class=""><a href="#" id="menu-lang-8"
-																			data-id="8" data-label="Ocaml"
-																			title="Ocaml (ocamlopt 4.01.0)" class="lang "
-																			tabindex="1058">Ocaml</a></li>
-																		<li class=""><a href="#" id="menu-lang-38"
-																			data-id="38" data-label="Tcl" title="Tcl (tclsh 8.6)"
-																			class="lang " tabindex="1073">Tcl</a></li>
-																		<li class=""><a href="#" id="menu-lang-14"
-																			data-id="14" data-label="CLIPS"
-																			title="CLIPS (clips 6.24)" class="lang "
-																			tabindex="1029">CLIPS</a></li>
-																		<li class=""><a href="#" id="menu-lang-107"
-																			data-id="107" data-label="Forth"
-																			title="Forth (gforth-0.7.2)" class="lang "
-																			tabindex="1044">Forth</a></li>
-																		<li class=""><a href="#" id="menu-lang-127"
-																			data-id="127" data-label="Octave"
-																			title="Octave (3.6.2)" class="lang " tabindex="1059">Octave</a>
-																		</li>
-																		<li class=""><a href="#" id="menu-lang-62"
-																			data-id="62" data-label="Text"
-																			title="Text (text 6.10)" class="lang "
-																			tabindex="1074">Text</a></li>
-																		<li class=""><a href="#" id="menu-lang-111"
-																			data-id="111" data-label="Clojure"
-																			title="Clojure (clojure 1.7)" class="lang "
-																			tabindex="1030">Clojure</a></li>
-																		<li class=""><a href="#" id="menu-lang-5"
-																			data-id="5" data-label="Fortran"
-																			title="Fortran (gfortran-5.1)" class="lang "
-																			tabindex="1045">Fortran</a></li>
-																		<li class=""><a href="#" id="menu-lang-119"
-																			data-id="119" data-label="Oz"
-																			title="Oz (mozart-1.4.0)" class="lang "
-																			tabindex="1060">Oz</a></li>
-																		<li class=""><a href="#" id="menu-lang-115"
-																			data-id="115" data-label="Unlambda"
-																			title="Unlambda (unlambda-2.0.0)" class="lang "
-																			tabindex="1075">Unlambda</a></li>
-																		<li class=""><a href="#" id="menu-lang-118"
-																			data-id="118" data-label="COBOL"
-																			title="COBOL (open-cobol-1.1)" class="lang "
-																			tabindex="1031">COBOL</a></li>
-																		<li class=""><a href="#" id="menu-lang-114"
-																			data-id="114" data-label="Go" title="Go (1.4.2)"
-																			class="lang " tabindex="1046">Go</a></li>
-																		<li class=""><a href="#" id="menu-lang-54"
-																			data-id="54" data-label="Perl 6"
-																			title="Perl 6 (rakudo-2014.07)" class="lang "
-																			tabindex="1061">Perl 6</a></li>
-																		<li class=""><a href="#" id="menu-lang-6"
-																			data-id="6" data-label="Whitespace"
-																			title="Whitespace (wspace 0.3)" class="lang "
-																			tabindex="1076">Whitespace</a></li>
-																		<li class=""><a href="#" id="menu-lang-106"
-																			data-id="106" data-label="COBOL 85"
-																			title="COBOL 85 (tinycobol-0.65.9)" class="lang "
-																			tabindex="1032">COBOL 85</a></li>
-																		<li class=""><a href="#" id="menu-lang-121"
-																			data-id="121" data-label="Groovy"
-																			title="Groovy (groovy-2.4)" class="lang "
-																			tabindex="1047">Groovy</a></li>
-																		<li class=""><a href="#" id="menu-lang-94"
-																			data-id="94" data-label="PicoLisp"
-																			title="PicoLisp (3.1.1)" class="lang "
-																			tabindex="1062">PicoLisp</a></li>
-																	</ul>
-																</div>
+															</div>
+															<div class="ex-more-options-box"
+																style="padding: 10px; padding-top: 6px; color: #666">
+																<textarea id="output2" rows="2" cols="80"
+																	readonly="readonly"></textarea>
 															</div>
 														</div>
-
-
-														<!-- show input -->
-														<button type="button" class="btn footer-item rel-tooltip"
-															data-toggle="button" title="Specify input (stdin)"
-															id="button-input2" style="display: none;">
-															<i class="icon-inbox"></i> stdin
-														</button>
-
-														<!-- visibility -->
-														<input type="hidden" name="public" value="1">
-														<div class="btn-group footer-item" style="display: none;"
-															data-toggle="buttons-radio" id="btn-group-visibility">
-															<button type="button" class="rel-tooltip btn active"
-																data-value="1"
-																title="Public - your code will be available to everyone.">
-																<i class="icon-globe"></i>
-															</button>
-															<button type="button" class="rel-tooltip btn "
-																data-value="0"
-																title="Secret - your code will be available only to those with whom you share a link.">
-																<i class="icon-glasses"></i>
-															</button>
-															<button type="button" class="rel-tooltip btn  disabled"
-																disabled="disabled" data-value="-1"
-																title="Private - only you will be able to access the code. You have to be signed in to use this option.">
-																<i class="icon-lock"></i>
-															</button>
+														<div class="ex-more-options-box"
+															style="padding-top: 4px; display: none;">
+															<!-- note -->
+															<div style="margin-bottom: 5px">
+																<i class="icon-pencil"></i> enter your note
+																<div class="pull-right option-clear">
+																	<a href="#" class="rel-tooltip" title="Clear the note"
+																		onclick="$('#note').val(''); return false;">clear</a>
+																</div>
+																<div class="clearfix"></div>
+															</div>
+															<textarea name="note" id="note" rows="2" cols="80"></textarea>
 														</div>
-
-
-														<!-- more options -->
-														<a href="#" id="button-more-options2" class="reverse"
-															style="display: none;"> <span
-															class="more-options-more">more&nbsp;options</span> <span
-															class="more-options-less">fewer&nbsp;options</span>
-														</a>
-
-
-														<!-- submit -->
-														<div class="pull-right">
-															<input type="hidden" name="run" value="1">
-															<button type="submit" name="Submit" id="Translate2"
-																tabindex="2"
-																class="btn btn-success footer-item rel-tooltip"
-																title="Translate">
-																<i class="icon-cog-alt"></i> Translate
-															</button>
-															<button type="submit" name="Submit" id="Submit2"
-																tabindex="2"
-																class="btn btn-success footer-item rel-tooltip"
-																title="Run the program (Ctrl+Enter)">
-																<i class="icon-cog-alt"></i> Run
-															</button>
-														</div>
-
-														<div class="clearfix"></div>
 													</div>
 												</div>
 											</div>
 										</div>
-										<!-- <div class="span4">
+
+										<div class="g"
+											style="text-align: center; height: 90px; display: none;">
+
+
+											<!--<script type="text/javascript" src="//ap.lijit.com/www/delivery/fpi.js?z=357751&u=sphere-research&width=728&height=90"></script>-->
+
+											<!-- ideone_main_728x90_center -->
+											<ins class="adsbygoogle"
+												style="display: inline-block; width: 728px; height: 90px"
+												data-ad-client="ca-pub-4453360425583535"
+												data-ad-slot="4445601430"></ins>
+											<script>
+												(adsbygoogle = window.adsbygoogle
+														|| []).push({});
+											</script>
+
+
+										</div>
+
+										<!-- visible options + submit -->
+										<div class="row">
+											<div class="span8">
+												<div class="footer">
+													<!-- lang -->
+													<input type="hidden" name="_lang" id="_lang2" value="27">
+
+													<!-- simple lang select -->
+
+													<!-- advanced lang select -->
+													<div class="dropdown dropup" id="lang_advselect"
+														style="display: none;">
+														<a class="dropdown-toggle btn footer-item rel-tooltip"
+															data-toggle="dropdown" href="#" title="Choose language"
+															id="lang-dropdown-menu-button"><span>C#</span> <b
+															class="caret"></b></a>
+														<div id="lang-dropdown-menu" class="dropdown-menu"
+															role="menu" aria-labelledby="lang-dropdown-menu-button">
+															<div id="language-details"></div>
+															<div class="clearfix"></div>
+															<div class="popular-box">
+																<legend>popular</legend>
+																<ul class="popular">
+																	<li class=""><a href="#" id="menu-lang-28"
+																		data-id="28" data-label="Bash"
+																		title="Bash (bash 4.3.33)" class="lang "
+																		tabindex="1000">Bash</a></li>
+																	<li class=""><a href="#" id="menu-lang-22"
+																		data-id="22" data-label="Pascal (fpc)"
+																		title="Pascal (fpc) (fpc 2.6.4)" class="lang "
+																		tabindex="1009">Pascal (fpc)</a></li>
+																	<li class=""><a href="#" id="menu-lang-11"
+																		data-id="11" data-label="C" title="C (gcc-5.1)"
+																		class="lang " tabindex="1001">C</a></li>
+																	<li class=""><a href="#" id="menu-lang-2"
+																		data-id="2" data-label="Pascal (gpc)"
+																		title="Pascal (gpc) (gpc 20070904)" class="lang "
+																		tabindex="1010">Pascal (gpc)</a></li>
+																	<li class="active"><a href="#" id="menu-lang-27"
+																		data-id="27" data-label="C#" title="C# (mono-4.0.2)"
+																		class="lang " tabindex="1002">C#</a></li>
+																	<li class=""><a href="#" id="menu-lang-3"
+																		data-id="3" data-label="Perl"
+																		title="Perl (perl 5.20.1)" class="lang "
+																		tabindex="1011">Perl</a></li>
+																	<li class=""><a href="#" id="menu-lang-1"
+																		data-id="1" data-label="C++ 5.1"
+																		title="C++ 5.1 (gcc-5.1)" class="lang "
+																		tabindex="1003">C++ 5.1</a></li>
+																	<li class=""><a href="#" id="menu-lang-29"
+																		data-id="29" data-label="PHP" title="PHP (php 5.6.4)"
+																		class="lang " tabindex="1012">PHP</a></li>
+																	<li class=""><a href="#" id="menu-lang-44"
+																		data-id="44" data-label="C++14"
+																		title="C++14 (gcc-5.1)" class="lang " tabindex="1004">C++14</a></li>
+																	<li class=""><a href="#" id="menu-lang-4"
+																		data-id="4" data-label="Python"
+																		title="Python (python 2.7.10)" class="lang "
+																		tabindex="1013">Python</a></li>
+																	<li class=""><a href="#" id="menu-lang-21"
+																		data-id="21" data-label="Haskell"
+																		title="Haskell (ghc-7.8)" class="lang "
+																		tabindex="1005">Haskell</a></li>
+																	<li class=""><a href="#" id="menu-lang-116"
+																		data-id="116" data-label="Python 3"
+																		title="Python 3 (python-3.4)" class="lang "
+																		tabindex="1014">Python 3</a></li>
+																	<li class=""><a href="#" id="menu-lang-10"
+																		data-id="10" data-label="Java"
+																		title="Java (sun-jdk-8u51)" class="lang "
+																		tabindex="1006">Java</a></li>
+																	<li class=""><a href="#" id="menu-lang-17"
+																		data-id="17" data-label="Ruby" title="Ruby (ruby-2.1)"
+																		class="lang " tabindex="1015">Ruby</a></li>
+																	<li class=""><a href="#" id="menu-lang-55"
+																		data-id="55" data-label="Java7"
+																		title="Java7 (sun-jdk-1.7.0_10)" class="lang "
+																		tabindex="1007">Java7</a></li>
+																	<li class=""><a href="#" id="menu-lang-40"
+																		data-id="40" data-label="SQL"
+																		title="SQL (sqlite3-3.8.7)" class="lang "
+																		tabindex="1016">SQL</a></li>
+																	<li class=""><a href="#" id="menu-lang-43"
+																		data-id="43" data-label="Objective-C"
+																		title="Objective-C (gcc-5.1)" class="lang "
+																		tabindex="1008">Objective-C</a></li>
+																	<li class=""><a href="#" id="menu-lang-101"
+																		data-id="101" data-label="VB.NET"
+																		title="VB.NET (mono-3.10)" class="lang "
+																		tabindex="1017">VB.NET</a></li>
+																</ul>
+															</div>
+															<div class="rest-box">
+																<legend>others</legend>
+																<ul class="rest">
+																	<li class=""><a href="#" id="menu-lang-7"
+																		data-id="7" data-label="Ada" title="Ada (gnat-5.1)"
+																		class="lang " tabindex="1018">Ada</a></li>
+																	<li class=""><a href="#" id="menu-lang-91"
+																		data-id="91" data-label="CoffeeScript"
+																		title="CoffeeScript (1.9.3)" class="lang "
+																		tabindex="1033">CoffeeScript</a></li>
+																	<li class=""><a href="#" id="menu-lang-16"
+																		data-id="16" data-label="Icon"
+																		title="Icon (iconc 9.4.3)" class="lang "
+																		tabindex="1048">Icon</a></li>
+																	<li class=""><a href="#" id="menu-lang-19"
+																		data-id="19" data-label="Pike" title="Pike (pike 7.8)"
+																		class="lang " tabindex="1063">Pike</a></li>
+																	<li class=""><a href="#" id="menu-lang-45"
+																		data-id="45" data-label="Assembler"
+																		title="Assembler (gcc-5.1)" class="lang "
+																		tabindex="1019">Assembler</a></li>
+																	<li class=""><a href="#" id="menu-lang-32"
+																		data-id="32" data-label="Common Lisp (clisp)"
+																		title="Common Lisp (clisp) (clisp 2.49)" class="lang "
+																		tabindex="1034">Common Lisp (clisp)</a></li>
+																	<li class=""><a href="#" id="menu-lang-9"
+																		data-id="9" data-label="Intercal"
+																		title="Intercal (c-intercal 28.0-r1)" class="lang "
+																		tabindex="1049">Intercal</a></li>
+																	<li class=""><a href="#" id="menu-lang-108"
+																		data-id="108" data-label="Prolog (gnu)"
+																		title="Prolog (gnu) (gprolog-1.3.1)" class="lang "
+																		tabindex="1064">Prolog (gnu)</a></li>
+																	<li class=""><a href="#" id="menu-lang-13"
+																		data-id="13" data-label="Assembler"
+																		title="Assembler (nasm-2.11.05)" class="lang "
+																		tabindex="1020">Assembler</a></li>
+																	<li class=""><a href="#" id="menu-lang-84"
+																		data-id="84" data-label="D" title="D (ldc 0.14)"
+																		class="lang " tabindex="1035">D</a></li>
+																	<li class=""><a href="#" id="menu-lang-35"
+																		data-id="35" data-label="JavaScript (rhino)"
+																		title="JavaScript (rhino) (rhino-1.7.7)" class="lang "
+																		tabindex="1050">JavaScript (rhino)</a></li>
+																	<li class=""><a href="#" id="menu-lang-15"
+																		data-id="15" data-label="Prolog (swi)"
+																		title="Prolog (swi) (swipl 5.6.64)" class="lang "
+																		tabindex="1065">Prolog (swi)</a></li>
+																	<li class=""><a href="#" id="menu-lang-104"
+																		data-id="104" data-label="AWK (gawk)"
+																		title="AWK (gawk) (gawk-4.1.1)" class="lang "
+																		tabindex="1021">AWK (gawk)</a></li>
+																	<li class=""><a href="#" id="menu-lang-20"
+																		data-id="20" data-label="D" title="D (gdc 5.1)"
+																		class="lang " tabindex="1036">D</a></li>
+																	<li class=""><a href="#" id="menu-lang-112"
+																		data-id="112" data-label="JavaScript (spidermonkey)"
+																		title="JavaScript (spidermonkey) (spidermonkey 24.2)"
+																		class="lang " tabindex="1051">JavaScript
+																			(spidermonkey)</a></li>
+																	<li class=""><a href="#" id="menu-lang-99"
+																		data-id="99" data-label="Python (Pypy)"
+																		title="Python (Pypy) (Pypy)" class="lang "
+																		tabindex="1066">Python (Pypy)</a></li>
+																	<li class=""><a href="#" id="menu-lang-105"
+																		data-id="105" data-label="AWK (mawk)"
+																		title="AWK (mawk) (mawk-3.3)" class="lang "
+																		tabindex="1022">AWK (mawk)</a></li>
+																	<li class=""><a href="#" id="menu-lang-102"
+																		data-id="102" data-label="D (dmd)"
+																		title="D (dmd) (dmd-2.067.1)" class="lang "
+																		tabindex="1037">D (dmd)</a></li>
+																	<li class=""><a href="#" id="menu-lang-26"
+																		data-id="26" data-label="Lua" title="Lua (luac 5.2)"
+																		class="lang " tabindex="1052">Lua</a></li>
+																	<li class=""><a href="#" id="menu-lang-117"
+																		data-id="117" data-label="R" title="R (R-2.11.1)"
+																		class="lang " tabindex="1067">R</a></li>
+																	<li class=""><a href="#" id="menu-lang-110"
+																		data-id="110" data-label="bc" title="bc (bc-1.06.95)"
+																		class="lang " tabindex="1023">bc</a></li>
+																	<li class=""><a href="#" id="menu-lang-96"
+																		data-id="96" data-label="Elixir"
+																		title="Elixir (1.1.0)" class="lang " tabindex="1038">Elixir</a>
+																	</li>
+																	<li class=""><a href="#" id="menu-lang-30"
+																		data-id="30" data-label="Nemerle"
+																		title="Nemerle (ncc 0.9.3)" class="lang "
+																		tabindex="1053">Nemerle</a></li>
+																	<li class=""><a href="#" id="menu-lang-93"
+																		data-id="93" data-label="Rust" title="Rust (1.0.0)"
+																		class="lang " tabindex="1068">Rust</a></li>
+																	<li class=""><a href="#" id="menu-lang-12"
+																		data-id="12" data-label="Brainf**k"
+																		title="Brainf**k (bff-1.0.5)" class="lang "
+																		tabindex="1024">Brainf**k</a></li>
+																	<li class=""><a href="#" id="menu-lang-36"
+																		data-id="36" data-label="Erlang"
+																		title="Erlang (erl-18)" class="lang " tabindex="1039">Erlang</a></li>
+																	<li class=""><a href="#" id="menu-lang-25"
+																		data-id="25" data-label="Nice"
+																		title="Nice (nicec 0.9.6)" class="lang "
+																		tabindex="1054">Nice</a></li>
+																	<li class=""><a href="#" id="menu-lang-39"
+																		data-id="39" data-label="Scala"
+																		title="Scala (scala-2.11.7)" class="lang "
+																		tabindex="1069">Scala</a></li>
+																	<li class=""><a href="#" id="menu-lang-81"
+																		data-id="81" data-label="C" title="C (clang 3.7)"
+																		class="lang " tabindex="1025">C</a></li>
+																	<li class=""><a href="#" id="menu-lang-124"
+																		data-id="124" data-label="F#" title="F# (fsharp-3.1)"
+																		class="lang " tabindex="1040">F#</a></li>
+																	<li class=""><a href="#" id="menu-lang-122"
+																		data-id="122" data-label="Nim" title="Nim (0.11.2)"
+																		class="lang " tabindex="1055">Nim</a></li>
+																	<li class=""><a href="#" id="menu-lang-97"
+																		data-id="97" data-label="Scheme (chicken)"
+																		title="Scheme (chicken) (4.9)" class="lang "
+																		tabindex="1070">Scheme (chicken)</a></li>
+																	<li class=""><a href="#" id="menu-lang-82"
+																		data-id="82" data-label="C++" title="C++ (clang 3.7)"
+																		class="lang " tabindex="1026">C++</a></li>
+																	<li class=""><a href="#" id="menu-lang-123"
+																		data-id="123" data-label="Factor"
+																		title="Factor (factor-0.93)" class="lang "
+																		tabindex="1041">Factor</a></li>
+																	<li class=""><a href="#" id="menu-lang-56"
+																		data-id="56" data-label="Node.js"
+																		title="Node.js (0.12.7)" class="lang " tabindex="1056">Node.js</a></li>
+																	<li class=""><a href="#" id="menu-lang-33"
+																		data-id="33" data-label="Scheme (guile)"
+																		title="Scheme (guile) (guile 2.0.11)" class="lang "
+																		tabindex="1071">Scheme (guile)</a></li>
+																	<li class=""><a href="#" id="menu-lang-41"
+																		data-id="41" data-label="C++ 4.3.2"
+																		title="C++ 4.3.2 (gcc-4.3.2)" class="lang "
+																		tabindex="1027">C++ 4.3.2</a></li>
+																	<li class=""><a href="#" id="menu-lang-125"
+																		data-id="125" data-label="Falcon"
+																		title="Falcon (falcon-0.9.6.6)" class="lang "
+																		tabindex="1042">Falcon</a></li>
+																	<li class=""><a href="#" id="menu-lang-83"
+																		data-id="83" data-label="Objective-C"
+																		title="Objective-C (clang 3.7)" class="lang "
+																		tabindex="1057">Objective-C</a></li>
+																	<li class=""><a href="#" id="menu-lang-23"
+																		data-id="23" data-label="Smalltalk"
+																		title="Smalltalk (gst 3.2.4)" class="lang "
+																		tabindex="1072">Smalltalk</a></li>
+																	<li class=""><a href="#" id="menu-lang-34"
+																		data-id="34" data-label="C99 strict"
+																		title="C99 strict (gcc-5.1)" class="lang "
+																		tabindex="1028">C99 strict</a></li>
+																	<li class=""><a href="#" id="menu-lang-92"
+																		data-id="92" data-label="Fantom"
+																		title="Fantom (1.0.67)" class="lang " tabindex="1043">Fantom</a></li>
+																	<li class=""><a href="#" id="menu-lang-8"
+																		data-id="8" data-label="Ocaml"
+																		title="Ocaml (ocamlopt 4.01.0)" class="lang "
+																		tabindex="1058">Ocaml</a></li>
+																	<li class=""><a href="#" id="menu-lang-38"
+																		data-id="38" data-label="Tcl" title="Tcl (tclsh 8.6)"
+																		class="lang " tabindex="1073">Tcl</a></li>
+																	<li class=""><a href="#" id="menu-lang-14"
+																		data-id="14" data-label="CLIPS"
+																		title="CLIPS (clips 6.24)" class="lang "
+																		tabindex="1029">CLIPS</a></li>
+																	<li class=""><a href="#" id="menu-lang-107"
+																		data-id="107" data-label="Forth"
+																		title="Forth (gforth-0.7.2)" class="lang "
+																		tabindex="1044">Forth</a></li>
+																	<li class=""><a href="#" id="menu-lang-127"
+																		data-id="127" data-label="Octave"
+																		title="Octave (3.6.2)" class="lang " tabindex="1059">Octave</a>
+																	</li>
+																	<li class=""><a href="#" id="menu-lang-62"
+																		data-id="62" data-label="Text"
+																		title="Text (text 6.10)" class="lang " tabindex="1074">Text</a></li>
+																	<li class=""><a href="#" id="menu-lang-111"
+																		data-id="111" data-label="Clojure"
+																		title="Clojure (clojure 1.7)" class="lang "
+																		tabindex="1030">Clojure</a></li>
+																	<li class=""><a href="#" id="menu-lang-5"
+																		data-id="5" data-label="Fortran"
+																		title="Fortran (gfortran-5.1)" class="lang "
+																		tabindex="1045">Fortran</a></li>
+																	<li class=""><a href="#" id="menu-lang-119"
+																		data-id="119" data-label="Oz"
+																		title="Oz (mozart-1.4.0)" class="lang "
+																		tabindex="1060">Oz</a></li>
+																	<li class=""><a href="#" id="menu-lang-115"
+																		data-id="115" data-label="Unlambda"
+																		title="Unlambda (unlambda-2.0.0)" class="lang "
+																		tabindex="1075">Unlambda</a></li>
+																	<li class=""><a href="#" id="menu-lang-118"
+																		data-id="118" data-label="COBOL"
+																		title="COBOL (open-cobol-1.1)" class="lang "
+																		tabindex="1031">COBOL</a></li>
+																	<li class=""><a href="#" id="menu-lang-114"
+																		data-id="114" data-label="Go" title="Go (1.4.2)"
+																		class="lang " tabindex="1046">Go</a></li>
+																	<li class=""><a href="#" id="menu-lang-54"
+																		data-id="54" data-label="Perl 6"
+																		title="Perl 6 (rakudo-2014.07)" class="lang "
+																		tabindex="1061">Perl 6</a></li>
+																	<li class=""><a href="#" id="menu-lang-6"
+																		data-id="6" data-label="Whitespace"
+																		title="Whitespace (wspace 0.3)" class="lang "
+																		tabindex="1076">Whitespace</a></li>
+																	<li class=""><a href="#" id="menu-lang-106"
+																		data-id="106" data-label="COBOL 85"
+																		title="COBOL 85 (tinycobol-0.65.9)" class="lang "
+																		tabindex="1032">COBOL 85</a></li>
+																	<li class=""><a href="#" id="menu-lang-121"
+																		data-id="121" data-label="Groovy"
+																		title="Groovy (groovy-2.4)" class="lang "
+																		tabindex="1047">Groovy</a></li>
+																	<li class=""><a href="#" id="menu-lang-94"
+																		data-id="94" data-label="PicoLisp"
+																		title="PicoLisp (3.1.1)" class="lang " tabindex="1062">PicoLisp</a></li>
+																</ul>
+															</div>
+														</div>
+													</div>
+
+													<!-- show input -->
+													<button type="button" class="btn footer-item rel-tooltip"
+														data-toggle="button" title="Specify input (stdin)"
+														id="button-input2" style="display: none;">
+														<i class="icon-inbox"></i> stdin
+													</button>
+
+													<!-- visibility -->
+													<input type="hidden" name="public" value="1">
+													<div class="btn-group footer-item" style="display: none;"
+														data-toggle="buttons-radio" id="btn-group-visibility">
+														<button type="button" class="rel-tooltip btn active"
+															data-value="1"
+															title="Public - your code will be available to everyone.">
+															<i class="icon-globe"></i>
+														</button>
+														<button type="button" class="rel-tooltip btn "
+															data-value="0"
+															title="Secret - your code will be available only to those with whom you share a link.">
+															<i class="icon-glasses"></i>
+														</button>
+														<button type="button" class="rel-tooltip btn  disabled"
+															disabled="disabled" data-value="-1"
+															title="Private - only you will be able to access the code. You have to be signed in to use this option.">
+															<i class="icon-lock"></i>
+														</button>
+													</div>
+
+													<!-- more options -->
+													<a href="#" id="button-more-options2" class="reverse"
+														style="display: none;"> <span
+														class="more-options-more">more&nbsp;options</span> <span
+														class="more-options-less">fewer&nbsp;options</span>
+													</a>
+
+
+													<!-- submit -->
+													<div class="pull-right">
+														<input type="hidden" name="run" value="1">
+														<button type="submit" name="Submit" id="Translate2"
+															tabindex="2"
+															class="btn btn-success footer-item rel-tooltip"
+															title="Translate">
+															<i class="icon-cog-alt"></i> Translate
+														</button>
+														<button type="submit" name="Submit" id="Submit2"
+															tabindex="2"
+															class="btn btn-success footer-item rel-tooltip"
+															title="Run the program (Ctrl+Enter)">
+															<i class="icon-cog-alt"></i> Run
+														</button>
+													</div>
+
+													<div class="clearfix"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- <div class="span4">
 												ad
 												<div class="right-sidebar" data-spy="_affix"
 													data-offset-top="40">
@@ -2970,228 +3060,205 @@ public class Test
 												</div>
 											</div>
 										 -->
-									</div>
 								</div>
-								<!-- /.item -->
-								<div class="item"></div>
-								<!-- /.item -->
-								<div class="item"></div>
 							</div>
-							<!-- 
-						<a class="left carousel-control" href="#featured-project-carousel" data-slide="prev">‹</a> 
-						<a class="right carousel-control" href="#featured-project-carousel" data-slide="next">›</a> </div>
+							<!-- /.item -->
+							<div class="item"></div>
+							<!-- /.item -->
+							<div class="item"></div>
+						</div>
+						<!-- 
+						<a class="left carousel-control" href="#featured-project-carousel" data-slide="prev">?</a> 
+						<a class="right carousel-control" href="#featured-project-carousel" data-slide="next">?</a> </div>
 					 -->
-						</div>
 					</div>
 				</div>
-
 			</div>
-		</section>
-		<div class="bor"></div>
-
-		<div class="container">
-
-			<div class="row">
-				<!-- TODO: translate -->
-				<div class="span8">
-					<div class="row">
-						<div class="span4 home-info-box">
-							<legend>What is C.VA?</legend>
-							C.VA is an online compiler and debugging tool which allows you to
-							compile source code and execute it online in C# and JAVA.
-							Furthermore, C.VA can translate C# source code to JAVA and JAVA
-							to C#.
-						</div>
-						<div class="span4 home-info-box">
-							<legend>How to use C.VA?</legend>
-							You have to type JAVA on left side, and C# on right side. enter
-							the source code with optional input data... and you are ready to
-							go! Plus, if you know what JAVA code is of C#, C# is of JAVA,
-							click the translate button!
-						</div>
-					</div>
-					<div class="row">
-						<div class="span4 home-info-box">
-							<legend>Having problems?</legend>
-							Check the <a href="/samples">samples</a> to see how to write code
-							which works correctly. If you find out more, please do not have a
-							question on our project.
-						</div>
-						<div class="span4">
-							<legend>C.VA!!!</legend>
-							We are proud to present our <strong>C.VA!!!</strong> technology,
-							which allows you to execute programs on a remote server in a
-							secure way within a complete runtime environment. Visit the on
-							the 4th floor COEX.
-						</div>
-					</div>
-					<div class="row"></div>
-				</div>
-
-				<div class="span4 home-info-box">
-					<legend>Follow us</legend>
-					<div class="pull-right">
-						<a
-							href="http://tradecampus.kita.net/front/SubjSeqF.do?cmd=compSubjSeqMain&amp;p_trainingclass=04&amp;next=compSubjSeqApplyMain&amp;p_isapply=Y&amp;p_contentid=06&amp;p_outmenuid=47">
-							<img src="images/banner_43.jpg" />
-					</div>
-					<div id="fb-root" class=" fb_reset">
-						<div
-							style="position: absolute; top: -10000px; height: 0px; width: 0px;">
-							<div>
-								<iframe name="fb_xdm_frame_http" frameborder="0"
-									allowtransparency="true" allowfullscreen="true" scrolling="no"
-									id="fb_xdm_frame_http" aria-hidden="true"
-									title="Facebook Cross Domain Communication Frame" tabindex="-1"
-									src="http://staticxx.facebook.com/connect/xd_arbiter/r/fTmIQU3LxvB.js?version=42#channel=f13e906978281a&amp;origin=http%3A%2F%2Fideone.com"
-									style="border: none;"></iframe>
-								<iframe name="fb_xdm_frame_https" frameborder="0"
-									allowtransparency="true" allowfullscreen="true" scrolling="no"
-									id="fb_xdm_frame_https" aria-hidden="true"
-									title="Facebook Cross Domain Communication Frame" tabindex="-1"
-									src="https://staticxx.facebook.com/connect/xd_arbiter/r/fTmIQU3LxvB.js?version=42#channel=f13e906978281a&amp;origin=http%3A%2F%2Fideone.com"
-									style="border: none;"></iframe>
-							</div>
-						</div>
-						<div
-							style="position: absolute; top: -10000px; height: 0px; width: 0px;">
-							<div>
-								<iframe name="f33bad09c4dd864" frameborder="0"
-									allowtransparency="true" allowfullscreen="true" scrolling="no"
-									src="https://www.facebook.com/connect/ping?client_id=127237194030782&amp;domain=ideone.com&amp;origin=1&amp;redirect_uri=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FfTmIQU3LxvB.js%3Fversion%3D42%23cb%3Df1019df8a9b995c%26domain%3Dideone.com%26origin%3Dhttp%253A%252F%252Fideone.com%252Ff13e906978281a%26relation%3Dparent&amp;response_type=token%2Csigned_request%2Ccode&amp;sdk=joey"
-									style="display: none;"></iframe>
-							</div>
-						</div>
-					</div>
-					<script>
-						(function(d, s, id) {
-							var js, fjs = d.getElementsByTagName(s)[0];
-							if (d.getElementById(id))
-								return;
-							js = d.createElement(s);
-							js.id = id;
-							js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=127237194030782";
-							fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));
-					</script>
-
-					<!-- Place this tag after the last +1 button tag. -->
-					<script type="text/javascript">
-						(function() {
-							var po = document.createElement('script');
-							po.type = 'text/javascript';
-							po.async = true;
-							po.src = 'https://apis.google.com/js/plusone.js';
-							var s = document.getElementsByTagName('script')[0];
-							s.parentNode.insertBefore(po, s);
-						})();
-					</script>
-				</div>
-			</div>
-		</div>
-
-
-
-		<div id="cookie-ue"
-			style="border: 0px; margin: 0px; padding: 0px; position: fixed; left: 0px; bottom: 0px; background-color: #ddd; width: 100%; font-size: 12px; z-index: 10000; opacity: 0.9;">
-			<div style="padding: 5px;" class="container">
-				<span id="cookie-ue-msg-content">We use cookies to improve
-					our services. If you continue without changing your settings, we'll
-					assume that you are happy to receive all cookies on Ideone website.</span>
-				<button type="button" class="btn btn-small" title="OK"
-					id="cookie-ue-button">OK</button>
-			</div>
-
-			<script type="text/javascript">
-				$(document)
-						.ready(
-								function() {
-									$("#cookie-ue-msg-content")
-											.text(
-													"We use cookies to improve our services. If you continue without changing your settings, we'll assume that you are happy to receive all cookies on Ideone website.");
-									$("#cookie-ue-button").click(function() {
-										cookie_helper_set('ue', 1);
-										$("#cookie-ue").hide();
-									});
-								});
-			</script>
 
 		</div>
+	</section>
+	
+	<div class="white_content" id="openJ">
+		<div id="javaPop">
+			<h2>JAVA 코드창</h2>
+			<a href="#close"><button type="button" id="closeBtnJ">닫기</button></a>
+			<div id="javaSource"
+				style="border: 5px inset orange; width: 730px auto; height: 330px">
 
-		<div class="modal hide fade" id="bug-dialog" role="dialog"
-			tabindex="-1">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">×</button>
-				<h3>Report bug / make suggestion</h3>
-			</div>
-			<div class="modal-body">
-				<img src="//stx1.ideone.com/gfx/loader.gif"
-					style="width: 14px; height: 14px;" alt="loading...">
-			</div>
-			<div class="modal-footer">
-				<a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#"
-					class="btn btn-primary" id="bug-dialog-submit">submit</a>
 			</div>
 		</div>
+	</div>
 
+	<div class="white_content" id="openC">
+		<div id="csharpPop">
+			<h2>C# 코드창</h2>
+			<a href="#close"><button type="button" id="closeBtnC">닫기</button></a>
+			<div id="csharpSource"
+				style="border: 5px inset purple; width: 730px auto; height: 330px">
 
-		<div class="modal hide fade" id="lang-dialog">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">×</button>
-				<h3>Choose your language</h3>
-			</div>
-			<div class="modal-body">
-				<ul style="list-style-type: none;">
-					<li><a href="/lang/en"><b>English</b></a></li>
-					<li><a href="/lang/hi">Hindi</a></li>
-					<li><a href="/lang/hu">Hungarian</a></li>
-					<li><a href="/lang/mn">Mongolian</a></li>
-					<li><a href="/lang/pl">Polish</a></li>
-					<li><a href="/lang/ru">Russian</a></li>
-					<li><a href="/lang/es">Spanish</a></li>
-					<li><a href="/lang/zh">Traditional Chinese</a></li>
-				</ul>
-			</div>
-			<div class="modal-footer">
-				<a href="#" class="btn" data-dismiss="modal">Close</a>
 			</div>
 		</div>
+	</div>
 
+	<script type="text/javascript">
+		//set default view mode
+		$defaultViewMode = "full"; //full (fullscreen background), fit (fit to window), original (no scale)
 
+		//cache var
+		$bg = $("#bg");
+		$outer_container = $("#outer_container");
+		$tag = $('#tag');
+		$arrow = $('#arrow');
 
-		<script>
-			(function(i, s, o, g, r, a, m) {
-				i['GoogleAnalyticsObject'] = r;
-				i[r] = i[r] || function() {
-					(i[r].q = i[r].q || []).push(arguments)
-				}, i[r].l = 1 * new Date();
-				a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-				a.async = 1;
-				a.src = g;
-				m.parentNode.insertBefore(a, m)
-			})(window, document, 'script',
-					'//www.google-analytics.com/analytics.js', 'ga');
-			ga('create', 'UA-10507872-8', 'auto');
-			ga('send', 'pageview');
-		</script>
-		<script type="text/javascript">
-			$(function() {
-				$(document).on('click', '.track', function() {
-					var event = $(this).attr('data-event');
-					var action = $(this).attr('data-action');
-					var value = $(this).attr('data-value');
-					ga('send', 'event', event, action, value);
-					console.log(event);
+		$(window).load(function() {
+			SlidePanels("close");
+		});
+
+		//slide in/out left pane
+		$tag.click(function() {
+			SlidePanels("open");
+		});
+
+		$arrow.click(function() { //mouse out
+			SlidePanels("close");
+		});
+
+		function SlidePanels(action) {
+			var speed = 900;
+			var easing = "easeInOutExpo";
+			if (action == "open") {
+				$("#tag").fadeTo("fast", 0);
+				$outer_container.stop().animate({
+					left : 0
+				}, speed, easing);
+				$bg.stop().animate({
+					left : 585
+				}, speed, easing);
+			} else {
+				$outer_container.stop().animate({
+					left : -800
+				}, speed, easing);
+				$bg.stop().animate({
+					left : 0
+				}, speed, easing, function() {
+					$("#tag").fadeTo("fast", 1);
 				});
-			});
+			}
+		}
+	</script>
+	
+		</div>
+	</div>
+	<script src="script/custom-index.js"></script>
+
+	<input type="hidden" id="site" value="index">
+	<input type="hidden" name="p1" id="p1"
+		value="10995f790962d0d24a86cfc233e4c4bf">
+	<input type="hidden" name="p2" id="p2" value="8">
+	<input type="hidden" name="p3" id="p3" value="19">
+	<input type="hidden" name="p4" id="p4" value="1368">
+	<input type="hidden" name="clone_link" value="/">
+
+	<div id="main_form_files"></div>
+
+	<div class="bor"></div>
+
+	<div id="cookie-ue"
+		style="border: 0px; margin: 0px; padding: 0px; position: fixed; left: 0px; bottom: 0px; background-color: #ddd; width: 100%; font-size: 12px; z-index: 10000; opacity: 0.9;">
+		<div style="padding: 5px;" class="container">
+			<span id="cookie-ue-msg-content">We use cookies to improve our
+				services. If you continue without changing your settings, we'll
+				assume that you are happy to receive all cookies on Ideone website.</span>
+			<button type="button" class="btn btn-small" title="OK"
+				id="cookie-ue-button">OK</button>
+		</div>
+
+		<script type="text/javascript">
+			$(document)
+					.ready(
+							function() {
+								$("#cookie-ue-msg-content")
+										.text(
+												"We use cookies to improve our services. If you continue without changing your settings, we'll assume that you are happy to receive all cookies on Ideone website.");
+								$("#cookie-ue-button").click(function() {
+									cookie_helper_set('ue', 1);
+									$("#cookie-ue").hide();
+								});
+							});
 		</script>
 
+	</div>
+
+	<div class="modal hide fade" id="bug-dialog" role="dialog"
+		tabindex="-1">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h3>Report bug / make suggestion</h3>
+		</div>
+		<div class="modal-body">
+			<img src="//stx1.ideone.com/gfx/loader.gif"
+				style="width: 14px; height: 14px;" alt="loading...">
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#"
+				class="btn btn-primary" id="bug-dialog-submit">submit</a>
+		</div>
+	</div>
+
+
+	<div class="modal hide fade" id="lang-dialog">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">×</button>
+			<h3>Choose your language</h3>
+		</div>
+		<div class="modal-body">
+			<ul style="list-style-type: none;">
+				<li><a href="/lang/en"><b>English</b></a></li>
+				<li><a href="/lang/hi">Hindi</a></li>
+				<li><a href="/lang/hu">Hungarian</a></li>
+				<li><a href="/lang/mn">Mongolian</a></li>
+				<li><a href="/lang/pl">Polish</a></li>
+				<li><a href="/lang/ru">Russian</a></li>
+				<li><a href="/lang/es">Spanish</a></li>
+				<li><a href="/lang/zh">Traditional Chinese</a></li>
+			</ul>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+
+	<script>
+		(function(i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function() {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script',
+				'//www.google-analytics.com/analytics.js', 'ga');
+		ga('create', 'UA-10507872-8', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<script type="text/javascript">
+		$(function() {
+			$(document).on('click', '.track', function() {
+				var event = $(this).attr('data-event');
+				var action = $(this).attr('data-action');
+				var value = $(this).attr('data-value');
+				ga('send', 'event', event, action, value);
+				console.log(event);
+			});
+		});
+	</script>
 
 	</div>
 	<!-- end of #_container -->
-
 
 	<!--
 <script type="text/javascript">
@@ -3210,5 +3277,6 @@ public class Test
 	<iframe id="rufous-sandbox" scrolling="no" frameborder="0"
 		allowtransparency="true" allowfullscreen="true"
 		style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;"></iframe>
+
 </body>
 </html>

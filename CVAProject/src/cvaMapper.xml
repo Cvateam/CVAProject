@@ -33,4 +33,10 @@
 		* from board
 
 	</select>
+	<select id="listRead" resultType="Question">
+		select * from question order by qno asc
+	</select>
+	<select id="questiondetail" parameterType="int" resultType="Question">
+		select * from question where qno =#{qno}
+	</select>
 </mapper>
