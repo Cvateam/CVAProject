@@ -2361,6 +2361,7 @@ class Ideone
 													<!-- submit -->
 													<div class="pull-right">
 														<input type="hidden" name="run" value="1">
+														<img id = "downloadBtn" src="images/download.png" width = "20px" height="10px">
 														<button type="submit" name="Submit" id="Translate1"
 															tabindex="2"
 															class="btn btn-success footer-item rel-tooltip"
@@ -2373,6 +2374,7 @@ class Ideone
 															title="Run the program">
 															<i class="icon-cog-alt"></i> Run
 														</button>
+														
 													</div>
 
 													<div class="clearfix"></div>
@@ -3016,6 +3018,7 @@ public class Test
 													<!-- submit -->
 													<div class="pull-right">
 														<input type="hidden" name="run" value="1">
+															<img id = "downloadBtn" src="images/download.png" width = "20px" height="10px">
 														<button type="submit" name="Submit" id="Translate2"
 															tabindex="2"
 															class="btn btn-success footer-item rel-tooltip"
