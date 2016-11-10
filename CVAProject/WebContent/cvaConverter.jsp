@@ -1425,7 +1425,7 @@ transform
 		</div>
 	</div>
 
-	<div id="bg">
+	<div id="bg" style="overflow: scroll;">
 		<div id="tag"></div>
 		<div id="middle" style="position: relative; left: 50px">
 		

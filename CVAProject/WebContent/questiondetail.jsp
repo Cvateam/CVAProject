@@ -1294,7 +1294,11 @@ transform
 
 
 
+
+
 :rotate(360deg)
+
+
 
 
 
@@ -1391,12 +1395,18 @@ transform
 }
 
 input, textarea, .uneditable-input {
-    width: 500px;
-
+	width: 500px;
+}
 </style>
 </head>
 <body class="home  not-responsive">
-
+<%-- <script type="text/javascript">
+window.onscroll = function(){
+	var scroll1 =(document.documentElement && document.documentElement.scrollTop)||document.body.scrollTop;
+	document.title = 'scroll position:'+top;
+	}
+};
+</script> --%>
 
 
 
@@ -1416,16 +1426,17 @@ input, textarea, .uneditable-input {
 						d1.innerHTML = output;
 					}
 					</script>
-					<br/>
-					<s:textarea id="test" cols="100" rows="45" readonly="readonly"></s:textarea>					
+					<br />
+					<s:textarea id="test" cols="100" rows="45" readonly="readonly"></s:textarea>
 
-					<img src="images/hide.png" id="arrow" style="position: absolute; left: 86%; top: 60%; "> 
+					<img src="images/hide.png" id="arrow"
+						style="position: absolute; left: 86%; top: 60%;">
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="bg">
+	<div id="bg" style="overflow: scroll;">
 		<div id="tag"></div>
 		<div id="middle" style="position: relative; left: 50px">
 
