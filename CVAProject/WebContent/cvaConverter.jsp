@@ -80,17 +80,17 @@ a [class^="icon-"], a [class*=" icon-"] {
 								.each(
 										response.boardList,
 										function(index, item) {
-											var javaFile = item.savedfile;
-											var csharpFile = item.savedfile2;
+											var javaFile = item.javaCode;
+											var csharpFile = item.csharpCode;
 
 											if (javaFile != null
 													&& csharpFile != null) {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.title
+														+ item.boardTitle1
 														+ "</td><td>"
-														+ item.inputdate
+														+ item.boardMemo
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											if (javaFile != null
@@ -98,9 +98,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.title
+														+ item.boardTitle1
 														+ "</td><td>"
-														+ item.inputdate
+														+ item.boardMemo
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											if (javaFile == null
@@ -108,7 +108,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.title
+														+ item.boardMemo
 														+ "</td><td>"
 														+ item.inputdate
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
@@ -118,9 +118,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.title
+														+ item.boardTitle1
 														+ "</td><td>"
-														+ item.inputdate
+														+ item.boardMemo
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											$("div.contents table").append(txt);
@@ -151,19 +151,18 @@ a [class^="icon-"], a [class*=" icon-"] {
 											$
 													.each(
 															response.boardList,
-															function(index,
-																	item) {
-																var javaFile = item.savedfile;
-																var csharpFile = item.savedfile2;
+															function(index,item) {
+																var javaFile = item.javaCode;
+																var csharpFile = item.csharpCode;
 
 																if (javaFile != null
 																		&& csharpFile != null) {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.title
+																			+ item.boardTitle1
 																			+ "</td><td>"
-																			+ item.inputdate
+																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 																}
 																if (javaFile != null
@@ -171,9 +170,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.title
+																			+ item.boardTitle1
 																			+ "</td><td>"
-																			+ item.inputdate
+																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 																}
 																if (javaFile == null
@@ -181,9 +180,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.title
+																			+ item.boardTitle2
 																			+ "</td><td>"
-																			+ item.inputdate
+																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 																}
 																if (javaFile == null
@@ -191,9 +190,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.title
+																			+ item.boardTitle1
 																			+ "</td><td>"
-																			+ item.inputdate
+																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 																}
 																$(
@@ -222,7 +221,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 						success : function(response) {
 							var txt = "";
 							var txt2 = response.board;
-							txt = "<h3>" + txt2.savedfile + "<h3>";
+							txt = "<h3>" + txt2.javaCode + "<h3>";
 							$("#javaSource").append(txt);
 						}
 					});
@@ -246,7 +245,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 						success : function(response) {
 							var txt = "";
 							var txt2 = response.board;
-							txt = "<h3>" + txt2.savedfile2 + "<h3>";
+							txt = "<h3>" + txt2.csharpCode + "<h3>";
 							$("#csharpSource").append(txt);
 						}
 					});
@@ -1382,9 +1381,7 @@ transform
 	position: absolute;
 }
 </style>
-
 </head>
-
 <body class="home  not-responsive">
 
 
@@ -1413,7 +1410,7 @@ transform
 						<tr>
 							<th id="boardSmall">No</th>
 							<th id="boardTitle">제목</th>
-							<th id="boardDate">일자</th>
+							<th id="boardDate">메모</th>
 							<th id="boardSmall">JAVA</th>
 							<th id="boardSmall">C#</th>
 						</tr>
@@ -1431,6 +1428,7 @@ transform
 		<div id="tag"></div>
 		<div id="middle" style="position: relative; left: 50px">
 		
+		
 		<div class="navbar " id="primary-navigation" style="position: relative; left: 20px">
 			<div class="navbar-inner">
 
@@ -1442,34 +1440,24 @@ transform
 						style="background-image: url('images/Logomakr_1yE4r7.png');"></span></a>
 					<div class="nav-collapse collapse " style="height: 0px;">
 						<ul class="nav pull-right" style="margin-right: -400px ">
-							<s:if test='%{#session.loginId == null}'>
-							<li class="active"><a href="./customer/loginForm.action" class="scroll-page"><i
-									class="icon-home"></i>Join</a></li>
-									</s:if>
-									<s:if test='%{#session.loginId != null}'>
-							<li class=""><a href="./logoutConverter" class="scroll-page"><i
-									class="icon-lightbulb" ></i> Logout</a></li>
-									</s:if>
-							<li class=""><a href="./boardList" class="scroll-page"><i
-									class="icon-cloud"></i> Board</a></li>
-							<s:if test='%{#session.loginId == null}'>
+							<li class="active"><a href="/" class="scroll-page"><i
+									class="icon-home"></i>new code</a></li>
+							<li class=""><a href="/samples" class="scroll-page"><i
+									class="icon-lightbulb"></i> samples</a></li>
+							<li class=""><a href="/recent" class="scroll-page"><i
+									class="icon-cloud"></i> recent codes</a></li>
 							<li class="dropdown"><a href="#"
 								class="dropdown-toggle btn-singin-wnd-open"
-								data-toggle="dropdown"><i class="icon-signin"></i>Login</a>
-								</s:if>
-								<s:if test = "%{#session.message != null}">
-									<script>
-										alert("아이디나 비번을 잘못입력하셨습니다.");
-									</script>
-								</s:if> 
+								data-toggle="dropdown"><i class="icon-signin"></i> sign in</a>
 								<ul class="dropdown-menu dropdown-form" id="signin-dropdown">
 									<li class="dropdown-caret right"><span class="caret-outer"></span>
 										<span class="caret-inner"></span></li>
 									<li>
 										<div class="modal-body">
-											<form action="./loginConverter" method="post" id = "form">
+											<form action="http://ideone.com/account/login" method="post">
 												<div style="margin-bottom: 20px;">
-													New user? <a class="normal-link" href="/account/register">Join</a>
+													New user? <a class="normal-link" href="/account/register">Sign
+														up</a>
 												</div>
 
 												<div class="control-group">
@@ -1477,7 +1465,7 @@ transform
 														<div class="input-prepend" style="margin-bottom: 0px">
 															<span class="add-on rel-tooltip" title="Username"><i
 																class="icon-user"></i></span> <input type="text" class="span2"
-																id="Username" name = "custid"
+																id="username" name="username" value=""
 																placeholder="Username">
 														</div>
 													</div>
@@ -1488,28 +1476,33 @@ transform
 														<div class="input-prepend">
 															<span class="add-on rel-tooltip" title="Password"><i
 																class="icon-key"></i></span> <input type="password"
-																class="span2" id="Password"  name = "password"
+																class="span2" id="password" name="password" value=""
 																placeholder="Password">
 														</div>
 													</div>
 												</div>
+
+												<input type="hidden" name="remember" value="yes"> <input
+													type="hidden" name="next" value="Lw==">
+
 												<div class="control-group">
 													<div class="controls">
-														<button type="submit" class = "login">
-															<i class="icon-signin"></i> Login
+														<button type="submit" class="btn">
+															<i class="icon-signin"></i> Sign in
 														</button>
 													</div>
 												</div>
 
 												<div>
 													<a class="normal-link" href="/account/forgot">Can't
-														Login?</a>
+														sign in?</a>
 												</div>
 
 												<hr class="clear" style="margin: 0px; margin-bottom: 10px">
-
+												<a class="btn facebook-login-button"
+													href="https://www.facebook.com/dialog/oauth?client_id=347515280067&amp;redirect_uri=http://ideone.com/account/registerfb/&amp;scope=email,user_location,user_hometown">Log
+													in with Facebook</a>
 											</form>
-										
 										</div>
 									</li>
 								</ul></li>
@@ -2761,7 +2754,7 @@ public class Test
 															</div>
 															<div class="rest-box">
 																<legend>others</legend>
-																<ul class="rest">
+																	<ul class="rest">
 																	<li class=""><a href="#" id="menu-lang-7"
 																		data-id="7" data-label="Ada" title="Ada (gnat-5.1)"
 																		class="lang " tabindex="1018">Ada</a></li>

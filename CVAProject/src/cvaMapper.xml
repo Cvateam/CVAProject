@@ -39,4 +39,18 @@
 	<select id="questiondetail" parameterType="int" resultType="Question">
 		select * from question where qno =#{qno}
 	</select>
+	
+	<select id="listAllBoard" resultType="Board">
+	select * from Board
+	</select>
+	
+	<select id="searchBoard" parameterType="String" resultType="Board">
+	select * from Board where title like '%' || #{title} || '%'
+	</select>
+
+<!--팝 로드 두개 다 일로 들어옴 -->
+
+<select id="popLoad" parameterType="int" resultType="Board">
+	select * from Board where boardnum=#{boardnum}
+	</select>
 </mapper>
