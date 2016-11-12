@@ -1382,7 +1382,9 @@ transform
 	position: absolute;
 }
 </style>
+
 </head>
+
 <body class="home  not-responsive">
 
 
@@ -1429,7 +1431,6 @@ transform
 		<div id="tag"></div>
 		<div id="middle" style="position: relative; left: 50px">
 		
-		
 		<div class="navbar " id="primary-navigation" style="position: relative; left: 20px">
 			<div class="navbar-inner">
 
@@ -1441,24 +1442,34 @@ transform
 						style="background-image: url('images/Logomakr_1yE4r7.png');"></span></a>
 					<div class="nav-collapse collapse " style="height: 0px;">
 						<ul class="nav pull-right" style="margin-right: -400px ">
-							<li class="active"><a href="/" class="scroll-page"><i
-									class="icon-home"></i>new code</a></li>
-							<li class=""><a href="/samples" class="scroll-page"><i
-									class="icon-lightbulb"></i> samples</a></li>
-							<li class=""><a href="/recent" class="scroll-page"><i
-									class="icon-cloud"></i> recent codes</a></li>
+							<s:if test='%{#session.loginId == null}'>
+							<li class="active"><a href="./customer/loginForm.action" class="scroll-page"><i
+									class="icon-home"></i>Join</a></li>
+									</s:if>
+									<s:if test='%{#session.loginId != null}'>
+							<li class=""><a href="./logoutConverter" class="scroll-page"><i
+									class="icon-lightbulb" ></i> Logout</a></li>
+									</s:if>
+							<li class=""><a href="./boardList" class="scroll-page"><i
+									class="icon-cloud"></i> Board</a></li>
+							<s:if test='%{#session.loginId == null}'>
 							<li class="dropdown"><a href="#"
 								class="dropdown-toggle btn-singin-wnd-open"
-								data-toggle="dropdown"><i class="icon-signin"></i> sign in</a>
+								data-toggle="dropdown"><i class="icon-signin"></i>Login</a>
+								</s:if>
+								<s:if test = "%{#session.message != null}">
+									<script>
+										alert("아이디나 비번을 잘못입력하셨습니다.");
+									</script>
+								</s:if> 
 								<ul class="dropdown-menu dropdown-form" id="signin-dropdown">
 									<li class="dropdown-caret right"><span class="caret-outer"></span>
 										<span class="caret-inner"></span></li>
 									<li>
 										<div class="modal-body">
-											<form action="http://ideone.com/account/login" method="post">
+											<form action="./loginConverter" method="post" id = "form">
 												<div style="margin-bottom: 20px;">
-													New user? <a class="normal-link" href="/account/register">Sign
-														up</a>
+													New user? <a class="normal-link" href="/account/register">Join</a>
 												</div>
 
 												<div class="control-group">
@@ -1466,7 +1477,7 @@ transform
 														<div class="input-prepend" style="margin-bottom: 0px">
 															<span class="add-on rel-tooltip" title="Username"><i
 																class="icon-user"></i></span> <input type="text" class="span2"
-																id="username" name="username" value=""
+																id="Username" name = "custid"
 																placeholder="Username">
 														</div>
 													</div>
@@ -1477,33 +1488,28 @@ transform
 														<div class="input-prepend">
 															<span class="add-on rel-tooltip" title="Password"><i
 																class="icon-key"></i></span> <input type="password"
-																class="span2" id="password" name="password" value=""
+																class="span2" id="Password"  name = "password"
 																placeholder="Password">
 														</div>
 													</div>
 												</div>
-
-												<input type="hidden" name="remember" value="yes"> <input
-													type="hidden" name="next" value="Lw==">
-
 												<div class="control-group">
 													<div class="controls">
-														<button type="submit" class="btn">
-															<i class="icon-signin"></i> Sign in
+														<button type="submit" class = "login">
+															<i class="icon-signin"></i> Login
 														</button>
 													</div>
 												</div>
 
 												<div>
 													<a class="normal-link" href="/account/forgot">Can't
-														sign in?</a>
+														Login?</a>
 												</div>
 
 												<hr class="clear" style="margin: 0px; margin-bottom: 10px">
-												<a class="btn facebook-login-button"
-													href="https://www.facebook.com/dialog/oauth?client_id=347515280067&amp;redirect_uri=http://ideone.com/account/registerfb/&amp;scope=email,user_location,user_hometown">Log
-													in with Facebook</a>
+
 											</form>
+										
 										</div>
 									</li>
 								</ul></li>

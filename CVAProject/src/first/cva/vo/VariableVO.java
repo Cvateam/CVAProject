@@ -3,7 +3,6 @@ package first.cva.vo;
 import java.util.ArrayList;
 
 public class VariableVO {
-	final static public String a = "g";
 	private String code;
 	private boolean beingStatic;
 	private boolean beingFinal;

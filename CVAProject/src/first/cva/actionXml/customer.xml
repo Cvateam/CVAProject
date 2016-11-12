@@ -41,15 +41,13 @@
 
 		<action name="login" method="login"
 			class = "first.cva.action.CustomerAction">
-			<result name="success" type="redirect">/converterMain.action</result>
-			<result name="input" type="redirect">/index.action</result>
-			<result name="admin" type="redirect">/admin/listLoan.action</result>
+			<result name="success" type="redirect">converterMain</result>
 		</action>
 
 		<!-- 로그아웃 처리 -->
 		<action name="logout" method="logout"
 			class = "first.cva.action.CustomerAction">
-			<result name="success" type="redirect">/index.action</result>
+			<result name="json" ></result>
 		</action>
 
 		<!-- 개인정보 수정 폼으로 -->

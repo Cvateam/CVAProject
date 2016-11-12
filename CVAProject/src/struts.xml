@@ -18,7 +18,7 @@
 			<interceptor-ref name="loginInterceptor" />
 		</interceptor-stack>
 	</interceptors> -->
-		<default-action-ref name="index"/>
+		 <default-action-ref name="index"/> 
 		
 		<action name="index">
 			<result>/mainIndex.jsp</result>
@@ -71,7 +71,24 @@
 		<action name="questiondetail" class="first.cva.action.QuestionAction" method="questiondetail">
 			<result>/questiondetail.jsp</result>
 		</action>
+		
+		<!-- 로그인 처리 -->
+		<action name="login" method="login"
+			class = "first.cva.action.CustomerAction">
+			<result name="json"></result>
+		</action>
+		<action name="loginConverter" method="login"
+			class = "first.cva.action.CustomerAction">
+			<result name="success" type = "redirect">converter</result>
+			<result name = "input" type = "redirect">converter</result>
+		</action>
+				
+		<action name= "logoutConverter" method="logout"
+			class = "first.cva.action.CustomerAction">
+				<result type = "redirect" >converter</result>
+		</action>	
 	</package>
+	
 	
 	<include file="first/cva/actionXml/customer.xml"/>
 	<!-- <include file="first/cva/actionXml/csharpOperation.xml"></include> -->

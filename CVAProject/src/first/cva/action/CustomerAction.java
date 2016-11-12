@@ -19,6 +19,7 @@ public class CustomerAction extends ActionSupport implements SessionAware {
 	String custid;			/** 고객 아이디 */
 	String password;		/** 고객 비밀번호 */
 	boolean duplicated;		/** 아이디 중복 여부 */
+	String message;
 	
 	CustomerDAO dao = new CustomerDAO();	/** 고객 정보 DAO 객체 */
 	Map<String, Object> session;		/** 세션 정보 */
@@ -54,12 +55,13 @@ public class CustomerAction extends ActionSupport implements SessionAware {
 	 */
 	public String login() {
 		customer = dao.selectCustomer(custid);
-		System.out.println(custid);
 		//ID가 없거나 비밀번호가 다르면 로그인 실패
 		if (customer == null) {
 			return INPUT;
 		}
 		if (!password.equals(customer.getPassword())) {
+			message = "아이디나 비밀번호가 틀리셨습니다.";
+			session.put("message", message);
 			return INPUT;
 		}
 		//로그인 성공하는 경우 세션에 로그인 정보 저장
@@ -68,7 +70,8 @@ public class CustomerAction extends ActionSupport implements SessionAware {
 		//"admin" 아이디로 로그인한 경우 세션에 관리자 여부 저장
 		if (custid.equals("a")) { // 관리자 파악 
 			session.put("isAdmin", true);
-			
+			session.remove("message");
+			System.out.println("password = " + password);
 			return SUCCESS;
 		}
 		
@@ -151,6 +154,14 @@ public class CustomerAction extends ActionSupport implements SessionAware {
 
 	public void setDao(CustomerDAO dao) {
 		this.dao = dao;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 }

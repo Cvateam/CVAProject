@@ -11,13 +11,13 @@
      <link rel="stylesheet" href="../css/main.css">
 	<script type="text/javascript" src="../script/jquery-3.1.0.min.js"></script>
 		<script>
-		$(function(){
+/* 		$(function(){
 			$("#previousBtn").on('click' , function(){
-				location.href = "../converterMain";
+				location.href = "../history.go(-1)";
 			});
 			
 		});
-	
+	 */
 	</script>
   </head>
   <body  style="background-image: url(../images/img3.jpg); background-size: contain;  ">
@@ -32,13 +32,13 @@
     <span class="text">LOGIN</span>
     <span class="loader"></span>
   </header>
-  <form class="form" action="login" method="POST" id="form"> 
+  <form class="form" action="../login" method="POST" id="form"> 
     <input class="input" type="text" placeholder="Username" id = "Username" name = "custid">
     <input class="input" type="password" placeholder="Password" id = "Password" name = "password">
-    <button class="btn" type="submit" ></button>
+    <button class="btn" type="submit" id = "login"></button>
   </form>
 </div>
-<button class ="arrowbtn" id = "previousBtn">←
+<button class ="arrowbtn" id = "previousBtn" onClick="history.go(-1); return false;">←
 </button>
 <!-- <button class ="resetbtn" type= "reset">Reset
 </button> -->
