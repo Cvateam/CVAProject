@@ -1,5 +1,6 @@
 package first.cva.action;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -46,7 +47,7 @@ public class JavaOperationAction extends ActionSupport {
 		File file2 = null;
 		//Test클래스명 이거 대신 한문장 읽어들인 뒤에 계속 트림 돌려서 없을때까지 컨테인 쓰든지 해서 그리고 클래스명 정확하게 읽어오기
 		//첫 라인 패키지명 읽어오기   //주석처리된 /* package whatever; // don't place package name! */이부분읽어들임 . 나중에 처리할 부분
-		String oneSentence[] = javaCode.split("\n"); // 한줄씩 읽어들임;
+		/*String oneSentence[] = javaCode.split("\n"); // 한줄씩 읽어들임;
 		String toReadPackage = oneSentence[0].trim(); // package 첫라인이어야함
 
 		String packageName = null;
@@ -59,11 +60,11 @@ public class JavaOperationAction extends ActionSupport {
 			packageName = toReadPackage.substring(beginIndex+8, endIndex);//beginIndex+8 package+1 띄어쓰기
 
 			String dir = directory.getAbsolutePath()+"/"+packageName; // .java 파일들 놓을 위치(패키지명으로 처리)  	
-			File packagedir = new File(dir);
-			packagedir.mkdirs();
+			//File packagedir = new File(dir);
+			//packagedir.mkdirs();
 
-			file2  = new File(dir+"/Test2.java"); // 패키지의 두번째 파일
-			File file1  = new File(dir+"/Test.java");  // 첫번째 파일 
+			file2  = new File(directory.getAbsolutePath()+"/Test2.java"); // 패키지의 두번째 파일
+			File file1  = new File(directory.getAbsolutePath()+"/Test.java");  // 첫번째 파일 
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(file1));
 				out.write(javaCode); out.newLine();
@@ -79,10 +80,10 @@ public class JavaOperationAction extends ActionSupport {
 				System.err.println(e);
 				System.exit(1);
 			}
-			  source  = new File(dir+"\\Test.java"); // package 컴파일 main 
+			  source  = new File(directory.getAbsolutePath()+"\\Test.java"); // package 컴파일 main 
 		
 		}else{// 소스코드 하나 컴파일 
-			source =  new File(directory.getAbsolutePath()+"\\Test.java");
+*/			source =  new File(directory.getAbsolutePath()+"\\Test.java");
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(source));
 				out.write(javaCode); out.newLine();
@@ -92,7 +93,7 @@ public class JavaOperationAction extends ActionSupport {
 				System.err.println(e);
 				System.exit(1);
 			}
-		}
+		
 		////////////////////////////////////// 소스코드 확인  //////////////////////////
 		
 		/*	간단 cmd 이용 소스코드 컴파일 코드      
@@ -110,10 +111,11 @@ public class JavaOperationAction extends ActionSupport {
 			
 		}*/
 		Process compile = null;
+
 		
-		compile = runtime.exec("javac -sourcepath  " +source.getParent()+" "+ file2.getAbsolutePath() + " ");
-		System.out.println("=========================Test2 컴파일 끝");
-		compile = runtime.exec("javac -classpath  " +file2.getAbsolutePath()+" "+ source.getAbsolutePath() + " ");
+		//compile = runtime.exec("javac -d " +source.getParent()+"/classes "+file2.getAbsolutePath());
+		//System.out.println("=========================Test2 컴파일 끝");
+		compile = runtime.exec("javac -sourcepath "+source.getParent()+" "+ source.getAbsolutePath());
 		//compile = runtime.exec("javac -classpath  " +source.getParent()+" "+ source.getAbsolutePath() + " ");
 		System.out.println("=========================Test 컴파일 끝");
 		try{
@@ -138,7 +140,9 @@ public class JavaOperationAction extends ActionSupport {
 		System.out.println("에러코드 생성 ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ");
 		if (compileLog1.isEmpty()){
 			String name = source.getName();
-			Process java = runtime.exec("java -cp " + source.getParent() + " " + name.substring(0, name.lastIndexOf(".")) + " ");
+			
+			//Process java = runtime.exec("java -cp .;" +source.getParent()+"/classes"+ name.substring(0, name.lastIndexOf(".")) + " ");
+			Process java = runtime.exec("java -cp " +source.getParent()+" "+ name.substring(0, name.lastIndexOf(".")) + " ");
 			System.out.println("run 실행 ");
 			try{
 				java.waitFor();
@@ -164,7 +168,9 @@ public class JavaOperationAction extends ActionSupport {
 			javaCompileCode =   compileLog1.replace( "C:\\SetUpFile\\eclipse\\eclipse-jee-neon-R-win32-x86_64\\eclipse\\WebJava\\Request\\", " ");
 			//source.delete();//java파일삭제
 		}
+		
 		return SUCCESS;
+	
 	}//java compile
 
 
