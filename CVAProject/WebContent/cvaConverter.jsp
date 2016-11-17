@@ -80,17 +80,17 @@ a [class^="icon-"], a [class*=" icon-"] {
 								.each(
 										response.boardList,
 										function(index, item) {
-											var javaFile = item.savedfile;
-											var csharpFile = item.savedfile2;
+											var javaFile = item.javaCode;
+											var csharpFile = item.csharpCode;
 
 											if (javaFile != null
 													&& csharpFile != null) {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.title
+														+ item.boardTitle1
 														+ "</td><td>"
-														+ item.inputdate
+														+ item.boardMemo
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											if (javaFile != null
@@ -98,9 +98,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.title
+														+ item.boardTitle1
 														+ "</td><td>"
-														+ item.inputdate
+														+ item.boardMemo
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											if (javaFile == null
@@ -108,7 +108,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.title
+														+ item.boardMemo
 														+ "</td><td>"
 														+ item.inputdate
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
@@ -118,9 +118,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.title
+														+ item.boardTitle1
 														+ "</td><td>"
-														+ item.inputdate
+														+ item.boardMemo
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											$("div.contents table").append(txt);
@@ -151,19 +151,18 @@ a [class^="icon-"], a [class*=" icon-"] {
 											$
 													.each(
 															response.boardList,
-															function(index,
-																	item) {
-																var javaFile = item.savedfile;
-																var csharpFile = item.savedfile2;
+															function(index,item) {
+																var javaFile = item.javaCode;
+																var csharpFile = item.csharpCode;
 
 																if (javaFile != null
 																		&& csharpFile != null) {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.title
+																			+ item.boardTitle1
 																			+ "</td><td>"
-																			+ item.inputdate
+																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 																}
 																if (javaFile != null
@@ -171,9 +170,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.title
+																			+ item.boardTitle1
 																			+ "</td><td>"
-																			+ item.inputdate
+																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 																}
 																if (javaFile == null
@@ -181,9 +180,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.title
+																			+ item.boardTitle2
 																			+ "</td><td>"
-																			+ item.inputdate
+																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 																}
 																if (javaFile == null
@@ -191,9 +190,9 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.title
+																			+ item.boardTitle1
 																			+ "</td><td>"
-																			+ item.inputdate
+																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 																}
 																$(
@@ -222,7 +221,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 						success : function(response) {
 							var txt = "";
 							var txt2 = response.board;
-							txt = "<h3>" + txt2.savedfile + "<h3>";
+							txt = "<h3>" + txt2.javaCode + "<h3>";
 							$("#javaSource").append(txt);
 						}
 					});
@@ -246,7 +245,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 						success : function(response) {
 							var txt = "";
 							var txt2 = response.board;
-							txt = "<h3>" + txt2.savedfile2 + "<h3>";
+							txt = "<h3>" + txt2.csharpCode + "<h3>";
 							$("#csharpSource").append(txt);
 						}
 					});
@@ -1411,7 +1410,7 @@ transform
 						<tr>
 							<th id="boardSmall">No</th>
 							<th id="boardTitle">제목</th>
-							<th id="boardDate">일자</th>
+							<th id="boardDate">메모</th>
 							<th id="boardSmall">JAVA</th>
 							<th id="boardSmall">C#</th>
 						</tr>
@@ -1425,7 +1424,7 @@ transform
 		</div>
 	</div>
 
-	<div id="bg">
+	<div id="bg" style="overflow: scroll;">
 		<div id="tag"></div>
 		<div id="middle" style="position: relative; left: 50px">
 		
@@ -2755,7 +2754,7 @@ public class Test
 															</div>
 															<div class="rest-box">
 																<legend>others</legend>
-																<ul class="rest">
+																	<ul class="rest">
 																	<li class=""><a href="#" id="menu-lang-7"
 																		data-id="7" data-label="Ada" title="Ada (gnat-5.1)"
 																		class="lang " tabindex="1018">Ada</a></li>

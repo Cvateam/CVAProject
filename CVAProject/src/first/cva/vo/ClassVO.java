@@ -77,7 +77,7 @@ public class ClassVO {
 		
 		for (int ii = 0; ii < generatorString.size(); ii++) {
 			code1 += generatorString.get(ii) + "\n";
-			if (generatorString.get(ii).indexOf("{") != -1) { // 어디서부터 어디까지인가
+			if (generatorString.get(ii).indexOf("{") != -1) {
 				parenthesis++;
 			} else if (generatorString.get(ii).indexOf("}") != -1) {
 				parenthesis--;
@@ -122,8 +122,7 @@ public class ClassVO {
 								getterSetterString.add(splitCode1.get(kk));
 								for (int hh = kk + 1; hh < splitCode1.size(); hh++) {
 									getterSetterString.add(splitCode1.get(hh));
-									if (splitCode1.get(hh).indexOf("{") != -1) { // 어디서부터
-																					// 어디까지인가
+									if (splitCode1.get(hh).indexOf("{") != -1) { 
 										parenthesis++;
 									} else if (splitCode1.get(hh).indexOf("}") != -1) {
 										parenthesis--;

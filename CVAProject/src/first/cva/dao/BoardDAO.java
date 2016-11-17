@@ -47,4 +47,48 @@ public class BoardDAO {
 		}
 		return result;
 	}
+	
+	
+	public List<Board> listAll(){
+		System.out.println("dao listAll");
+		SqlSession ss = null;
+		ss = factory.openSession();
+		List<Board> result =ss.selectList("mapper.listAllBoard");
+		ss.commit();
+		ss.close();
+		return result;
+	}
+	
+
+
+	public List<Board> searchBoard(String title) {
+		System.out.println("dao searchBoard");
+		SqlSession ss = null;
+		ss = factory.openSession();
+		List<Board> result =ss.selectList("mapper.searchBoard",title);
+		ss.commit();
+		ss.close();
+		return result;
+	}
+	
+	public Board javaPopLoad(int boardnum) {
+		System.out.println("dao JavaPopLoad");
+		SqlSession ss = null;
+		ss = factory.openSession();
+		Board result =ss.selectOne("mapper.popLoad",boardnum);
+		ss.commit();
+		ss.close();
+		return result;
+	}
+	
+	public Board csharpPopLoad(int boardnum) {
+		System.out.println("dao CsharpPopLoad");
+		SqlSession ss = null;
+		ss = factory.openSession();
+		Board result =ss.selectOne("mapper.popLoad",boardnum);
+		ss.commit();
+		ss.close();
+		return result;
+	}
+	
 }

@@ -8,6 +8,7 @@ $(document).ready(function() {
     e.preventDefault();
     //$('.login').removeClass('clicked').addClass('loading');
 	var action = $("#form").attr('action');
+	alert(action);
 	var form_data = {
 		"custid": $("#Username").val(),
 		"password" : $("#Password").val()
@@ -17,11 +18,11 @@ $(document).ready(function() {
 		url: action,
 		data: form_data,
 		success: function(response) {
-				location.href = "../index.action";
+				location.href = "../converterMain.action";
 		}
 		,error : function(resp){
-			alert("error발생다시 시도해주세요.");
-			location.href = "../index.action";
+			alert(resp.message);
+			location.href = "loginForm.action";
 		}
 	});
 	

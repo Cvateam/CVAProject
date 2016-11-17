@@ -18,7 +18,7 @@
 			<interceptor-ref name="loginInterceptor" />
 		</interceptor-stack>
 	</interceptors> -->
-		<default-action-ref name="index"/>
+		 <default-action-ref name="index"/> 
 		
 		<action name="index">
 			<result>/mainIndex.jsp</result>
@@ -71,7 +71,46 @@
 		<action name="questiondetail" class="first.cva.action.QuestionAction" method="questiondetail">
 			<result>/questiondetail.jsp</result>
 		</action>
+		
+		<!-- 로그인 처리 -->
+		<action name="login" method="login"
+			class = "first.cva.action.CustomerAction">
+			<result name="json"></result>
+		</action>
+		<action name="loginConverter" method="login"
+			class = "first.cva.action.CustomerAction">
+			<result name="success" type = "redirect">converter</result>
+			<result name = "input" type = "redirect">converter</result>
+		</action>
+				
+		<action name= "logoutConverter" method="logout"
+			class = "first.cva.action.CustomerAction">
+				<result type = "redirect" >converter</result>
+		</action>
+		
+		
+				<!--         글 내용 보기 -->
+  <action name="list" class="first.cva.action.BoardAction" method="listBoard" >
+  			<result type="json"></result>
+  </action>
+
+
+<!--         글 검색 하기 -->
+	<action name="search" class="first.cva.action.BoardAction" method="searchBoard">
+		<result type="json"></result>
+	</action>
+	
+<!--         javaPop 클릭시 -->
+	<action name="javaPopLoad" class="first.cva.action.BoardAction" method="javaPopLoad">
+	<result type="json"></result>
+	</action>
+	
+<!--         csharpPop 클릭시 -->	
+	<action name="csharpPopLoad" class="first.cva.action.BoardAction" method="csharpPopLoad">
+	<result type="json"></result>
+	</action>	
 	</package>
+	
 	
 	<include file="first/cva/actionXml/customer.xml"/>
 	<!-- <include file="first/cva/actionXml/csharpOperation.xml"></include> -->

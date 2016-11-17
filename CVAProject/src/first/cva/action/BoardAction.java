@@ -19,6 +19,14 @@ public class BoardAction extends ActionSupport implements SessionAware {
 	private Map<String, Object> session; // login중인 회원의 저장정보들 불러올때 사용할 세션
 	private List<Board> boardList;		// 저장한 Board List 객체
 	
+	private int boardnum;
+	private String boardTitle1; //java 
+	private String boardTitle2;// cSharp
+	private String searchField;//검색대상 필드.. null일 수도 있다.
+	private String searchText;//검색어
+	
+	
+
 	public String boardSave1() throws Exception{
 		board.setCustid((String)session.get("loginId"));
 		System.out.println(board.getJavaScannerInput());
@@ -32,6 +40,55 @@ public class BoardAction extends ActionSupport implements SessionAware {
 		boardList = new BoardDAO().boardList((String)session.get("loginid"));
 		
 		
+		return SUCCESS;
+	}
+	
+	
+	public String listBoard() throws Exception{
+		System.out.println("start boardList");
+		
+		BoardDAO dao=new BoardDAO();
+		boardList=dao.listAll();
+		System.out.println("boardList2");
+		System.out.println(boardList.toString());
+		
+	/*	for(Board board : boardList){
+			System.out.println(board);
+			
+		}*/
+		return SUCCESS;		
+	}
+	
+
+	
+	public String searchBoard(){
+		System.out.println("start SearchBoard");
+		System.out.println(searchText);
+		BoardDAO dao=new BoardDAO();
+		boardList=dao.searchBoard(searchText);
+		System.out.println("serachBoard2");
+		System.out.println(boardList.toString());
+		
+		return SUCCESS;
+	}
+	
+	public String javaPopLoad(){
+		System.out.println("javaPopLoad");
+		System.out.println(boardnum);
+		BoardDAO dao=new BoardDAO();
+		board=dao.javaPopLoad(boardnum);
+		System.out.println(board.toString());
+		System.out.println("javaPopLoad2");
+		return SUCCESS;
+	}
+	
+	public String csharpPopLoad(){
+		System.out.println("csharpPopLoad");
+		System.out.println(boardnum);
+		BoardDAO dao=new BoardDAO();
+		board=dao.csharpPopLoad(boardnum);
+		System.out.println(board.toString());
+		System.out.println("csharpPopLoad2");
 		return SUCCESS;
 	}
 
@@ -80,6 +137,39 @@ public class BoardAction extends ActionSupport implements SessionAware {
 	}
 	public void setBoardList(List<Board> boardList) {
 		this.boardList = boardList;
+	}
+	public int getBoardnum() {
+		return boardnum;
+	}
+	public void setBoardnum(int boardnum) {
+		this.boardnum = boardnum;
+	}
+	public String getBoardTitle1() {
+		return boardTitle1;
+	}
+	public void setBoardTitle1(String boardTitle1) {
+		this.boardTitle1 = boardTitle1;
+	}
+	public String getBoardTitle2() {
+		return boardTitle2;
+	}
+	public void setBoardTitle2(String boardTitle2) {
+		this.boardTitle2 = boardTitle2;
+	}
+	public String getSearchField() {
+		return searchField;
+	}
+	public void setSearchField(String searchField) {
+		this.searchField = searchField;
+	}
+	public String getSearchText() {
+		return searchText;
+	}
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	
