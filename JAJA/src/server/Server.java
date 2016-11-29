@@ -36,7 +36,6 @@ public class Server extends Application {
 			if (!serverSocket.isClosed()) {
 				stopServer();
 			}
-			e.printStackTrace();
 			return;
 		}
 
@@ -70,8 +69,6 @@ public class Server extends Application {
 						if (!serverSocket.isClosed()) {
 							stopServer();
 						}
-						
-						e.printStackTrace();
 						break;
 					}
 				}
@@ -99,7 +96,6 @@ public class Server extends Application {
 				btnStartStop.setText("start");
 			});
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
