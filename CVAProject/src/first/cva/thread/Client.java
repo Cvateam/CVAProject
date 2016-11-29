@@ -16,8 +16,7 @@ public class Client {
 					socket = new Socket("localhost", 5001);
 					System.out.println("연결완료: " + socket.getRemoteSocketAddress());
 				} catch (Exception e) {
-					System.out.println("서버통신안됨");
-					e.printStackTrace();
+					System.out.println("접속종료");
 					if (!socket.isClosed()) {
 						stopClient();
 					}
@@ -36,7 +35,6 @@ public class Client {
 				socket.close();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -54,7 +52,6 @@ public class Client {
 				}
 				data = new String(byteArr, 0, readByteCount, "UTF-8");
 			} catch (Exception e) {
-				e.printStackTrace();
 				System.out.println("서버통신안됨");
 				stopClient();
 				break;
@@ -73,7 +70,6 @@ public class Client {
 					outputStream.flush();
 					System.out.println("보내기 완료");
 				} catch (Exception e) {
-					e.printStackTrace();
 					System.out.println("통신안됨");
 					stopClient();
 				}
