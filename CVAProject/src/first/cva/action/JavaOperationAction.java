@@ -25,9 +25,30 @@ public class JavaOperationAction extends ActionSupport {
 	public String compile1() throws Exception{
 		Runtime runtime = Runtime.getRuntime();
 		File directory = new File("WebJava/Request");
-		directory.mkdirs();
-		System.out.println("javaCode1 :"+javaCode1 );
-		///////////////////////////////////////// Scanner 파트 /////////////////////////////////
+			directory.mkdirs(); /// 소스 저장하는 디렉토리 생성 
+
+		/////////////////////////////////////// class 이름 체크 ///////////////////
+		String [] sentence  = javaCode.split("\n");
+		String className = null; 
+		int i = 0;
+		boolean flag = true;
+		while(flag){
+			if(sentence[i].indexOf("class") != -1){ 
+				int beginIndex = sentence[i].indexOf("class ");
+					if(sentence[i].indexOf("{") != -1){
+						int endIndex = sentence[i].indexOf("{");
+						System.out.println(sentence[i].toString());
+						className = sentence[i].substring(beginIndex+6, endIndex).trim();
+						//System.out.println(className);
+						flag = false;
+					}
+				i++;	
+			}else{
+			i++;
+			}
+		 }
+		//System.out.println("-"+className+"-");
+		///////////////////////////////////////// Scanner 파트 ///////////////////
 
 		if (javaCode.indexOf("Scanner") != -1){
 			/*javaCode = javaCode.replace("Console.ReadLine();", "\"" + scannerInput + "\"";*/
@@ -35,12 +56,14 @@ public class JavaOperationAction extends ActionSupport {
 			if(javaCode.indexOf("new Scanner(System.in)") != -1){
 				javaCode = javaCode.replace("new Scanner(System.in)", "new Scanner(\"" + scannerInput + "\")");
 			}
+		
+			if (scannerInput == null) {
+				javaCompileCode = "스캐너사용시에는  input칸에 입력해주셔야합니다.";
+				return ERROR;
+	
+			}
 		}
-		if (scannerInput == null) {
-			javaCompileCode = "스캐너사용시에는  input칸에 입력해주셔야합니다.";
-			return ERROR;
-
-		}
+		
 		////////////////////////////package 확인 /////////////////////////////////
 
 		File source = null;
@@ -83,7 +106,8 @@ public class JavaOperationAction extends ActionSupport {
 			  source  = new File(directory.getAbsolutePath()+"\\Test.java"); // package 컴파일 main 
 		
 		}else{// 소스코드 하나 컴파일 
-*/			source =  new File(directory.getAbsolutePath()+"\\Test.java");
+*/			
+		source =  new File(directory.getAbsolutePath()+"\\"+ className + ".java");
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(source));
 				out.write(javaCode); out.newLine();
