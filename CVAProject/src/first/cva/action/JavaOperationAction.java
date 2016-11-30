@@ -188,6 +188,7 @@ public class JavaOperationAction extends ActionSupport {
 
 		sysoutToConsoleWriteLine();// Console.WriteLine 변환.
 		changeGetSet(); // 겟셋
+		changeScanner();//스캐너 변환
 
 		// 키워드
 		for (int ii = 0; ii < list.size(); ii++) {
@@ -199,6 +200,33 @@ public class JavaOperationAction extends ActionSupport {
 		javatranslatedCode += "\n}";
 
 		return SUCCESS;
+	}
+
+	private void changeScanner() {
+		String re_javaCode="";
+		String a3="";
+		String ori_j_code = javaCode;
+		String[] mainArray = javaCode.split("\n");
+		for (int i = 0; i < mainArray.length; i++) {
+			String a1 = mainArray[i];
+			if (a1.indexOf("new Scanner(System.in);") != -1) {
+				String[] cutArray =a1.trim().split(" ");
+				a3 = cutArray[1];
+				System.out.println(a3);
+			}else{
+				re_javaCode +=a1+"\n";
+			}
+		}
+		String[] checkArray =re_javaCode.split("\n");
+		for(int j =0;j<checkArray.length;j++){
+			String a2 = checkArray[j];
+			if(a2.indexOf(a3+".next")!=-1){
+				System.out.println("하이");
+				javaCode=re_javaCode.replace(a3+".next()", "Console.ReadLine()");
+			}
+		}
+		System.out.println(javaCode);
+		
 	}
 
 	private void changeGetSet() {
