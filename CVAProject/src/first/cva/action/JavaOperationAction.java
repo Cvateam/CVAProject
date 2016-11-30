@@ -308,7 +308,7 @@ public class JavaOperationAction extends ActionSupport {
 		String xxx = "\""; 
 
 		//1) 주어진 String에 matches를 이용하여 원하는 "sysout"이 있는지 확인
-		if(javaCode.matches(so)==true){
+		if(javaCode.indexOf(so2)!=-1){
 			System.out.println("있다");
 			// 2)있는게 확인되면  "sysout"을 기준으로 자르기
 			String[] array = javaCode.split(so2);
