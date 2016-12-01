@@ -1690,7 +1690,7 @@ transform
 												</div>
 											</div>
 											<div id="file_parent1" style="padding: 10px; display: none;">
-												<textarea name="file" id="file1" tabindex="1">/* package whatever; // don't place package name! */
+												<textarea name="file" id="file1" tabindex="1">
 import java.util.*;
 import java.lang.*;
 import java.io.*;

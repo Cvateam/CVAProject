@@ -19,35 +19,17 @@ public class JavaOperationAction extends ActionSupport {
 	private String javatranslatedCode; // 씨샵으로 번역된 코드
 	private String scannerInput; // 스캐너이용했을때 사용자가 콘솔에서 입력하는 값
 
-	public JavaOperationAction() {
-	};
+	public JavaOperationAction() {};
 
 	public String compile1() throws Exception {
 		Runtime runtime = Runtime.getRuntime();
 		File directory = new File("WebJava/Request");
 		directory.mkdirs(); /// 소스 저장하는 디렉토리 생성
-
-		/////////////////////////////////////// class 이름 체크 ///////////////////
-		String[] sentence = javaCode.split("\n");
-		String className = null;
-		int i = 0;
-		boolean flag = true;
-		while (flag) {
-			if (sentence[i].indexOf("class") != -1) {
-				int beginIndex = sentence[i].indexOf("class ");
-				if (sentence[i].indexOf("{") != -1) {
-					int endIndex = sentence[i].indexOf("{");
-					System.out.println(sentence[i].toString());
-					className = sentence[i].substring(beginIndex + 6, endIndex).trim();
-					// System.out.println(className);
-					flag = false;
-				}
-				i++;
-			} else {
-				i++;
-			}
-		}
-		// System.out.println("-"+className+"-");
+		File classDirectory = new File("WebJava/Request/classes");
+		classDirectory.mkdirs(); /// 클래스파일저장하는 폴더 생성 
+		
+		String mainClassName  = checkClassName(javaCode); // 하나 클래스 이름 빼왔음 
+		System.out.println("mainClassName : "+mainClassName);
 		///////////////////////////////////////// Scanner 파트 ///////////////////
 
 		if (javaCode.indexOf("Scanner") != -1) {
@@ -67,62 +49,60 @@ public class JavaOperationAction extends ActionSupport {
 			}
 		}
 
-		//////////////////////////// package 확인
-		//////////////////////////// /////////////////////////////////
+		//////////////////////////// package 확인////////////////////////////
 
 		File source = null;
 		File file2 = null;
-		// Test클래스명 이거 대신 한문장 읽어들인 뒤에 계속 트림 돌려서 없을때까지 컨테인 쓰든지 해서 그리고 클래스명 정확하게
-		// 읽어오기
+
 		// 첫 라인 패키지명 읽어오기 //주석처리된 /* package whatever; // don't place package
 		// name! */이부분읽어들임 . 나중에 처리할 부분
-		/*
-		 * String oneSentence[] = javaCode.split("\n"); // 한줄씩 읽어들임; String
-		 * toReadPackage = oneSentence[0].trim(); // package 첫라인이어야함
-		 * 
-		 * String packageName = null;
-		 * 
-		 * if(toReadPackage.indexOf("package") != -1){ int beginIndex =
-		 * javaCode.indexOf("package"); int endIndex = javaCode.indexOf(";");
-		 * 
-		 * 
-		 * packageName = toReadPackage.substring(beginIndex+8,
-		 * endIndex);//beginIndex+8 package+1 띄어쓰기
-		 * 
-		 * String dir = directory.getAbsolutePath()+"/"+packageName; // .java
-		 * 파일들 놓을 위치(패키지명으로 처리) //File packagedir = new File(dir);
-		 * //packagedir.mkdirs();
-		 * 
-		 * file2 = new File(directory.getAbsolutePath()+"/Test2.java"); // 패키지의
-		 * 두번째 파일 File file1 = new
-		 * File(directory.getAbsolutePath()+"/Test.java"); // 첫번째 파일 try {
-		 * BufferedWriter out = new BufferedWriter(new FileWriter(file1));
-		 * out.write(javaCode); out.newLine();
-		 * 
-		 * out.close(); if(javaCode1 != null){ BufferedWriter out2 = new
-		 * BufferedWriter(new FileWriter(file2)); out2.write(javaCode1);
-		 * out2.newLine();
-		 * 
-		 * out2.close(); } } catch (IOException e) { System.err.println(e);
-		 * System.exit(1); } source = new
-		 * File(directory.getAbsolutePath()+"\\Test.java"); // package 컴파일 main
-		 * 
-		 * }else{// 소스코드 하나 컴파일
-		 */
-		source = new File(directory.getAbsolutePath() + "\\" + className + ".java");
-		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(source));
-			out.write(javaCode);
-			out.newLine();
 
-			out.close();
-		} catch (IOException e) {
-			System.err.println(e);
-			System.exit(1);
+		String oneSentence[] = javaCode.split("\n"); // 한줄씩 읽어들임; String
+		String toReadPackage = oneSentence[0].trim(); // package 첫라인이어야함
+
+		String packageName = null;
+
+		if(toReadPackage.indexOf("package") != -1){ 
+				
+				int beginIndex = javaCode.indexOf("package"); 
+				int endIndex = javaCode.indexOf(";");
+
+				packageName = toReadPackage.substring(beginIndex+8, endIndex).trim();//beginIndex+8 package+1 띄어쓰기
+
+				String dir = directory.getAbsolutePath()+"/"+packageName; // .java파일들 놓을 위치(패키지명으로 처리) //File packagedir = new File(dir);
+				new File(dir).mkdirs();
+				file2 = new File(dir+"/Test2.java"); // 패키지의두번째 파일 
+				source = new File(dir+"\\" + mainClassName + ".java");// 첫번째 파일 package 컴파일 main
+				try {
+					BufferedWriter out = new BufferedWriter(new FileWriter(source));
+					out.write(javaCode); out.newLine();
+	
+					out.close(); 
+					
+					if(javaCode1 != null){ BufferedWriter out2 = new BufferedWriter(new FileWriter(file2)); 
+					out2.write(javaCode1);
+					out2.newLine();
+	
+					out2.close(); 
+					} 
+				}catch(IOException e){
+					e.printStackTrace();
+				}
+		}else{// 소스코드 하나 컴파일
+	
+			source = new File(directory.getAbsolutePath() + "\\" + mainClassName + ".java");
+			try {
+				BufferedWriter out = new BufferedWriter(new FileWriter(source));
+				out.write(javaCode);
+				out.newLine();
+	
+				out.close();
+			} catch (IOException e) {
+				System.err.println(e);
+				System.exit(1);
+			}
 		}
-
-		////////////////////////////////////// 소스코드 확인
-		////////////////////////////////////// //////////////////////////
+		////////////////////////////////////// 소스코드 확인////////////////////////////////////
 
 		/*
 		 * 간단 cmd 이용 소스코드 컴파일 코드  String command = "javac -d D:/Test/classes ";
@@ -130,24 +110,15 @@ public class JavaOperationAction extends ActionSupport {
 		 *     Process processor = Runtime.getRuntime().exec(command);  }
 		 */
 
-		System.out.println("source.getParent()" + source.getParent());
-		System.out.println("source.getAbsolutePath()" + source.getAbsolutePath());
-		// for문 돌려서 main 외의 것 컴파일 시킨후 메인 컴파일 해야함 일단은 2개
-		/*
-		 * for(int i = 0; i <= 1 ; i++ ){
-		 * 
-		 * 
-		 * }
-		 */
-		Process compile = null;
+		System.out.println("source.getParent : " + source.getParent());
+		System.out.println("source.getAbsolutePath : " + source.getAbsolutePath());
 
-		// compile = runtime.exec("javac -d " +source.getParent()+"/classes
-		// "+file2.getAbsolutePath());
-		// System.out.println("=========================Test2 컴파일 끝");
-		compile = runtime.exec("javac -sourcepath " + source.getParent() + " " + source.getAbsolutePath());
-		// compile = runtime.exec("javac -classpath " +source.getParent()+" "+
-		// source.getAbsolutePath() + " ");
-		System.out.println("=========================Test 컴파일 끝");
+		Process compile = null;
+		
+		System.out.println("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+packageName+"/"+mainClassName+".java " + directory.getAbsolutePath()+"/"+packageName+"/"+checkClassName(javaCode1)+".java");
+		
+		compile = runtime.exec("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+packageName+"/"+mainClassName+".java " + directory.getAbsolutePath()+"/"+packageName+"/"+checkClassName(javaCode1)+".java");
+		
 		try {
 			compile.waitFor();
 		} catch (InterruptedException e) {
@@ -156,7 +127,7 @@ public class JavaOperationAction extends ActionSupport {
 
 		StringBuilder compileLog = new StringBuilder();
 		Scanner compileScanner = new Scanner(compile.getErrorStream()); // error
-																		// 코드 확인
+		// 코드 확인
 
 		while (compileScanner.hasNextLine()) {
 
@@ -168,16 +139,16 @@ public class JavaOperationAction extends ActionSupport {
 		String compileLog1 = compileLog.toString();
 		javaCompileCode = compileLog1
 				.replace("C:\\SetUpFile\\eclipse\\eclipse-jee-neon-R-win32-x86_64\\eclipse\\WebJava\\Request\\", " ");
-		System.out.println("에러코드 생성 ㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ");
 		if (compileLog1.isEmpty()) {
-			String name = source.getName();
+			//String name = source.getName();
 
 			// Process java = runtime.exec("java -cp .;"
 			// +source.getParent()+"/classes"+ name.substring(0,
 			// name.lastIndexOf(".")) + " ");
-			Process java = runtime
-					.exec("java -cp " + source.getParent() + " " + name.substring(0, name.lastIndexOf(".")) + " ");
 			System.out.println("run 실행 ");
+			System.out.println("java -cp " + directory.getAbsolutePath() + "\\classes " +packageName+"."+mainClassName);
+			Process java = runtime.exec("java -cp " + directory.getAbsolutePath() + "\\classes " +packageName+"."+mainClassName);
+			
 			try {
 				java.waitFor();
 
@@ -191,7 +162,7 @@ public class JavaOperationAction extends ActionSupport {
 				javaScanner1.close();
 				System.out.println(javaLog.toString());
 				javaCompileCode = javaLog.toString();
-				System.out.println("javaCompileCode" + javaCompileCode);
+				System.out.println("javaCompileCode : " + javaCompileCode);
 
 				// source.delete();//java파일삭제
 				// new File(source.getParent(), name +
@@ -208,6 +179,30 @@ public class JavaOperationAction extends ActionSupport {
 		return SUCCESS;
 
 	}// java compile
+
+	private String checkClassName(String Code) {
+		String[] sentence = Code.split("\n");
+		String name = null;
+		int i = 0;
+		boolean flag = true;
+		while (flag) {
+			if (sentence[i].indexOf("class") != -1) {
+				int beginIndex = sentence[i].indexOf("class ");
+				if (sentence[i].indexOf("{") != -1) {
+					int endIndex = sentence[i].indexOf("{");
+					System.out.println(sentence[i].toString());
+					name = sentence[i].substring(beginIndex + 6, endIndex).trim();
+					// System.out.println(className);
+					flag = false;
+				}
+				i++;
+			} else {
+				i++;
+			}
+		}
+		// System.out.println("-"+className+"-");
+		return name;
+	}// 클래스 이름 뽑아내는 메소드 
 
 	public String translate1() throws Exception {
 		KeywordDAO dao = new KeywordDAO();
@@ -251,7 +246,7 @@ public class JavaOperationAction extends ActionSupport {
 		// 원래의 코드를 보존한다.
 		int result = 0;
 		int check = 0;
-	//	String ori_j_code = javaCode;
+		//	String ori_j_code = javaCode;
 		// 줄을 기준으로 나눠서 전체의 코드를 정리한다.
 		//String[] mainArray = javaCode.split("\n");
 
