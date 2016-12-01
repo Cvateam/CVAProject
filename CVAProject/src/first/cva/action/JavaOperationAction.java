@@ -90,7 +90,7 @@ public class JavaOperationAction extends ActionSupport {
 				}
 		}else{// 소스코드 하나 컴파일
 	
-			source = new File(directory.getAbsolutePath() + "\\" + mainClassName + ".java");
+			source = new File(directory.getAbsolutePath() +"\\"+ mainClassName + ".java");
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(source));
 				out.write(javaCode);
@@ -112,13 +112,20 @@ public class JavaOperationAction extends ActionSupport {
 
 		System.out.println("source.getParent : " + source.getParent());
 		System.out.println("source.getAbsolutePath : " + source.getAbsolutePath());
-
+		
+		//System.out.println("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+packageName+"/"+mainClassName+".java " + directory.getAbsolutePath()+"/"+packageName+"/"+checkClassName(javaCode1)+".java");
 		Process compile = null;
+		System.out.println("javaCode1 : " + javaCode1.length());
 		
-		System.out.println("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+packageName+"/"+mainClassName+".java " + directory.getAbsolutePath()+"/"+packageName+"/"+checkClassName(javaCode1)+".java");
-		
-		compile = runtime.exec("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+packageName+"/"+mainClassName+".java " + directory.getAbsolutePath()+"/"+packageName+"/"+checkClassName(javaCode1)+".java");
-		
+		//System.out.println(basic);
+		if(packageName != null && javaCode1.length() != 112){
+			compile = runtime.exec("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+packageName+"/"+mainClassName+".java " + directory.getAbsolutePath()+"/"+packageName+"/"+checkClassName(javaCode1)+".java");
+		}else if(packageName != null){
+			compile = runtime.exec("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+packageName+"/"+mainClassName+".java ");
+			System.out.println("패키지 컴파일 하나만 ");
+		}else{
+			compile = runtime.exec("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+mainClassName+".java ");
+		}
 		try {
 			compile.waitFor();
 		} catch (InterruptedException e) {
@@ -140,15 +147,16 @@ public class JavaOperationAction extends ActionSupport {
 		javaCompileCode = compileLog1
 				.replace("C:\\SetUpFile\\eclipse\\eclipse-jee-neon-R-win32-x86_64\\eclipse\\WebJava\\Request\\", " ");
 		if (compileLog1.isEmpty()) {
-			//String name = source.getName();
-
-			// Process java = runtime.exec("java -cp .;"
-			// +source.getParent()+"/classes"+ name.substring(0,
-			// name.lastIndexOf(".")) + " ");
+			
+			Process java = null;
 			System.out.println("run 실행 ");
 			System.out.println("java -cp " + directory.getAbsolutePath() + "\\classes " +packageName+"."+mainClassName);
-			Process java = runtime.exec("java -cp " + directory.getAbsolutePath() + "\\classes " +packageName+"."+mainClassName);
-			
+			if(packageName != null){
+				java = runtime.exec("java -cp " + directory.getAbsolutePath() + "\\classes " +packageName+"."+mainClassName);
+			}else{
+				java = runtime.exec("java -cp " + directory.getAbsolutePath() + "\\classes " +mainClassName);
+
+			}
 			try {
 				java.waitFor();
 
