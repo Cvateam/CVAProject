@@ -75,7 +75,7 @@ div.codeTextarea{
 	
 }
 
-#file1 {
+#file1, #file3, #file4 {
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 	border-color: #ccc;
@@ -132,6 +132,22 @@ div.codeTextarea{
 }
 
 #file_div2 {
+	display: none;
+	height: 300px;
+	position: relative;
+	width: 100%;
+	background-color: white;
+}
+
+#file_div3 {
+	display: none;
+	height: 300px;
+	position: relative;
+	width: 100%;
+	background-color: white;
+}
+
+#file_div4 {
 	display: none;
 	height: 300px;
 	position: relative;
