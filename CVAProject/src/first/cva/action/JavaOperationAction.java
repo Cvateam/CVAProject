@@ -350,6 +350,9 @@ public class JavaOperationAction extends ActionSupport {
 	private void changeScanner() {
 		String re_javaCode = "";
 		String a3 = "";
+		String a5 = "";
+		String a6 = "";
+		String a7 =""; 
 		//String ori_j_code = javaCode;
 		String[] mainArray = javaCode.split("\n");
 		for (int i = 0; i < mainArray.length; i++) {
@@ -359,6 +362,19 @@ public class JavaOperationAction extends ActionSupport {
 				a3 = cutArray[1];
 				System.out.println(a3);
 			} else {
+				if (a1.indexOf(a3) != -1) {
+					String a4 = mainArray[i];
+					System.out.println(a4);
+					String[] cutArray2 = a4.trim().split(" ");
+					a5 = cutArray2[0];
+					a7 = cutArray2[1];
+					System.out.println(a5);
+					a6 = a5.valueOf(a5.charAt(0)).toUpperCase();
+					for (int j = 1; j < a5.length(); j++) {
+						a6 += a5.charAt(j);
+					}
+					System.out.println(a6);
+				}
 				re_javaCode += a1 + "\n";
 			}
 		}
@@ -366,8 +382,13 @@ public class JavaOperationAction extends ActionSupport {
 		for (int j = 0; j < checkArray.length; j++) {
 			String a2 = checkArray[j];
 			if (a2.indexOf(a3 + ".next") != -1) {
-				System.out.println("하이");
-				javaCode = re_javaCode.replace(a3 + ".next()", "Console.ReadLine()");
+				if (a6.equals("String")) {
+					re_javaCode = re_javaCode.replace(a3 + ".next()", "Console.ReadLine()");
+				} else {
+					re_javaCode = re_javaCode.replace(a6.toLowerCase(),"String");
+					re_javaCode = re_javaCode.replace(a3 + ".next" + a6 + "();", "Console.ReadLine();\n\t\t"+a7+" = Int32.parseInt("+a7+");");
+					
+				}
 			}
 		}
 		System.out.println(javaCode);
