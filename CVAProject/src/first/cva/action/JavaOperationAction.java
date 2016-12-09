@@ -263,32 +263,32 @@ public class JavaOperationAction extends ActionSupport {
 		System.out.println(index);
 		for (int i = 1; i < index; i++) {
 			String a1 = midArray[i];
-			System.out.println("a1:" + a1);
+			//System.out.println("a1:" + a1);
 			String[] keyArray = a1.split(" ");
 			String a2 = keyArray[0];
 			String a3 = keyArray[1];
 			String[] keyArray1 = a3.split(";");
 			a3 = keyArray1[0];
-			System.out.println("a2:" + a2);
-			System.out.println("a3:" + a3);
+			//System.out.println("a2:" + a2);
+			//System.out.println("a3:" + a3);
 			// String
 			String b2 = a2.toLowerCase();
 			String b1 = a3.valueOf(a3.charAt(0)).toUpperCase();
 			for (int j = 1; j < a3.length(); j++) {
 				b1 += a3.charAt(j);
 			}
-			System.out.println("b2:" + b2);
-			System.out.println("b1:" + b1);
+			//System.out.println("b2:" + b2);
+			//System.out.println("b1:" + b1);
 			String[] checkArray = javaCode.split("public ");
 			for (int j = 1; j < checkArray.length - 1; j++) {
 				System.out.println(j);
 				System.out.println(checkArray[2]);
 				if (checkArray[j].indexOf(a2 + " get" + b1) != -1 || checkArray[j].indexOf(" set" + b1) != -1) {
-					System.out.println("안녕하다");
+					//System.out.println("안녕하다");
 					String a4 = checkArray[j];
 					a4 += "public " + checkArray[j + 1];
-					System.out.println("a4:" + a4);
-					System.out.println("나와라" + a4);
+					//System.out.println("a4:" + a4);
+					//System.out.println("나와라" + a4);
 
 					if (a4.indexOf("get") != -1) {
 						check += 1;
@@ -298,7 +298,7 @@ public class JavaOperationAction extends ActionSupport {
 						check += 1;
 						result += 1;
 					}
-					System.out.println("result" + result);
+					//System.out.println("result" + result);
 					String mid_mid1 = "\t\tpublic " + b2 + " " + b1 + "{\n\t\t\tget;\n\t\t\tset;\n\t\t}\n";
 					String mid_mid11 = "public " + b2 + " " + b1 + "{\n\t\t\tget;\n\t\t\tset;\n\t\t}\n";
 					String mid_mid2 = "\tpublic " + b2 + " " + b1 + "{\n\t\tget;\n\t}\n";
@@ -307,14 +307,14 @@ public class JavaOperationAction extends ActionSupport {
 
 					case 11:// 둘다있다
 						if (check == 2) {
-							System.out.println(mid_mid1);
+							//System.out.println(mid_mid1);
 							javaCode = javaCode.replace("public " + a4, mid_mid11);
 							System.out.println(javaCode);
 							a4 = "";
 							result = 0;
 							break;
 						} else {
-							System.out.println(mid_mid1);
+							//System.out.println(mid_mid1);
 							javaCode = javaCode.replace("public " + a4, mid_mid1 + "\n\t}\n");
 							System.out.println(javaCode);
 							a4 = "";
@@ -322,20 +322,20 @@ public class JavaOperationAction extends ActionSupport {
 							break;
 						}
 					case 10:// get
-						System.out.println("get일함");
+						//System.out.println("get일함");
 						javaCode = javaCode.replace("public " + a4, mid_mid2);
 						a4 = "";
 						result = 0;
 						break;
 					case 1:// set
-						System.out.println("set 일함");
+						//System.out.println("set 일함");
 						javaCode = javaCode.replace("public " + a4, mid_mid3);
 						a4 = "";
 						result = 0;
 						break;
 
 					default:
-						System.out.println("안녕하세요 월루입니다.");
+						//System.out.println("안녕하세요 월루입니다.");
 						break;
 					}
 				}
@@ -343,55 +343,77 @@ public class JavaOperationAction extends ActionSupport {
 			}
 
 		}
-		System.out.println("==================");
-		System.out.println(javaCode);
+		//System.out.println("==================");
+		//System.out.println(javaCode);
 	}
 
 	private void changeScanner() {
+		//System.out.println("확인하다");
 		String re_javaCode = "";
 		String a3 = "";
 		String a5 = "";
 		String a6 = "";
 		String a7 =""; 
-		//String ori_j_code = javaCode;
+		String ori_j_code = javaCode;
+		
+		System.out.println("Javacode"+javaCode);
 		String[] mainArray = javaCode.split("\n");
 		for (int i = 0; i < mainArray.length; i++) {
+			//System.out.println("돌아가는 부분 ");
 			String a1 = mainArray[i];
 			if (a1.indexOf("new Scanner(System.in);") != -1) {
+				//System.out.println("scan가 있다 ");
 				String[] cutArray = a1.trim().split(" ");
 				a3 = cutArray[1];
-				System.out.println(a3);
-			} else {
-				if (a1.indexOf(a3) != -1) {
-					String a4 = mainArray[i];
-					System.out.println(a4);
-					String[] cutArray2 = a4.trim().split(" ");
-					a5 = cutArray2[0];
-					a7 = cutArray2[1];
-					System.out.println(a5);
-					a6 = a5.valueOf(a5.charAt(0)).toUpperCase();
-					for (int j = 1; j < a5.length(); j++) {
-						a6 += a5.charAt(j);
+				//System.out.println("A3"+a3);
+			}else if(a1.equals("")){
+				//System.out.println("뇌텅텅");
+				re_javaCode += a1 + "\n";
+			}else {
+				//System.out.println("있긴합니다만");
+				if(!a3.equals("")){//a3이 있다면
+					//System.out.println("a3은"+a3);
+					if (a1.indexOf(a3) != -1) {
+						//System.out.println("존재합니다.");
+						String a4 = mainArray[i];
+						String[] cutArray2 = a4.trim().split(" ");
+						a5 = cutArray2[0];
+						a7 = cutArray2[1];
+						a6 = a5.valueOf(a5.charAt(0)).toUpperCase();
+						for (int j = 1; j < a5.length(); j++) {
+							a6 += a5.charAt(j);
+						}
+						//System.out.println("a5"+a5);
+						//System.out.println("a6"+a6);
 					}
-					System.out.println(a6);
 				}
 				re_javaCode += a1 + "\n";
 			}
 		}
+		//System.out.println("지구종말");
+		 //int number = Int32.Parse(value); 
 		String[] checkArray = re_javaCode.split("\n");
 		for (int j = 0; j < checkArray.length; j++) {
 			String a2 = checkArray[j];
+			//System.out.println("a2"+a2);
+			//System.out.println("a3"+a3);
 			if (a2.indexOf(a3 + ".next") != -1) {
 				if (a6.equals("String")) {
 					re_javaCode = re_javaCode.replace(a3 + ".next()", "Console.ReadLine()");
 				} else {
-					re_javaCode = re_javaCode.replace(a6.toLowerCase(),"String");
-					re_javaCode = re_javaCode.replace(a3 + ".next" + a6 + "();", "Console.ReadLine();\n\t\t"+a7+" = Int32.parseInt("+a7+");");
+					System.out.println("a6"+a6);
+					if(a2.matches(".*int.*")){
+						//System.out.println("끝이나는 소리가 들린다.");
+						re_javaCode = re_javaCode.replace(a6.toLowerCase()+" "+a7,"String valus");
+					}
+					re_javaCode = re_javaCode.replace("prStringln","println");
+					re_javaCode = re_javaCode.replace(a3 + ".next" + a6 + "();", "Console.ReadLine();\n\t\t" +"int "+a7 + " = Int32.Parse(valus);");
 					
 				}
 			}
 		}
-		System.out.println(javaCode);
+		javaCode = re_javaCode; 
+		//System.out.println(javaCode);
 
 	}
 
@@ -405,8 +427,8 @@ public class JavaOperationAction extends ActionSupport {
 		//String xxx = "\"";
 
 		// 1) 주어진 String에 matches를 이용하여 원하는 "sysout"이 있는지 확인
-		if (javaCode.matches(so) == true) {
-			System.out.println("있다");
+		if(javaCode.indexOf(so2)!=-1){
+			//System.out.println("있다");
 			// 2)있는게 확인되면 "sysout"을 기준으로 자르기
 			String[] array = javaCode.split(so2);
 			// 3) 잘라진 array의 length을 기준으로 length-1번 일하기

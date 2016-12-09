@@ -76,18 +76,18 @@ $(document).ready(function() {
 	//////////////// java compile connect  //////////////////////////
 	
 	$('#Submit1').on('click', function() {
-		javaUnloadEditor4();
+		//javaUnloadEditor4();
 		javaUnloadEditor3();
 		javaUnloadEditor();
 		var item = {
 			"javaCode"  :  $('#file1').val()
 			,"javaCode1"  :  $('#file3').val()
-			,"javaCode2" : $('#file4').val()
+			//,"javaCode2" : $('#file4').val()
 			,"scannerInput"  : $('#input1').val()
 		};
 		javaLoadEditor();
 		javaLoadEditor3();
-		javaLoadEditor4();
+		//javaLoadEditor4();
 		$.ajax({
 			type : 'get',
 			url : 'compile1',

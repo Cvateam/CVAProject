@@ -1397,14 +1397,14 @@ transform
 					</h1>
 
 					<!-- 검색폼 -->
-					<s:form name="pagingForm" method="post" action="board"
+				<%-- 	<s:form name="pagingForm" method="post" action="board"
 						theme="simple">
 						<p class="board_search">
 							<a><img src="images/glass.png" width="30" height="30" id="glass" ></a>
 							<s:textfield name="searchText" size="40" id="searchText" />
 							<input type="button" value="검색" id="searchBtn" class="searchBtn">
 						</p>
-					</s:form>
+					</s:form> --%>
 
 					<table border="1" id="boardTable">
 						<tr>
@@ -1436,36 +1436,37 @@ transform
 					<a class="btn btn-navbar collapsed" data-toggle="collapse"
 						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
-					</a> <a href="/" class="brand scroll-page"><span
+					</a> <a href="converterMain" class="brand scroll-page"><span
 						style="background-image: url('images/Logomakr_1yE4r7.png');"></span></a>
 					<div class="nav-collapse collapse " style="height: 0px;">
 						<ul class="nav pull-right" style="margin-right: -400px ">
-							<li class="active"><a href="/" class="scroll-page"><i
-									class="icon-home"></i>new code</a></li>
+							<s:if test='%{#session.loginId != null}'>
+							<li class="active"><a href = "loginConverter" class="scroll-page" ><i
+									class="icon-home"></i>logout</a></li>
+							</s:if>
 							<li class=""><a href="/samples" class="scroll-page"><i
-									class="icon-lightbulb"></i> samples</a></li>
+									class="icon-lightbulb"></i></a></li>
+							<s:if test='%{#session.loginId == null}'>		
 							<li class=""><a href="/recent" class="scroll-page"><i
-									class="icon-cloud"></i> recent codes</a></li>
+									class="icon-cloud"></i>join</a></li>
+							</s:if>
+							<s:if test='%{#session.loginId == null}'>	
 							<li class="dropdown"><a href="#"
 								class="dropdown-toggle btn-singin-wnd-open"
-								data-toggle="dropdown"><i class="icon-signin"></i> sign in</a>
+								data-toggle="dropdown"><i class="icon-signin"></i>login</a>
 								<ul class="dropdown-menu dropdown-form" id="signin-dropdown">
 									<li class="dropdown-caret right"><span class="caret-outer"></span>
 										<span class="caret-inner"></span></li>
 									<li>
 										<div class="modal-body">
-											<form action="http://ideone.com/account/login" method="post">
-												<div style="margin-bottom: 20px;">
-													New user? <a class="normal-link" href="/account/register">Sign
-														up</a>
-												</div>
+											<form action="loginConverter" method="post">
 
 												<div class="control-group">
 													<div class="controls">
 														<div class="input-prepend" style="margin-bottom: 0px">
 															<span class="add-on rel-tooltip" title="Username"><i
 																class="icon-user"></i></span> <input type="text" class="span2"
-																id="username" name="username" value=""
+																id="username" name="custid" value=""
 																placeholder="Username">
 														</div>
 													</div>
@@ -1498,14 +1499,11 @@ transform
 														sign in?</a>
 												</div>
 
-												<hr class="clear" style="margin: 0px; margin-bottom: 10px">
-												<a class="btn facebook-login-button"
-													href="https://www.facebook.com/dialog/oauth?client_id=347515280067&amp;redirect_uri=http://ideone.com/account/registerfb/&amp;scope=email,user_location,user_hometown">Log
-													in with Facebook</a>
 											</form>
 										</div>
 									</li>
 								</ul></li>
+								</s:if>
 
 							<li class=" dropdown-hover"></li>
 

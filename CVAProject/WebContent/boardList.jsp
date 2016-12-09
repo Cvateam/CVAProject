@@ -57,7 +57,7 @@
 					<div id="content">
 						<section>
 							<div class="post">
-								<h2>사용자 ID</h2>
+								<h2>${sessionScope.loginId}님</h2>
 								<p><a href="#"><img src="images/spongiBob.jpg" alt="" class="img-alignleft"></a> Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl. Nullam non wisi a sem semper eleifend. Donec mattis libero eget urna. Duis pretium velit ac mauris. Proin eu wisi suscipit nulla suscipit interdum. Aenean lectus lorem, imperdiet at, ultrices eget, ornare et, wisi. Pellentesque adipiscing purus ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.	 Pellentesque pede. Donec pulvinar ullamcorper metus. In eu odio at lectus pulvinar mollis.</p>
 								<p class="button-style"><a href="#">Profile Update</a></p>
 							</div>
@@ -83,28 +83,21 @@
 							<div class="sbox1">
 								<h2>Java</h2>
 								<ul class="style1">
-									<li><a href="#">Maecenas luctus lectus at sapien</a></li>
-									<li><a href="#">Etiam rhoncus volutpat erat</a></li>
-									<li><a href="#">Etiam posuere augue sit amet nisl</a></li>
-									<li><a href="#">Mauris vulputate dolor sit amet nibh</a></li>
-									<li><a href="#">Nulla luctus eleifend purus</a></li>
+									<s:iterator value="boardList">
+								<s:if test="javaboardList != null">
+									<li><a href="#">${boardTitle1}</a></li>
+								</s:if>
+							</s:iterator>
 								</ul>
 							</div>
 							<div class="sbox2">
 								<h2>C#</h2>
 								<ul class="style1">
-									<li><a href="#">Maecenas luctus lectus at sapien</a></li>
-									<li><a href="#">Etiam rhoncus volutpat erat</a></li>
-									<li><a href="#">Donec dictum metus in sapien</a></li>
-									<li><a href="#">Maecenas  lectus  sapien</a></li>
-									<li><a href="#">Integer gravida  quis urna</a></li>
-									<li><a href="#">Etiam posuere   amet nisl</a></li>
-									<li><a href="#">Integer gravida  quis urna</a></li>
-									<li><a href="#">Etiam posuere   amet nisl</a></li>
-									<li><a href="#">Mauris vulputate   amet </a></li>
-									<li><a href="#">Nulla luctus eleifend </a></li>
-									<li><a href="#">Mauris vulputate dolor sit amet nibh</a></li>
-									<li><a href="#">Nulla luctus eleifend purus</a></li>
+									<s:iterator value="boardList">
+								<s:if test="cSharpboardList != null">
+									<li><a href="#">${boardTitle1}</a></li>
+								</s:if>
+							</s:iterator>
 								</ul>
 							</div>
 						</section>

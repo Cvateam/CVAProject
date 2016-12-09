@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
-import org.eclipse.jdt.internal.compiler.ast.ThrowStatement;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -18,37 +17,44 @@ public class BoardAction extends ActionSupport implements SessionAware {
 	private String message;				// 저장 확인 메세지
 	private Map<String, Object> session; // login중인 회원의 저장정보들 불러올때 사용할 세션
 	private List<Board> boardList;		// 저장한 Board List 객체
-	
+	private List<Board> javaboardList;		// 저장한 Board List 객체
+	private List<Board> cSharpboardList;		// 저장한 Board List 객체
 	private int boardnum;
 	private String boardTitle1; //java 
 	private String boardTitle2;// cSharp
 	private String searchField;//검색대상 필드.. null일 수도 있다.
 	private String searchText;//검색어
-	
+	private String javaCode;
 	
 
 	public String boardSave1() throws Exception{
 		board.setCustid((String)session.get("loginId"));
+
 		System.out.println(board.getJavaScannerInput());
-		System.out.println(board.getJavaCode());
+		//System.out.println(board.getJavaCode());
 		int a = new BoardDAO().boardSave1(board);
 		
 		message  =  (a == 1 )? "저장되었습니다" : "저장되지않았습니다. 다시 시도하세요.";
 		return SUCCESS;
 	}
 	public String boardList() throws Exception {
-		boardList = new BoardDAO().boardList((String)session.get("loginid"));
-		
-		
+		BoardDAO dao = new BoardDAO();
+		boardList = dao.boardList((String)session.get("loginid"));
+		javaboardList = dao.javaboardList((String)session.get("loginid")); 
+		cSharpboardList = dao.cSharpboardList((String)session.get("loginid"));
 		return SUCCESS;
 	}
 	
 	
 	public String listBoard() throws Exception{
 		System.out.println("start boardList");
-		
-		BoardDAO dao=new BoardDAO();
-		boardList=dao.listAll();
+		if(session.get("loginId") != null){
+			BoardDAO dao=new BoardDAO();
+			boardList=dao.listAll();
+		}
+		else{
+			boardList= null;
+		}
 		System.out.println("boardList2");
 		System.out.println(boardList.toString());
 		
@@ -159,11 +165,29 @@ public class BoardAction extends ActionSupport implements SessionAware {
 	public String getSearchField() {
 		return searchField;
 	}
+	public List<Board> getJavaboardList() {
+		return javaboardList;
+	}
+	public void setJavaboardList(List<Board> javaboardList) {
+		this.javaboardList = javaboardList;
+	}
+	public List<Board> getcSharpboardList() {
+		return cSharpboardList;
+	}
+	public void setcSharpboardList(List<Board> cSharpboardList) {
+		this.cSharpboardList = cSharpboardList;
+	}
 	public void setSearchField(String searchField) {
 		this.searchField = searchField;
 	}
 	public String getSearchText() {
 		return searchText;
+	}
+	public String getJavaCode() {
+		return javaCode;
+	}
+	public void setJavaCode(String javaCode) {
+		this.javaCode = javaCode;
 	}
 	public void setSearchText(String searchText) {
 		this.searchText = searchText;

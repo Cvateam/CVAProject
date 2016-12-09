@@ -90,5 +90,38 @@ public class BoardDAO {
 		ss.close();
 		return result;
 	}
+
+	public List<Board> javaboardList(String custid) {
+		List<Board> result = null;
+		SqlSession ss = null;
+		try {
+			ss = factory.openSession();
+		    result = ss.selectList("mapper.javaboardList", custid );
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (ss != null) ss.close();
+		}
+		return result;
+	}
+	
+	public List<Board> cSharpboardList(String custid) {
+		List<Board> result = null;
+		SqlSession ss = null;
+		try {
+			ss = factory.openSession();
+		    result = ss.selectList("mapper.cSharpboardList", custid );
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (ss != null) ss.close();
+		}
+		return result;
+	}
+	
 	
 }

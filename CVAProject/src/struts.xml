@@ -6,18 +6,18 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<package name="default" namespace="/" extends="struts-default, json-default">
-	<!-- <interceptors> -->
-		<!-- 로그인 인터셉터 정의 -->
-		<!-- <interceptor name="loginInterceptor"
-			class="seschool.bank.interceptor.LoginInterceptor" /> -->
+<!-- 	<interceptors> 
+		로그인 인터셉터 정의
+		 <interceptor name="loginInterceptor"
+			class="first.cva.interceptor.LoginInterceptor" />
+		로그인 확인시 사용 인터셉터 스택 정의
 
-		<!-- 로그인 확인시 사용 인터셉터 스택 정의 -->
-
-		<!-- <interceptor-stack name="loginInterceptorStack">
+		 <interceptor-stack name="loginInterceptorStack">
 			<interceptor-ref name="defaultStack" />
 			<interceptor-ref name="loginInterceptor" />
 		</interceptor-stack>
-	</interceptors> -->
+	</interceptors> 
+		 -->
 		 <default-action-ref name="index"/> 
 		
 		<action name="index">
@@ -75,7 +75,7 @@
 		<!-- 로그인 처리 -->
 		<action name="login" method="login"
 			class = "first.cva.action.CustomerAction">
-			<result name="json"></result>
+			<result name="success" type ="redirect" >converterMain</result>
 		</action>
 		<action name="loginConverter" method="login"
 			class = "first.cva.action.CustomerAction">
@@ -85,13 +85,15 @@
 				
 		<action name= "logoutConverter" method="logout"
 			class = "first.cva.action.CustomerAction">
-				<result type = "redirect" >converter</result>
+				<result type = "json"></result>
 		</action>
 		
 		
 				<!--         글 내용 보기 -->
   <action name="list" class="first.cva.action.BoardAction" method="listBoard" >
-  			<result type="json"></result>
+  		<!-- <interceptor-ref name="loginInterceptorStack"/> -->
+  			<result type="json" name = "success"></result>
+  			<!-- <result type = "redirect" name = "login">login.action</result> -->
   </action>
 
 

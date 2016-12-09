@@ -31,7 +31,6 @@
 	<select id="boardList" parameterType="String" resultType="Board">
 		select
 		* from board
-
 	</select>
 	<select id="listRead" resultType="Question">
 		select * from question order by qno asc
@@ -46,6 +45,13 @@
 	
 	<select id="searchBoard" parameterType="String" resultType="Board">
 	select * from Board where title like '%' || #{title} || '%'
+	</select>
+	
+	<select id= "javaboardList" parameterType="String" resultType="Board">
+		select * from Board where cSharpCode is null
+	</select>
+		<select id= "cSharpboardList" parameterType="String" resultType="Board">
+		select * from Board where javaCode is null
 	</select>
 
 <!--팝 로드 두개 다 일로 들어옴 -->

@@ -178,7 +178,7 @@
 						"\t{" + 
 						"      static void Main(string[] args)\n"+
 						"      {"+
-						"            System.Console.WriteLine(\"Hello World...\");"+
+						"            Console.WriteLine(\"Hello World...\");"+
 						"        }"+
 						"    }"+
 						"}"
