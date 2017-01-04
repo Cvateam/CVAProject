@@ -29,8 +29,8 @@ public class BoardAction extends ActionSupport implements SessionAware {
 
 	public String boardSave1() throws Exception{
 		board.setCustid((String)session.get("loginId"));
-
-		System.out.println(board.getJavaScannerInput());
+		//System.out.println("board.getOutputjava() : "+board.getOutputjava());
+		//System.out.println(board.getJavaScannerInput());
 		//System.out.println(board.getJavaCode());
 		int a = new BoardDAO().boardSave1(board);
 		

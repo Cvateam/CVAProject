@@ -69,8 +69,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 
 	$(function() {
 		/*최초 테이블 띄우기  */
-		$
-				.ajax({
+		$.ajax({
 					method : "get",
 					url : "list"//struts.xml
 					,
@@ -88,28 +87,28 @@ a [class^="icon-"], a [class*=" icon-"] {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.boardTitle1
-														+ "</td><td>"
+														+ item.boardTitlejava
+														+ "</td><td><a href='#openM' id='boardMemoPopUp'>"
 														+ item.boardMemo
-														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+														+ "</a></td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											if (javaFile != null
 													&& csharpFile == null) {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.boardTitle1
-														+ "</td><td>"
+														+ item.boardTitlejava
+														+ "</td><td><a href='#openM' id='boardMemoPopUp'>"
 														+ item.boardMemo
-														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+														+ "</a></td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											if (javaFile == null
 													&& csharpFile != null) {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
-														+ "</td><td>"
+														+ "</td><td><a href='#openM' id='boardMemoPopUp'>"
 														+ item.boardMemo
-														+ "</td><td>"
+														+ "</a></td><td>"
 														+ item.inputdate
 														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
@@ -118,10 +117,10 @@ a [class^="icon-"], a [class*=" icon-"] {
 												txt = "<tr id='conTr'><td>"
 														+ item.boardnum
 														+ "</td><td>"
-														+ item.boardTitle1
-														+ "</td><td>"
+														+ item.boardTitlejava
+														+ "</td><td><a href='#openM' id='boardMemoPopUp'>"
 														+ item.boardMemo
-														+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+														+ "</a></td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
 											}
 											$("div.contents table").append(txt);
 										});
@@ -160,7 +159,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.boardTitle1
+																			+ item.boardTitlejava
 																			+ "</td><td>"
 																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
@@ -170,7 +169,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.boardTitle1
+																			+ item.boardTitlejava
 																			+ "</td><td>"
 																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
@@ -190,7 +189,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 																	txt = "<tr id='conTr'><td>"
 																			+ item.boardnum
 																			+ "</td><td>"
-																			+ item.boardTitle1
+																			+ item.boardTitlejava
 																			+ "</td><td>"
 																			+ item.boardMemo
 																			+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
@@ -1441,7 +1440,7 @@ transform
 					<div class="nav-collapse collapse " style="height: 0px;">
 						<ul class="nav pull-right" style="margin-right: -400px ">
 							<s:if test='%{#session.loginId != null}'>
-							<li class="active"><a href = "loginConverter" class="scroll-page" ><i
+							<li class="active"><a href = "logoutConverter" class="scroll-page" ><i
 									class="icon-home"></i>logout</a></li>
 							</s:if>
 							<li class=""><a href="/samples" class="scroll-page"><i
@@ -1645,8 +1644,7 @@ transform
 																<span class="ace_comment">/*&nbsp;Name&nbsp;of&nbsp;the&nbsp;class&nbsp;has&nbsp;to&nbsp;be&nbsp;"Main"&nbsp;only&nbsp;if&nbsp;the&nbsp;class&nbsp;is&nbsp;public.&nbsp;*/</span>
 															</div>
 															<div class="ace_line" style="height: 14.40000057220459px">
-																<span class="ace_keyword">class</span>&nbsp;<span
-																	class="ace_identifier">Ideone</span>
+																<span class="ace_keyword">class</span>&nbsp;
 															</div>
 															<div class="ace_line" style="height: 14.40000057220459px">{</div>
 															<div class="ace_line" style="height: 14.40000057220459px">
@@ -1701,6 +1699,7 @@ class Test{
 }</textarea>
 											</div>
 										</div>
+										<div>
 										<input type="hidden" id="file_template1"
 											value="/* package whatever; // don't place package name! */
 
@@ -1715,7 +1714,7 @@ class Ideone
 	{
 		// your code goes here
 	}
-}">
+}"></div>
 										<div id="class2" class="classEditor"
 											style="border-bottom: 1px solid #ececec; display: none;">
 											<div id="file_div3" class=" ace_editor ace-tm"
@@ -2520,8 +2519,8 @@ class Ideone
 
 													<!-- submit -->
 													<div class="pull-right">
-														<input type="hidden" name="run" value="1">
-														<img id = "downloadBtn" src="images/download.png" width = "20px" height="10px">
+														<input type="hidden" name="run" value="1"><!-- cva.js에서 처리 -->
+														<img id = "downloadBtnJava" src="images/download.png" width = "20px" height="10px">
 														<button type="submit" name="Submit" id="Translate1"
 															tabindex="2"
 															class="btn btn-success footer-item rel-tooltip"
@@ -3178,7 +3177,7 @@ public class Test
 													<!-- submit -->
 													<div class="pull-right">
 														<input type="hidden" name="run" value="1">
-															<img id = "downloadBtn" src="images/download.png" width = "20px" height="10px">
+															<img id = "downloadBtnCsharp" src="images/download.png" width = "20px" height="10px">
 														<button type="submit" name="Submit" id="Translate2"
 															tabindex="2"
 															class="btn btn-success footer-item rel-tooltip"
@@ -3259,11 +3258,13 @@ public class Test
 			<div id="csharpSource"
 				style="border: 5px inset purple; width: 730px auto; height: 330px">
 
+
 			</div>
 		</div>
 	</div>
 
 	<script type="text/javascript">
+	// 보드 창 슬라이드 
 		//set default view mode
 		$defaultViewMode = "full"; //full (fullscreen background), fit (fit to window), original (no scale)
 
@@ -3326,12 +3327,10 @@ public class Test
 
 	<div class="bor"></div>
 
-	<div id="cookie-ue"
+<%-- 	<div id="cookie-ue"
 		style="border: 0px; margin: 0px; padding: 0px; position: fixed; left: 0px; bottom: 0px; background-color: #ddd; width: 100%; font-size: 12px; z-index: 10000; opacity: 0.9;">
 		<div style="padding: 5px;" class="container">
-			<span id="cookie-ue-msg-content">We use cookies to improve our
-				services. If you continue without changing your settings, we'll
-				assume that you are happy to receive all cookies on Ideone website.</span>
+		
 			<button type="button" class="btn btn-small" title="OK"
 				id="cookie-ue-button">OK</button>
 		</div>
@@ -3350,9 +3349,9 @@ public class Test
 							});
 		</script>
 
-	</div>
+	</div> --%>
 
-	<div class="modal hide fade" id="bug-dialog" role="dialog"
+<%-- 	<div class="modal hide fade" id="bug-dialog" role="dialog"
 		tabindex="-1">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
@@ -3360,8 +3359,8 @@ public class Test
 			<h3>Report bug / make suggestion</h3>
 		</div>
 		<div class="modal-body">
-			<img src="//stx1.ideone.com/gfx/loader.gif"
-				style="width: 14px; height: 14px;" alt="loading...">
+			<!-- <img src="//stx1.ideone.com/gfx/loader.gif"
+				style="width: 14px; height: 14px;" alt="loading..."> -->
 		</div>
 		<div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#"
@@ -3420,7 +3419,7 @@ public class Test
 		});
 	</script>
 
-	</div>
+	</div> --%>
 	<!-- end of #_container -->
 
 	<!--
@@ -3433,13 +3432,13 @@ public class Test
 </script>
 -->
 
-	<iframe name="oauth2relay645593108" id="oauth2relay645593108"
+	<!-- <iframe name="oauth2relay645593108" id="oauth2relay645593108"
 		src="https://accounts.google.com/o/oauth2/postmessageRelay?parent=http%3A%2F%2Fideone.com&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.ko.b3EMGvUEw9Y.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCNJUTGcG5rVed37F3A_9H-H7f8Ogw#rpctoken=627441766&amp;forcesecure=1"
 		tabindex="-1" aria-hidden="true"
 		style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe>
 	<iframe id="rufous-sandbox" scrolling="no" frameborder="0"
 		allowtransparency="true" allowfullscreen="true"
-		style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;"></iframe>
+		style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;"></iframe> -->
 
 </body>
 </html>

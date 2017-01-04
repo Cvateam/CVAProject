@@ -85,7 +85,7 @@
 				
 		<action name= "logoutConverter" method="logout"
 			class = "first.cva.action.CustomerAction">
-				<result type = "json"></result>
+				<result type = "redirect">converter</result>
 		</action>
 		
 		

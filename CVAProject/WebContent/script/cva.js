@@ -130,15 +130,18 @@ $(document).ready(function() {
 	
 	/////////////////기록한 자바소스 저장 /////////////////////
 	
-	$("#downloadBtn").on("click" , function(){ //downloadBtn --- 자바쪽 다운로드 아이디
+	$("#downloadBtnJava").on("click" , function(){ //downloadBtn --- 자바쪽 다운로드 아이디
 		javaUnloadEditor();
 		var title = prompt("Please enter a title ", "practice1");
+		var memo = prompt("leave a memo" ,  null);
 		javaLoadEditor();
 
 		var item = {
 			"board.javaCode" : $('#file1').val()
 			,"board.javaScannerInput" : $('#input1').val()
-			,"board.boardTitle1" : title
+			,"board.boardTitlejava" : title
+			,"board.boardMemo" : memo
+			,"board.outputjava" : $('#output1').val()
 		};
 		$.ajax({
 			type : 'get',
@@ -147,11 +150,158 @@ $(document).ready(function() {
 			dataType : 'json',
 			success : function(response) {
 				alert(response.message);
+				/* 테이블 띄우기  */
+				$.ajax({
+							method : "get",
+							url : "list"//struts.xml
+							,
+							success : function(response) {
+								var txt = "";
+								$
+										.each(
+												response.boardList,
+												function(index, item) {
+													var javaFile = item.javaCode;
+													var csharpFile = item.csharpCode;
+
+													if (javaFile != null
+															&& csharpFile != null) {
+														txt = "<tr id='conTr'><td>"
+																+ item.boardnum
+																+ "</td><td>"
+																+ item.boardTitlejava
+																+ "</td><td>"
+																+ item.boardMemo
+																+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+													}
+													if (javaFile != null
+															&& csharpFile == null) {
+														txt = "<tr id='conTr'><td>"
+																+ item.boardnum
+																+ "</td><td>"
+																+ item.boardTitlejava
+																+ "</td><td>"
+																+ item.boardMemo
+																+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+													}
+													if (javaFile == null
+															&& csharpFile != null) {
+														txt = "<tr id='conTr'><td>"
+																+ item.boardnum
+																+ "</td><td>"
+																+ item.boardMemo
+																+ "</td><td>"
+																+ item.inputdate
+																+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+													}
+													if (javaFile == null
+															&& csharpFile == null) {
+														txt = "<tr id='conTr'><td>"
+																+ item.boardnum
+																+ "</td><td>"
+																+ item.boardTitlejava
+																+ "</td><td>"
+																+ item.boardMemo
+																+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+													}
+													$("div.contents table").append(txt);
+												});
+							}
+						});
 				// board로 가시겠습니까 만들지 말지 
 			},
 			error : function(resp) {
 				alert(resp.message);
 			}
 		});
-	})
+		
+	});
+	///////////////////////c# 코드 저장//////////////////////////////////
+	$("#downloadBtnCsharp").on("click" , function(){ //downloadBtn --- 자바쪽 다운로드 아이디
+		csharpUnloadEditor();
+		var title = prompt("Please enter a title ", "practiceCsharp");
+		var memo = prompt("leave a memo" ,  null);
+		csharpLoadEditor();
+
+		var item = {
+			"board.csharpCode" : $('#file2').val()
+			,"board.csharpScannerInput" : $('#input2').val()
+			,"board.boardTitlecsharp" : title
+			,"board.boardMemo" : memo
+			,"board.outputcsharp" : $('#output2').val()
+		};
+		$.ajax({
+			type : 'get',
+			url : 'save2',    // 아직 만들지 않은 액션  //  위에 이렇게 하면 각자각자 만들어지는거임 하나의 제목으로 저장되는거 아님 
+			// 일단 이렇게 해두고 나중에 처리할지 말지는 ... 
+			data : item,
+			dataType : 'json',
+			success : function(response) {
+				alert(response.message);
+				/* 테이블 띄우기  */
+				$.ajax({
+							method : "get",
+							url : "list"//struts.xml
+							,
+							success : function(response) {
+								var txt = "";
+								$
+										.each(
+												response.boardList,
+												function(index, item) {
+													var javaFile = item.javaCode;
+													var csharpFile = item.csharpCode;
+
+													if (javaFile != null
+															&& csharpFile != null) {
+														txt = "<tr id='conTr'><td>"
+																+ item.boardnum
+																+ "</td><td>"
+																+ item.boardTitlejava
+																+ "</td><td>"
+																+ item.boardMemo
+																+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+													}
+													if (javaFile != null
+															&& csharpFile == null) {
+														txt = "<tr id='conTr'><td>"
+																+ item.boardnum
+																+ "</td><td>"
+																+ item.boardTitlejava
+																+ "</td><td>"
+																+ item.boardMemo
+																+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/Java.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+													}
+													if (javaFile == null
+															&& csharpFile != null) {
+														txt = "<tr id='conTr'><td>"
+																+ item.boardnum
+																+ "</td><td>"
+																+ item.boardMemo
+																+ "</td><td>"
+																+ item.inputdate
+																+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/Csharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+													}
+													if (javaFile == null
+															&& csharpFile == null) {
+														txt = "<tr id='conTr'><td>"
+																+ item.boardnum
+																+ "</td><td>"
+																+ item.boardTitlejava
+																+ "</td><td>"
+																+ item.boardMemo
+																+ "</td><td><a href='#openJ' id='javaPopUp'><img src='img/noJava.PNG' class='javaPop' border='0' width='30' height='30'></a></td><td><a href='#openC' id='csharpPopUp'><img src='img/noCsharp.PNG' class='csharpPop' border='0' width='30' height='30'></a></td></tr>";
+													}
+													$("div.contents table").append(txt);
+												});
+							}
+						});
+				// board로 가시겠습니까 만들지 말지 
+			},
+			error : function(resp) {
+				alert(resp.message);
+			}
+		});
+		
+	});
 });//ready

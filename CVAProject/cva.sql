@@ -1,8 +1,9 @@
 create table customer (
-	custid varchar2(50) primary key,
-	password varchar2(50) not null
+	custid varchar2(50) primary key
+	,password varchar2(50) not null
+	,insertdate date not null
 );
-insert into customer values ('a','a');
+insert into customer values ('a','a' , '2016/11/05');
 commit;
 
 
@@ -10,7 +11,7 @@ create table keyword (
 	num number primary key,
 	csharpkeyword varchar2(100),
 	javakeyword varchar2(100)
-)
+);
 
 create table question(
 	qno number primary key,
@@ -18,9 +19,9 @@ create table question(
 	content varchar2(1000) not null,
 	lv varchar2(10) not null,
 	solution varchar2(4000) not null
-)
+);
 
-create sequence question_seq
+create sequence question_seq;
 
 select * from question;
 insert into question values(question_seq.nextval,'원의면적구하기','원의 반지름을 입력받아 원의 면적을 구하시오','<중>','import java.util.Scanner;\n\npublic class test{\n\tpublic static void main(String[] args) {\n\t\tScanner input = new Scanner(System.in);\n\n\t\tdouble area, area1;\n\t\tSystem.out.print(\"원의 반지름을 입력하세요:\");\n\t\tarea = input.nextInt();\n\t\tarea1 = area * area * Math.E;\n\t\tSystem.out.printf(\"%,10.2f\", area1);\n\t}\n}\n');
@@ -83,32 +84,29 @@ insert into keyword values(keyword_seq.nextval,'Console.WriteLine','System.out.p
 insert into keyword values(keyword_seq.nextval,'Console.Write','System.out.print');
 
 delete from keyword where csharpkeyword='namespace';
-
-drop sequence keyword_seq;
-drop table keyword;
-
+commit;
 
 create table board(
-javaCode varchar2(4000)
-,cSharpCode varchar2(4000)
-, javaScannerInput varchar2(100) 
+javaCode varchar2(4000) --저장할 자바코드
+,cSharpCode varchar2(4000) -- 저장할 씨샵코드
+, javaScannerInput varchar2(100)  --스캐너 사용시입력하는 곳
 ,cShrapScannerInput varchar2(100)
-, boardTitle1 varchar2(100)   
-, boardTitle2 varchar2(100)
-,custid varchar2(50)   not null
-, boardMemo varchar2(1000)
-,boardnum  number primary key
+, boardTitlejava varchar2(100)    --자바코드저장 제목
+, boardTitlecsharp varchar2(100) -- 씨샵코드저장 제목
+,custid varchar2(50)   not null -- 사용자 아이디 (로그인체크)
+, boardMemo varchar2(4000) -- 저장할 때 메모가능
+,outputjava varchar2(4000) --컴파일한 출력결과물 자바
+,outputcsharp varchar2(4000) -- 컴파일한 출력결과물 씨샵
+,boardnum  number primary key -- 일련번호 
+,inputdate date not null
 );
-
 create sequence board_seq;
-
 insert into board values ('public class Test
 {
 	public static void main (String[] args)
 	{
 	System.out.println("success");
 	}
-}' , null, null,null,'sysout',null , 'a' , '처음인데 재밌네' , board_seq.nextval);
+}' , null, null,null,'sysout',null , 'a' , '처음인데 재밌네' ,'success' ,null,  board_seq.nextval , '2017/01/02');
 
 select * from board;
-                           

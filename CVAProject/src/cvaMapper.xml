@@ -17,14 +17,35 @@
 
 	<!-- Board 저장 Java -->
 	<insert id="insertBoard" parameterType="Board">
-		insert into board (javacode , javascannerinput , boardtitle1 ,
-		custid ,
-		boardnum) values (
+		insert into board (javacode , javascannerinput , boardtitlejava 
+		,custid 
+		,boardnum
+		,boardmemo
+		,outputjava
+		,inputdate) values (
 		#{javaCode}
+		<if test="javaScannerInput == null">
+		,null
+		</if> 
+		<if test = "javaScannerInput != null">
 		,#{javaScannerInput}
-		,#{boardTitle1}
+		</if>
+		,#{boardTitlejava}
 		,#{custid}
 		,board_seq.nextval
+		<if test="boardMemo == null">
+		,null
+		</if> 
+		<if test = "boardMemo != null">
+		,#{boardMemo}
+		</if>
+		<if test="outputjava == null">
+		,null
+		</if> 
+		<if test = "outputjava != null">
+		,#{outputjava}
+		</if>
+		, sysdate
 		)
 
 	</insert>
