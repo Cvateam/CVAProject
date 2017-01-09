@@ -10,7 +10,6 @@ $(document).ready(function() {
 		$('#class2').css('display','block');
 		$('#class3').css('display','none')
 	});
-	
 	$('#class3-button').on('click', function() {
 		$('#class1').css('display','none');
 		$('#class2').css('display','none');

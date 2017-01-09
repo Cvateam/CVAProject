@@ -36,19 +36,19 @@ a [class^="icon-"], a [class*=" icon-"] {
 	href="http://stx1.ideone.com/themes/smoothness/jquery-ui-1.10.1.custom.min.css"
 	type="text/css" rel="stylesheet">
 <!-- jak sie wrzuci do bundle to nie dziala -->
-<!-- <link href="/gfx2/css/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css" type="text/css" rel="stylesheet" /> -->
+ <link href="/gfx2/css/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css" type="text/css" rel="stylesheet" /> 
 <!-- mozna ew wlaczyc zamiast tego powyzej -->
 
 <!-- 2013-02-07 by wiele: na czas develu wyrzucam to z bundle zeby moc latwiej debugowac w firebugu -->
-<!-- <link href="http://stx1.ideone.com/gfx2/css/ideone-1-2.css?8"
-	rel="stylesheet"> -->
+<link href="http://stx1.ideone.com/gfx2/css/ideone-1-2.css?8"
+	rel="stylesheet">
 <link href="css/converter.css" rel="stylesheet">
 <link href="http://stx1.ideone.com/gfx2/css/ideone-recent.css?8"
 	rel="stylesheet">
 <link href="http://stx1.ideone.com/gfx2/css/ideone-myrecent.css?8"
 	rel="stylesheet">
-<!-- <link href="http://stx1.ideone.com/gfx2/css/ideone-view.css?8"
-	rel="stylesheet"> -->
+- <link href="http://stx1.ideone.com/gfx2/css/ideone-view.css?8"
+	rel="stylesheet">
 <link href="css/view.css" rel="stylesheet">
 
 
@@ -63,8 +63,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script type="text/javascript">
-	var cookie_name = 'settings';
-	var cookie_time = '15552000';
+
 	var is_mobile = 0;
 
 	$(function() {

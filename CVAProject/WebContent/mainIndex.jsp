@@ -116,6 +116,7 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js?ver=3.3"></script>
 		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 		<script>
+
 			var numberOfSections = 4;
 			var selectedSection = 1;
 

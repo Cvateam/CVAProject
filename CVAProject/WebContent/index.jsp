@@ -17,7 +17,19 @@
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<script>document.documentElement.className = 'js';</script>
+		<script type="text/javascript" src="script/jquery-3.1.0.min.js"></script>
+		<script>document.documentElement.className = 'js';	</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$('#converterBtn').on('click' , function(){
+				  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			          location.href = "mConverter";
+			      }
+				  location.href = "converter";
+			   });
+				
+		});
+		</script>
 	</head>
 	<body>
 		<svg class="hidden">
@@ -90,7 +102,7 @@
 			<section class="featured-content">
 				<ul class="featured-list">
 					<li class="featured-list__item">
-						<a href="converter" class="featured-list__link">
+						<a href="#" class="featured-list__link" id = "converterBtn">
 							<img class="featured-list__img" src="img/icons/converter.png" >
 							<h3 class="featured-list__title">Converter</h3>
 						</a>
@@ -100,6 +112,7 @@
 							<img class="featured-list__img" src="img/icons/board.png" >
 							<h3 class="featured-list__title">Board</h3>
 						</a>
+						
 					</li>
 <!-- 					<li class="featured-list__item">
 						<a href="#" class="featured-list__link">

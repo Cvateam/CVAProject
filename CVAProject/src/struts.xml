@@ -110,7 +110,16 @@
 <!--         csharpPop 클릭시 -->	
 	<action name="csharpPopLoad" class="first.cva.action.BoardAction" method="csharpPopLoad">
 	<result type="json"></result>
-	</action>	
+	</action>
+	
+	
+<!--  모바일 전용 화면  -->
+	<action name="mLoginForm" >
+		<result>mLogin.jsp</result>
+	</action>
+	<action name="mConverter">
+		<result>mConverter.jsp</result>
+	</action>		
 	</package>
 	
 	
