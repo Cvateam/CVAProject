@@ -136,8 +136,8 @@
 			sounds : {},
 			sources : [{
 				lake : 'sounds/HappyBackgroundMusicUpbeat.mp3',
-				splash : 'sounds/Water Splash-SoundBible.com-800223477.mp3',
-				underwater : 'sounds/Underwater_Pool-Mike_Koenig-355864284.mp3'
+				/*splash : 'sounds/Water Splash-SoundBible.com-800223477.mp3',
+				underwater : 'sounds/Underwater_Pool-Mike_Koenig-355864284.mp3'*/
 			}],
 			load : function(callback) {
 				this.totalFiles = Object.size(this.sources[0]);
@@ -245,7 +245,7 @@
 			bubbles.stop();
 			// Sounds..
 			audio.fadeOut('underwater');
-			audio.play('splash', 700);
+			//audio.play('splash', 700);
 			audio.loop('lake');
 			audio.fadeIn('lake', 700);
 		}
@@ -253,11 +253,11 @@
 			// Start the bubbles canvas animation.
 			bubbles.start();
 			// Sounds..
-			audio.fadeOut('underwater');
-			audio.volume('splash', 0);
-			audio.play('splash', 700);
-			audio.loop('underwater');
-			audio.play('underwater', 700);
+			//audio.fadeOut('underwater');
+			//audio.volume('splash', 0);
+			//audio.play('splash', 700);
+			//audio.loop('underwater');
+			//audio.play('underwater', 700);
 			audio.fadeIn('lake');
 		}
 	}

@@ -117,9 +117,17 @@
 	<action name="mLoginForm" >
 		<result>mLogin.jsp</result>
 	</action>
+	<action name="mLogin" method="login"
+		class = "first.cva.action.CustomerAction">
+		<result name="success" type ="redirect" >mMain</result>
+	</action>	
 	<action name="mConverter">
 		<result>mConverter.jsp</result>
-	</action>		
+	</action>	
+	<action name="mMain">
+		<result>fullyResponsiveMobileMain.jsp</result>
+	</action>	
+		
 	</package>
 	
 	

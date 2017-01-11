@@ -22,7 +22,7 @@
 	<div class="logo">login</div>
 	<!-- Main Form -->
 	<div class="login-form-1">
-		<form action="login" method="POST" id="form" class="text-left">
+		<form action="mLogin" method="POST" id="form" class="text-left">
 			<div class="login-form-main-message"></div>
 			<div class="main-login-form">
 				<div class="login-group">
