@@ -53,6 +53,9 @@
 		select
 		* from board
 	</select>
+	<select id="boardRead" parameterType="String" resultType="Board">
+		select javacode from Board where boardtitlejava=#{boardtitle1}
+	</select>
 	<select id="listRead" resultType="Question">
 		select * from question order by qno asc
 	</select>

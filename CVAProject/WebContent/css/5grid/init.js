@@ -377,7 +377,7 @@
 						.css('z-index', '151')
 						.css('top', '0')
 						.css('width', '100%')
-						.css('overflow', 'hidden')
+						.css('overflow', 'scroll')
 						.css('height', _opts['mobileUI.titleBarHeight'] + 'px')
 						.css('line-height', _opts['mobileUI.titleBarHeight'] + 'px')
 						.disableSelection_5grid()
@@ -409,7 +409,7 @@
 					if (_isTouch) {
 						var _mobileUI_site_nav_pos = 0;
 						mobileUI_site_nav
-							.css('overflow', 'hidden')
+							.css('overflow', 'scroll')
 							.bind('touchstart', function(e) {
 								_mobileUI_site_nav_pos = mobileUI_site_nav.scrollTop() + event.touches[0].pageY;
 							})
@@ -426,7 +426,7 @@
 
 				// Body
 					body	
-						.css('overflow', (_isTouch ? 'hidden' : 'visible'))
+						.css('overflow', (_isTouch ? 'scroll' : 'visible'))
 						.bind('5grid_toggleNav', function() {
 							if (mobileUI_site_nav.isOpen_5grid)
 								body.trigger('5grid_closeNav');

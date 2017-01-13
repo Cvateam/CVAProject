@@ -122,6 +122,23 @@ public class BoardDAO {
 		}
 		return result;
 	}
+
+	public Board boardRead(String boardTitle1) {
+		Board result = null;
+		SqlSession ss = null;
+		try {
+			ss = factory.openSession();
+		    result = ss.selectOne("mapper.boardRead", boardTitle1);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (ss != null) ss.close();
+		}
+		return result;
+	}
+	
 	
 	
 }

@@ -607,13 +607,6 @@ a:focus {
 		margin: 0 0 0 0.5em;
 		width: 100%;
 	}
-	.codrops-demos::after {
-		content: 'Tap anywhere to turn on sound';
-		display: inline-block;
-		margin: 1em 0 0 0;
-		font-weight: bolder;
-		color: #4d79ff;
-	}
 	.landing-header__title {
 		font-size: 2.5em;
 	}

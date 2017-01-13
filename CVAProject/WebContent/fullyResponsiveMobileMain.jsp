@@ -56,7 +56,7 @@
 					<!-- Social Icons -->
 						<ul class="icons">
 							<li><a href="mConverter" class="icon fa fa-exchange" aria-hidden="true"><span class="label">Converter</span></a></li>
-							<li><a href="#" class="icon fa fa-th-list" aria-hidden="true"><span class="label">Board</span></a></li>
+							<li><a href="boardList" class="icon fa fa-th-list" aria-hidden="true"><span class="label">Board</span></a></li>
 							<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
 							<!-- <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li> -->
 						<!-- 	<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li> -->

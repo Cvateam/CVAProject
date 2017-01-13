@@ -44,6 +44,13 @@ public class BoardAction extends ActionSupport implements SessionAware {
 		cSharpboardList = dao.cSharpboardList((String)session.get("loginid"));
 		return SUCCESS;
 	}
+	public String boardRead() throws Exception {
+		BoardDAO dao = new BoardDAO();
+		boardList = dao.boardList((String)session.get("loginid"));
+		board = dao.boardRead(boardTitle1); 
+	
+		return SUCCESS;
+	}
 	
 	
 	public String listBoard() throws Exception{

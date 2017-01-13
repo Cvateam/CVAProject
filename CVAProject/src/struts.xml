@@ -111,7 +111,9 @@
 	<action name="csharpPopLoad" class="first.cva.action.BoardAction" method="csharpPopLoad">
 	<result type="json"></result>
 	</action>
-	
+	<action name="boardRead"  class="first.cva.action.BoardAction" method="boardRead">
+		<result>boardRead.jsp</result>
+	</action>
 	
 <!--  모바일 전용 화면  -->
 	<action name="mLoginForm" >

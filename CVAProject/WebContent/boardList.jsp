@@ -15,14 +15,17 @@
 <link rel="stylesheet" href="css/styleBoard.css" />
 <link rel="stylesheet" href="css/style-desktop.css" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
-
+<link rel="stylesheet" media="screen and (max-width: 600px)" href="css/style-mobile.css" />
+<link rel="stylesheet" media="screen and (max-width: 600px)" href="css/5grid/core-mobile.css" />
+<link rel="stylesheet" media="screen and (max-width: 600px)" href="css/5grid/mobileUI-beveled.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="css/5grid/init.js?use=mobile,desktop,1000px&amp;mobileUI=1&amp;mobileUI.theme=none"></script>
 </head>
-<body>
+<body style="overflow: scroll; ">
 <!-- <div id="wrapper"> -->
 	<div id="header-wrapper">
 			<div class="5grid-layout">
+			
 				<div class="row">
 					<div class="12u" id="logo"> <!-- Logo -->
 						<h1><a href="#" class="mobileUI-site-name">C.VA</a></h1>
@@ -71,7 +74,7 @@
 						<ul class="style1">
 							<s:iterator value="boardList">
 								<s:if test="boardList != null">
-									<li><a href="#">${boardTitle1}</a></li>
+									<li><a href="boardRead.action?boardTitle="${boardTitle1}>${boardTitle1}</a></li>
 								</s:if>
 							</s:iterator>
 						</ul>
