@@ -123,6 +123,9 @@
 	</action>	
 	<action name="mConverter">
 		<result>mConverter.jsp</result>
+	</action>
+	<action name="mConverterC">
+		<result>mConverterC.jsp</result>
 	</action>	
 	<action name="mMain">
 		<result>fullyResponsiveMobileMain.jsp</result>
