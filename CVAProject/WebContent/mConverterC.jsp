@@ -1301,188 +1301,147 @@ form {
 												<!-- editor + ad -->
 												<div style="border-bottom: 1px solid #ececec; height:170px;">
 													<div id="file_div" class=" ace_editor ace-tm"
-														style="height: 320px; display: block;">
-														<textarea class="ace_text-input" wrap="off"
-															autocapitalize="off" spellcheck="false"
-															style="bottom: 161.6px; height: 14.4px; width: 6.6px; right: 679.4px;"></textarea>
-														<div class="ace_gutter">
-															<div
-																class="ace_layer ace_gutter-layer ace_folding-enabled"
-																style="margin-top: 0px; height: 348.8px; width: 47px;">
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">
-																	1<span class="ace_fold-widget ace_start ace_open"
-																		style="height: 14.40000057220459px"></span>
-																</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">2</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">3</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">4</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">5</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">6</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">
-																	7<span class="ace_fold-widget ace_start ace_open"
-																		style="height: 14.40000057220459px"></span>
-																</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">8</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">
-																	9<span class="ace_fold-widget ace_start ace_open"
-																		style="height: 14.40000057220459px"></span>
-																</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">10</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">
-																	11<span class="ace_fold-widget ace_start ace_open"
-																		style="height: 14.40000057220459px"></span>
-																</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">12</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">13</div>
-																<div class="ace_gutter-cell "
-																	style="height: 14.40000057220459px;">14</div>
-															</div>
-															<div class="ace_gutter-active-line"
-																style="top: 144px; height: 14.4px;"></div>
+												style="height: 320px; display: block;">
+												<textarea class="ace_text-input" wrap="off"
+													autocapitalize="off" spellcheck="false"
+													style="bottom: 190.4px; height: 14.4px; width: 6.6px; right: 712.8px;"></textarea>
+												<div class="ace_gutter">
+													<div class="ace_layer ace_gutter-layer ace_folding-enabled"
+														style="margin-top: 0px; height: 348.8px; width: 40px;">
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">1</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">2</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">3</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															4<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
 														</div>
-														<div class="ace_scroller"
-															style="left: 47px; right: 0px; bottom: 0px;">
-															<div class="ace_content"
-																style="margin-top: 0px; width: 723px; height: 348.8px; margin-left: 0px;">
-																<div class="ace_layer ace_print-margin-layer">
-																	<div class="ace_print-margin"
-																		style="left: 532px; visibility: visible;"></div>
-																</div>
-																<div class="ace_layer ace_marker-layer">
-																	<div class="ace_active-line"
-																		style="height: 14.40000057220459px; top: 144.0000057220459px; left: 0; right: 0;"></div>
-																	<div class="ace_bracket ace_start"
-																		style="height: 14.40000057220459px; width: 6.599999904632568px; top: 172.80000686645508px; left: 30.399999618530273px;"></div>
-																</div>
-																<div class="ace_layer ace_text-layer"
-																	style="padding: 0px 4px;">
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">
-																		<span class="ace_comment">/*&nbsp;package&nbsp;whatever;&nbsp;//&nbsp;don't&nbsp;place&nbsp;package&nbsp;name!&nbsp;*/</span>
-																	</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px"></div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">
-																		<span class="ace_keyword">import</span>&nbsp;<span
-																			class="ace_identifier">java</span>.<span
-																			class="ace_identifier">util</span>.<span
-																			class="ace_keyword ace_operator">*</span>;
-																	</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">
-																		<span class="ace_keyword">import</span>&nbsp;<span
-																			class="ace_identifier">java</span>.<span
-																			class="ace_identifier">lang</span>.<span
-																			class="ace_keyword ace_operator">*</span>;
-																	</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">
-																		<span class="ace_keyword">import</span>&nbsp;<span
-																			class="ace_identifier">java</span>.<span
-																			class="ace_identifier">io</span>.<span
-																			class="ace_keyword ace_operator">*</span>;
-																	</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px"></div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">
-																		<span class="ace_comment">/*&nbsp;Name&nbsp;of&nbsp;the&nbsp;class&nbsp;has&nbsp;to&nbsp;be&nbsp;"Main"&nbsp;only&nbsp;if&nbsp;the&nbsp;class&nbsp;is&nbsp;public.&nbsp;*/</span>
-																	</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">
-																		<span class="ace_keyword">class</span>&nbsp;<span
-																			class="ace_identifier">CVA</span>
-																	</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">{</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">
-																		&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
-																			class="ace_keyword">static</span>&nbsp;<span
-																			class="ace_keyword">void</span>&nbsp;<span
-																			class="ace_identifier">main</span>&nbsp;(<span
-																			class="ace_support ace_function">String</span>[]&nbsp;<span
-																			class="ace_identifier">args</span>)&nbsp;<span
-																			class="ace_keyword">throws</span>&nbsp;<span
-																			class="ace_identifier">java</span>.<span
-																			class="ace_identifier">lang</span>.<span
-																			class="ace_support ace_function">Exception</span>
-																	</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;{</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">
-																		<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-																			class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
-																	</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
-																	<div class="ace_line"
-																		style="height: 14.40000057220459px">}</div>
-																</div>
-																<div class="ace_layer ace_marker-layer"></div>
-																<div
-																	class="ace_layer ace_cursor-layer ace_hidden-cursors">
-																	<div class="ace_cursor"
-																		style="left: 37px; top: 144px; width: 6.6px; height: 14.4px;"></div>
-																</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">5</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">
+															6<span class="ace_fold-widget ace_start ace_open"
+																style="height: 14.40000057220459px"></span>
+														</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">7</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">8</div>
+														<div class="ace_gutter-cell "
+															style="height: 14.40000057220459px;">9</div>
+													</div>
+													<div class="ace_gutter-active-line"
+														style="top: 115.2px; height: 14.4px;"></div>
+												</div>
+												<div class="ace_scroller"
+													style="left: 40px; right: 0px; bottom: 0px;">
+													<div class="ace_content"
+														style="margin-top: 0px; width: 730px; height: 348.8px; margin-left: 0px;">
+														<div class="ace_layer ace_print-margin-layer">
+															<div class="ace_print-margin"
+																style="left: 532px; visibility: visible;"></div>
+														</div>
+														<div class="ace_layer ace_marker-layer">
+															<div class="ace_active-line"
+																style="height: 14.40000057220459px; top: 115.20000457763672px; left: 0; right: 0;"></div>
+															<div class="ace_bracket ace_start"
+																style="height: 14.40000057220459px; width: 6.599999904632568px; top: 43.20000171661377px; left: 4px;"></div>
+														</div>
+														<div class="ace_layer ace_text-layer"
+															style="padding: 0px 4px;">
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">using</span>&nbsp;<span
+																	class="ace_identifier">System</span><span
+																	class="ace_punctuation ace_operator">;</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px"></div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_keyword">public</span>&nbsp;<span
+																	class="ace_keyword">class</span>&nbsp;<span
+																	class="ace_identifier">Test</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_paren ace_lparen">{</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
+																	class="ace_keyword">static</span>&nbsp;<span
+																	class="ace_keyword">void</span>&nbsp;<span
+																	class="ace_identifier">Main</span><span
+																	class="ace_paren ace_lparen">(</span><span
+																	class="ace_paren ace_rparen">)</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																&nbsp;&nbsp;&nbsp;&nbsp;<span
+																	class="ace_paren ace_lparen">{</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+																	class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																&nbsp;&nbsp;&nbsp;&nbsp;<span
+																	class="ace_paren ace_rparen">}</span>
+															</div>
+															<div class="ace_line" style="height: 14.40000057220459px">
+																<span class="ace_paren ace_rparen">}</span>
 															</div>
 														</div>
-														<div
-															style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
-														<div class="ace_scrollbar"
-															style="width: 22px; display: none; overflow-y: scroll; bottom: 0px;">
-															<div class="ace_scrollbar-inner" style="height: 201.6px;"></div>
-														</div>
-														<div class="ace_scrollbar-h"
-															style="height: 22px; display: none; overflow-x: scroll; left: 47px; right: 0px;">
-															<div class="ace_scrollbar-inner" style="width: 723px;"></div>
+														<div class="ace_layer ace_marker-layer"></div>
+														<div class="ace_layer ace_cursor-layer ace_hidden-cursors">
+															<div class="ace_cursor"
+																style="left: 10.6px; top: 115.2px; width: 6.6px; height: 14.4px;"></div>
 														</div>
 													</div>
+												</div>
+												<div
+													style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
+												<div class="ace_scrollbar"
+													style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
+													<div class="ace_scrollbar-inner" style="height: 129.6px;"></div>
+												</div>
+												<div class="ace_scrollbar-h"
+													style="height: 26px; display: none; overflow-x: scroll; left: 40px; right: 0px;">
+													<div class="ace_scrollbar-inner" style="width: 730px;"></div>
+												</div>
+											</div>
 													<div id="file_parent" style="padding: 10px; height:168px; display: none;">
-														<textarea name="file" id="file" tabindex="1" style="height:160px;">/* package whatever; // don't place package name! */
+														<textarea name="file" id="file" tabindex="1" style="height:160px;">using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
-import java.util.*;
-import java.lang.*;
-import java.io.*;
-
-/* Name of the class has to be "Main" only if the class is public. */
-class CVA
+namespace CVa
 {
-	public static void main (String[] args) throws java.lang.Exception
+	public class Test
 	{
-		// your code goes here
+		public static void Main(string[] args)
+		{
+			// your code goes here
+		}
 	}
 }</textarea>
 													</div>
 												</div>
 												<input type="hidden" id="file_template"
-													value="/* package whatever; // don't place package name! */
+													value="using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
-import java.util.*;
-import java.lang.*;
-import java.io.*;
-
-/* Name of the class has to be &quot;Main&quot; only if the class is public. */
-class Ideone
+namespace CVa
 {
-	public static void main (String[] args) throws java.lang.Exception
+	public class Test
 	{
-		// your code goes here
+		public static void Main(string[] args)
+		{
+			// your code goes here
+		}
 	}
 }">
 
@@ -1576,7 +1535,7 @@ class Ideone
 															<div class="dropdown dropup" id="lang_advselect">
 																<a class="dropdown-toggle btn footer-item rel-tooltip"
 																	data-toggle="dropdown" href="#" title="Choose language"
-																	id="lang-dropdown-menu-button"><span>Java</span> <b
+																	id="lang-dropdown-menu-button"><span>C#</span> <b
 																	class="caret"></b></a>
 																<div id="lang-dropdown-menu" class="dropdown-menu"
 																	role="menu" aria-labelledby="lang-dropdown-menu-button">
