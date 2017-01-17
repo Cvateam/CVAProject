@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" xml:lang="en">
 <head>
@@ -17,9 +17,7 @@
 <link rel="shortcut icon" type="image/png"
 	href="//stx1.ideone.com/gfx2/img/favicon.png"> -->
 
-<link
-	href="css/bootStrap.css"
-	rel="stylesheet">
+<link href="css/bootStrap.css" rel="stylesheet">
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,7 +85,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 	src="//stx1.ideone.com/gfx2/js/jquery-migrate-1.0.0.js?7"></script>
 <script type="text/javascript"
 	src="//stx1.ideone.com/gfx2/js/jquery-custom-file-input.js?7"></script>
-	
+
 <!-- <script type="text/javascript">
 	var height = window.screen.availHeight;
 	var width = window.screen.availWidth;
@@ -1146,7 +1144,19 @@ transform
 
 
 
+
+
+
+
+
+
 :rotate(360deg)
+
+
+
+
+
+
 
 
 
@@ -1220,13 +1230,13 @@ transform
 	z-index: 4
 }
 
-html, body.not-responsive, div#_container, div.container{
-	height:592px;
-	width:360px;
+html, body.not-responsive, div#_container, div.container {
+	height: 592px;
+	width: 360px;
 }
 
-div{
-	width:340px;
+div {
+	width: 340px;
 }
 
 div.header {
@@ -1234,182 +1244,195 @@ div.header {
 }
 
 form {
-	padding:0;
-	margin:0;
+	padding: 0;
+	margin: 0;
 }
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 360px){
-
+@media only screen and (min-device-width : 320px) and (max-device-width
+	: 360px) {
 }
 </style>
 </head>
 
 <body class="home  not-responsive">
 	<div id="_container">
+		<script type="text/javascript" src="script/cvaMC.js"></script>
 		<script type="text/javascript" src="script/cvaMobile.js"></script>
-		<input type="hidden" id="site" value="index">
+		<input type="hidden" id="site" value="index"> <input
+			type="hidden" name="p1" id="p1"
+			value="4e9b957d2520aa8f482aa69f047300f3"> <input
+			type="hidden" name="p2" id="p2" value="9"> <input
+			type="hidden" name="p3" id="p3" value="20"> <input
+			type="hidden" name="p4" id="p4" value="1710"> <input
+			type="hidden" name="clone_link" value="/">
 
-		<form enctype="multipart/form-data" action="/ideone/Index/submit/"
-			method="post" id="main_form">
-			<input type="hidden" name="p1" id="p1"
-				value="4e9b957d2520aa8f482aa69f047300f3"> <input
-				type="hidden" name="p2" id="p2" value="9"> <input
-				type="hidden" name="p3" id="p3" value="20"> <input
-				type="hidden" name="p4" id="p4" value="1710"> <input
-				type="hidden" name="clone_link" value="/">
+		<div id="main_form_files"></div>
 
-			<div id="main_form_files"></div>
-
-			<section
-				class="project-carousel thebackground shadow-inner-top-bottom" >
-				<div class="container">
-					<div class="row">
-						<div class="span12 home-main-box" style="width:360px;">
-							<div id="featured-project-carousel" style="width:360px;"class="carousel slide">
-								<div class="carousel-inner overflow-visible"style="width:360px;">
-									<div class="item active"style="width:360px;">
+		<section
+			class="project-carousel thebackground shadow-inner-top-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="span12 home-main-box" style="width: 360px;">
+						<div id="featured-project-carousel" style="width: 360px;"
+							class="carousel slide">
+							<div class="carousel-inner overflow-visible"
+								style="width: 360px;">
+								<div class="item active" style="width: 360px;">
 
 
-										<div class="row">
-											<div class="span8 code-panel"style="width:360px;"  >
-												<div class="header">
-													<i class="icon-code"></i> enter your source code <span
-														id="insert-part-or" style="display: inline">or</span> <span
-														id="insert-part-insert" style="display: inline">insert</span>
-													<span id="insert-part-template" style="display: inline"><a
-														id="insert-template-link" href="#" class="rel-tooltip"
-														title="Insert template">template</a></span> <span
-														id="insert-part-or2" style="display: inline">or</span> <span
-														id="insert-part-sample" style="display: inline"><a
-														id="insert-sample-link" href="#" class="rel-tooltip"
-														title="Insert sample program">sample</a></span> <span
-														id="insert-part-or3" style="display: inline">or</span> <span
-														id="insert-part-users-template" style="display: inline"><a
-														id="insert-users-template-link" href="#"
-														class="rel-tooltip" title="Insert your template">your
-															template</a></span> <img id="insert-loader"
-														style="display: none; height: 11px"
-														src="//stx1.ideone.com/gfx/loader.gif" alt="loading...">
-													<div class="pull-right option-clear" style="width:50px;">
-														<a href="#" class="rel-tooltip with-margin-right"
-															title="Clear the editor"
-															onclick="clearEditor(); return false;">clear</a>
-													</div>
-													<div class="clearfix"></div>
+									<div class="row">
+										<div class="span8 code-panel" style="width: 360px;">
+											<div class="header">
+												<i class="icon-code"></i> enter your source code <span
+													id="insert-part-or" style="display: inline">or</span> <span
+													id="insert-part-insert" style="display: inline">insert</span>
+												<span id="insert-part-template" style="display: inline"><a
+													id="insert-template-link" href="#" class="rel-tooltip"
+													title="Insert template">template</a></span> <span
+													id="insert-part-or2" style="display: inline">or</span> <span
+													id="insert-part-sample" style="display: inline"><a
+													id="insert-sample-link" href="#" class="rel-tooltip"
+													title="Insert sample program">sample</a></span> <span
+													id="insert-part-or3" style="display: inline">or</span> <span
+													id="insert-part-users-template" style="display: inline"><a
+													id="insert-users-template-link" href="#"
+													class="rel-tooltip" title="Insert your template">your
+														template</a></span> <img id="insert-loader"
+													style="display: none; height: 11px"
+													src="//stx1.ideone.com/gfx/loader.gif" alt="loading...">
+												<div class="pull-right option-clear" style="width: 50px;">
+													<a href="#" class="rel-tooltip with-margin-right"
+														title="Clear the editor"
+														onclick="clearEditor(); return false;">clear</a>
 												</div>
-
-												<!-- editor + ad -->
-												<div style="border-bottom: 1px solid #ececec; height:170px;">
-													<div id="file_div" class=" ace_editor ace-tm"
-												style="height: 320px; display: block;">
-												<textarea class="ace_text-input" wrap="off"
-													autocapitalize="off" spellcheck="false"
-													style="bottom: 190.4px; height: 14.4px; width: 6.6px; right: 712.8px;"></textarea>
-												<div class="ace_gutter">
-													<div class="ace_layer ace_gutter-layer ace_folding-enabled"
-														style="margin-top: 0px; height: 348.8px; width: 40px;">
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">1</div>
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">2</div>
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">3</div>
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">
-															4<span class="ace_fold-widget ace_start ace_open"
-																style="height: 14.40000057220459px"></span>
-														</div>
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">5</div>
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">
-															6<span class="ace_fold-widget ace_start ace_open"
-																style="height: 14.40000057220459px"></span>
-														</div>
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">7</div>
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">8</div>
-														<div class="ace_gutter-cell "
-															style="height: 14.40000057220459px;">9</div>
-													</div>
-													<div class="ace_gutter-active-line"
-														style="top: 115.2px; height: 14.4px;"></div>
-												</div>
-												<div class="ace_scroller"
-													style="left: 40px; right: 0px; bottom: 0px;">
-													<div class="ace_content"
-														style="margin-top: 0px; width: 730px; height: 348.8px; margin-left: 0px;">
-														<div class="ace_layer ace_print-margin-layer">
-															<div class="ace_print-margin"
-																style="left: 532px; visibility: visible;"></div>
-														</div>
-														<div class="ace_layer ace_marker-layer">
-															<div class="ace_active-line"
-																style="height: 14.40000057220459px; top: 115.20000457763672px; left: 0; right: 0;"></div>
-															<div class="ace_bracket ace_start"
-																style="height: 14.40000057220459px; width: 6.599999904632568px; top: 43.20000171661377px; left: 4px;"></div>
-														</div>
-														<div class="ace_layer ace_text-layer"
-															style="padding: 0px 4px;">
-															<div class="ace_line" style="height: 14.40000057220459px">
-																<span class="ace_keyword">using</span>&nbsp;<span
-																	class="ace_identifier">System</span><span
-																	class="ace_punctuation ace_operator">;</span>
-															</div>
-															<div class="ace_line" style="height: 14.40000057220459px"></div>
-															<div class="ace_line" style="height: 14.40000057220459px">
-																<span class="ace_keyword">public</span>&nbsp;<span
-																	class="ace_keyword">class</span>&nbsp;<span
-																	class="ace_identifier">Test</span>
-															</div>
-															<div class="ace_line" style="height: 14.40000057220459px">
-																<span class="ace_paren ace_lparen">{</span>
-															</div>
-															<div class="ace_line" style="height: 14.40000057220459px">
-																&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
-																	class="ace_keyword">static</span>&nbsp;<span
-																	class="ace_keyword">void</span>&nbsp;<span
-																	class="ace_identifier">Main</span><span
-																	class="ace_paren ace_lparen">(</span><span
-																	class="ace_paren ace_rparen">)</span>
-															</div>
-															<div class="ace_line" style="height: 14.40000057220459px">
-																&nbsp;&nbsp;&nbsp;&nbsp;<span
-																	class="ace_paren ace_lparen">{</span>
-															</div>
-															<div class="ace_line" style="height: 14.40000057220459px">
-																<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-																	class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
-															</div>
-															<div class="ace_line" style="height: 14.40000057220459px">
-																&nbsp;&nbsp;&nbsp;&nbsp;<span
-																	class="ace_paren ace_rparen">}</span>
-															</div>
-															<div class="ace_line" style="height: 14.40000057220459px">
-																<span class="ace_paren ace_rparen">}</span>
-															</div>
-														</div>
-														<div class="ace_layer ace_marker-layer"></div>
-														<div class="ace_layer ace_cursor-layer ace_hidden-cursors">
-															<div class="ace_cursor"
-																style="left: 10.6px; top: 115.2px; width: 6.6px; height: 14.4px;"></div>
-														</div>
-													</div>
-												</div>
-												<div
-													style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
-												<div class="ace_scrollbar"
-													style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
-													<div class="ace_scrollbar-inner" style="height: 129.6px;"></div>
-												</div>
-												<div class="ace_scrollbar-h"
-													style="height: 26px; display: none; overflow-x: scroll; left: 40px; right: 0px;">
-													<div class="ace_scrollbar-inner" style="width: 730px;"></div>
-												</div>
+												<div class="clearfix"></div>
 											</div>
-													<div id="file_parent" style="padding: 10px; height:168px; display: none;">
-														<textarea name="file" id="file" tabindex="1" style="height:160px;">using System;
+
+											<!-- editor + ad -->
+											<div style="border-bottom: 1px solid #ececec; height: 170px;">
+												<div id="file_div" class=" ace_editor ace-tm"
+													style="height: 320px; display: block;">
+													<textarea class="ace_text-input" wrap="off"
+														autocapitalize="off" spellcheck="false"
+														style="bottom: 190.4px; height: 14.4px; width: 6.6px; right: 712.8px;"></textarea>
+													<div class="ace_gutter">
+														<div
+															class="ace_layer ace_gutter-layer ace_folding-enabled"
+															style="margin-top: 0px; height: 348.8px; width: 40px;">
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">1</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">2</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">3</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">
+																4<span class="ace_fold-widget ace_start ace_open"
+																	style="height: 14.40000057220459px"></span>
+															</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">5</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">
+																6<span class="ace_fold-widget ace_start ace_open"
+																	style="height: 14.40000057220459px"></span>
+															</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">7</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">8</div>
+															<div class="ace_gutter-cell "
+																style="height: 14.40000057220459px;">9</div>
+														</div>
+														<div class="ace_gutter-active-line"
+															style="top: 115.2px; height: 14.4px;"></div>
+													</div>
+													<div class="ace_scroller"
+														style="left: 40px; right: 0px; bottom: 0px;">
+														<div class="ace_content"
+															style="margin-top: 0px; width: 730px; height: 348.8px; margin-left: 0px;">
+															<div class="ace_layer ace_print-margin-layer">
+																<div class="ace_print-margin"
+																	style="left: 532px; visibility: visible;"></div>
+															</div>
+															<div class="ace_layer ace_marker-layer">
+																<div class="ace_active-line"
+																	style="height: 14.40000057220459px; top: 115.20000457763672px; left: 0; right: 0;"></div>
+																<div class="ace_bracket ace_start"
+																	style="height: 14.40000057220459px; width: 6.599999904632568px; top: 43.20000171661377px; left: 4px;"></div>
+															</div>
+															<div class="ace_layer ace_text-layer"
+																style="padding: 0px 4px;">
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_keyword">using</span>&nbsp;<span
+																		class="ace_identifier">System</span><span
+																		class="ace_punctuation ace_operator">;</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px"></div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_keyword">public</span>&nbsp;<span
+																		class="ace_keyword">class</span>&nbsp;<span
+																		class="ace_identifier">Test</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_paren ace_lparen">{</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	&nbsp;&nbsp;&nbsp;&nbsp;<span class="ace_keyword">public</span>&nbsp;<span
+																		class="ace_keyword">static</span>&nbsp;<span
+																		class="ace_keyword">void</span>&nbsp;<span
+																		class="ace_identifier">Main</span><span
+																		class="ace_paren ace_lparen">(</span><span
+																		class="ace_paren ace_rparen">)</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	&nbsp;&nbsp;&nbsp;&nbsp;<span
+																		class="ace_paren ace_lparen">{</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+																		class="ace_comment">//&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	&nbsp;&nbsp;&nbsp;&nbsp;<span
+																		class="ace_paren ace_rparen">}</span>
+																</div>
+																<div class="ace_line"
+																	style="height: 14.40000057220459px">
+																	<span class="ace_paren ace_rparen">}</span>
+																</div>
+															</div>
+															<div class="ace_layer ace_marker-layer"></div>
+															<div
+																class="ace_layer ace_cursor-layer ace_hidden-cursors">
+																<div class="ace_cursor"
+																	style="left: 10.6px; top: 115.2px; width: 6.6px; height: 14.4px;"></div>
+															</div>
+														</div>
+													</div>
+													<div
+														style="height: auto; width: auto; top: -100px; left: -100px; visibility: hidden; position: fixed; overflow: visible; white-space: nowrap;">X</div>
+													<div class="ace_scrollbar"
+														style="width: 26px; display: none; overflow-y: scroll; bottom: 0px;">
+														<div class="ace_scrollbar-inner" style="height: 129.6px;"></div>
+													</div>
+													<div class="ace_scrollbar-h"
+														style="height: 26px; display: none; overflow-x: scroll; left: 40px; right: 0px;">
+														<div class="ace_scrollbar-inner" style="width: 730px;"></div>
+													</div>
+												</div>
+												<div id="file_parent"
+													style="padding: 10px; height: 168px; display: none;">
+													<textarea name="file" id="file" tabindex="1" spellcheck="false"
+														style="height: 160px;">using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -1425,10 +1448,10 @@ namespace CVa
 		}
 	}
 }</textarea>
-													</div>
 												</div>
-												<input type="hidden" id="file_template"
-													value="using System;
+											</div>
+											<input type="hidden" id="file_template"
+												value="using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -1445,192 +1468,190 @@ namespace CVa
 	}
 }">
 
-												<!-- advanced config: input -->
-												<div class="row " id="ex-input">
-													<div class="span8" style="width:360px;">
-														<div class="ex-more-options-box"
-															style="padding: 10px; padding-top: 6px; color: #666">
-															<div style="margin-bottom: 5px">
-																<i class="icon-inbox"></i> enter input (stdin)
-																<div class="pull-right option-clear" style="width:50px;">
-																	<a href="#" class="rel-tooltip" title="Clear the input"
-																		onclick="$('#input').val(''); return false;">clear</a>
-																</div>
-																<div class="clearfix"></div>
+											<!-- advanced config: input -->
+											<div class="row " id="ex-input">
+												<div class="span8" style="width: 360px;">
+													<div class="ex-more-options-box"
+														style="padding: 10px; padding-top: 6px; color: #666">
+														<div style="margin-bottom: 5px">
+															<i class="icon-inbox"></i> enter input (stdin)
+															<div class="pull-right option-clear" style="width: 50px;">
+																<a href="#" class="rel-tooltip" title="Clear the input"
+																	onclick="$('#input').val(''); return false;">clear</a>
 															</div>
-															<textarea name="input" id="input" rows="2" cols="80"></textarea>
+															<div class="clearfix"></div>
 														</div>
+														<textarea name="input" id="input" rows="2" cols="80"></textarea>
 													</div>
 												</div>
+											</div>
 
-												<!-- advanced config: more options -->
-												<div class="row " id="ex-more-options">
-													<div class="span8" style="width:360px;">
-														<!--
+											<!-- advanced config: more options -->
+											<div class="row " id="ex-more-options">
+												<div class="span8" style="width: 360px;">
+													<!--
 							<div class="row">
 								<div class="span8 top-border">
 								</div>
 							</div>
 							-->
-														<div class="row">
-															<div class="span8" style="width:360px;">
-																<div class="ex-more-options-box"
-																	style="padding-bottom: 0px; padding-top: 6px; display:none;">
-																	<!-- syntax -->
-																	<div class="syntax-box" >
-																		<input type="hidden" name="syntax" value="0">
-																		<label for="syntax" class="checkbox"><input
-																			type="checkbox" name="syntax" id="syntax" value="1"
-																			checked="checked"> <span>syntax
-																				highlight</span></label>
-																	</div>
-
-																	<div class="timelimit-box" style="display: none;">
-																		<i class="icon-time"></i> time limit: <label
-																			for="timelimit-0"><input type="radio"
-																			name="timelimit" value="0" id="timelimit-0"
-																			checked="checked"> <span>5s</span></label> <label
-																			for="timelimit-1"><input type="radio"
-																			name="timelimit" value="1" id="timelimit-1"
-																			disabled="disabled"> <span>15s</span></label> <a
-																			href="/faq#constraints" class="help-link rel-tooltip"
-																			target="_blank" title="What's the time limit?"
-																			style="margin-left: 2px"><i
-																			class="icon-help-circled"></i></a>
-																	</div>
-
+													<div class="row">
+														<div class="span8" style="width: 360px;">
+															<div class="ex-more-options-box"
+																style="padding-bottom: 0px; padding-top: 6px; display: none;">
+																<!-- syntax -->
+																<div class="syntax-box">
+																	<input type="hidden" name="syntax" value="0"> <label
+																		for="syntax" class="checkbox"><input
+																		type="checkbox" name="syntax" id="syntax" value="1"
+																		checked="checked"> <span>syntax
+																			highlight</span></label>
 																</div>
+
+																<div class="timelimit-box" style="display: none;">
+																	<i class="icon-time"></i> time limit: <label
+																		for="timelimit-0"><input type="radio"
+																		name="timelimit" value="0" id="timelimit-0"
+																		checked="checked"> <span>5s</span></label> <label
+																		for="timelimit-1"><input type="radio"
+																		name="timelimit" value="1" id="timelimit-1"
+																		disabled="disabled"> <span>15s</span></label> <a
+																		href="/faq#constraints" class="help-link rel-tooltip"
+																		target="_blank" title="What's the time limit?"
+																		style="margin-left: 2px"><i
+																		class="icon-help-circled"></i></a>
+																</div>
+
 															</div>
 														</div>
-														<div class="row">
-															<div class="span8"style="width:360px;">
-																<div class="ex-more-options-box"
-																	style="padding-top: 4px">
-																	<!-- note -->
-																	<div style="margin-bottom: 5px">
-																		<i class="icon-pencil"></i> Output
-																		<div class="pull-right option-clear" style="width:50px;">
-																			<a href="#" class="rel-tooltip"
-																				title="Clear the note"
-																				onclick="$('#note').val(''); return false;">clear</a>
-																		</div>
-																		<div class="clearfix"></div>
+													</div>
+													<div class="row">
+														<div class="span8" style="width: 360px;">
+															<div class="ex-more-options-box" style="padding-top: 4px">
+																<!-- note -->
+																<div style="margin-bottom: 5px">
+																	<i class="icon-pencil"></i> Output
+																	<div class="pull-right option-clear"
+																		style="width: 50px;">
+																		<a href="#" class="rel-tooltip" title="Clear the note"
+																			onclick="$('#note').val(''); return false;">clear</a>
 																	</div>
-																	<textarea name="note" id="note" rows="2" cols="80"></textarea>
+																	<div class="clearfix"></div>
 																</div>
+																<textarea name="note" id="note" rows="2" cols="80" readonly="readonly"></textarea>
 															</div>
 														</div>
 													</div>
 												</div>
-												<!-- visible options + submit -->
-												<div class="row">
-													<div class="span8"style="width:360px;">
-														<div class="footer">
-															<!-- lang -->
-															<input type="hidden" name="_lang" id="_lang" value="10">
+											</div>
+											<!-- visible options + submit -->
+											<div class="row">
+												<div class="span8" style="width: 360px;">
+													<div class="footer">
+														<!-- lang -->
+														<input type="hidden" name="_lang" id="_lang" value="10">
 
-															<!-- simple lang select -->
+														<!-- simple lang select -->
 
-															<!-- advanced lang select -->
-															<div class="dropdown dropup" id="lang_advselect">
-																<a class="dropdown-toggle btn footer-item rel-tooltip"
-																	data-toggle="dropdown" href="#" title="Choose language"
-																	id="lang-dropdown-menu-button"><span>C#</span> <b
-																	class="caret"></b></a>
-																<div id="lang-dropdown-menu" class="dropdown-menu"
-																	role="menu" aria-labelledby="lang-dropdown-menu-button">
-																	<div id="language-details"></div>
-																	<div class="clearfix"></div>
-																	<div class="popular-box">
-																		<legend>popular</legend>
-																		<ul class="popular">
-																			<li class=""><a href="mConverterC" id="menu-lang-27"
-																				data-id="27" data-label="C#" title="C# (mono-4.0.2)"
-																				class="lang " tabindex="1002">C#</a></li>
-																			<li class="active"><a href="mConverter" id="menu-lang-10"
-																				data-id="10" data-label="Java"
-																				title="Java (sun-jdk-8u51)" class="lang "
-																				tabindex="1006">Java</a></li>
-																		</ul>
-																	</div>
+														<!-- advanced lang select -->
+														<div class="dropdown dropup" id="lang_advselect">
+															<a class="dropdown-toggle btn footer-item rel-tooltip"
+																data-toggle="dropdown" href="#" title="Choose language"
+																id="lang-dropdown-menu-button"><span>C#</span> <b
+																class="caret"></b></a>
+															<div id="lang-dropdown-menu" class="dropdown-menu"
+																role="menu" aria-labelledby="lang-dropdown-menu-button">
+																<div id="language-details"></div>
+																<div class="clearfix"></div>
+																<div class="popular-box">
+																	<legend>popular</legend>
+																	<ul class="popular">
+																		<li class=""><a href="mConverterC"
+																			id="menu-lang-27" data-id="27" data-label="C#"
+																			title="C# (mono-4.0.2)" class="lang " tabindex="1002">C#</a></li>
+																		<li class="active"><a href="mConverter"
+																			id="menu-lang-10" data-id="10" data-label="Java"
+																			title="Java (sun-jdk-8u51)" class="lang "
+																			tabindex="1006">Java</a></li>
+																	</ul>
 																</div>
 															</div>
-
-
-															<!-- show input -->
-															<button type="button" class="btn footer-item rel-tooltip"
-																data-toggle="button" title="Specify input (stdin)"
-																id="button-input" style="display:none;">
-																<i class="icon-inbox"></i> stdin
-															</button>
-
-															<!-- visibility -->
-															<input type="hidden" name="public" value="1">
-															<div class="btn-group footer-item"
-																data-toggle="buttons-radio" id="btn-group-visibility"
-																style="display: none;">
-																<button type="button" class="rel-tooltip btn active"
-																	data-value="1"
-																	title="Public - your code will be available to everyone.">
-																	<i class="icon-globe"></i>
-																</button>
-																<button type="button" class="rel-tooltip btn "
-																	data-value="0"
-																	title="Secret - your code will be available only to those with whom you share a link.">
-																	<i class="icon-glasses"></i>
-																</button>
-																<button type="button" class="rel-tooltip btn  disabled"
-																	disabled="disabled" data-value="-1"
-																	title="Private - only you will be able to access the code. You have to be signed in to use this option.">
-																	<i class="icon-lock"></i>
-																</button>
-															</div>
-
-
-															<!-- more options -->
-															<a href="#" id="button-more-options" class="" style="display:none;"> <span
-																class="more-options-more">more&nbsp;options</span> <span
-																class="more-options-less">fewer&nbsp;options</span>
-															</a>
-
-
-															<!-- submit -->
-															<div class="pull-right" style="width:50px; padding-right: 30px;">
-																<input type="hidden" name="run" value="1">
-																<button type="submit" name="Submit" id="Submit"
-																	tabindex="2"
-																	class="btn btn-success footer-item rel-tooltip"
-																	title=""
-																	data-original-title="Run the program (Ctrl+Enter)">
-																	<i class="icon-cog-alt"></i> Run
-																</button>
-															</div>
-
-															<div class="clearfix"></div>
 														</div>
+
+
+														<!-- show input -->
+														<button type="button" class="btn footer-item rel-tooltip"
+															data-toggle="button" title="Specify input (stdin)"
+															id="button-input" style="display: none;">
+															<i class="icon-inbox"></i> stdin
+														</button>
+
+														<!-- visibility -->
+														<input type="hidden" name="public" value="1">
+														<div class="btn-group footer-item"
+															data-toggle="buttons-radio" id="btn-group-visibility"
+															style="display: none;">
+															<button type="button" class="rel-tooltip btn active"
+																data-value="1"
+																title="Public - your code will be available to everyone.">
+																<i class="icon-globe"></i>
+															</button>
+															<button type="button" class="rel-tooltip btn "
+																data-value="0"
+																title="Secret - your code will be available only to those with whom you share a link.">
+																<i class="icon-glasses"></i>
+															</button>
+															<button type="button" class="rel-tooltip btn  disabled"
+																disabled="disabled" data-value="-1"
+																title="Private - only you will be able to access the code. You have to be signed in to use this option.">
+																<i class="icon-lock"></i>
+															</button>
+														</div>
+
+
+														<!-- more options -->
+														<a href="#" id="button-more-options" class=""
+															style="display: none;"> <span
+															class="more-options-more">more&nbsp;options</span> <span
+															class="more-options-less">fewer&nbsp;options</span>
+														</a>
+
+
+														<!-- submit -->
+														<div class="pull-right"
+															style="width: 50px; padding-right: 30px;">
+															<input type="hidden" name="run" value="1">
+															<button type="submit" name="Submit" id="Submit"
+																tabindex="2"
+																class="btn btn-success footer-item rel-tooltip" title=""
+																data-original-title="Run the program (Ctrl+Enter)">
+																<i class="icon-cog-alt"></i> Run
+															</button>
+														</div>
+
+														<div class="clearfix"></div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-
-									<!-- /.item -->
-									<div class="item"></div>
-									<!-- /.item -->
-									<div class="item"></div>
 								</div>
-								<!-- 
+
+								<!-- /.item -->
+								<div class="item"></div>
+								<!-- /.item -->
+								<div class="item"></div>
+							</div>
+							<!-- 
 						<a class="left carousel-control" href="#featured-project-carousel" data-slide="prev">‹</a> 
 						<a class="right carousel-control" href="#featured-project-carousel" data-slide="next">›</a> </div>
 					 -->
-							</div>
 						</div>
 					</div>
-
 				</div>
-			</section>
-		</form>
+
+			</div>
+		</section>
 	</div>
-	</body>
-	</html>
-	
+</body>
+</html>
