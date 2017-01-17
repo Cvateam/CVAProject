@@ -22,7 +22,9 @@ public class JavaOperationAction extends ActionSupport {
 	public JavaOperationAction() {};
 
 	public String compile1() throws Exception {
+		System.out.println(javaCode);
 		Runtime runtime = Runtime.getRuntime();
+		System.out.println("test");
 		File directory = new File("WebJava/Request");
 		directory.mkdirs(); /// 소스 저장하는 디렉토리 생성
 		File classDirectory = new File("WebJava/Request/classes");
@@ -89,7 +91,7 @@ public class JavaOperationAction extends ActionSupport {
 					e.printStackTrace();
 				}
 		}else{// 소스코드 하나 컴파일
-	
+			
 			source = new File(directory.getAbsolutePath() +"\\"+ mainClassName + ".java");
 			try {
 				BufferedWriter out = new BufferedWriter(new FileWriter(source));
@@ -115,7 +117,7 @@ public class JavaOperationAction extends ActionSupport {
 		
 		//System.out.println("javac -cp " + directory.getAbsolutePath() + "\\classes -d "+ directory.getAbsolutePath()+ "\\classes " + directory.getAbsolutePath()+"/"+packageName+"/"+mainClassName+".java " + directory.getAbsolutePath()+"/"+packageName+"/"+checkClassName(javaCode1)+".java");
 		Process compile = null;
-		System.out.println("javaCode1 : " + javaCode1.length());
+		//System.out.println("javaCode1 : " + javaCode1.length());
 		
 		//System.out.println(basic);
 		if(packageName != null && javaCode1.length() != 112){

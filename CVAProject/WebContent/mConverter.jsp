@@ -1297,9 +1297,9 @@ form {
 													id="insert-part-users-template" style="display: inline"><a
 													id="insert-users-template-link" href="#"
 													class="rel-tooltip" title="Insert your template">your
-														template</a></span> <img id="insert-loader"
+														template</a></span> <!-- <img id="insert-loader"
 													style="display: none; height: 11px"
-													src="//stx1.ideone.com/gfx/loader.gif" alt="loading...">
+													src="//stx1.ideone.com/gfx/loader.gif" alt="loading..."> -->
 												<div class="pull-right option-clear" style="width: 50px;">
 													<a href="#" class="rel-tooltip with-margin-right"
 														title="Clear the editor"

@@ -22,7 +22,7 @@
 					<!-- Logo -->
 						<div id="logo">
 							<span class="image avatar48"><img src="images/brandLogo.png" alt="" /></span>
-							<h1 id="title">씨바</h1>
+							<h1 id="title">C.VA</h1>
 							<p>안드로이드프로젝트</p>
 						</div>
 

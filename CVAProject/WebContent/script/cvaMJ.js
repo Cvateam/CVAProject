@@ -1,7 +1,9 @@
-$('#Submit').on('click', function() {
+$(document).ready(function() {
+	$('#Submit').on('click', function() {
+		alert("확인중");
 		var item = {
-			"javaCode"  :  $('#file').val()
-			,"scannerInput"  : $('#input').val()
+				"javaCode"  :  $('#file').val()
+				,"scannerInput"  : $('#input').val()
 		};
 		$.ajax({
 			type : 'get',
@@ -16,3 +18,4 @@ $('#Submit').on('click', function() {
 			}
 		});
 	});
+});
